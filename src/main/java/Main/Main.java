@@ -5,6 +5,7 @@
  */
 package Main;
 
+import GUI.MainMenu;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -21,8 +22,10 @@ public class Main {
      */
     public static void main(String[] args) {
         // TODO code application logic here
-        
+        MainMenu mainMenu = new MainMenu();
+        mainMenu.setVisible(true);
         //jdbc:mariadb://
+        /*
         String url = "jdbc:mariadb://dvnikst.duckdns.org:3306/is2-daquino-gk";
         String user = "user1";
         String password = "951753";
@@ -45,6 +48,7 @@ public class Main {
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
+*/
     }
     
 }
