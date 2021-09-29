@@ -1,7 +1,11 @@
 # PracticoMaquinaIS2
 
-Practico de Maquina de la materia Ingenieria de Software 2 realizado por Kwist Daniel y Gauna Dario.
+Practico de Maquina de la materia Ingenieria de Software 2 realizado por Kwist Daniel, Gauna Dario y Burger Tobias.
 Universidad Nacional de San Luis
+
+## Caso de Estudio
+
+Aca caso de estudio
 
 ## Objetivo
 
