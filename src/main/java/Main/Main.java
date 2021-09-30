@@ -5,7 +5,7 @@
  */
 package Main;
 
-import GUI.MainMenu;
+import GUI.LogIn;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -22,8 +22,8 @@ public class Main {
      */
     public static void main(String[] args) {
         // TODO code application logic here
-        MainMenu mainMenu = new MainMenu();
-        mainMenu.setVisible(true);
+        LogIn li = new LogIn();
+        li.setVisible(true);
         //jdbc:mariadb://
         /*
         String url = "jdbc:mariadb://dvnikst.duckdns.org:3306/is2-daquino-gk";
