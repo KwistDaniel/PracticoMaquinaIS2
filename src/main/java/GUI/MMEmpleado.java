@@ -68,7 +68,14 @@ public class MMEmpleado extends javax.swing.JFrame {
             }
         });
 
+        BClientes.setBackground(new java.awt.Color(210, 4, 45));
+        BClientes.setForeground(new java.awt.Color(250, 250, 250));
         BClientes.setText("Clientes");
+        BClientes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BClientesActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -187,9 +194,13 @@ public class MMEmpleado extends javax.swing.JFrame {
     private void BVentasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BVentasActionPerformed
         // TODO add your handling code here:
         dispose();
-        MEmpVentas MEV = new MEmpVentas(Prioridad);
-        MEV.setVisible(true);
+        LogIn LI = new LogIn();
+        LI.setVisible(true);
     }//GEN-LAST:event_BVentasActionPerformed
+
+    private void BClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BClientesActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_BClientesActionPerformed
 
     /**
      * @param args the command line arguments
