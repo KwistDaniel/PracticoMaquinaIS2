@@ -119,6 +119,7 @@ public class LogIn extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         BLogIn = new javax.swing.JButton();
         TFPassword = new javax.swing.JPasswordField();
+        fakelog = new javax.swing.JButton();
         BSalir = new javax.swing.JButton();
 
         jTextField1.setText("jTextField1");
@@ -155,25 +156,39 @@ public class LogIn extends javax.swing.JFrame {
             }
         });
 
+        fakelog.setText("jButton1");
+        fakelog.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                fakelogActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(TFUser, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(TFPassword, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel5Layout.createSequentialGroup()
-                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING))
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
             .addGroup(jPanel5Layout.createSequentialGroup()
-                .addGap(24, 24, 24)
-                .addComponent(BLogIn, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(24, Short.MAX_VALUE))
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(TFUser, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(TFPassword, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel5Layout.createSequentialGroup()
+                                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING))
+                                .addGap(0, 0, Short.MAX_VALUE))))
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel5Layout.createSequentialGroup()
+                                .addGap(24, 24, 24)
+                                .addComponent(BLogIn, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel5Layout.createSequentialGroup()
+                                .addGap(71, 71, 71)
+                                .addComponent(fakelog)))
+                        .addGap(0, 18, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -188,7 +203,9 @@ public class LogIn extends javax.swing.JFrame {
                 .addComponent(TFPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(64, 64, 64)
                 .addComponent(BLogIn)
-                .addContainerGap(151, Short.MAX_VALUE))
+                .addGap(34, 34, 34)
+                .addComponent(fakelog)
+                .addContainerGap(95, Short.MAX_VALUE))
         );
 
         BSalir.setBackground(new java.awt.Color(210, 4, 45));
@@ -284,6 +301,13 @@ public class LogIn extends javax.swing.JFrame {
     private void TFUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TFUserActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_TFUserActionPerformed
+
+    private void fakelogActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fakelogActionPerformed
+        dispose();
+        MMEmpleado mmemp = new MMEmpleado(2);
+        mmemp.setVisible(true);
+        
+    }//GEN-LAST:event_fakelogActionPerformed
     
     /**
      * @param args the command line arguments
@@ -340,6 +364,7 @@ public class LogIn extends javax.swing.JFrame {
     private javax.swing.JButton BSalir;
     private javax.swing.JPasswordField TFPassword;
     private javax.swing.JTextField TFUser;
+    private javax.swing.JButton fakelog;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
