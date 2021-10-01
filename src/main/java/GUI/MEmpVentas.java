@@ -21,6 +21,7 @@ public class MEmpVentas extends javax.swing.JFrame {
     }
     
     public MEmpVentas(int priority){
+        initComponents();
         Prioridad = priority;
         this.setVisible(true);
         this.setLocationRelativeTo(null);
@@ -39,7 +40,7 @@ public class MEmpVentas extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
         BStock = new javax.swing.JButton();
-        BVentas = new javax.swing.JButton();
+        BAltaVenta = new javax.swing.JButton();
         BClientes = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
         BSalir = new javax.swing.JButton();
@@ -59,12 +60,12 @@ public class MEmpVentas extends javax.swing.JFrame {
         BStock.setForeground(new java.awt.Color(250, 250, 250));
         BStock.setText("Stock");
 
-        BVentas.setBackground(new java.awt.Color(210, 4, 45));
-        BVentas.setForeground(new java.awt.Color(250, 250, 250));
-        BVentas.setText("Ventas");
-        BVentas.addActionListener(new java.awt.event.ActionListener() {
+        BAltaVenta.setBackground(new java.awt.Color(210, 4, 45));
+        BAltaVenta.setForeground(new java.awt.Color(250, 250, 250));
+        BAltaVenta.setText("Cargar Venta");
+        BAltaVenta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BVentasActionPerformed(evt);
+                BAltaVentaActionPerformed(evt);
             }
         });
 
@@ -79,7 +80,7 @@ public class MEmpVentas extends javax.swing.JFrame {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(BClientes)
                     .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(BVentas)
+                        .addComponent(BAltaVenta)
                         .addComponent(BStock, javax.swing.GroupLayout.Alignment.TRAILING)))
                 .addContainerGap(153, Short.MAX_VALUE))
         );
@@ -87,7 +88,7 @@ public class MEmpVentas extends javax.swing.JFrame {
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                 .addGap(76, 76, 76)
-                .addComponent(BVentas)
+                .addComponent(BAltaVenta)
                 .addGap(18, 18, 18)
                 .addComponent(BClientes)
                 .addGap(18, 18, 18)
@@ -153,7 +154,7 @@ public class MEmpVentas extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(18, 18, 18)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(27, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -184,11 +185,13 @@ public class MEmpVentas extends javax.swing.JFrame {
         LI.setVisible(true);
     }//GEN-LAST:event_BSalirActionPerformed
 
-    private void BVentasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BVentasActionPerformed
-        // TODO add your handling code here:
+    private void BAltaVentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BAltaVentaActionPerformed
         dispose();
+        AltaVenta AV = new AltaVenta(Prioridad);
+        AV.setVisible(true);
         
-    }//GEN-LAST:event_BVentasActionPerformed
+        
+    }//GEN-LAST:event_BAltaVentaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -233,10 +236,10 @@ public class MEmpVentas extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton BAltaVenta;
     private javax.swing.JButton BClientes;
     private javax.swing.JButton BSalir;
     private javax.swing.JButton BStock;
-    private javax.swing.JButton BVentas;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;

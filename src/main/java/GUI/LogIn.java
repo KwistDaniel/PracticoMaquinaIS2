@@ -304,8 +304,8 @@ public class LogIn extends javax.swing.JFrame {
 
     private void fakelogActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fakelogActionPerformed
         dispose();
-        MMEmpleado mmemp = new MMEmpleado(2);
-        mmemp.setVisible(true);
+        MMEmpleado MME = new MMEmpleado(2);
+        MME.setVisible(true);
         
     }//GEN-LAST:event_fakelogActionPerformed
     
