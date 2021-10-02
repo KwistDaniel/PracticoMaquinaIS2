@@ -38,6 +38,7 @@ public class AltaVenta extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         TRenglones = new javax.swing.JTable();
         BSig = new javax.swing.JButton();
+        TFFiltro = new javax.swing.JTextField();
         jPanel4 = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
         BAgObj = new javax.swing.JButton();
@@ -73,23 +74,29 @@ public class AltaVenta extends javax.swing.JFrame {
         BSig.setForeground(new java.awt.Color(250, 250, 250));
         BSig.setText("Siguiente");
 
+        TFFiltro.setText("jTextField2");
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 104, Short.MAX_VALUE))
-            .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(BSig)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jScrollPane1)
+                    .addComponent(TFFiltro))
+                .addGap(0, 104, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(TFFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(BSig)
                 .addContainerGap())
@@ -268,6 +275,7 @@ public class AltaVenta extends javax.swing.JFrame {
     private javax.swing.JButton BAgObj;
     private javax.swing.JButton BElimSelec;
     private javax.swing.JButton BSig;
+    private javax.swing.JTextField TFFiltro;
     private javax.swing.JTable TRenglones;
     private javax.swing.JButton jButton1;
     private javax.swing.JPanel jPanel1;

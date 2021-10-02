@@ -18,12 +18,7 @@ public class Persona {
     private String dNac;
     private String mNac;
     private String yNac;
-    private String calleDir;
-    private String numDir;
-    private String pisoDir;
-    private String deptoDir;
-    private String codPostal;
-    private String localidad;
+    private Direccion direccion;
     private String email;
     
     
@@ -39,15 +34,10 @@ public class Persona {
         this.dNac = aux.dNac;
         this.mNac = aux.mNac;
         this.yNac = aux.yNac;
-        this.calleDir = aux.calleDir;
-        this.numDir = aux.numDir;
-        this.pisoDir = aux.pisoDir;
-        this.deptoDir = aux.deptoDir;
-        this.codPostal = aux.codPostal;
-        this.localidad = aux.localidad;
+        this.direccion = aux.direccion;
         this.email = aux.email;
     }
-    public Persona (String nombre, String apellido, String dni, String sexo, String telefono, String dNac, String mNac, String yNac, String calleDir, String numDir, String pisoDir, String deptoDir, String codPostal, String localidad, String email){
+    public Persona (String nombre, String apellido, String dni, String sexo, String telefono, String dNac, String mNac, String yNac, Direccion direccion, String email){
         this.nombre = nombre;
         this.apellido = apellido;
         this.dni = dni;
@@ -56,12 +46,7 @@ public class Persona {
         this.dNac = dNac;
         this.mNac = mNac;
         this.yNac = yNac;
-        this.calleDir = calleDir;
-        this.numDir = numDir;
-        this.pisoDir = pisoDir;
-        this.deptoDir = deptoDir;
-        this.codPostal = codPostal;
-        this.localidad = localidad;
+        this.direccion = direccion;
         this.email = email;
 }
 
@@ -129,53 +114,14 @@ public class Persona {
         this.yNac = yNac;
     }
 
-    public String getCalleDir() {
-        return calleDir;
+    public Direccion getdireccion() {
+        return direccion;
     }
 
-    public void setCalleDir(String calleDir) {
-        this.calleDir = calleDir;
+    public void setdireccion(Direccion direccion) {
+        this.direccion = direccion;
     }
 
-    public String getNumDir() {
-        return numDir;
-    }
-
-    public void setNumDir(String numDir) {
-        this.numDir = numDir;
-    }
-
-    public String getPisoDir() {
-        return pisoDir;
-    }
-
-    public void setPisoDir(String pisoDir) {
-        this.pisoDir = pisoDir;
-    }
-
-    public String getDeptoDir() {
-        return deptoDir;
-    }
-
-    public void setDeptoDir(String deptoDir) {
-        this.deptoDir = deptoDir;
-    }
-
-    public String getCodPostal() {
-        return codPostal;
-    }
-
-    public void setCodPostal(String codPostal) {
-        this.codPostal = codPostal;
-    }
-
-    public String getLocalidad() {
-        return localidad;
-    }
-
-    public void setLocalidad(String localidad) {
-        this.localidad = localidad;
-    }
 
     public String getEmail() {
         return email;
@@ -186,19 +132,11 @@ public class Persona {
     }
 
     @Override
-    public String toString() {//ACOMODAR
-        String template = "\tPersona:\n" +
-                "Nombre: %s\n" +
-                "Apellido: %s\n" +
-                "Teléfono: %s\n" +
-                "DNI: %s\n" +
-                "Sexo: %s\n" +
-                "Direccción: %s\n" +
-                "Fecha de nacimiento: %s\n" +
-                "Email: %s\n";
-
-        return "a";//String.format(template, this.getNombre(), this.getApellido(), this.getTelefono(), this.getDni(), this.getSexo(), this.getDireccion(), this.getFechaNac(), this.getEmail());
+    public String toString() {
+        return super.toString(); //To change body of generated methods, choose Tools | Templates.
     }
+
+    
     
     
     
