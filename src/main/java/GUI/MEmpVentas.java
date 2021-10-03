@@ -5,6 +5,8 @@
  */
 package GUI;
 
+import Objects.Mercancia;
+import java.util.ArrayList;
 import javax.swing.JFrame;
 
 /**
@@ -14,7 +16,7 @@ import javax.swing.JFrame;
 public class MEmpVentas extends javax.swing.JFrame {
 
     
-    int Prioridad;
+    int prioridad;
     public MEmpVentas() {
         initComponents();       
                 
@@ -22,7 +24,7 @@ public class MEmpVentas extends javax.swing.JFrame {
     
     public MEmpVentas(int priority){
         initComponents();
-        Prioridad = priority;
+        prioridad = priority;
         this.setVisible(true);
         this.setLocationRelativeTo(null);
     }
@@ -187,7 +189,8 @@ public class MEmpVentas extends javax.swing.JFrame {
 
     private void BAltaVentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BAltaVentaActionPerformed
         dispose();
-        AltaVenta AV = new AltaVenta(Prioridad);
+        ArrayList<Mercancia> aux = new ArrayList<Mercancia>();
+        AltaVenta AV = new AltaVenta(aux,prioridad);
         AV.setVisible(true);
         
         

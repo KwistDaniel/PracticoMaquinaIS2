@@ -5,6 +5,8 @@
  */
 package GUI;
 
+import Objects.Mercancia;
+import java.util.ArrayList;
 import javax.swing.JFrame;
 
 /**
@@ -14,14 +16,14 @@ import javax.swing.JFrame;
 public class MMEmpleado extends javax.swing.JFrame {
 
     
-    int Prioridad;
+    int prioridad;
     public MMEmpleado() {
         initComponents();
     }
     
     public MMEmpleado(int priority){
         initComponents();
-        Prioridad = priority;
+        prioridad = priority;
         this.setVisible(true);
         this.setLocationRelativeTo(null);
     }
@@ -199,8 +201,9 @@ public class MMEmpleado extends javax.swing.JFrame {
     private void BVentasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BVentasActionPerformed
         // TODO add your handling code here:
         dispose();
-        LogIn LI = new LogIn();
-        LI.setVisible(true);
+        ArrayList<Mercancia> aux = new ArrayList<Mercancia>();
+        SeleccionarMercancia SM = new SeleccionarMercancia(aux,prioridad);
+        SM.setVisible(true);
     }//GEN-LAST:event_BVentasActionPerformed
 
     private void BClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BClientesActionPerformed

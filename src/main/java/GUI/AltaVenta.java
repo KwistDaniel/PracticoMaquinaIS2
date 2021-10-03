@@ -6,6 +6,8 @@
 package GUI;
 
 import GUI.*;
+import Objects.Mercancia;
+import java.util.ArrayList;
 import javax.swing.JFrame;
 
 /**
@@ -13,13 +15,14 @@ import javax.swing.JFrame;
  * @author kwist
  */
 public class AltaVenta extends javax.swing.JFrame {
-    int Prioridad;
+    int prioridad;
     public AltaVenta() {
         initComponents();
     }
-    public AltaVenta(int priority){
+    
+    public AltaVenta(ArrayList<Mercancia> mercancias, int priority){
+        prioridad = priority;
         initComponents();
-        Prioridad = priority;
         this.setVisible(true);
         this.setLocationRelativeTo(null);
     }

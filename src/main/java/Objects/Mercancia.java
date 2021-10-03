@@ -164,5 +164,12 @@ public class Mercancia {
     private Object[] toObject(){
         return new Object[]{getCod(),getNombre(),getDescripcion(),getPrecio_u(),getCantidad(),getColor(),getCategoria(),getCalidad(),getAncho(),getAlto(),getMetcuad()};
     }
+
+    @Override
+    public String toString() {
+        return cod + " " + nombre + " " + descripcion; //To change body of generated methods, choose Tools | Templates.
+    }
+    
+    
     
 }
