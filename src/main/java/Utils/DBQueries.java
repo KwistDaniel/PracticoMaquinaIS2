@@ -30,7 +30,7 @@ public class DBQueries {
                     "id VARCHAR(255) NOT NULL," +
                     "pass VARCHAR(255) NOT NULL," +
                     "Status INT NOT NULL," +
-                    "PRIMARY KEY(cod)");
+                    "PRIMARY KEY(cod))");
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
@@ -75,19 +75,20 @@ public class DBQueries {
         Statement statement;
         try {
             statement = connection.createStatement();
-            statement.executeUpdate("CREATE TABLE Mercancia (" +
+            statement.executeUpdate("CREATE TABLE Mercancia(" +
                     "COD INT NOT NULL," +
-                    "nombre VARCHAR(255) NOT NULL," +
-                    "descripcion VARCHAR(255) NOT NULL," +
-                    "precioUnitario VARCHAR(255) NOT NULL," +
-                    "cantidad VARCHAR(255) NOT NULL," +
-                    "color VARCHAR(255) NOT NULL," +
-                    "categoria VARCHAR(255) NOT NULL," +
-                    "medidaAncho VARCHAR(255)," +
-                    "medidaAlto VARCHAR(255)," +
-                    "metrosCuadrados VARCHAR(255)," +
+                    "NOMBRE VARCHAR(255) NOT NULL," +
+                    "DESCRIPCION VARCHAR(255) NOT NULL," +
+                    "PRECIO_UNITARIO VARCHAR(255) NOT NULL," +
+                    "CANTIDAD INT NOT NULL," +
+                    "COLOR VARCHAR(255) NOT NULL," +
+                    "CATEGORIA VARCHAR(255) NOT NULL," +
+                    "CALIDAD INT," +
+                    "MEDIDA_ANCHO VARCHAR(255)," +
+                    "MEDIDA_ALTO VARCHAR(255)," +
+                    "METROS_CUADRADOS VARCHAR(255)," +
                     "Status INT NOT NULL," +
-                    "PRIMARY KEY(cod)");
+                    "PRIMARY KEY(COD))");
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
@@ -103,7 +104,7 @@ public class DBQueries {
                     "id VARCHAR(255) NOT NULL," +
                     "pass VARCHAR(255) NOT NULL," +
                     "Status INT NOT NULL," +
-                    "PRIMARY KEY(cod)");
+                    "PRIMARY KEY(cod))");
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
@@ -133,7 +134,7 @@ public class DBQueries {
                     "FOREIGN KEY (DNI_CLIENTE,SEXO_CLIENTE) REFERENCES ClienteFisico(DNI,SEXO),"+
                     "FOREIGN KEY () REFERENCES ClienteJuridico(),"+
                     "FOREIGN KEY (DNI_VENDEDOR,SEXO_VENDEDOR) REFERENCES Vendedor(DNI,SEXO),"+
-                    "FOREIGN KEY (COD_ENVIO) REFERENCES Envio(COD)");
+                    "FOREIGN KEY (COD_ENVIO) REFERENCES Envio(COD))");
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }

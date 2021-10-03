@@ -27,12 +27,21 @@ public class DAOMercancia implements BusinessObject {
         Statement statement;
         try{
             statement = connection.createStatement();
-            ResultSet rs = statement.executeQuery("SELET * FROM Mercancia WHERE (Status=1)");
+            ResultSet rs = statement.executeQuery("SELECT * FROM Mercancia WHERE ( Status = 1 ) ");
             Mercancia mercancia;
             while (rs.next()){
                 mercancia = new Mercancia();
                 mercancia.setCod(rs.getInt("COD"));
-                
+                mercancia.setNombre(rs.getString("NOMBRE"));
+                mercancia.setDescripcion(rs.getString("DESCRIPCION"));
+                mercancia.setPrecio_u(rs.getString("PRECIO_UNITARIO"));
+                mercancia.setCantidad(rs.getInt("CANTIDAD"));
+                mercancia.setColor(rs.getString("COLOR"));
+                mercancia.setCategoria(rs.getString("CATEGORIA"));
+                mercancia.setCalidad(rs.getInt("CALIDAD"));
+                mercancia.setAncho(rs.getString("MEDIDA_ANCHO"));
+                mercancia.setAlto(rs.getString("MEDIDA_ALTO"));
+                mercancia.setMetcuad(rs.getString("METROS_CUADRADOS"));
                 
                 mercancias.add(mercancia);
             }

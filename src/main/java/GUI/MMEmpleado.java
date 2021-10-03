@@ -58,6 +58,11 @@ public class MMEmpleado extends javax.swing.JFrame {
         BStock.setBackground(new java.awt.Color(210, 4, 45));
         BStock.setForeground(new java.awt.Color(250, 250, 250));
         BStock.setText("Stock");
+        BStock.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BStockActionPerformed(evt);
+            }
+        });
 
         BVentas.setBackground(new java.awt.Color(210, 4, 45));
         BVentas.setForeground(new java.awt.Color(250, 250, 250));
@@ -201,6 +206,12 @@ public class MMEmpleado extends javax.swing.JFrame {
     private void BClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BClientesActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_BClientesActionPerformed
+
+    private void BStockActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BStockActionPerformed
+        dispose();
+        ListarMercancias LM = new ListarMercancias();
+        LM.setVisible(true);
+    }//GEN-LAST:event_BStockActionPerformed
 
     /**
      * @param args the command line arguments

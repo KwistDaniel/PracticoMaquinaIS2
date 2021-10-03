@@ -16,7 +16,7 @@ public class Mercancia {
     private String nombre;
     private String categoria;
     private String descripcion;
-    private String cantidad;
+    private int cantidad;
     private String precio_u;
     private String color;
     private int tipo; //0 cualq, 1 porcelanato y ceramicos
@@ -29,7 +29,7 @@ public class Mercancia {
     public Mercancia() {
     }
 
-    public Mercancia(int cod, String nombre, String categoria, String descripcion, String cantidad, String precio_u, String color, int tipo, int partida, String ancho, String alto, String metcuad, int calidad) {
+    public Mercancia(int cod, String nombre, String categoria, String descripcion, int cantidad, String precio_u, String color, int tipo, int partida, String ancho, String alto, String metcuad, int calidad) {
         this.cod = cod;
         this.nombre = nombre;
         this.categoria = categoria;
@@ -77,11 +77,11 @@ public class Mercancia {
         this.descripcion = descripcion;
     }
 
-    public String getCantidad() {
+    public int getCantidad() {
         return cantidad;
     }
 
-    public void setCantidad(String cantidad) {
+    public void setCantidad(int cantidad) {
         this.cantidad = cantidad;
     }
 
@@ -158,11 +158,11 @@ public class Mercancia {
     }
     
     public static Object[] getHeaders(){
-        return new Object[]{"Codigo","Nombre","Descripcion","","","","","","","","","","","","","","","","",""};//falta
+        return new Object[]{"Codigo","Nombre","Descripcion","Precio Unitario","Cantidad","Color","Categoria","Calidad","Ancho","Alto","Metros Cuadrados"};
     }
     
     private Object[] toObject(){
-        return new Object[]{getCod(),getNombre()};//FALTA
+        return new Object[]{getCod(),getNombre(),getDescripcion(),getPrecio_u(),getCantidad(),getColor(),getCategoria(),getCalidad(),getAncho(),getAlto(),getMetcuad()};
     }
     
 }
