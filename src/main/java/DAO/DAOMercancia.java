@@ -42,7 +42,6 @@ public class DAOMercancia implements BusinessObject {
                 mercancia.setAncho(rs.getString("MEDIDA_ANCHO"));
                 mercancia.setAlto(rs.getString("MEDIDA_ALTO"));
                 mercancia.setMetcuad(rs.getString("METROS_CUADRADOS"));
-                
                 mercancias.add(mercancia);
             }
         }catch (SQLException throwables){
