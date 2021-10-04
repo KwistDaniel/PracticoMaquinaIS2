@@ -167,7 +167,7 @@ public class Mercancia {
 
     @Override
     public String toString() {
-        return cod + " " + nombre + " " + descripcion; //To change body of generated methods, choose Tools | Templates.
+        return cod + " " + nombre + " " + descripcion; 
     }
     
     

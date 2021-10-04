@@ -116,11 +116,11 @@
                           <Group type="103" groupAlignment="1" attributes="0">
                               <Component id="BClientes" min="-2" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="BAltaVenta" min="-2" max="-2" attributes="0"/>
+                                  <Component id="BMVentas" min="-2" max="-2" attributes="0"/>
                                   <Component id="BStock" alignment="1" min="-2" max="-2" attributes="0"/>
                               </Group>
                           </Group>
-                          <EmptySpace pref="153" max="32767" attributes="0"/>
+                          <EmptySpace pref="159" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -128,7 +128,7 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="1" attributes="0">
                           <EmptySpace min="-2" pref="76" max="-2" attributes="0"/>
-                          <Component id="BAltaVenta" min="-2" max="-2" attributes="0"/>
+                          <Component id="BMVentas" min="-2" max="-2" attributes="0"/>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Component id="BClientes" min="-2" max="-2" attributes="0"/>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
@@ -147,10 +147,13 @@
                     <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                       <Color blue="fa" green="fa" red="fa" type="rgb"/>
                     </Property>
-                    <Property name="text" type="java.lang.String" value="Stock"/>
+                    <Property name="text" type="java.lang.String" value="ASDASD"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BStockActionPerformed"/>
+                  </Events>
                 </Component>
-                <Component class="javax.swing.JButton" name="BAltaVenta">
+                <Component class="javax.swing.JButton" name="BMVentas">
                   <Properties>
                     <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                       <Color blue="2d" green="4" red="d2" type="rgb"/>
@@ -161,12 +164,12 @@
                     <Property name="text" type="java.lang.String" value="Cargar Venta"/>
                   </Properties>
                   <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BAltaVentaActionPerformed"/>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BMVentasActionPerformed"/>
                   </Events>
                 </Component>
                 <Component class="javax.swing.JButton" name="BClientes">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="Clientes"/>
+                    <Property name="text" type="java.lang.String" value="Listar Ventas"/>
                   </Properties>
                 </Component>
               </SubComponents>

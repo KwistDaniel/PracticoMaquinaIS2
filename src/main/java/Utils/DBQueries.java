@@ -48,25 +48,42 @@ public class DBQueries {
                     "APELLIDO VARCHAR(255) NOT NULL," +
                     "TELEFONO LONGTEXT NOT NULL," +
                     "SEXO VARCHAR(255) NOT NULL," +
-                    "CALLE_DIR LONGTEXT NOT NULL," +
-                    "NUMERO_DIR LONGTEXT NOT NULL," +
-                    "PISO_DIR LONGTEXT NOT NULL," +
-                    "DEPTO_DIR LONGTEXT NOT NULL," +
-                    "COD_POSTAL_DIR LONGTEXT NOT NULL," +
-                    "LOCALIDAD_DIR LONGTEXT NOT NULL," +
+                    "ID_DIR INT NOT NULL," +
                     "dNac VARCHAR(2) NOT NULL," +
                     "mNac VARCHAR(2) NOT NULL," +
                     "yNac VARCHAR(4) NOT NULL," +
                     "EMAIL LONGTEXT NOT NULL," +
                     "Status INT NOT NULL," +
-                    "PRIMARY KEY(DNI,SEXO)");
+                    "PRIMARY KEY(DNI,SEXO)," +
+                    "FOREIGN KEY (ID_DIR) REFERENCES Direccion(ID))");
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
         DataBase.getInstance().disconnect();
     }
+    
     public static void tablaClientesJuridicos(){
         
+    }
+    public static void tablaDirecciones(){
+        Connection connection = DataBase.getInstance().getConnection();
+        Statement statement;
+        try {
+            statement = connection.createStatement();
+            statement.executeUpdate("CREATE TABLE Direccion (" +
+                    "ID INT NOT NULL," +
+                    "CALLE LONGTEXT," +
+                    "NUMERO LONGTEXT," +
+                    "PISO LONGTEXT," +
+                    "DEPTO LONGTEXT," +
+                    "COD_POSTAL LONGTEXT," +
+                    "LOCALIDAD LONGTEXT," +
+                    "Status INT NOT NULL," + 
+                    "PRIMARY KEY(ID))");
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        DataBase.getInstance().disconnect();
     }
     public static void tablaVendedores(){
         

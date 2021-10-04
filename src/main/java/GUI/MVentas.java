@@ -13,16 +13,16 @@ import javax.swing.JFrame;
  *
  * @author kwist
  */
-public class MEmpVentas extends javax.swing.JFrame {
+public class MVentas extends javax.swing.JFrame {
 
     
     int prioridad;
-    public MEmpVentas() {
+    public MVentas() {
         initComponents();       
                 
     }
     
-    public MEmpVentas(int priority){
+    public MVentas(int priority){
         initComponents();
         prioridad = priority;
         this.setVisible(true);
@@ -42,7 +42,7 @@ public class MEmpVentas extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
         BStock = new javax.swing.JButton();
-        BAltaVenta = new javax.swing.JButton();
+        BMVentas = new javax.swing.JButton();
         BClientes = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
         BSalir = new javax.swing.JButton();
@@ -60,18 +60,23 @@ public class MEmpVentas extends javax.swing.JFrame {
 
         BStock.setBackground(new java.awt.Color(210, 4, 45));
         BStock.setForeground(new java.awt.Color(250, 250, 250));
-        BStock.setText("Stock");
-
-        BAltaVenta.setBackground(new java.awt.Color(210, 4, 45));
-        BAltaVenta.setForeground(new java.awt.Color(250, 250, 250));
-        BAltaVenta.setText("Cargar Venta");
-        BAltaVenta.addActionListener(new java.awt.event.ActionListener() {
+        BStock.setText("ASDASD");
+        BStock.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BAltaVentaActionPerformed(evt);
+                BStockActionPerformed(evt);
             }
         });
 
-        BClientes.setText("Clientes");
+        BMVentas.setBackground(new java.awt.Color(210, 4, 45));
+        BMVentas.setForeground(new java.awt.Color(250, 250, 250));
+        BMVentas.setText("Cargar Venta");
+        BMVentas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BMVentasActionPerformed(evt);
+            }
+        });
+
+        BClientes.setText("Listar Ventas");
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -82,15 +87,15 @@ public class MEmpVentas extends javax.swing.JFrame {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(BClientes)
                     .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(BAltaVenta)
+                        .addComponent(BMVentas)
                         .addComponent(BStock, javax.swing.GroupLayout.Alignment.TRAILING)))
-                .addContainerGap(153, Short.MAX_VALUE))
+                .addContainerGap(159, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                 .addGap(76, 76, 76)
-                .addComponent(BAltaVenta)
+                .addComponent(BMVentas)
                 .addGap(18, 18, 18)
                 .addComponent(BClientes)
                 .addGap(18, 18, 18)
@@ -187,14 +192,18 @@ public class MEmpVentas extends javax.swing.JFrame {
         LI.setVisible(true);
     }//GEN-LAST:event_BSalirActionPerformed
 
-    private void BAltaVentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BAltaVentaActionPerformed
+    private void BMVentasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BMVentasActionPerformed
         dispose();
         ArrayList<Mercancia> aux = new ArrayList<Mercancia>();
         AltaVenta AV = new AltaVenta(aux,prioridad);
         AV.setVisible(true);
         
         
-    }//GEN-LAST:event_BAltaVentaActionPerformed
+    }//GEN-LAST:event_BMVentasActionPerformed
+
+    private void BStockActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BStockActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_BStockActionPerformed
 
     /**
      * @param args the command line arguments
@@ -213,14 +222,22 @@ public class MEmpVentas extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(MEmpVentas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MVentas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(MEmpVentas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MVentas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(MEmpVentas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MVentas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(MEmpVentas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MVentas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
@@ -233,14 +250,14 @@ public class MEmpVentas extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new MEmpVentas().setVisible(true);
+                new MVentas().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton BAltaVenta;
     private javax.swing.JButton BClientes;
+    private javax.swing.JButton BMVentas;
     private javax.swing.JButton BSalir;
     private javax.swing.JButton BStock;
     private javax.swing.JPanel jPanel1;

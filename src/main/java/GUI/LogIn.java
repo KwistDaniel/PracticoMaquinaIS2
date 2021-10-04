@@ -291,12 +291,14 @@ public class LogIn extends javax.swing.JFrame {
         if(password.equals(userToValidate.getPass())){
             dispose();
             System.out.println("Prioridad: " + userToValidate.getPrioridad());
-            MMEmpleado MME = new MMEmpleado(userToValidate.getPrioridad());
+            MainMenu MME = new MainMenu(userToValidate.getPrioridad());
             MME.setVisible(true);
         }
         else {
             //mostrar label o cartel de error o contra incorrecta
-        }
+            //tmb hacer que no se pueda clickear nada mas fuera, asi le pone aceptar
+            //Lo mismo seria para seleccionar la cantidad en una venta 
+       }
         
         
         
