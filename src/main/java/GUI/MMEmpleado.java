@@ -202,8 +202,8 @@ public class MMEmpleado extends javax.swing.JFrame {
         // TODO add your handling code here:
         dispose();
         ArrayList<Mercancia> aux = new ArrayList<Mercancia>();
-        SeleccionarMercancia SM = new SeleccionarMercancia(aux,prioridad);
-        SM.setVisible(true);
+        AltaVenta AV = new AltaVenta(aux,prioridad);
+        AV.setVisible(true);
     }//GEN-LAST:event_BVentasActionPerformed
 
     private void BClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BClientesActionPerformed

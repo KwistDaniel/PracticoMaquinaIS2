@@ -29,6 +29,7 @@ public class DBQueries {
                     "cod INT NOT NULL," +
                     "id VARCHAR(255) NOT NULL," +
                     "pass VARCHAR(255) NOT NULL," +
+                    "priority INT NOT NULL," +
                     "Status INT NOT NULL," +
                     "PRIMARY KEY(cod))");
         } catch (SQLException throwables) {
