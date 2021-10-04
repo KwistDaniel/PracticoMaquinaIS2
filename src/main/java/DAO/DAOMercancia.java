@@ -21,7 +21,7 @@ import java.util.List;
 public class DAOMercancia implements BusinessObject {
 
     @Override
-    public List readAll() {
+    public List<Mercancia> readAll() {
         List<Mercancia> mercancias = new ArrayList<>();
         Connection connection = DataBase.getInstance().getConnection();
         Statement statement;

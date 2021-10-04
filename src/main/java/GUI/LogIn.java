@@ -5,7 +5,10 @@
  */
 package GUI;
 
+import DAO.BusinessObject;
+import DAO.DAOUsuario;
 import GUI.*;
+import Objects.Usuario;
 import javax.swing.JFrame;
 import static Utils.CONSTANTS.*;
 import javax.swing.event.DocumentEvent;
@@ -119,7 +122,6 @@ public class LogIn extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         BLogIn = new javax.swing.JButton();
         TFPassword = new javax.swing.JPasswordField();
-        fakelog = new javax.swing.JButton();
         BSalir = new javax.swing.JButton();
 
         jTextField1.setText("jTextField1");
@@ -156,13 +158,6 @@ public class LogIn extends javax.swing.JFrame {
             }
         });
 
-        fakelog.setText("jButton1");
-        fakelog.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                fakelogActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
@@ -180,13 +175,8 @@ public class LogIn extends javax.swing.JFrame {
                                     .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING))
                                 .addGap(0, 0, Short.MAX_VALUE))))
                     .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel5Layout.createSequentialGroup()
-                                .addGap(24, 24, 24)
-                                .addComponent(BLogIn, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel5Layout.createSequentialGroup()
-                                .addGap(71, 71, 71)
-                                .addComponent(fakelog)))
+                        .addGap(24, 24, 24)
+                        .addComponent(BLogIn, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 18, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -203,9 +193,7 @@ public class LogIn extends javax.swing.JFrame {
                 .addComponent(TFPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(64, 64, 64)
                 .addComponent(BLogIn)
-                .addGap(34, 34, 34)
-                .addComponent(fakelog)
-                .addContainerGap(95, Short.MAX_VALUE))
+                .addContainerGap(151, Short.MAX_VALUE))
         );
 
         BSalir.setBackground(new java.awt.Color(210, 4, 45));
@@ -294,6 +282,23 @@ public class LogIn extends javax.swing.JFrame {
 
     private void BLogInActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BLogInActionPerformed
         String user,password;
+        user = TFUser.getText();
+        password = TFPassword.getText();
+        Usuario userToValidate = new Usuario();
+        BusinessObject<Usuario> bobjct = new DAOUsuario();
+        userToValidate = bobjct.readOne(user);
+        
+        if(password.equals(userToValidate.getPass())){
+            dispose();
+            System.out.println("Prioridad: " + userToValidate.getPrioridad());
+            MMEmpleado MME = new MMEmpleado(userToValidate.getPrioridad());
+            MME.setVisible(true);
+        }
+        else {
+            //mostrar label o cartel de error o contra incorrecta
+        }
+        
+        
         
         
     }//GEN-LAST:event_BLogInActionPerformed
@@ -301,13 +306,6 @@ public class LogIn extends javax.swing.JFrame {
     private void TFUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TFUserActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_TFUserActionPerformed
-
-    private void fakelogActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fakelogActionPerformed
-        dispose();
-        MMEmpleado MME = new MMEmpleado(2);
-        MME.setVisible(true);
-        
-    }//GEN-LAST:event_fakelogActionPerformed
     
     /**
      * @param args the command line arguments
@@ -364,7 +362,6 @@ public class LogIn extends javax.swing.JFrame {
     private javax.swing.JButton BSalir;
     private javax.swing.JPasswordField TFPassword;
     private javax.swing.JTextField TFUser;
-    private javax.swing.JButton fakelog;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
