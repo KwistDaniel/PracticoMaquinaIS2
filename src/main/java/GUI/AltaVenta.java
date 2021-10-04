@@ -296,6 +296,9 @@ public class AltaVenta extends javax.swing.JFrame {
     }//GEN-LAST:event_BAgObjActionPerformed
 
     private void BSiguienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BSiguienteActionPerformed
+        dispose();
+        SeleccionarTipoCliente stc = new SeleccionarTipoCliente(mercancias,prioridad);
+        stc.setVisible(true);
         //ACA LLEVO A QUE CLIENTE SE LO VOY A VENDER, O CREO UNO NUEVO O SELECCIONO UNO (tabla con filtro va a venir bien)
         //DE AHI CREO UN ENVIO, O PERMITO SELECCIONAR UNA DE LAS DIRECCIONES DEL CLIENTE O LE CREO UNA
     }//GEN-LAST:event_BSiguienteActionPerformed

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package GUI;
+package GUI.PruebasAndTemplates;
 
 import GUI.*;
 import javax.swing.JFrame;
@@ -19,8 +19,8 @@ public class Template extends javax.swing.JFrame {
      */
     public Template() {
         initComponents();
-                this.setVisible(true);
-                this.setLocationRelativeTo(null);
+        this.setVisible(true);
+        this.setLocationRelativeTo(null);
                 
                 
     }

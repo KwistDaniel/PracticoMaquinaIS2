@@ -6,8 +6,9 @@
 package GUI;
 
 import DAO.BusinessObject;
-import DAO.DAOMercancia;
+import DAO.DAOClienteF;
 import GUI.*;
+import Objects.ClienteF;
 import Objects.Mercancia;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
@@ -24,7 +25,7 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author kwist
  */
-public class SeleccionarMercancia extends javax.swing.JFrame {
+public class SeleccionarClienteF extends javax.swing.JFrame {
     ArrayList<Mercancia> mercancias;
     int prioridad;
     /**
@@ -38,7 +39,7 @@ public class SeleccionarMercancia extends javax.swing.JFrame {
             }
         };
     
-    public SeleccionarMercancia(ArrayList<Mercancia> aux,int priority) {
+    public SeleccionarClienteF(ArrayList<Mercancia> aux,int priority) {
         prioridad = priority;
         mercancias = new ArrayList<Mercancia>(aux);
         initComponents();
@@ -53,8 +54,8 @@ public class SeleccionarMercancia extends javax.swing.JFrame {
                 return column == 1;
             }
         };*/
-        BusinessObject<Mercancia> businessObject = new DAOMercancia();
-        Object[][] objects = Mercancia.getDataVector(businessObject.readAll());
+        BusinessObject<ClienteF> businessObject = new DAOClienteF();
+        Object[][] objects = ClienteF.getDataVector(businessObject.readAll());
         Object[] headers = Mercancia.getHeaders();
         tm.setDataVector(objects, headers);
         
@@ -91,7 +92,7 @@ public class SeleccionarMercancia extends javax.swing.JFrame {
                 
     }
 
-    private SeleccionarMercancia() {
+    private SeleccionarClienteF() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
@@ -166,10 +167,12 @@ public class SeleccionarMercancia extends javax.swing.JFrame {
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                 .addContainerGap(30, Short.MAX_VALUE)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(BVolver)
-                    .addComponent(BSeleccionar))
+                .addComponent(BVolver)
                 .addGap(21, 21, 21))
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(20, 20, 20)
+                .addComponent(BSeleccionar)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -213,21 +216,19 @@ public class SeleccionarMercancia extends javax.swing.JFrame {
     }//GEN-LAST:event_BVolverActionPerformed
 
     private void BSeleccionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BSeleccionarActionPerformed
-        ArrayList<Mercancia> mercanciasaux = new ArrayList<Mercancia>(mercancias);
-        //Revisar algo para que no pueda agregar un item que ya agregue, o por tema de cantidades
-        //selecciono y meto el objeto
+        //selecciono y meto el obje
         Object[] aux = tm.getDataVector().elementAt(tabla.getSelectedRow()).toArray();
-        Mercancia aux1 = new Mercancia();
-        aux1.setCod((int) aux[0]);
+        ClienteF aux1 = new ClienteF();
+        //aux1.setCod((int) aux[0]);
         aux1.setNombre((String) aux[1]);
-        aux1.setDescripcion((String) aux[2]);
+        //aux1.setDescripcion((String) aux[2]);
         System.out.println(aux1.toString());
         
-        mercanciasaux.add(aux1);
+        
         
         dispose();
-        AltaVenta AV = new AltaVenta(mercanciasaux,prioridad);
-        AV.setVisible(true);
+        //AltaEnvioClienteFisico AECF = new AltaEnvioClienteFisico(mercancias,prioridad,aux1);
+        //AECF.setVisible(true);
         
     }//GEN-LAST:event_BSeleccionarActionPerformed
 
@@ -248,14 +249,62 @@ public class SeleccionarMercancia extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(SeleccionarMercancia.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(SeleccionarClienteF.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(SeleccionarMercancia.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(SeleccionarClienteF.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(SeleccionarMercancia.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(SeleccionarClienteF.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(SeleccionarMercancia.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(SeleccionarClienteF.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
@@ -276,7 +325,7 @@ public class SeleccionarMercancia extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new SeleccionarMercancia().setVisible(true);
+                new SeleccionarClienteF().setVisible(true);
             }
         });
     }
