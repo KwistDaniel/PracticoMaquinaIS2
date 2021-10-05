@@ -30,9 +30,18 @@ public class AltaVenta extends javax.swing.JFrame {
     private final JTable tabla;
     
     DefaultTableModel tm = new DefaultTableModel(){
-            @Override
+            /*@Override
             public boolean isCellEditable(int row, int column){
                 return column == 1;
+            }*/
+            @Override
+            public Class getColumnClass(int column){
+                switch (column){
+                    case 11:
+                        return Boolean.class;
+                    default:
+                        return String.class;
+                }
             }
         };
     public AltaVenta(ArrayList<Mercancia> aux, int priority){
@@ -46,7 +55,7 @@ public class AltaVenta extends javax.swing.JFrame {
         
         
         Object[][] objects = Mercancia.getDataVector(mercancias);
-        Object[] headers = Mercancia.getHeaders();
+        Object[] headers = Mercancia.getHeadersB();
         tm.setDataVector(objects, headers);
         
         

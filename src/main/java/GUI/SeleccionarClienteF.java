@@ -212,7 +212,9 @@ public class SeleccionarClienteF extends javax.swing.JFrame {
 
     private void BVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BVolverActionPerformed
         // TODO add your handling code here:
-        System.exit(0);
+        dispose();
+        AltaVenta av = new AltaVenta(mercancias,prioridad);
+        av.setVisible(true);
     }//GEN-LAST:event_BVolverActionPerformed
 
     private void BSeleccionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BSeleccionarActionPerformed

@@ -160,9 +160,16 @@ public class Mercancia {
     public static Object[] getHeaders(){
         return new Object[]{"Codigo","Nombre","Descripcion","Precio Unitario","Cantidad","Color","Categoria","Calidad","Ancho","Alto","Metros Cuadrados"};
     }
+    public static Object[] getHeadersB(){
+        return new Object[]{"Codigo","Nombre","Descripcion","Precio Unitario","Cantidad","Color","Categoria","Calidad","Ancho","Alto","Metros Cuadrados","Descuento"};
+    }
     
     private Object[] toObject(){
         return new Object[]{getCod(),getNombre(),getDescripcion(),getPrecio_u(),getCantidad(),getColor(),getCategoria(),getCalidad(),getAncho(),getAlto(),getMetcuad()};
+    }
+    
+    private Object[] toObjectB(){
+        return new Object[]{getCod(),getNombre(),getDescripcion(),getPrecio_u(),getCantidad(),getColor(),getCategoria(),getCalidad(),getAncho(),getAlto(),getMetcuad(),false};
     }
 
     @Override

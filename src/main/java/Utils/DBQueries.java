@@ -175,7 +175,7 @@ public class DBQueries {
         Statement statement;
         try {
             statement = connection.createStatement();
-            statement.executeUpdate("CREATE TABLE Venta (" +
+            statement.executeUpdate("CREATE TABLE Venta (" + //REVISAR ESTO COMO LO HAGO
                     "cod INT NOT NULL," +
                     "DNI_CLIENTE VARCHAR(255)," +
                     "SEXO_CLIENTE VARCHAR(255)," +
@@ -194,13 +194,28 @@ public class DBQueries {
                     "FOREIGN KEY (DNI_CLIENTE,SEXO_CLIENTE) REFERENCES ClienteFisico(DNI,SEXO),"+
                     "FOREIGN KEY () REFERENCES ClienteJuridico(),"+
                     "FOREIGN KEY (DNI_VENDEDOR,SEXO_VENDEDOR) REFERENCES Vendedor(DNI,SEXO),"+
+                    "FOREIGN KEY (DNI_VENDEDOR,SEXO_VENDEDOR) REFERENCES RenglonVenta(DNI,SEXO),"+
+                    
                     "FOREIGN KEY (COD_ENVIO) REFERENCES Envio(COD))");
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
         DataBase.getInstance().disconnect();
     }
-    
+    public static void tablaRenglones(){
+        Connection connection = DataBase.getInstance().getConnection();
+        Statement statement;
+        try {
+            statement = connection.createStatement();
+            statement.executeUpdate("CREATE TABLE RenglonVenta (" +
+                    "ID_Venta INT NOT NULL," +
+                    "COD_Mercancia VARCHAR(10) NOT NULL," +
+                    "PRIMARY KEY(ID_Venta,COD_Mercancia))");
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        DataBase.getInstance().disconnect();
+    }
     
     
     
