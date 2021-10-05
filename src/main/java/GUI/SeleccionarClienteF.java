@@ -56,7 +56,7 @@ public class SeleccionarClienteF extends javax.swing.JFrame {
         };*/
         BusinessObject<ClienteF> businessObject = new DAOClienteF();
         Object[][] objects = ClienteF.getDataVector(businessObject.readAll());
-        Object[] headers = Mercancia.getHeaders();
+        Object[] headers = ClienteF.getHeaders();
         tm.setDataVector(objects, headers);
         
         

@@ -20,8 +20,8 @@ public class ClienteF extends Persona {
         super(aux);
     }
   
-    public ClienteF(String nombre, String apellido, String dni, String sexo, String telefono, String dNac, String mNac, String yNac, int idDir , String email){
-        super(nombre,apellido,dni,sexo,telefono,dNac,mNac,yNac,idDir,email);
+    public ClienteF(String nombre, String apellido, String dni, String sexo, String telefono, String fNac, String email){
+        super(nombre,apellido,dni,sexo,telefono,fNac,email);
     }
     
     public static Object[][] getDataVector(List<ClienteF> clientef){
@@ -31,7 +31,10 @@ public class ClienteF extends Persona {
         }   
         return objects;
     }
+    public static Object[] getHeaders(){
+        return new Object[]{"Nombre","Apellido","DNI","Sexo","Telefono","Nacimiento","Email"};
+    }
     private Object[] toObject(){
-        return new Object[]{getNombre(),getApellido(),getDni(),getSexo(),getTelefono(),getdNac(),getmNac(),getyNac(),getIdDir(),getEmail()};
+        return new Object[]{getNombre(),getApellido(),getDni(),getSexo(),getTelefono(),getfNac(),getEmail()};
     }
 }

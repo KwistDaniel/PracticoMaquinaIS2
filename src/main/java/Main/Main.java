@@ -25,6 +25,7 @@ public class Main {
         // TODO code application logic here
         LogIn li = new LogIn();
         li.setVisible(true);
+        //DBQueries.tablaMercancias();
         //DBQueries.tablaConexionDirClientF();
         //DBQueries.tablaConexionDirClientJ();
         //DBQueries.tablaDirecciones();

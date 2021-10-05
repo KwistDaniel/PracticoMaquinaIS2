@@ -29,7 +29,12 @@ public class AltaVenta extends javax.swing.JFrame {
     ArrayList<Mercancia> mercancias;
     private final JTable tabla;
     
-    
+    DefaultTableModel tm = new DefaultTableModel(){
+            @Override
+            public boolean isCellEditable(int row, int column){
+                return column == 1;
+            }
+        };
     public AltaVenta(ArrayList<Mercancia> aux, int priority){
         mercancias = new ArrayList<Mercancia>(aux);
         prioridad = priority;
@@ -38,12 +43,7 @@ public class AltaVenta extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
         GridBagConstraints gridBagConstraints = new GridBagConstraints();
         
-        DefaultTableModel tm = new DefaultTableModel(){
-            @Override
-            public boolean isCellEditable(int row, int column){
-                return column == 1;
-            }
-        };
+        
         
         Object[][] objects = Mercancia.getDataVector(mercancias);
         Object[] headers = Mercancia.getHeaders();
@@ -140,6 +140,11 @@ public class AltaVenta extends javax.swing.JFrame {
         BElimSelec.setBackground(new java.awt.Color(210, 4, 45));
         BElimSelec.setForeground(new java.awt.Color(250, 250, 250));
         BElimSelec.setText("Eliminar Selec");
+        BElimSelec.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BElimSelecActionPerformed(evt);
+            }
+        });
 
         BAgDesc.setBackground(new java.awt.Color(210, 4, 45));
         BAgDesc.setForeground(new java.awt.Color(250, 250, 250));
@@ -302,6 +307,11 @@ public class AltaVenta extends javax.swing.JFrame {
         //ACA LLEVO A QUE CLIENTE SE LO VOY A VENDER, O CREO UNO NUEVO O SELECCIONO UNO (tabla con filtro va a venir bien)
         //DE AHI CREO UN ENVIO, O PERMITO SELECCIONAR UNA DE LAS DIRECCIONES DEL CLIENTE O LE CREO UNA
     }//GEN-LAST:event_BSiguienteActionPerformed
+
+    private void BElimSelecActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BElimSelecActionPerformed
+        tm.removeRow(tabla.getSelectedRow());
+        mercancias.remove(tabla.getSelectedRow() + 1);
+    }//GEN-LAST:event_BElimSelecActionPerformed
 
     /**
      * @param args the command line arguments

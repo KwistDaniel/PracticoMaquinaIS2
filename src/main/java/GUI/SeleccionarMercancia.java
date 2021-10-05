@@ -13,7 +13,9 @@ import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
@@ -58,8 +60,20 @@ public class SeleccionarMercancia extends javax.swing.JFrame {
         Object[] headers = Mercancia.getHeaders();
         tm.setDataVector(objects, headers);
         
+        ArrayList<Integer> codaelim = new ArrayList<Integer>();
+        for(int i=0; i < mercancias.size();i++){
+            codaelim.add((Integer)mercancias.get(i).getCod());
+        }
         
-        
+        for (int i=0; i < tm.getRowCount(); i++){
+            for (int j=0; j < codaelim.size(); j++){
+                if(tm.getValueAt(i, 0) == codaelim.get(j)){
+                    tm.removeRow(i);
+                    i--;
+                }
+            }
+        }
+
         
         tabla = new JTable(tm);
         tabla.setFocusable(false);
@@ -209,25 +223,50 @@ public class SeleccionarMercancia extends javax.swing.JFrame {
 
     private void BVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BVolverActionPerformed
         // TODO add your handling code here:
-        System.exit(0);
+        dispose();
+        AltaVenta av = new AltaVenta(mercancias,prioridad);
     }//GEN-LAST:event_BVolverActionPerformed
 
     private void BSeleccionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BSeleccionarActionPerformed
-        ArrayList<Mercancia> mercanciasaux = new ArrayList<Mercancia>(mercancias);
-        //Revisar algo para que no pueda agregar un item que ya agregue, o por tema de cantidades
-        //selecciono y meto el objeto
-        Object[] aux = tm.getDataVector().elementAt(tabla.getSelectedRow()).toArray();
-        Mercancia aux1 = new Mercancia();
-        aux1.setCod((int) aux[0]);
-        aux1.setNombre((String) aux[1]);
-        aux1.setDescripcion((String) aux[2]);
-        System.out.println(aux1.toString());
+        String control = JOptionPane.showInputDialog("Ingrese una cantidad");
         
-        mercanciasaux.add(aux1);
-        //falta terminar de llenar los datos
-        dispose();
-        AltaVenta AV = new AltaVenta(mercanciasaux,prioridad);
-        AV.setVisible(true);
+        if (control == null){
+            JOptionPane.showMessageDialog(null, "Valor incorrecto");
+        }
+        else{
+            try{
+                int cant = Integer.parseInt(control);
+                ArrayList<Mercancia> mercanciasaux = new ArrayList<Mercancia>(mercancias);
+                Object[] aux = tm.getDataVector().elementAt(tabla.getSelectedRow()).toArray();
+                if (cant > (int) aux[4] || cant <=0){
+                    JOptionPane.showMessageDialog(null, "Valor incorrecto");
+                }
+                else{
+                    Mercancia aux1 = new Mercancia();
+                    aux1.setCod((int) aux[0]);
+                    aux1.setNombre((String) aux[1]);
+                    aux1.setDescripcion((String) aux[2]);
+                    aux1.setPrecio_u((double) aux[3]);
+                    aux1.setCantidad(cant);
+                    aux1.setColor((String) aux[5]);
+                    aux1.setCategoria((String) aux[6]);
+                    aux1.setCalidad((int) aux[7]);
+                    aux1.setAncho((int) aux[8]);
+                    aux1.setAlto((int) aux[9]);
+                    aux1.setMetcuad((int) aux[10]);
+                    mercanciasaux.add(aux1);
+                    dispose();
+                    AltaVenta AV = new AltaVenta(mercanciasaux,prioridad);
+                    AV.setVisible(true);
+                }
+                
+            }catch(Exception e){
+                JOptionPane.showMessageDialog(null, "Valor incorrecto");
+            }
+        }
+        
+        
+        
         
     }//GEN-LAST:event_BSeleccionarActionPerformed
 

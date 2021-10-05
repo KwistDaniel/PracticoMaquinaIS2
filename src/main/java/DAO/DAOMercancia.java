@@ -34,14 +34,14 @@ public class DAOMercancia implements BusinessObject {
                 mercancia.setCod(rs.getInt("COD"));
                 mercancia.setNombre(rs.getString("NOMBRE"));
                 mercancia.setDescripcion(rs.getString("DESCRIPCION"));
-                mercancia.setPrecio_u(rs.getString("PRECIO_UNITARIO"));
+                mercancia.setPrecio_u(rs.getDouble("PRECIO_UNITARIO"));
                 mercancia.setCantidad(rs.getInt("CANTIDAD"));
                 mercancia.setColor(rs.getString("COLOR"));
                 mercancia.setCategoria(rs.getString("CATEGORIA"));
                 mercancia.setCalidad(rs.getInt("CALIDAD"));
-                mercancia.setAncho(rs.getString("MEDIDA_ANCHO"));
-                mercancia.setAlto(rs.getString("MEDIDA_ALTO"));
-                mercancia.setMetcuad(rs.getString("METROS_CUADRADOS"));
+                mercancia.setAncho(rs.getInt("MEDIDA_ANCHO"));
+                mercancia.setAlto(rs.getInt("MEDIDA_ALTO"));
+                mercancia.setMetcuad(rs.getInt("METROS_CUADRADOS"));
                 mercancias.add(mercancia);
             }
         }catch (SQLException throwables){

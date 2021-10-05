@@ -15,10 +15,7 @@ public class Persona {
     private String dni;
     private String sexo;
     private String telefono;
-    private String dNac;
-    private String mNac;
-    private String yNac;
-    private int idDir;
+    private String fNac;
     private String email;
     
     
@@ -31,22 +28,16 @@ public class Persona {
         this.dni = aux.dni;
         this.sexo = aux.sexo;
         this.telefono = aux.telefono;
-        this.dNac = aux.dNac;
-        this.mNac = aux.mNac;
-        this.yNac = aux.yNac;
-        this.idDir = aux.idDir;
+        this.fNac = aux.fNac;
         this.email = aux.email;
     }
-    public Persona (String nombre, String apellido, String dni, String sexo, String telefono, String dNac, String mNac, String yNac, int idDir, String email){
+    public Persona (String nombre, String apellido, String dni, String sexo, String telefono, String fNac, String email){
         this.nombre = nombre;
         this.apellido = apellido;
         this.dni = dni;
         this.sexo = sexo;
         this.telefono = telefono;
-        this.dNac = dNac;
-        this.mNac = mNac;
-        this.yNac = yNac;
-        this.idDir = idDir;
+        this.fNac = fNac;
         this.email = email;
 }
 
@@ -90,38 +81,13 @@ public class Persona {
         this.telefono = telefono;
     }
 
-    public String getdNac() {
-        return dNac;
+    public String getfNac() {
+        return fNac;
     }
 
-    public void setdNac(String dNac) {
-        this.dNac = dNac;
+    public void setfNac(String fNac) {
+        this.fNac = fNac;
     }
-
-    public String getmNac() {
-        return mNac;
-    }
-
-    public void setmNac(String mNac) {
-        this.mNac = mNac;
-    }
-
-    public String getyNac() {
-        return yNac;
-    }
-
-    public void setyNac(String yNac) {
-        this.yNac = yNac;
-    }
-
-    public int getIdDir() {
-        return idDir;
-    }
-
-    public void setIdDir(int idDir) {
-        this.idDir = idDir;
-    }
-
 
     public String getEmail() {
         return email;

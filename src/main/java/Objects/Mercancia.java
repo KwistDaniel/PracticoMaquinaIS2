@@ -17,19 +17,19 @@ public class Mercancia {
     private String categoria;
     private String descripcion;
     private int cantidad;
-    private String precio_u;
+    private double precio_u;
     private String color;
     private int tipo; //0 cualq, 1 porcelanato y ceramicos
     private int partida;
-    private String ancho;
-    private String alto;
-    private String metcuad;
+    private int ancho;
+    private int alto;
+    private int metcuad;
     private int calidad;
 
     public Mercancia() {
     }
 
-    public Mercancia(int cod, String nombre, String categoria, String descripcion, int cantidad, String precio_u, String color, int tipo, int partida, String ancho, String alto, String metcuad, int calidad) {
+    public Mercancia(int cod, String nombre, String categoria, String descripcion, int cantidad, double precio_u, String color, int tipo, int partida, int ancho, int alto, int metcuad, int calidad) {
         this.cod = cod;
         this.nombre = nombre;
         this.categoria = categoria;
@@ -85,11 +85,11 @@ public class Mercancia {
         this.cantidad = cantidad;
     }
 
-    public String getPrecio_u() {
+    public double getPrecio_u() {
         return precio_u;
     }
 
-    public void setPrecio_u(String precio_u) {
+    public void setPrecio_u(double precio_u) {
         this.precio_u = precio_u;
     }
 
@@ -117,27 +117,27 @@ public class Mercancia {
         this.partida = partida;
     }
 
-    public String getAncho() {
+    public int getAncho() {
         return ancho;
     }
 
-    public void setAncho(String ancho) {
+    public void setAncho(int ancho) {
         this.ancho = ancho;
     }
 
-    public String getAlto() {
+    public int getAlto() {
         return alto;
     }
 
-    public void setAlto(String alto) {
+    public void setAlto(int alto) {
         this.alto = alto;
     }
 
-    public String getMetcuad() {
+    public int getMetcuad() {
         return metcuad;
     }
 
-    public void setMetcuad(String metcuad) {
+    public void setMetcuad(int metcuad) {
         this.metcuad = metcuad;
     }
 

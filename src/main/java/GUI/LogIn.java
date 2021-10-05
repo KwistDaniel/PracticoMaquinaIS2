@@ -11,6 +11,7 @@ import GUI.*;
 import Objects.Usuario;
 import javax.swing.JFrame;
 import static Utils.CONSTANTS.*;
+import javax.swing.JOptionPane;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
@@ -288,16 +289,24 @@ public class LogIn extends javax.swing.JFrame {
         BusinessObject<Usuario> bobjct = new DAOUsuario();
         userToValidate = bobjct.readOne(user,password);
         
-        if(userToValidate.getUser().equals(user)){
-            dispose();
-            MainMenu MME = new MainMenu(userToValidate.getPrioridad());
-            MME.setVisible(true);
+        try{
+            if(userToValidate.getUser().equals(user)){
+                dispose();
+                MainMenu MME = new MainMenu(userToValidate.getPrioridad());
+                MME.setVisible(true);
+            }
+            else {
+                System.out.println("Borra esto");
+                //BORRAR ESTO
+                //JOptionPane.showMessageDialog(null, "Datos Incorrectos");
+                //mostrar label o cartel de error o contra incorrecta
+                //tmb hacer que no se pueda clickear nada mas fuera, asi le pone aceptar
+                //Lo mismo seria para seleccionar la cantidad en una venta 
+            }
+        } catch(Exception e){
+            JOptionPane.showMessageDialog(null, "Datos Incorrectos");
         }
-        else {
-            //mostrar label o cartel de error o contra incorrecta
-            //tmb hacer que no se pueda clickear nada mas fuera, asi le pone aceptar
-            //Lo mismo seria para seleccionar la cantidad en una venta 
-       }
+        
         
         
         

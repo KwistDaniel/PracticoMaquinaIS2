@@ -48,9 +48,7 @@ public class DBQueries {
                     "APELLIDO VARCHAR(255) NOT NULL," +
                     "TELEFONO LONGTEXT NOT NULL," +
                     "SEXO VARCHAR(2) NOT NULL," +
-                    "dNac VARCHAR(2) NOT NULL," +
-                    "mNac VARCHAR(2) NOT NULL," +
-                    "yNac VARCHAR(4) NOT NULL," +
+                    "FNac VARCHAR(10) NOT NULL," +
                     "EMAIL LONGTEXT NOT NULL," +
                     "Status INT NOT NULL," +
                     "PRIMARY KEY(DNI,SEXO))");
@@ -70,9 +68,7 @@ public class DBQueries {
                     "NOMBRE VARCHAR(255) NOT NULL," +
                     "TELEFONO LONGTEXT NOT NULL," +
                     "SITIVA VARCHAR(255) NOT NULL," +
-                    "dFund VARCHAR(2) NOT NULL," +
-                    "mFund VARCHAR(2) NOT NULL," +
-                    "yFund VARCHAR(4) NOT NULL," +
+                    "FFund VARCHAR(10)," +
                     "EMAIL LONGTEXT NOT NULL," +
                     "Status INT NOT NULL," +
                     "PRIMARY KEY(CUIT))");
@@ -143,14 +139,14 @@ public class DBQueries {
                     "COD INT NOT NULL," +
                     "NOMBRE VARCHAR(255) NOT NULL," +
                     "DESCRIPCION VARCHAR(255) NOT NULL," +
-                    "PRECIO_UNITARIO VARCHAR(255) NOT NULL," +
+                    "PRECIO_UNITARIO REAL NOT NULL," +
                     "CANTIDAD INT NOT NULL," +
                     "COLOR VARCHAR(255) NOT NULL," +
                     "CATEGORIA VARCHAR(255) NOT NULL," +
                     "CALIDAD INT," +
-                    "MEDIDA_ANCHO VARCHAR(255)," +
-                    "MEDIDA_ALTO VARCHAR(255)," +
-                    "METROS_CUADRADOS VARCHAR(255)," +
+                    "MEDIDA_ANCHO INT," +
+                    "MEDIDA_ALTO INT," +
+                    "METROS_CUADRADOS INT," +
                     "Status INT NOT NULL," +
                     "PRIMARY KEY(COD))");
         } catch (SQLException throwables) {
