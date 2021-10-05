@@ -5,7 +5,13 @@
  */
 package DAO;
 
+import DataBase.DataBase;
 import Objects.ClienteF;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -16,7 +22,32 @@ public class DAOClienteF implements BusinessObject<ClienteF> {
 
     @Override
     public List<ClienteF> readAll() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        List<ClienteF> clientesf = new ArrayList<>();
+        Connection connection = DataBase.getInstance().getConnection();
+        Statement statement;
+        try{
+            statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery("SELECT * FROM ClienteFisico WHERE ( Status = 1 ) ");
+            ClienteF clientef;
+            while (rs.next()){
+                clientef = new ClienteF();
+                clientef.setDni(rs.getString("DNI"));
+                clientef.setNombre(rs.getString("NOMBRE"));
+                clientef.setApellido(rs.getString("APELLIDO"));
+                clientef.setTelefono(rs.getString("TELEFONO"));
+                clientef.setSexo(rs.getString("SEXO"));
+                clientef.setIdDir(rs.getString("ID_DIR"));
+                clientef.setdNac(rs.getString("dNac"));
+                clientef.setmNac(rs.getString("mNac"));
+                clientef.setyNac(rs.getString("yNac"));
+                clientef.setEmail(rs.getString("EMAIL"));
+                clientesf.add(clientef);
+            }
+        }catch (SQLException throwables){
+            throwables.printStackTrace();
+        }
+        DataBase.getInstance().disconnect();
+        return clientesf;
     }
 
     @Override

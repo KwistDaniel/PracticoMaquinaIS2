@@ -18,7 +18,7 @@ public class Persona {
     private String dNac;
     private String mNac;
     private String yNac;
-    private Direccion direccion;
+    private String idDir;
     private String email;
     
     
@@ -34,10 +34,10 @@ public class Persona {
         this.dNac = aux.dNac;
         this.mNac = aux.mNac;
         this.yNac = aux.yNac;
-        this.direccion = aux.direccion;
+        this.idDir = aux.idDir;
         this.email = aux.email;
     }
-    public Persona (String nombre, String apellido, String dni, String sexo, String telefono, String dNac, String mNac, String yNac, Direccion direccion, String email){
+    public Persona (String nombre, String apellido, String dni, String sexo, String telefono, String dNac, String mNac, String yNac, String idDir, String email){
         this.nombre = nombre;
         this.apellido = apellido;
         this.dni = dni;
@@ -46,7 +46,7 @@ public class Persona {
         this.dNac = dNac;
         this.mNac = mNac;
         this.yNac = yNac;
-        this.direccion = direccion;
+        this.idDir = idDir;
         this.email = email;
 }
 
@@ -114,12 +114,12 @@ public class Persona {
         this.yNac = yNac;
     }
 
-    public Direccion getdireccion() {
-        return direccion;
+    public String getIdDir() {
+        return idDir;
     }
 
-    public void setdireccion(Direccion direccion) {
-        this.direccion = direccion;
+    public void setIdDir(String idDir) {
+        this.idDir = idDir;
     }
 
 

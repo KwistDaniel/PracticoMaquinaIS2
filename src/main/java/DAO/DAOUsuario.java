@@ -33,7 +33,7 @@ public class DAOUsuario implements BusinessObject<Usuario> {
         Statement statement;
         try{
             statement = connection.createStatement();
-            ResultSet rs = statement.executeQuery("SELECT * FROM Usuario WHERE (Status=1) AND (id='" + ids[0] + "')");
+            ResultSet rs = statement.executeQuery("SELECT * FROM Usuario WHERE (Status=1) AND (id='" + ids[0] + "') AND (pass='" + ids[1] + "')");
             while(rs.next()){
                 usuario.setUser(rs.getString("id"));
                 usuario.setPass(rs.getString("pass"));

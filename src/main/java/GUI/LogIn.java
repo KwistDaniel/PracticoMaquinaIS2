@@ -286,11 +286,10 @@ public class LogIn extends javax.swing.JFrame {
         password = TFPassword.getText();
         Usuario userToValidate = new Usuario();
         BusinessObject<Usuario> bobjct = new DAOUsuario();
-        userToValidate = bobjct.readOne(user);
+        userToValidate = bobjct.readOne(user,password);
         
-        if(password.equals(userToValidate.getPass())){
+        if(userToValidate.getUser().equals(user)){
             dispose();
-            System.out.println("Prioridad: " + userToValidate.getPrioridad());
             MainMenu MME = new MainMenu(userToValidate.getPrioridad());
             MME.setVisible(true);
         }

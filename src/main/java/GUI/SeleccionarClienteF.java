@@ -223,10 +223,10 @@ public class SeleccionarClienteF extends javax.swing.JFrame {
         aux1.setNombre((String) aux[1]);
         //aux1.setDescripcion((String) aux[2]);
         System.out.println(aux1.toString());
+        //como se maneja la direccion??
         
         
-        
-        dispose();
+        //dispose();
         //AltaEnvioClienteFisico AECF = new AltaEnvioClienteFisico(mercancias,prioridad,aux1);
         //AECF.setVisible(true);
         

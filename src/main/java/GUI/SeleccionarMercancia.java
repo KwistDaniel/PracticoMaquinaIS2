@@ -224,7 +224,7 @@ public class SeleccionarMercancia extends javax.swing.JFrame {
         System.out.println(aux1.toString());
         
         mercanciasaux.add(aux1);
-        
+        //falta terminar de llenar los datos
         dispose();
         AltaVenta AV = new AltaVenta(mercanciasaux,prioridad);
         AV.setVisible(true);

@@ -208,9 +208,8 @@ public class MainMenu extends javax.swing.JFrame {
     private void BVentasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BVentasActionPerformed
         // TODO add your handling code here:
         dispose();
-        ArrayList<Mercancia> aux = new ArrayList<Mercancia>();
-        AltaVenta AV = new AltaVenta(aux,prioridad);
-        AV.setVisible(true);
+        MVentas mv = new MVentas(prioridad);
+        mv.setVisible(true);
     }//GEN-LAST:event_BVentasActionPerformed
 
     private void BClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BClientesActionPerformed
