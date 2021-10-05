@@ -5,10 +5,38 @@
  */
 package DAO;
 
+import Objects.ConectDirCF;
+import java.util.List;
+
 /**
  *
  * @author kwist
  */
-public class DAOConectDirCF {
+public class DAOConectDirCF implements BusinessObject<ConectDirCF> {
+
+    @Override
+    public List<ConectDirCF> readAll() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public ConectDirCF readOne(String... ids) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public int create(ConectDirCF t) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public int update(ConectDirCF t) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public int delete(ConectDirCF t) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
 }

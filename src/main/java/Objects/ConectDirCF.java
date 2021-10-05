@@ -10,5 +10,7 @@ package Objects;
  * @author kwist
  */
 public class ConectDirCF {
-    
+    private int ID_DIR;
+    private String DNI;
+    private String Sexo;
 }
