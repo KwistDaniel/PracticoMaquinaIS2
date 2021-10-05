@@ -54,7 +54,9 @@ public class SeleccionarClienteF extends javax.swing.JFrame {
                 return column == 1;
             }
         };*/
+        System.out.println("AAAXX");
         BusinessObject<ClienteF> businessObject = new DAOClienteF();
+        System.out.println("BBBXX");
         Object[][] objects = ClienteF.getDataVector(businessObject.readAll());
         Object[] headers = ClienteF.getHeaders();
         tm.setDataVector(objects, headers);
@@ -224,8 +226,8 @@ public class SeleccionarClienteF extends javax.swing.JFrame {
         //aux1.setCod((int) aux[0]);
         aux1.setNombre((String) aux[1]);
         //aux1.setDescripcion((String) aux[2]);
-        System.out.println(aux1.toString());
-        //como se maneja la direccion??
+        
+        //como se maneja la direccion?? la cargo o no?
         
         
         //dispose();

@@ -180,13 +180,13 @@ public class SeleccionarTipoCliente extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void VolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VolverActionPerformed
-        // TODO add your handling code here:
         dispose();
         AltaVenta av = new AltaVenta(mercancias,prioridad);
         av.setVisible(true);
     }//GEN-LAST:event_VolverActionPerformed
 
     private void BClienteFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BClienteFActionPerformed
+        dispose();
         SeleccionarClienteF scf = new SeleccionarClienteF(mercancias,prioridad);
         scf.setVisible(true);
     }//GEN-LAST:event_BClienteFActionPerformed
