@@ -13,7 +13,7 @@ public class ClienteJ {
     private String CUIT;
     private String sitIVA;
     private String nombre;
-    private String idDir;
+    private int idDir; //REVISAR
     private String telefono;
     private String email;
     private String dFund;
@@ -34,7 +34,7 @@ public class ClienteJ {
         this.mFund = aux.mFund;
         this.yFund = aux.yFund;
     }
-    public ClienteJ(String CUIT, String sitIVA, String nombre, String idDir, String telefono, String email, String dFund, String mFund, String yFund) {
+    public ClienteJ(String CUIT, String sitIVA, String nombre, int idDir, String telefono, String email, String dFund, String mFund, String yFund) {
         this.CUIT = CUIT;
         this.sitIVA = sitIVA;
         this.nombre = nombre;
@@ -70,11 +70,11 @@ public class ClienteJ {
         this.nombre = nombre;
     }
 
-    public String getIdDir() {
+    public int getIdDir() {
         return idDir;
     }
 
-    public void setIdDir(String idDir) {
+    public void setIdDir(int idDir) {
         this.idDir = idDir;
     }
 

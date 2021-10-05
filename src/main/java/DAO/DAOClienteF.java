@@ -36,7 +36,7 @@ public class DAOClienteF implements BusinessObject<ClienteF> {
                 clientef.setApellido(rs.getString("APELLIDO"));
                 clientef.setTelefono(rs.getString("TELEFONO"));
                 clientef.setSexo(rs.getString("SEXO"));
-                clientef.setIdDir(rs.getString("ID_DIR"));
+                clientef.setIdDir(rs.getInt("ID_DIR"));
                 clientef.setdNac(rs.getString("dNac"));
                 clientef.setmNac(rs.getString("mNac"));
                 clientef.setyNac(rs.getString("yNac"));

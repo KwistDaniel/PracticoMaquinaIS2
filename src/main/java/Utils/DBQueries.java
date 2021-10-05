@@ -43,19 +43,17 @@ public class DBQueries {
         try {
             statement = connection.createStatement();
             statement.executeUpdate("CREATE TABLE ClienteFisico (" +
-                    "DNI VARCHAR(20) NOT NULL," +
+                    "DNI VARCHAR(10) NOT NULL," +
                     "NOMBRE VARCHAR(255) NOT NULL," +
                     "APELLIDO VARCHAR(255) NOT NULL," +
                     "TELEFONO LONGTEXT NOT NULL," +
-                    "SEXO VARCHAR(255) NOT NULL," +
-                    "ID_DIR INT NOT NULL," +
+                    "SEXO VARCHAR(2) NOT NULL," +
                     "dNac VARCHAR(2) NOT NULL," +
                     "mNac VARCHAR(2) NOT NULL," +
                     "yNac VARCHAR(4) NOT NULL," +
                     "EMAIL LONGTEXT NOT NULL," +
                     "Status INT NOT NULL," +
-                    "PRIMARY KEY(DNI,SEXO)," +
-                    "FOREIGN KEY (ID_DIR) REFERENCES Direccion(ID))");
+                    "PRIMARY KEY(DNI,SEXO))");
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
@@ -63,23 +61,71 @@ public class DBQueries {
     }
     
     public static void tablaClientesJuridicos(){
-        
+        Connection connection = DataBase.getInstance().getConnection();
+        Statement statement;
+        try {
+            statement = connection.createStatement();
+            statement.executeUpdate("CREATE TABLE ClienteJuridico (" +
+                    "CUIT VARCHAR(15) NOT NULL," +
+                    "NOMBRE VARCHAR(255) NOT NULL," +
+                    "TELEFONO LONGTEXT NOT NULL," +
+                    "SITIVA VARCHAR(255) NOT NULL," +
+                    "dFund VARCHAR(2) NOT NULL," +
+                    "mFund VARCHAR(2) NOT NULL," +
+                    "yFund VARCHAR(4) NOT NULL," +
+                    "EMAIL LONGTEXT NOT NULL," +
+                    "Status INT NOT NULL," +
+                    "PRIMARY KEY(CUIT))");
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        DataBase.getInstance().disconnect();
+    }
+    
+    public static void tablaConexionDirClientF(){
+        Connection connection = DataBase.getInstance().getConnection();
+        Statement statement;
+        try {
+            statement = connection.createStatement();
+            statement.executeUpdate("CREATE TABLE ConectDirCliF (" +
+                    "ID_DIR INT NOT NULL," +
+                    "DNI_CF VARCHAR(10) NOT NULL," +
+                    "SEXO_CF VARCHAR(2) NOT NULL," + 
+                    "PRIMARY KEY(ID_DIR,DNI_CF,SEXO_CF))");
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        DataBase.getInstance().disconnect();
+    }
+    public static void tablaConexionDirClientJ(){
+        Connection connection = DataBase.getInstance().getConnection();
+        Statement statement;
+        try {
+            statement = connection.createStatement();
+            statement.executeUpdate("CREATE TABLE ConectDirCliJ (" +
+                    "ID_DIR INT NOT NULL," +
+                    "CUIT_CJ VARCHAR(15) NOT NULL," +
+                    "PRIMARY KEY(ID_DIR,CUIT_CJ))");
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        DataBase.getInstance().disconnect();
     }
     public static void tablaDirecciones(){
         Connection connection = DataBase.getInstance().getConnection();
         Statement statement;
         try {
             statement = connection.createStatement();
-            statement.executeUpdate("CREATE TABLE Direccion (" +
-                    "ID INT NOT NULL," +
-                    "CALLE LONGTEXT," +
-                    "NUMERO LONGTEXT," +
-                    "PISO LONGTEXT," +
-                    "DEPTO LONGTEXT," +
-                    "COD_POSTAL LONGTEXT," +
-                    "LOCALIDAD LONGTEXT," +
-                    "Status INT NOT NULL," + 
-                    "PRIMARY KEY(ID))");
+            statement.executeUpdate("CREATE TABLE Direccion (" + 
+                    "ID INT NOT NULL," + 
+                    "CALLE LONGTEXT," + 
+                    "NUMERO LONGTEXT," + 
+                    "PISO LONGTEXT," + 
+                    "DEPTO LONGTEXT," + 
+                    "COD_POSTAL LONGTEXT," + 
+                    "LOCALIDAD LONGTEXT," + 
+                    "Status INT NOT NULL," +
+                    "PRIMARY KEY (ID))");
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
@@ -158,4 +204,18 @@ public class DBQueries {
         }
         DataBase.getInstance().disconnect();
     }
+    
+    
+    
+    
+    
+    
+    
+    /*
+    Queries:
+    **JOIN PARA CONSEGUIR DIRECCIONES DE UN CLIENTEF POR DNI Y SEXO:**
+    SELECT ID,CALLE,NUMERO,PISO,DEPTO,COD_POSTAL,LOCALIDAD FROM Direccion INNER JOIN (SELECT ID_DIR FROM conectdirclif WHERE (DNI_CF='39662252') AND (SEXO_CF='M')) AS DJ ON ID = DJ.ID_DIR
+    **
+    
+*/
 }

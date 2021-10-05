@@ -18,7 +18,7 @@ public class Persona {
     private String dNac;
     private String mNac;
     private String yNac;
-    private String idDir;
+    private int idDir;
     private String email;
     
     
@@ -37,7 +37,7 @@ public class Persona {
         this.idDir = aux.idDir;
         this.email = aux.email;
     }
-    public Persona (String nombre, String apellido, String dni, String sexo, String telefono, String dNac, String mNac, String yNac, String idDir, String email){
+    public Persona (String nombre, String apellido, String dni, String sexo, String telefono, String dNac, String mNac, String yNac, int idDir, String email){
         this.nombre = nombre;
         this.apellido = apellido;
         this.dni = dni;
@@ -114,11 +114,11 @@ public class Persona {
         this.yNac = yNac;
     }
 
-    public String getIdDir() {
+    public int getIdDir() {
         return idDir;
     }
 
-    public void setIdDir(String idDir) {
+    public void setIdDir(int idDir) {
         this.idDir = idDir;
     }
 

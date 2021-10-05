@@ -20,7 +20,7 @@ public class ClienteF extends Persona {
         super(aux);
     }
   
-    public ClienteF(String nombre, String apellido, String dni, String sexo, String telefono, String dNac, String mNac, String yNac, String idDir , String email){
+    public ClienteF(String nombre, String apellido, String dni, String sexo, String telefono, String dNac, String mNac, String yNac, int idDir , String email){
         super(nombre,apellido,dni,sexo,telefono,dNac,mNac,yNac,idDir,email);
     }
     

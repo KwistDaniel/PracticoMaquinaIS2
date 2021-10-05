@@ -9,12 +9,6 @@ package Objects;
  *
  * @author kwist
  */
-public class Direccion {
-    private int idDir;
-    private String calleDir;
-    private String numDir;
-    private String pisoDir;
-    private String deptoDir;
-    private String codPostal;
-    private String localidad;
+public class ConectDirCF {
+    
 }

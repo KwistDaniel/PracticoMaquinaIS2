@@ -25,6 +25,12 @@ public class Main {
         // TODO code application logic here
         LogIn li = new LogIn();
         li.setVisible(true);
+        //DBQueries.tablaConexionDirClientF();
+        //DBQueries.tablaConexionDirClientJ();
+        //DBQueries.tablaDirecciones();
+        //DBQueries.tablaClientesFisicos();
+        //DBQueries.tablaClientesJuridicos();
+        
         //jdbc:mariadb://
         /*
         String url = "jdbc:mariadb://dvnikst.duckdns.org:3306/is2-daquino-gk";
