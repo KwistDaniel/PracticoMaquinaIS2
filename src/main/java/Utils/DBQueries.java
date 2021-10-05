@@ -207,9 +207,11 @@ public class DBQueries {
         Statement statement;
         try {
             statement = connection.createStatement();
-            statement.executeUpdate("CREATE TABLE RenglonVenta (" +
+            statement.executeUpdate("CREATE TABLE RenglonVenta (" + //REVISAR
                     "ID_Venta INT NOT NULL," +
                     "COD_Mercancia VARCHAR(10) NOT NULL," +
+                    "Cantidad VARCHAR(10) NOT NULL," +
+                    "Precio_U VARCHAR(10) NOT NULL," +
                     "PRIMARY KEY(ID_Venta,COD_Mercancia))");
         } catch (SQLException throwables) {
             throwables.printStackTrace();

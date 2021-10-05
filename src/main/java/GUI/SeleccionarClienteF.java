@@ -220,14 +220,20 @@ public class SeleccionarClienteF extends javax.swing.JFrame {
     }//GEN-LAST:event_BVolverActionPerformed
 
     private void BSeleccionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BSeleccionarActionPerformed
-        //selecciono y meto el obje
+        
         Object[] aux = tm.getDataVector().elementAt(tabla.getSelectedRow()).toArray();
         ClienteF aux1 = new ClienteF();
-        //aux1.setCod((int) aux[0]);
-        aux1.setNombre((String) aux[1]);
-        //aux1.setDescripcion((String) aux[2]);
+        aux1.setNombre((String) aux[0]);
+        aux1.setApellido((String) aux[1]);
+        aux1.setDni((String) aux[2]);
+        aux1.setSexo((String) aux[3]);
+        aux1.setTelefono((String) aux[4]);
+        aux1.setfNac((String) aux[5]);
+        aux1.setEmail((String) aux[6]);
+        aux1.toString();
+        System.out.println("Nombre: " + aux1.getNombre() + " Apellido: " + aux1.getApellido() + " DNI: " + aux1.getDni() + " Sexo: " + aux1.getSexo() + " Telefono: " + aux1.getTelefono() + " Fecha Nac: " + aux1.getfNac() + " Email: " + aux1.getEmail());
         
-        //como se maneja la direccion?? la cargo o no?
+        //
         
         
         //dispose();

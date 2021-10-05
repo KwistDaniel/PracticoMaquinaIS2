@@ -99,7 +99,7 @@ public class Persona {
 
     @Override
     public String toString() {
-        return super.toString(); //To change body of generated methods, choose Tools | Templates.
+        return "Nombre: " + nombre + " Apellido: " + apellido + " DNI: " + dni + " Sexo: " + sexo + " Telefono: " + telefono + " Fecha Nac: " + fNac + " Email: " + email;
     }
 
     
