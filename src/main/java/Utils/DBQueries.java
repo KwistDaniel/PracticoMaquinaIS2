@@ -219,16 +219,13 @@ public class DBQueries {
         DataBase.getInstance().disconnect();
     }
     
-    
-    
-    
-    
-    
     /*
-    Queries:
+    Queries importantes:
     **JOIN PARA CONSEGUIR DIRECCIONES DE UN CLIENTEF POR DNI Y SEXO:**
     SELECT ID,CALLE,NUMERO,PISO,DEPTO,COD_POSTAL,LOCALIDAD FROM Direccion INNER JOIN (SELECT ID_DIR FROM conectdirclif WHERE (DNI_CF='39662252') AND (SEXO_CF='M')) AS DJ ON ID = DJ.ID_DIR
-    **
+    
+    **JOIN PARA LISTAR VENTAS:
+    SELECT //hacer como arriba, join de interseccion con subconsulta deberia andar
     
 */
 }
