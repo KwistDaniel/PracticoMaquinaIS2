@@ -5,7 +5,13 @@
  */
 package DAO;
 
+import DataBase.DataBase;
 import Objects.ConectDirCF;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -36,6 +42,11 @@ public class DAOConectDirCF implements BusinessObject<ConectDirCF> {
 
     @Override
     public int delete(ConectDirCF t) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public List<ConectDirCF> readAllIds(String... ids) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     

@@ -9,42 +9,47 @@ import GUI.PruebasAndTemplates.*;
 import GUI.*;
 import Objects.ClienteF;
 import Objects.ClienteJ;
+import Objects.Direccion;
 import Objects.Mercancia;
 import java.util.ArrayList;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 /**
  *
  * @author kwist
  */
-public class SeleccionarEnvio extends javax.swing.JFrame {
+public class FinAltaVenta extends javax.swing.JFrame {
     ArrayList<Mercancia> mercancias;
     ClienteF clientef;
     ClienteJ clientej;
     int prioridad,tipocliente;
+    Direccion direccionenvio;
     /**
      * Creates new form Menu
      */
-    public SeleccionarEnvio(ClienteF cfaux, ClienteJ cjaux, ArrayList<Mercancia> aux, int priority,int tcliente) {
-        this.tipocliente = tcliente;
-        if(tipocliente == 1){
+    public FinAltaVenta() {
+        initComponents();
+        this.setVisible(true);
+        this.setLocationRelativeTo(null);     
+    }
+    
+    public FinAltaVenta(ClienteF cfaux, ClienteJ cjaux, ArrayList<Mercancia> aux, int priority,int tcliente,Direccion daux){
+        prioridad = priority;
+        tipocliente = tcliente;
+        if (tipocliente == 1){
             clientef = new ClienteF(cfaux);
         }
         else{
             clientej = new ClienteJ(cjaux);
         }
-        
         mercancias = new ArrayList<Mercancia>(aux);
-        prioridad=priority;        
+        direccionenvio = new Direccion(daux);
+        
+        
         initComponents();
         this.setVisible(true);
-        this.setLocationRelativeTo(null);
-                
-                
-    }
-
-    private SeleccionarEnvio() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        this.setLocationRelativeTo(null); 
     }
 
     /**
@@ -59,10 +64,10 @@ public class SeleccionarEnvio extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
-        BCargarEnvio = new javax.swing.JButton();
-        BClienteF = new javax.swing.JButton();
+        Deposito = new javax.swing.JButton();
+        BMostrarCliente = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
-        Volver = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 0, 0));
@@ -75,21 +80,16 @@ public class SeleccionarEnvio extends javax.swing.JFrame {
 
         jPanel3.setBackground(new java.awt.Color(245, 245, 220));
 
-        BCargarEnvio.setBackground(new java.awt.Color(210, 4, 45));
-        BCargarEnvio.setForeground(new java.awt.Color(250, 250, 250));
-        BCargarEnvio.setText("Cargar Envio");
-        BCargarEnvio.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BCargarEnvioActionPerformed(evt);
-            }
-        });
+        Deposito.setBackground(new java.awt.Color(210, 4, 45));
+        Deposito.setForeground(new java.awt.Color(250, 250, 250));
+        Deposito.setText("jButton3");
 
-        BClienteF.setBackground(new java.awt.Color(210, 4, 45));
-        BClienteF.setForeground(new java.awt.Color(250, 250, 250));
-        BClienteF.setText("Retira Ahora");
-        BClienteF.addActionListener(new java.awt.event.ActionListener() {
+        BMostrarCliente.setBackground(new java.awt.Color(210, 4, 45));
+        BMostrarCliente.setForeground(new java.awt.Color(250, 250, 250));
+        BMostrarCliente.setText("Cliente");
+        BMostrarCliente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BClienteFActionPerformed(evt);
+                BMostrarClienteActionPerformed(evt);
             }
         });
 
@@ -100,30 +100,30 @@ public class SeleccionarEnvio extends javax.swing.JFrame {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(136, 136, 136)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(BClienteF)
-                    .addComponent(BCargarEnvio))
+                    .addComponent(BMostrarCliente)
+                    .addComponent(Deposito))
                 .addContainerGap(153, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                 .addGap(76, 76, 76)
-                .addComponent(BClienteF)
+                .addComponent(BMostrarCliente)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 286, Short.MAX_VALUE)
-                .addComponent(BCargarEnvio)
+                .addComponent(Deposito)
                 .addGap(90, 90, 90))
         );
 
         jPanel4.setBackground(new java.awt.Color(245, 245, 220));
         jPanel4.setPreferredSize(new java.awt.Dimension(364, 34));
 
-        Volver.setBackground(new java.awt.Color(210, 4, 45));
-        Volver.setForeground(new java.awt.Color(250, 250, 250));
-        Volver.setText("Volver");
-        Volver.setActionCommand("Exit");
-        Volver.addActionListener(new java.awt.event.ActionListener() {
+        jButton1.setBackground(new java.awt.Color(210, 4, 45));
+        jButton1.setForeground(new java.awt.Color(250, 250, 250));
+        jButton1.setText("Salir");
+        jButton1.setActionCommand("Exit");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                VolverActionPerformed(evt);
+                jButton1ActionPerformed(evt);
             }
         });
 
@@ -133,14 +133,14 @@ public class SeleccionarEnvio extends javax.swing.JFrame {
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
                 .addContainerGap(286, Short.MAX_VALUE)
-                .addComponent(Volver)
+                .addComponent(jButton1)
                 .addContainerGap())
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(Volver)
+                .addComponent(jButton1)
                 .addContainerGap())
         );
 
@@ -172,7 +172,7 @@ public class SeleccionarEnvio extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(18, 18, 18)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(21, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -196,27 +196,19 @@ public class SeleccionarEnvio extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void VolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VolverActionPerformed
-        dispose();
-        SeleccionarTipoCliente stc = new SeleccionarTipoCliente(mercancias,prioridad);
-        stc.setVisible(true);
-    }//GEN-LAST:event_VolverActionPerformed
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        System.exit(0);
+    }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void BClienteFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BClienteFActionPerformed
-/*        dispose();
-        SeleccionarClienteF scf = new SeleccionarClienteF(mercancias,prioridad);
-        scf.setVisible(true);*/
-    }//GEN-LAST:event_BClienteFActionPerformed
-
-    private void BCargarEnvioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BCargarEnvioActionPerformed
-        dispose();
-        SeleccionarDireccionEnvio sde = new SeleccionarDireccionEnvio(clientef,clientej,mercancias,prioridad,tipocliente);
-        sde.setVisible(true);
-        //AltaEnvio ae = new AltaEnvio(clientef,clientej,mercancias,prioridad,tipocliente);
-        //ae.setVisible(true);
-        
-        
-    }//GEN-LAST:event_BCargarEnvioActionPerformed
+    private void BMostrarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BMostrarClienteActionPerformed
+        if(tipocliente == 1){
+            JOptionPane.showMessageDialog(null, clientef.toString());
+        }
+        else{
+            //not supported yet
+        }
+    }//GEN-LAST:event_BMostrarClienteActionPerformed
 
     /**
      * @param args the command line arguments
@@ -235,70 +227,14 @@ public class SeleccionarEnvio extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(SeleccionarEnvio.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FinAltaVenta.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(SeleccionarEnvio.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FinAltaVenta.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(SeleccionarEnvio.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FinAltaVenta.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(SeleccionarEnvio.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FinAltaVenta.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
@@ -311,15 +247,15 @@ public class SeleccionarEnvio extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new SeleccionarEnvio().setVisible(true);
+                new FinAltaVenta().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton BCargarEnvio;
-    private javax.swing.JButton BClienteF;
-    private javax.swing.JButton Volver;
+    private javax.swing.JButton BMostrarCliente;
+    private javax.swing.JButton Deposito;
+    private javax.swing.JButton jButton1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;

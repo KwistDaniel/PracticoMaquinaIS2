@@ -38,5 +38,10 @@ public class DAOClienteJ implements BusinessObject<ClienteJ> {
     public int delete(ClienteJ t) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
+    @Override
+    public List<ClienteJ> readAllIds(String... ids) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
 }

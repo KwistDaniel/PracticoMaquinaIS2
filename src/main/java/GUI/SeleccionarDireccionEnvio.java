@@ -6,10 +6,12 @@
 package GUI;
 
 import DAO.BusinessObject;
-import DAO.DAOMercancia;
+import DAO.DAODireccion;
 import GUI.*;
 import Objects.ClienteF;
 import Objects.ClienteJ;
+import Objects.ConectDirCF;
+import Objects.Direccion;
 import Objects.Mercancia;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
@@ -68,9 +70,23 @@ public class SeleccionarDireccionEnvio extends javax.swing.JFrame {
                 return column == 1;
             }
         };*/
-        BusinessObject<Mercancia> businessObject = new DAOMercancia();
-        Object[][] objects = Mercancia.getDataVector(businessObject.readAll());
-        Object[] headers = Mercancia.getHeaders();
+        
+        Object[][] objects;
+        Object[] headers;
+        if (tipocliente == 1){
+            BusinessObject<Direccion> businessObject = new DAODireccion();
+            //PREGUNTAR HERNAN, pyuedo pasar la query aca? o debo crear otra clase de direccion para clientej, xq si paso dni y sexo para armar la query, necesito otro readall con ids para el clientej
+            objects = Direccion.getDataVector(businessObject.readAllIds("SELECT ID_DIR FROM conectdirclif WHERE (DNI_CF='"+ clientef.getDni() +"') AND (SEXO_CF='" + clientef.getSexo() + "')"));
+            headers = Direccion.getHeaders();
+        }
+        else{
+            //TODAVIA NO ESTA IMPLEMENTADO!!!!
+            BusinessObject<Direccion> businessObject = new DAODireccion();;
+            objects = Direccion.getDataVector(businessObject.readAllIds("SELECT ID_DIR FROM conectdirclif WHERE (CUIT='"+ clientej.getCUIT() +"')"));
+            headers = Direccion.getHeaders();
+        }
+        
+        
         tm.setDataVector(objects, headers);
         
         ArrayList<Integer> codaelim = new ArrayList<Integer>();
@@ -237,46 +253,24 @@ public class SeleccionarDireccionEnvio extends javax.swing.JFrame {
     private void BVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BVolverActionPerformed
         // TODO add your handling code here:
         dispose();
-        AltaVenta av = new AltaVenta(mercancias,prioridad);
+        SeleccionarEnvio se = new SeleccionarEnvio(clientef,clientej,mercancias,prioridad,tipocliente);
+        se.setVisible(true);
     }//GEN-LAST:event_BVolverActionPerformed
 
     private void BSeleccionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BSeleccionarActionPerformed
-        String control = JOptionPane.showInputDialog("Ingrese una cantidad");
+        Object[] aux = tm.getDataVector().elementAt(tabla.getSelectedRow()).toArray();
+        Direccion direccionenvio = new Direccion();
+        direccionenvio.setIdDir((int) aux[0]);
+        direccionenvio.setCalleDir((String) aux[1]);
+        direccionenvio.setNumDir((String) aux[2]);
+        direccionenvio.setPisoDir((String) aux[3]);
+        direccionenvio.setDeptoDir((String) aux[4]);
+        direccionenvio.setCodPostal((String) aux[5]);
+        direccionenvio.setLocalidad((String) aux[6]);
+        dispose();
+        FinAltaVenta fav = new FinAltaVenta(clientef,clientej,mercancias,prioridad,tipocliente,direccionenvio);
+        fav.setVisible(true);
         
-        if (control == null){
-            JOptionPane.showMessageDialog(null, "Valor incorrecto");
-        }
-        else{
-            try{
-                int cant = Integer.parseInt(control);
-                ArrayList<Mercancia> mercanciasaux = new ArrayList<Mercancia>(mercancias);
-                Object[] aux = tm.getDataVector().elementAt(tabla.getSelectedRow()).toArray();
-                if (cant > (int) aux[4] || cant <=0){
-                    JOptionPane.showMessageDialog(null, "Valor incorrecto");
-                }
-                else{
-                    Mercancia aux1 = new Mercancia();
-                    aux1.setCod((int) aux[0]);
-                    aux1.setNombre((String) aux[1]);
-                    aux1.setDescripcion((String) aux[2]);
-                    aux1.setPrecio_u((double) aux[3]);
-                    aux1.setCantidad(cant);
-                    aux1.setColor((String) aux[5]);
-                    aux1.setCategoria((String) aux[6]);
-                    aux1.setCalidad((int) aux[7]);
-                    aux1.setAncho((int) aux[8]);
-                    aux1.setAlto((int) aux[9]);
-                    aux1.setMetcuad((int) aux[10]);
-                    mercanciasaux.add(aux1);
-                    dispose();
-                    AltaVenta AV = new AltaVenta(mercanciasaux,prioridad);
-                    AV.setVisible(true);
-                }
-                
-            }catch(Exception e){
-                JOptionPane.showMessageDialog(null, "Valor incorrecto");
-            }
-        }
         
         
         

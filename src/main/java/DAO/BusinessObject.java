@@ -20,4 +20,6 @@ public interface BusinessObject<T> {
     int update(T t);
     
     int delete(T t);
+    
+    List<T> readAllIds(String... ids);
 }

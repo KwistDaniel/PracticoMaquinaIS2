@@ -37,7 +37,11 @@ public class ClienteF extends Persona {
     private Object[] toObject(){
         return new Object[]{getNombre(),getApellido(),getDni(),getSexo(),getTelefono(),getfNac(),getEmail()};
     }
-
+    
+    @Override
+    public String toString(){
+        return "Cliente: \n Nombre: " + getNombre() + "\n Apellido: " + getApellido() + "\n DNI: " + getDni() + "\n Sexo: " + getSexo() + "\n Telefono: " + getTelefono() + "\n Fecha Nac: " + getfNac() + "\n Email: " + getEmail();
+    }
     
     
 }
