@@ -167,6 +167,7 @@ public class DBQueries {
                     "PRECIO_UNITARIO REAL NOT NULL," +
                     "CANTIDAD INT NOT NULL," +
                     "COLOR VARCHAR(255) NOT NULL," +
+                    "PARTIDA INT NOT NULL," +
                     "CATEGORIA VARCHAR(255) NOT NULL," +
                     "CALIDAD INT," +
                     "MEDIDA_ANCHO INT," +

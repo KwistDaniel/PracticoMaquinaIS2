@@ -5,6 +5,9 @@
  */
 package GUI;
 
+import DAO.BusinessObject;
+import DAO.DAOClienteF;
+import DAO.DAOMercancia;
 import GUI.PruebasAndTemplates.*;
 import GUI.*;
 import Objects.ClienteF;
@@ -220,13 +223,26 @@ public class FinAltaVenta extends javax.swing.JFrame {
     private void BCargaVentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BCargaVentaActionPerformed
         //aca updateo las tablas
         if (tipocliente == 10){
-            //creo la venta de clientes
+            //1- CREO EL ENVIO (Necesita la direccion) *falta*
+            //2- CREO LA VENTA *Faltan los datos de vendedor, de ultima en vez de pasar prioridad por todos lados, paso un vendedor*
+            //3- CREO EL CONETOR DE VENTA CON EL CLIENTE *falta*
+            //4- UPDATE A MERCANCIA *listo*
+            //BusinessObject<??> businessObject?? = new DAO??();
+            //creo la venta de clientes, esto seria un create para el DAO ConectVenCF
+            //BusinessObject<??> businessObject?? = new DAO??();
             //creo el envio al cliente
-            //updateo la tabla de mercancias para actualizar la cantidad
         }
         else{
-            
+            //BusinessObject<??> businessObject?? = new DAO??();
+            //BusinessObject<??> businessObject?? = new DAO??();
         }
+            
+        BusinessObject<Mercancia> businessObjectM = new DAOMercancia();
+        for(int i = 0; i<mercancias.size();i++){//updateo la tabla de mercancias para actualizar la cantidad
+            businessObjectM.update(mercancias.get(i));
+        }
+            
+        
         
         dispose();
         MainMenu mm = new MainMenu(prioridad);

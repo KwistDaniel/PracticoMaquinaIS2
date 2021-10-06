@@ -254,6 +254,7 @@ public class SeleccionarMercancia extends javax.swing.JFrame {
                     aux1.setAncho((int) aux[8]);
                     aux1.setAlto((int) aux[9]);
                     aux1.setMetcuad((int) aux[10]);
+                    aux1.setPartida((int) aux[11]);
                     mercanciasaux.add(aux1);
                     dispose();
                     AltaVenta AV = new AltaVenta(mercanciasaux,prioridad);

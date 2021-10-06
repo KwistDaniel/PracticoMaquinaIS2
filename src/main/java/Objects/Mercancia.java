@@ -37,7 +37,6 @@ public class Mercancia {
         this.cantidad = cantidad;
         this.precio_u = precio_u;
         this.color = color;
-        this.tipo = tipo;
         this.partida = partida;
         this.ancho = ancho;
         this.alto = alto;
@@ -101,14 +100,6 @@ public class Mercancia {
         this.color = color;
     }
 
-    public int getTipo() {
-        return tipo;
-    }
-
-    public void setTipo(int tipo) {
-        this.tipo = tipo;
-    }
-
     public int getPartida() {
         return partida;
     }
@@ -158,14 +149,14 @@ public class Mercancia {
     }
     
     public static Object[] getHeaders(){
-        return new Object[]{"Codigo","Nombre","Descripcion","Precio Unitario","Cantidad","Color","Categoria","Calidad","Ancho","Alto","Metros Cuadrados"};
+        return new Object[]{"Codigo","Nombre","Descripcion","Precio Unitario","Cantidad","Color","Categoria","Calidad","Ancho","Alto","Metros Cuadrados","Partida"};
     }
     public static Object[] getHeadersB(){
-        return new Object[]{"Codigo","Nombre","Descripcion","Precio Unitario","Cantidad","Color","Categoria","Calidad","Ancho","Alto","Metros Cuadrados","Descuento"};
+        return new Object[]{"Codigo","Nombre","Descripcion","Precio Unitario","Cantidad","Color","Categoria","Calidad","Ancho","Alto","Metros Cuadrados","Partida","Descuento"};
     }
     
     private Object[] toObject(){
-        return new Object[]{getCod(),getNombre(),getDescripcion(),getPrecio_u(),getCantidad(),getColor(),getCategoria(),getCalidad(),getAncho(),getAlto(),getMetcuad()};
+        return new Object[]{getCod(),getNombre(),getDescripcion(),getPrecio_u(),getCantidad(),getColor(),getCategoria(),getCalidad(),getAncho(),getAlto(),getMetcuad(),getPartida()};
     }
     
     private Object[] toObjectB(){

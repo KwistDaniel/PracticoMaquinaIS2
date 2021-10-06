@@ -37,7 +37,7 @@ public class AltaVenta extends javax.swing.JFrame {
             @Override
             public Class getColumnClass(int column){
                 switch (column){
-                    case 11:
+                    case 12:
                         return Boolean.class;
                     default:
                         return String.class;
