@@ -6,7 +6,7 @@
 package GUI;
 
 import DAO.BusinessObject;
-import DAO.DAOClienteF;
+import DAO.DAOMercancia;
 import GUI.*;
 import Objects.ClienteF;
 import Objects.ClienteJ;
@@ -15,7 +15,9 @@ import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
@@ -26,9 +28,11 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author kwist
  */
-public class SeleccionarClienteF extends javax.swing.JFrame {
+public class SeleccionarDireccionEnvio extends javax.swing.JFrame {
     ArrayList<Mercancia> mercancias;
-    int prioridad;
+    int prioridad,tipocliente;
+    ClienteF clientef;
+    ClienteJ clientej;
     /**
      * Creates new form Menu
      */
@@ -40,12 +44,21 @@ public class SeleccionarClienteF extends javax.swing.JFrame {
             }
         };
     
-    public SeleccionarClienteF(ArrayList<Mercancia> aux,int priority) {
+    public SeleccionarDireccionEnvio(ClienteF cfaux, ClienteJ cjaux,ArrayList<Mercancia> aux,int priority,int tcliente) {
         prioridad = priority;
+        tipocliente = tcliente;
+        if (tipocliente == 1){
+            clientef = new ClienteF(cfaux);
+        }
+        else{
+            clientej = new ClienteJ(cjaux);
+        }
         mercancias = new ArrayList<Mercancia>(aux);
         initComponents();
         this.setVisible(true);
         this.setLocationRelativeTo(null);
+        
+        //ahora hago una tabla si es ClienteF y otra si es ClienteJ, por ahora solo implementar todo ClienteF.
         
         GridBagConstraints gridBagConstraints = new GridBagConstraints();
         
@@ -55,15 +68,25 @@ public class SeleccionarClienteF extends javax.swing.JFrame {
                 return column == 1;
             }
         };*/
-        System.out.println("AAAXX");
-        BusinessObject<ClienteF> businessObject = new DAOClienteF();
-        System.out.println("BBBXX");
-        Object[][] objects = ClienteF.getDataVector(businessObject.readAll());
-        Object[] headers = ClienteF.getHeaders();
+        BusinessObject<Mercancia> businessObject = new DAOMercancia();
+        Object[][] objects = Mercancia.getDataVector(businessObject.readAll());
+        Object[] headers = Mercancia.getHeaders();
         tm.setDataVector(objects, headers);
         
+        ArrayList<Integer> codaelim = new ArrayList<Integer>();
+        for(int i=0; i < mercancias.size();i++){
+            codaelim.add((Integer)mercancias.get(i).getCod());
+        }
         
-        
+        for (int i=0; i < tm.getRowCount(); i++){
+            for (int j=0; j < codaelim.size(); j++){
+                if(tm.getValueAt(i, 0) == codaelim.get(j)){
+                    tm.removeRow(i);
+                    i--;
+                }
+            }
+        }
+
         
         tabla = new JTable(tm);
         tabla.setFocusable(false);
@@ -95,7 +118,7 @@ public class SeleccionarClienteF extends javax.swing.JFrame {
                 
     }
 
-    private SeleccionarClienteF() {
+    private SeleccionarDireccionEnvio() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
@@ -170,12 +193,10 @@ public class SeleccionarClienteF extends javax.swing.JFrame {
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                 .addContainerGap(30, Short.MAX_VALUE)
-                .addComponent(BVolver)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(BVolver)
+                    .addComponent(BSeleccionar))
                 .addGap(21, 21, 21))
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addComponent(BSeleccionar)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -217,27 +238,48 @@ public class SeleccionarClienteF extends javax.swing.JFrame {
         // TODO add your handling code here:
         dispose();
         AltaVenta av = new AltaVenta(mercancias,prioridad);
-        av.setVisible(true);
     }//GEN-LAST:event_BVolverActionPerformed
 
     private void BSeleccionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BSeleccionarActionPerformed
+        String control = JOptionPane.showInputDialog("Ingrese una cantidad");
         
-        Object[] aux = tm.getDataVector().elementAt(tabla.getSelectedRow()).toArray();
-        ClienteF aux1 = new ClienteF();
-        aux1.setNombre((String) aux[0]);
-        aux1.setApellido((String) aux[1]);
-        aux1.setDni((String) aux[2]);
-        aux1.setSexo((String) aux[3]);
-        aux1.setTelefono((String) aux[4]);
-        aux1.setfNac((String) aux[5]);
-        aux1.setEmail((String) aux[6]);
-        aux1.toString();
-        //System.out.println("Nombre: " + aux1.getNombre() + " Apellido: " + aux1.getApellido() + " DNI: " + aux1.getDni() + " Sexo: " + aux1.getSexo() + " Telefono: " + aux1.getTelefono() + " Fecha Nac: " + aux1.getfNac() + " Email: " + aux1.getEmail());
+        if (control == null){
+            JOptionPane.showMessageDialog(null, "Valor incorrecto");
+        }
+        else{
+            try{
+                int cant = Integer.parseInt(control);
+                ArrayList<Mercancia> mercanciasaux = new ArrayList<Mercancia>(mercancias);
+                Object[] aux = tm.getDataVector().elementAt(tabla.getSelectedRow()).toArray();
+                if (cant > (int) aux[4] || cant <=0){
+                    JOptionPane.showMessageDialog(null, "Valor incorrecto");
+                }
+                else{
+                    Mercancia aux1 = new Mercancia();
+                    aux1.setCod((int) aux[0]);
+                    aux1.setNombre((String) aux[1]);
+                    aux1.setDescripcion((String) aux[2]);
+                    aux1.setPrecio_u((double) aux[3]);
+                    aux1.setCantidad(cant);
+                    aux1.setColor((String) aux[5]);
+                    aux1.setCategoria((String) aux[6]);
+                    aux1.setCalidad((int) aux[7]);
+                    aux1.setAncho((int) aux[8]);
+                    aux1.setAlto((int) aux[9]);
+                    aux1.setMetcuad((int) aux[10]);
+                    mercanciasaux.add(aux1);
+                    dispose();
+                    AltaVenta AV = new AltaVenta(mercanciasaux,prioridad);
+                    AV.setVisible(true);
+                }
+                
+            }catch(Exception e){
+                JOptionPane.showMessageDialog(null, "Valor incorrecto");
+            }
+        }
         
-        ClienteJ cjaux = new ClienteJ();
-        dispose();
-        SeleccionarEnvio SE = new SeleccionarEnvio(aux1,cjaux,mercancias,prioridad,1);
-        SE.setVisible(true);
+        
+        
         
     }//GEN-LAST:event_BSeleccionarActionPerformed
 
@@ -258,46 +300,14 @@ public class SeleccionarClienteF extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(SeleccionarClienteF.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(SeleccionarDireccionEnvio.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(SeleccionarClienteF.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(SeleccionarDireccionEnvio.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(SeleccionarClienteF.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(SeleccionarDireccionEnvio.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(SeleccionarClienteF.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(SeleccionarDireccionEnvio.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
@@ -334,7 +344,7 @@ public class SeleccionarClienteF extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new SeleccionarClienteF().setVisible(true);
+                new SeleccionarDireccionEnvio().setVisible(true);
             }
         });
     }

@@ -9,18 +9,16 @@ package Objects;
  *
  * @author kwist
  */
-public class ConectDirCF {
+public class ConectDirCJ {
     private int ID_DIR;
-    private String DNI;
-    private String Sexo;
+    private String CUIT;
 
-    public ConectDirCF() {
+    public ConectDirCJ() {
     }
 
-    public ConectDirCF(int ID_DIR, String DNI, String Sexo) {
+    public ConectDirCJ(int ID_DIR, String CUIT) {
         this.ID_DIR = ID_DIR;
-        this.DNI = DNI;
-        this.Sexo = Sexo;
+        this.CUIT = CUIT;
     }
 
     public int getID_DIR() {
@@ -31,20 +29,12 @@ public class ConectDirCF {
         this.ID_DIR = ID_DIR;
     }
 
-    public String getDNI() {
-        return DNI;
+    public String getCUIT() {
+        return CUIT;
     }
 
-    public void setDNI(String DNI) {
-        this.DNI = DNI;
-    }
-
-    public String getSexo() {
-        return Sexo;
-    }
-
-    public void setSexo(String Sexo) {
-        this.Sexo = Sexo;
+    public void setCUIT(String CUIT) {
+        this.CUIT = CUIT;
     }
     
     

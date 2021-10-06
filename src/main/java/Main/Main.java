@@ -25,6 +25,16 @@ public class Main {
         // TODO code application logic here
         LogIn li = new LogIn();
         li.setVisible(true);
+        
+            /**Ordenado**/
+        //DBQueries.tablaEnvios();
+        //DBQueries.tablaVendedores();
+        //DBQueries.tablaVentas();
+        //DBQueries.tablaRenglones();
+        //DBQueries.tablaConexionVenClientF();
+        //DBQueries.tablaConexionVenClientJ();
+        
+        /*SinOrdenar*/
         //DBQueries.tablaMercancias();
         //DBQueries.tablaConexionDirClientF();
         //DBQueries.tablaConexionDirClientJ();

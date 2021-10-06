@@ -9,26 +9,26 @@ package Objects;
  *
  * @author kwist
  */
-public class ConectDirCF {
-    private int ID_DIR;
+public class ConectVenCF {
+    private int COD_VENTA;
     private String DNI;
     private String Sexo;
 
-    public ConectDirCF() {
+    public ConectVenCF() {
     }
 
-    public ConectDirCF(int ID_DIR, String DNI, String Sexo) {
-        this.ID_DIR = ID_DIR;
+    public ConectVenCF(int COD_VENTA, String DNI, String Sexo) {
+        this.COD_VENTA = COD_VENTA;
         this.DNI = DNI;
         this.Sexo = Sexo;
     }
 
-    public int getID_DIR() {
-        return ID_DIR;
+    public int getCOD_VENTA() {
+        return COD_VENTA;
     }
 
-    public void setID_DIR(int ID_DIR) {
-        this.ID_DIR = ID_DIR;
+    public void setCOD_VENTA(int COD_VENTA) {
+        this.COD_VENTA = COD_VENTA;
     }
 
     public String getDNI() {
