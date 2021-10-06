@@ -233,6 +233,7 @@ public class FinAltaVenta extends javax.swing.JFrame {
             //creo el envio al cliente
         }
         else{
+            //aca lo mismo de arriba pero con clientej
             //BusinessObject<??> businessObject?? = new DAO??();
             //BusinessObject<??> businessObject?? = new DAO??();
         }
