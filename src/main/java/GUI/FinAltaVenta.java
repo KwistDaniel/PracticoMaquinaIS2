@@ -64,10 +64,10 @@ public class FinAltaVenta extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
-        Deposito = new javax.swing.JButton();
+        BCargaVenta = new javax.swing.JButton();
         BMostrarCliente = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
+        BVolver = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 0, 0));
@@ -80,9 +80,14 @@ public class FinAltaVenta extends javax.swing.JFrame {
 
         jPanel3.setBackground(new java.awt.Color(245, 245, 220));
 
-        Deposito.setBackground(new java.awt.Color(210, 4, 45));
-        Deposito.setForeground(new java.awt.Color(250, 250, 250));
-        Deposito.setText("jButton3");
+        BCargaVenta.setBackground(new java.awt.Color(210, 4, 45));
+        BCargaVenta.setForeground(new java.awt.Color(250, 250, 250));
+        BCargaVenta.setText("Cargar Venta");
+        BCargaVenta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BCargaVentaActionPerformed(evt);
+            }
+        });
 
         BMostrarCliente.setBackground(new java.awt.Color(210, 4, 45));
         BMostrarCliente.setForeground(new java.awt.Color(250, 250, 250));
@@ -101,7 +106,7 @@ public class FinAltaVenta extends javax.swing.JFrame {
                 .addGap(136, 136, 136)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(BMostrarCliente)
-                    .addComponent(Deposito))
+                    .addComponent(BCargaVenta))
                 .addContainerGap(153, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
@@ -110,20 +115,20 @@ public class FinAltaVenta extends javax.swing.JFrame {
                 .addGap(76, 76, 76)
                 .addComponent(BMostrarCliente)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 286, Short.MAX_VALUE)
-                .addComponent(Deposito)
+                .addComponent(BCargaVenta)
                 .addGap(90, 90, 90))
         );
 
         jPanel4.setBackground(new java.awt.Color(245, 245, 220));
         jPanel4.setPreferredSize(new java.awt.Dimension(364, 34));
 
-        jButton1.setBackground(new java.awt.Color(210, 4, 45));
-        jButton1.setForeground(new java.awt.Color(250, 250, 250));
-        jButton1.setText("Salir");
-        jButton1.setActionCommand("Exit");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        BVolver.setBackground(new java.awt.Color(210, 4, 45));
+        BVolver.setForeground(new java.awt.Color(250, 250, 250));
+        BVolver.setText("Volver");
+        BVolver.setActionCommand("Exit");
+        BVolver.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                BVolverActionPerformed(evt);
             }
         });
 
@@ -133,14 +138,14 @@ public class FinAltaVenta extends javax.swing.JFrame {
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
                 .addContainerGap(286, Short.MAX_VALUE)
-                .addComponent(jButton1)
+                .addComponent(BVolver)
                 .addContainerGap())
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton1)
+                .addComponent(BVolver)
                 .addContainerGap())
         );
 
@@ -172,7 +177,7 @@ public class FinAltaVenta extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(18, 18, 18)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(21, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -196,10 +201,12 @@ public class FinAltaVenta extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void BVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BVolverActionPerformed
         // TODO add your handling code here:
-        System.exit(0);
-    }//GEN-LAST:event_jButton1ActionPerformed
+        dispose();
+        SeleccionarEnvio se = new SeleccionarEnvio(clientef,clientej,mercancias,prioridad,tipocliente);
+        se.setVisible(true);
+    }//GEN-LAST:event_BVolverActionPerformed
 
     private void BMostrarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BMostrarClienteActionPerformed
         if(tipocliente == 1){
@@ -209,6 +216,22 @@ public class FinAltaVenta extends javax.swing.JFrame {
             //not supported yet
         }
     }//GEN-LAST:event_BMostrarClienteActionPerformed
+
+    private void BCargaVentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BCargaVentaActionPerformed
+        //aca updateo las tablas
+        if (tipocliente == 10){
+            //creo la venta de clientes
+            //creo el envio al cliente
+            //updateo la tabla de mercancias para actualizar la cantidad
+        }
+        else{
+            
+        }
+        
+        dispose();
+        MainMenu mm = new MainMenu(prioridad);
+        mm.setVisible(true);
+    }//GEN-LAST:event_BCargaVentaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -253,9 +276,9 @@ public class FinAltaVenta extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton BCargaVenta;
     private javax.swing.JButton BMostrarCliente;
-    private javax.swing.JButton Deposito;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton BVolver;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
