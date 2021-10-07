@@ -6,75 +6,78 @@
 package DAO;
 
 import DataBase.DataBase;
-import Objects.ClienteF;
+import Objects.Vendedor;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.ArrayList;
 import java.util.List;
+
+
 
 /**
  *
  * @author kwist
  */
-public class DAOClienteF implements BusinessObject<ClienteF> {
+public class DAOVendedor implements BusinessObject<Vendedor> {
 
     @Override
-    public List<ClienteF> readAll() {
-        List<ClienteF> clientesf = new ArrayList<>();
+    public List<Vendedor> readAll() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public Vendedor readOne(String... ids) {
+        Vendedor vendedor = new Vendedor();
         Connection connection = DataBase.getInstance().getConnection();
         Statement statement;
         try{
             statement = connection.createStatement();
-            ResultSet rs = statement.executeQuery("SELECT * FROM ClienteFisico WHERE ( Status = 1 ) ");
-            ClienteF clientef;
-            while (rs.next()){
-                clientef = new ClienteF();
-                clientef.setDni(rs.getString("DNI"));
-                clientef.setNombre(rs.getString("NOMBRE"));
-                clientef.setApellido(rs.getString("APELLIDO"));
-                clientef.setTelefono(rs.getString("TELEFONO"));
-                clientef.setSexo(rs.getString("SEXO"));
-                clientef.setfNac(rs.getString("FNac"));
-                clientef.setEmail(rs.getString("EMAIL"));
-                clientesf.add(clientef);
+            ResultSet rs = statement.executeQuery("SELECT * FROM Usuario WHERE (Status=1) AND (id='" + ids[0] + "') AND (pass='" + ids[1] + "')");
+            while(rs.next()){
+                vendedor.setDni(rs.getString("DNI"));
+                vendedor.setNombre(rs.getString("NOMBRE"));
+                vendedor.setApellido(rs.getString("APELLIDO"));
+                vendedor.setTelefono(rs.getString("TELEFONO"));
+                vendedor.setSexo(rs.getString("SEXO"));
+                vendedor.setfNac(rs.getString("FNac"));
+                vendedor.setEmail(rs.getString("EMAIL"));
+                vendedor.setUser(rs.getString("USER"));
+                vendedor.setPass(rs.getString("PASS"));
+                vendedor.setPrioridad(rs.getInt("PRIORITY"));
             }
-        }catch (SQLException throwables){
+        }catch(SQLException throwables){
             throwables.printStackTrace();
         }
         DataBase.getInstance().disconnect();
-        return clientesf;
+        return vendedor;
     }
 
     @Override
-    public ClienteF readOne(String... ids) {
+    public int create(Vendedor t) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public int create(ClienteF t) {
+    public int update(Vendedor t) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public int update(ClienteF t) {
+    public int delete(Vendedor t) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public int delete(ClienteF t) {
+    public List<Vendedor> readAllIds(String... ids) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public List<ClienteF> readAllIds(String... ids) {
+    public Vendedor lastCode() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    @Override
-    public ClienteF lastCode() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+    
     
 }

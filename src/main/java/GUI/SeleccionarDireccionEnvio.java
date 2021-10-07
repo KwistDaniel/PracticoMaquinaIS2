@@ -13,6 +13,7 @@ import Objects.ClienteJ;
 import Objects.ConectDirCF;
 import Objects.Direccion;
 import Objects.Mercancia;
+import Objects.Vendedor;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
@@ -32,7 +33,8 @@ import javax.swing.table.DefaultTableModel;
  */
 public class SeleccionarDireccionEnvio extends javax.swing.JFrame {
     ArrayList<Mercancia> mercancias;
-    int prioridad,tipocliente;
+    int tipocliente;
+    Vendedor vendedor;
     ClienteF clientef;
     ClienteJ clientej;
     /**
@@ -46,8 +48,8 @@ public class SeleccionarDireccionEnvio extends javax.swing.JFrame {
             }
         };
     
-    public SeleccionarDireccionEnvio(ClienteF cfaux, ClienteJ cjaux,ArrayList<Mercancia> aux,int priority,int tcliente) {
-        prioridad = priority;
+    public SeleccionarDireccionEnvio(ClienteF cfaux, ClienteJ cjaux,ArrayList<Mercancia> aux,Vendedor vaux,int tcliente) {
+        vendedor = new Vendedor(vaux);
         tipocliente = tcliente;
         if (tipocliente == 1){
             clientef = new ClienteF(cfaux);
@@ -253,7 +255,7 @@ public class SeleccionarDireccionEnvio extends javax.swing.JFrame {
     private void BVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BVolverActionPerformed
         // TODO add your handling code here:
         dispose();
-        SeleccionarEnvio se = new SeleccionarEnvio(clientef,clientej,mercancias,prioridad,tipocliente);
+        SeleccionarEnvio se = new SeleccionarEnvio(clientef,clientej,mercancias,vendedor,tipocliente);
         se.setVisible(true);
     }//GEN-LAST:event_BVolverActionPerformed
 
@@ -268,7 +270,7 @@ public class SeleccionarDireccionEnvio extends javax.swing.JFrame {
         direccionenvio.setCodPostal((String) aux[5]);
         direccionenvio.setLocalidad((String) aux[6]);
         dispose();
-        FinAltaVenta fav = new FinAltaVenta(clientef,clientej,mercancias,prioridad,tipocliente,direccionenvio);
+        FinAltaVenta fav = new FinAltaVenta(clientef,clientej,mercancias,vendedor,tipocliente,direccionenvio);
         fav.setVisible(true);
         
         

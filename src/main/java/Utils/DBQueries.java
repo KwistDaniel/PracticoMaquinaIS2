@@ -28,18 +28,24 @@ public class DBQueries {
         tablaVentas();
         tablaRenglones();
     }
-    public static void tablaUsuarios(){
+    public static void tablaVendedores(){
         Connection connection = DataBase.getInstance().getConnection();
         Statement statement;
         try {
             statement = connection.createStatement();
-            statement.executeUpdate("CREATE TABLE Usuario (" +
-                    "cod INT NOT NULL," +
-                    "id VARCHAR(255) NOT NULL," +
-                    "pass VARCHAR(255) NOT NULL," +
-                    "priority INT NOT NULL," +
+            statement.executeUpdate("CREATE TABLE Vendedor (" +
+                    "DNI VARCHAR(10) NOT NULL," +
+                    "NOMBRE VARCHAR(255) NOT NULL," +
+                    "APELLIDO VARCHAR(255) NOT NULL," +
+                    "USER VARCHAR(255) NOT NULL," +
+                    "PASS VARCHAR(255) NOT NULL," +
+                    "TELEFONO LONGTEXT NOT NULL," +
+                    "SEXO VARCHAR(2) NOT NULL," +
+                    "FNac VARCHAR(10) NOT NULL," +
+                    "EMAIL LONGTEXT NOT NULL," +
+                    "PRIORITY INT NOT NULL," +
                     "Status INT NOT NULL," +
-                    "PRIMARY KEY(cod))");
+                    "PRIMARY KEY(DNI,SEXO))");
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
@@ -65,7 +71,6 @@ public class DBQueries {
         }
         DataBase.getInstance().disconnect();
     }
-    
     public static void tablaClientesJuridicos(){
         Connection connection = DataBase.getInstance().getConnection();
         Statement statement;
@@ -85,7 +90,6 @@ public class DBQueries {
         }
         DataBase.getInstance().disconnect();
     }
-    
     public static void tablaConexionDirClientF(){
         Connection connection = DataBase.getInstance().getConnection();
         Statement statement;
@@ -130,26 +134,6 @@ public class DBQueries {
                     "LOCALIDAD LONGTEXT," + 
                     "Status INT NOT NULL," +
                     "PRIMARY KEY (ID))");
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        }
-        DataBase.getInstance().disconnect();
-    }
-    public static void tablaVendedores(){
-        Connection connection = DataBase.getInstance().getConnection();
-        Statement statement;
-        try {
-            statement = connection.createStatement();
-            statement.executeUpdate("CREATE TABLE Vendedor (" +
-                    "DNI VARCHAR(10) NOT NULL," +
-                    "NOMBRE VARCHAR(255) NOT NULL," +
-                    "APELLIDO VARCHAR(255) NOT NULL," +
-                    "TELEFONO VARCHAR(255) NOT NULL," +
-                    "SEXO VARCHAR(2) NOT NULL," +
-                    "FNac VARCHAR(10) NOT NULL," +
-                    "EMAIL VARCHAR(255) NOT NULL," +
-                    "Status INT NOT NULL," +
-                    "PRIMARY KEY(DNI,SEXO))");
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }

@@ -7,13 +7,16 @@ package GUI;
 
 import DAO.BusinessObject;
 import DAO.DAOClienteF;
+import DAO.DAOEnvio;
 import DAO.DAOMercancia;
 import GUI.PruebasAndTemplates.*;
 import GUI.*;
 import Objects.ClienteF;
 import Objects.ClienteJ;
 import Objects.Direccion;
+import Objects.Envio;
 import Objects.Mercancia;
+import Objects.Vendedor;
 import java.util.ArrayList;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -26,7 +29,8 @@ public class FinAltaVenta extends javax.swing.JFrame {
     ArrayList<Mercancia> mercancias;
     ClienteF clientef;
     ClienteJ clientej;
-    int prioridad,tipocliente;
+    int tipocliente;
+    Vendedor vendedor;
     Direccion direccionenvio;
     /**
      * Creates new form Menu
@@ -37,8 +41,8 @@ public class FinAltaVenta extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);     
     }
     
-    public FinAltaVenta(ClienteF cfaux, ClienteJ cjaux, ArrayList<Mercancia> aux, int priority,int tcliente,Direccion daux){
-        prioridad = priority;
+    public FinAltaVenta(ClienteF cfaux, ClienteJ cjaux, ArrayList<Mercancia> aux, Vendedor vaux,int tcliente,Direccion daux){
+        vendedor = new Vendedor(vaux);
         tipocliente = tcliente;
         if (tipocliente == 1){
             clientef = new ClienteF(cfaux);
@@ -207,7 +211,7 @@ public class FinAltaVenta extends javax.swing.JFrame {
     private void BVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BVolverActionPerformed
         // TODO add your handling code here:
         dispose();
-        SeleccionarEnvio se = new SeleccionarEnvio(clientef,clientej,mercancias,prioridad,tipocliente);
+        SeleccionarEnvio se = new SeleccionarEnvio(clientef,clientej,mercancias,vendedor,tipocliente);
         se.setVisible(true);
     }//GEN-LAST:event_BVolverActionPerformed
 
@@ -221,12 +225,23 @@ public class FinAltaVenta extends javax.swing.JFrame {
     }//GEN-LAST:event_BMostrarClienteActionPerformed
 
     private void BCargaVentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BCargaVentaActionPerformed
-        //aca updateo las tablas
+        //1- CREO EL ENVIO (Necesita la direccion) *falta fecha y hora*
+        //2- CREO LA VENTA *Faltan los datos de vendedor, de ultima en vez de pasar prioridad por todos lados, paso un vendedor**Sino tmb lo hardcodeo*
+        //3- CREO EL CONETOR DE VENTA CON EL CLIENTE *falta*
+        //4- UPDATE A MERCANCIA *listo*
+        
+        Envio envio = new Envio(), envioaux;
+        BusinessObject<Envio> businessObjectEnvio = new DAOEnvio();
+        envio.setCod(businessObjectEnvio.lastCode().getCod());
+        envio.setId_dir(direccionenvio.getIdDir());
+        envio.setEstado(0);
+        //FALTA LA FECHA Y HORA, ACTUALIZAR CLASE, DAO, TABLA BD Y LAS INTERFACES
+        businessObjectEnvio.create(envio);
         if (tipocliente == 10){
-            //1- CREO EL ENVIO (Necesita la direccion) *falta*
-            //2- CREO LA VENTA *Faltan los datos de vendedor, de ultima en vez de pasar prioridad por todos lados, paso un vendedor*
-            //3- CREO EL CONETOR DE VENTA CON EL CLIENTE *falta*
-            //4- UPDATE A MERCANCIA *listo*
+            //BusinessObject<??> businessObject?? = new DAO??();
+            
+            
+            
             //BusinessObject<??> businessObject?? = new DAO??();
             //creo la venta de clientes, esto seria un create para el DAO ConectVenCF
             //BusinessObject<??> businessObject?? = new DAO??();
@@ -246,7 +261,7 @@ public class FinAltaVenta extends javax.swing.JFrame {
         
         
         dispose();
-        MainMenu mm = new MainMenu(prioridad);
+        MainMenu mm = new MainMenu(vendedor);
         mm.setVisible(true);
     }//GEN-LAST:event_BCargaVentaActionPerformed
 

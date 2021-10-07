@@ -27,6 +27,7 @@ public class Main {
         li.setVisible(true);
         
             /**Ordenado**/
+        DBQueries.tablaVendedores();
         //DBQueries.tablaEnvios();
         //DBQueries.tablaVendedores();
         //DBQueries.tablaVentas();

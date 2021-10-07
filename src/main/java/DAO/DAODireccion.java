@@ -72,5 +72,10 @@ public class DAODireccion implements BusinessObject<Direccion> {
         DataBase.getInstance().disconnect();
         return direcciones;
     }
+
+    @Override
+    public Direccion lastCode() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
 }

@@ -9,6 +9,7 @@ import DAO.BusinessObject;
 import DAO.DAOMercancia;
 import GUI.*;
 import Objects.Mercancia;
+import Objects.Vendedor;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
@@ -28,7 +29,7 @@ import javax.swing.table.DefaultTableModel;
  */
 public class SeleccionarMercancia extends javax.swing.JFrame {
     ArrayList<Mercancia> mercancias;
-    int prioridad;
+    Vendedor vendedor;
     /**
      * Creates new form Menu
      */
@@ -40,8 +41,8 @@ public class SeleccionarMercancia extends javax.swing.JFrame {
             }
         };
     
-    public SeleccionarMercancia(ArrayList<Mercancia> aux,int priority) {
-        prioridad = priority;
+    public SeleccionarMercancia(ArrayList<Mercancia> aux,Vendedor vaux) {
+        vendedor = new Vendedor(vaux);
         mercancias = new ArrayList<Mercancia>(aux);
         initComponents();
         this.setVisible(true);
@@ -224,7 +225,7 @@ public class SeleccionarMercancia extends javax.swing.JFrame {
     private void BVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BVolverActionPerformed
         // TODO add your handling code here:
         dispose();
-        AltaVenta av = new AltaVenta(mercancias,prioridad);
+        AltaVenta av = new AltaVenta(mercancias,vendedor);
     }//GEN-LAST:event_BVolverActionPerformed
 
     private void BSeleccionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BSeleccionarActionPerformed
@@ -257,7 +258,7 @@ public class SeleccionarMercancia extends javax.swing.JFrame {
                     aux1.setPartida((int) aux[11]);
                     mercanciasaux.add(aux1);
                     dispose();
-                    AltaVenta AV = new AltaVenta(mercanciasaux,prioridad);
+                    AltaVenta AV = new AltaVenta(mercanciasaux,vendedor);
                     AV.setVisible(true);
                 }
                 

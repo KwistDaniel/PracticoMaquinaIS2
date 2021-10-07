@@ -6,66 +6,63 @@
 package DAO;
 
 import DataBase.DataBase;
-import Objects.Usuario;
+import Objects.Envio;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.List;
 
-
-
 /**
  *
  * @author kwist
  */
-public class DAOUsuario implements BusinessObject<Usuario> {
+public class DAOEnvio implements BusinessObject<Envio> {
 
     @Override
-    public List<Usuario> readAll() {
+    public List<Envio> readAll() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public Usuario readOne(String... ids) {
-        Usuario usuario = new Usuario();
+    public Envio readOne(String... ids) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public int create(Envio t) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public int update(Envio t) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public int delete(Envio t) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public List<Envio> readAllIds(String... ids) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public Envio lastCode() {
+        Envio envio = new Envio();
         Connection connection = DataBase.getInstance().getConnection();
         Statement statement;
         try{
             statement = connection.createStatement();
-            ResultSet rs = statement.executeQuery("SELECT * FROM Usuario WHERE (Status=1) AND (id='" + ids[0] + "') AND (pass='" + ids[1] + "')");
-            while(rs.next()){
-                usuario.setUser(rs.getString("id"));
-                usuario.setPass(rs.getString("pass"));
-                usuario.setPrioridad(rs.getInt("priority"));
-            }
-        }catch(SQLException throwables){
+            ResultSet rs = statement.executeQuery("SELECT MAX(COD) FROM Envio WHERE ( Status = 1 ) ");
+            envio.setCod(rs.getInt("COD"));
+        }catch (SQLException throwables){
             throwables.printStackTrace();
         }
         DataBase.getInstance().disconnect();
-        return usuario;
+        return envio;
     }
-
-    @Override
-    public int create(Usuario t) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public int update(Usuario t) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public int delete(Usuario t) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public List<Usuario> readAllIds(String... ids) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    
     
 }

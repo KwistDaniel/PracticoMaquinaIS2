@@ -6,6 +6,7 @@
 package GUI;
 
 import Objects.Mercancia;
+import Objects.Vendedor;
 import java.util.ArrayList;
 import javax.swing.JFrame;
 
@@ -16,14 +17,14 @@ import javax.swing.JFrame;
 public class MainMenu extends javax.swing.JFrame {
 
     
-    int prioridad;
+    Vendedor vendedor;
     public MainMenu() {
         initComponents();
     }
     
-    public MainMenu(int priority){
+    public MainMenu(Vendedor aux){
         initComponents();
-        prioridad = priority;
+        vendedor = new Vendedor(aux);
         this.setVisible(true);
         this.setLocationRelativeTo(null);
     }
@@ -208,7 +209,7 @@ public class MainMenu extends javax.swing.JFrame {
     private void BVentasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BVentasActionPerformed
         // TODO add your handling code here:
         dispose();
-        MVentas mv = new MVentas(prioridad);
+        MVentas mv = new MVentas(vendedor);
         mv.setVisible(true);
     }//GEN-LAST:event_BVentasActionPerformed
 

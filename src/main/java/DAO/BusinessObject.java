@@ -22,4 +22,6 @@ public interface BusinessObject<T> {
     int delete(T t);
     
     List<T> readAllIds(String... ids);
+    
+    T lastCode();
 }

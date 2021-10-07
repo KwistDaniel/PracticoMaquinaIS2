@@ -8,6 +8,7 @@ package GUI;
 import GUI.PruebasAndTemplates.*;
 import GUI.*;
 import Objects.Mercancia;
+import Objects.Vendedor;
 import java.util.ArrayList;
 import javax.swing.JFrame;
 
@@ -17,13 +18,13 @@ import javax.swing.JFrame;
  */
 public class SeleccionarTipoCliente extends javax.swing.JFrame {
     ArrayList<Mercancia> mercancias;
-    int prioridad;
+    Vendedor vendedor;
     /**
      * Creates new form Menu
      */
-    public SeleccionarTipoCliente(ArrayList<Mercancia> aux, int priority) {
+    public SeleccionarTipoCliente(ArrayList<Mercancia> aux, Vendedor vaux) {
         mercancias = new ArrayList<Mercancia>(aux);
-        prioridad=priority;        
+        vendedor = new Vendedor(vaux);
         initComponents();
         this.setVisible(true);
         this.setLocationRelativeTo(null);
@@ -181,13 +182,13 @@ public class SeleccionarTipoCliente extends javax.swing.JFrame {
 
     private void VolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VolverActionPerformed
         dispose();
-        AltaVenta av = new AltaVenta(mercancias,prioridad);
+        AltaVenta av = new AltaVenta(mercancias,vendedor);
         av.setVisible(true);
     }//GEN-LAST:event_VolverActionPerformed
 
     private void BClienteFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BClienteFActionPerformed
         dispose();
-        SeleccionarClienteF scf = new SeleccionarClienteF(mercancias,prioridad);
+        SeleccionarClienteF scf = new SeleccionarClienteF(mercancias,vendedor);
         scf.setVisible(true);
     }//GEN-LAST:event_BClienteFActionPerformed
 

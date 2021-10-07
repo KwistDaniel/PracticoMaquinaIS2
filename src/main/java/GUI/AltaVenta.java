@@ -9,6 +9,7 @@ import DAO.BusinessObject;
 import DAO.DAOMercancia;
 import GUI.*;
 import Objects.Mercancia;
+import Objects.Vendedor;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
@@ -25,7 +26,7 @@ import javax.swing.table.DefaultTableModel;
  * @author kwist
  */
 public class AltaVenta extends javax.swing.JFrame {
-    int prioridad;
+    Vendedor vendedor;
     ArrayList<Mercancia> mercancias;
     private final JTable tabla;
     
@@ -44,9 +45,9 @@ public class AltaVenta extends javax.swing.JFrame {
                 }
             }
         };
-    public AltaVenta(ArrayList<Mercancia> aux, int priority){
+    public AltaVenta(ArrayList<Mercancia> aux, Vendedor vaux){
         mercancias = new ArrayList<Mercancia>(aux);
-        prioridad = priority;
+        vendedor = new Vendedor(vaux);
         initComponents();
         this.setVisible(true);
         this.setLocationRelativeTo(null);
@@ -298,20 +299,20 @@ public class AltaVenta extends javax.swing.JFrame {
     private void BVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BVolverActionPerformed
         // TODO add your handling code here:
         dispose();
-        MVentas mv = new MVentas(prioridad);
+        MVentas mv = new MVentas(vendedor);
         mv.setVisible(true);
         
     }//GEN-LAST:event_BVolverActionPerformed
 
     private void BAgObjActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BAgObjActionPerformed
         dispose();
-        SeleccionarMercancia sm = new SeleccionarMercancia(mercancias,prioridad);
+        SeleccionarMercancia sm = new SeleccionarMercancia(mercancias,vendedor);
         sm.setVisible(true);
     }//GEN-LAST:event_BAgObjActionPerformed
 
     private void BSiguienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BSiguienteActionPerformed
         dispose();
-        SeleccionarTipoCliente stc = new SeleccionarTipoCliente(mercancias,prioridad);
+        SeleccionarTipoCliente stc = new SeleccionarTipoCliente(mercancias,vendedor);
         stc.setVisible(true);
         //ACA LLEVO A QUE CLIENTE SE LO VOY A VENDER, O CREO UNO NUEVO O SELECCIONO UNO (tabla con filtro va a venir bien)
         //DE AHI CREO UN ENVIO, O PERMITO SELECCIONAR UNA DE LAS DIRECCIONES DEL CLIENTE O LE CREO UNA

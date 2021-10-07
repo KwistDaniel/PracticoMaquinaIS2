@@ -6,9 +6,9 @@
 package GUI;
 
 import DAO.BusinessObject;
-import DAO.DAOUsuario;
+import DAO.DAOVendedor;
 import GUI.*;
-import Objects.Usuario;
+import Objects.Vendedor;
 import javax.swing.JFrame;
 import static Utils.CONSTANTS.*;
 import javax.swing.JOptionPane;
@@ -285,23 +285,15 @@ public class LogIn extends javax.swing.JFrame {
         String user,password;
         user = TFUser.getText();
         password = TFPassword.getText();
-        Usuario userToValidate = new Usuario();
-        BusinessObject<Usuario> bobjct = new DAOUsuario();
-        userToValidate = bobjct.readOne(user,password);
+        Vendedor vendedorToValidate = new Vendedor();
+        BusinessObject<Vendedor> bobjct = new DAOVendedor();
+        vendedorToValidate = bobjct.readOne(user,password);
         
         try{
-            if(userToValidate.getUser().equals(user)){
+            if(vendedorToValidate.getUser().equals(user)){
                 dispose();
-                MainMenu MME = new MainMenu(userToValidate.getPrioridad());
+                MainMenu MME = new MainMenu(vendedorToValidate);
                 MME.setVisible(true);
-            }
-            else {
-                System.out.println("Borra esto");
-                //BORRAR ESTO
-                //JOptionPane.showMessageDialog(null, "Datos Incorrectos");
-                //mostrar label o cartel de error o contra incorrecta
-                //tmb hacer que no se pueda clickear nada mas fuera, asi le pone aceptar
-                //Lo mismo seria para seleccionar la cantidad en una venta 
             }
         } catch(Exception e){
             JOptionPane.showMessageDialog(null, "Datos Incorrectos");

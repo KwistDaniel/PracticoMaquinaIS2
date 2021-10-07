@@ -43,5 +43,10 @@ public class ConectVenCJ implements BusinessObject<ConectVenCF> {
     public List<ConectVenCF> readAllIds(String... ids) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
+    @Override
+    public ConectVenCF lastCode() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
 }

@@ -6,6 +6,7 @@
 package GUI;
 
 import Objects.Mercancia;
+import Objects.Vendedor;
 import java.util.ArrayList;
 import javax.swing.JFrame;
 
@@ -16,15 +17,15 @@ import javax.swing.JFrame;
 public class MVentas extends javax.swing.JFrame {
 
     
-    int prioridad;
+    Vendedor vendedor;
     public MVentas() {
         initComponents();       
                 
     }
     
-    public MVentas(int priority){
+    public MVentas(Vendedor vaux){
         initComponents();
-        prioridad = priority;
+        vendedor = new Vendedor(vaux);
         this.setVisible(true);
         this.setLocationRelativeTo(null);
     }
@@ -45,7 +46,7 @@ public class MVentas extends javax.swing.JFrame {
         BMVentas = new javax.swing.JButton();
         BClientes = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
-        BSalir = new javax.swing.JButton();
+        BVolver = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 0, 0));
@@ -106,13 +107,13 @@ public class MVentas extends javax.swing.JFrame {
         jPanel4.setBackground(new java.awt.Color(245, 245, 220));
         jPanel4.setPreferredSize(new java.awt.Dimension(364, 34));
 
-        BSalir.setBackground(new java.awt.Color(210, 4, 45));
-        BSalir.setForeground(new java.awt.Color(250, 250, 250));
-        BSalir.setText("Salir");
-        BSalir.setActionCommand("Exit");
-        BSalir.addActionListener(new java.awt.event.ActionListener() {
+        BVolver.setBackground(new java.awt.Color(210, 4, 45));
+        BVolver.setForeground(new java.awt.Color(250, 250, 250));
+        BVolver.setText("Volver");
+        BVolver.setActionCommand("Exit");
+        BVolver.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BSalirActionPerformed(evt);
+                BVolverActionPerformed(evt);
             }
         });
 
@@ -122,14 +123,14 @@ public class MVentas extends javax.swing.JFrame {
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
                 .addContainerGap(286, Short.MAX_VALUE)
-                .addComponent(BSalir)
+                .addComponent(BVolver)
                 .addContainerGap())
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(BSalir)
+                .addComponent(BVolver)
                 .addContainerGap())
         );
 
@@ -185,17 +186,17 @@ public class MVentas extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void BSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BSalirActionPerformed
+    private void BVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BVolverActionPerformed
         // TODO add your handling code here:
         dispose();
-        LogIn LI = new LogIn();
-        LI.setVisible(true);
-    }//GEN-LAST:event_BSalirActionPerformed
+        MainMenu mm = new MainMenu(vendedor);
+        mm.setVisible(true);
+    }//GEN-LAST:event_BVolverActionPerformed
 
     private void BMVentasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BMVentasActionPerformed
         dispose();
         ArrayList<Mercancia> aux = new ArrayList<Mercancia>();
-        AltaVenta AV = new AltaVenta(aux,prioridad);
+        AltaVenta AV = new AltaVenta(aux,vendedor);
         AV.setVisible(true);
         
         
@@ -258,8 +259,8 @@ public class MVentas extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BClientes;
     private javax.swing.JButton BMVentas;
-    private javax.swing.JButton BSalir;
     private javax.swing.JButton BStock;
+    private javax.swing.JButton BVolver;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;

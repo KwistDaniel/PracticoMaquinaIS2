@@ -49,5 +49,10 @@ public class DAOConectDirCF implements BusinessObject<ConectDirCF> {
     public List<ConectDirCF> readAllIds(String... ids) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
+    @Override
+    public ConectDirCF lastCode() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
 }

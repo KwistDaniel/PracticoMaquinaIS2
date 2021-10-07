@@ -43,5 +43,10 @@ public class DAOClienteJ implements BusinessObject<ClienteJ> {
     public List<ClienteJ> readAllIds(String... ids) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
+    @Override
+    public ClienteJ lastCode() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
 }

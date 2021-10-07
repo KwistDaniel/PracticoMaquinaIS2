@@ -11,6 +11,7 @@ import GUI.*;
 import Objects.ClienteF;
 import Objects.ClienteJ;
 import Objects.Mercancia;
+import Objects.Vendedor;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
@@ -28,7 +29,7 @@ import javax.swing.table.DefaultTableModel;
  */
 public class SeleccionarClienteF extends javax.swing.JFrame {
     ArrayList<Mercancia> mercancias;
-    int prioridad;
+    Vendedor vendedor;
     /**
      * Creates new form Menu
      */
@@ -40,8 +41,8 @@ public class SeleccionarClienteF extends javax.swing.JFrame {
             }
         };
     
-    public SeleccionarClienteF(ArrayList<Mercancia> aux,int priority) {
-        prioridad = priority;
+    public SeleccionarClienteF(ArrayList<Mercancia> aux,Vendedor vaux) {
+        vendedor = new Vendedor(vaux);
         mercancias = new ArrayList<Mercancia>(aux);
         initComponents();
         this.setVisible(true);
@@ -216,7 +217,7 @@ public class SeleccionarClienteF extends javax.swing.JFrame {
     private void BVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BVolverActionPerformed
         // TODO add your handling code here:
         dispose();
-        AltaVenta av = new AltaVenta(mercancias,prioridad);
+        AltaVenta av = new AltaVenta(mercancias,vendedor);
         av.setVisible(true);
     }//GEN-LAST:event_BVolverActionPerformed
 
@@ -236,7 +237,7 @@ public class SeleccionarClienteF extends javax.swing.JFrame {
         
         ClienteJ cjaux = new ClienteJ();
         dispose();
-        SeleccionarEnvio SE = new SeleccionarEnvio(aux1,cjaux,mercancias,prioridad,1);
+        SeleccionarEnvio SE = new SeleccionarEnvio(aux1,cjaux,mercancias,vendedor,1);
         SE.setVisible(true);
         
     }//GEN-LAST:event_BSeleccionarActionPerformed
