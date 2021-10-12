@@ -7,16 +7,24 @@ package GUI;
 
 import DAO.BusinessObject;
 import DAO.DAOClienteF;
+import DAO.DAOConectVenCF;
+import DAO.DAOConectVenCJ;
 import DAO.DAOEnvio;
 import DAO.DAOMercancia;
+import DAO.DAORenglon;
+import DAO.DAOVenta;
 import GUI.PruebasAndTemplates.*;
 import GUI.*;
 import Objects.ClienteF;
 import Objects.ClienteJ;
+import Objects.ConectVenCF;
+import Objects.ConectVenCJ;
 import Objects.Direccion;
 import Objects.Envio;
 import Objects.Mercancia;
+import Objects.Renglon;
 import Objects.Vendedor;
+import Objects.Venta;
 import java.util.ArrayList;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -32,6 +40,7 @@ public class FinAltaVenta extends javax.swing.JFrame {
     int tipocliente;
     Vendedor vendedor;
     Direccion direccionenvio;
+    ArrayList<Integer> descuentos;
     /**
      * Creates new form Menu
      */
@@ -41,7 +50,7 @@ public class FinAltaVenta extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);     
     }
     
-    public FinAltaVenta(ClienteF cfaux, ClienteJ cjaux, ArrayList<Mercancia> aux, Vendedor vaux,int tcliente,Direccion daux){
+    public FinAltaVenta(ClienteF cfaux, ClienteJ cjaux, ArrayList<Mercancia> aux, Vendedor vaux,int tcliente,Direccion daux,ArrayList<Integer> descaux){
         vendedor = new Vendedor(vaux);
         tipocliente = tcliente;
         if (tipocliente == 1){
@@ -52,6 +61,7 @@ public class FinAltaVenta extends javax.swing.JFrame {
         }
         mercancias = new ArrayList<Mercancia>(aux);
         direccionenvio = new Direccion(daux);
+        descuentos = new ArrayList<Integer>(descaux);
         
         
         initComponents();
@@ -211,7 +221,7 @@ public class FinAltaVenta extends javax.swing.JFrame {
     private void BVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BVolverActionPerformed
         // TODO add your handling code here:
         dispose();
-        SeleccionarEnvio se = new SeleccionarEnvio(clientef,clientej,mercancias,vendedor,tipocliente);
+        SeleccionarEnvio se = new SeleccionarEnvio(clientef,clientej,mercancias,vendedor,tipocliente,descuentos);
         se.setVisible(true);
     }//GEN-LAST:event_BVolverActionPerformed
 
@@ -226,20 +236,67 @@ public class FinAltaVenta extends javax.swing.JFrame {
 
     private void BCargaVentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BCargaVentaActionPerformed
         //1- CREO EL ENVIO (Necesita la direccion) *falta fecha y hora*
-        //2- CREO LA VENTA *Faltan los datos de vendedor, de ultima en vez de pasar prioridad por todos lados, paso un vendedor**Sino tmb lo hardcodeo*
-        //3- CREO EL CONETOR DE VENTA CON EL CLIENTE *falta*
-        //4- UPDATE A MERCANCIA *listo*
+        //2- CREO LA VENTA
+        //3- CARGO CADA RENGLON DE VENTA
+        //4- CREO EL CONETOR DE VENTA CON EL CLIENTE
+        //5- UPDATE A MERCANCIA
         
-        Envio envio = new Envio(), envioaux;
-        BusinessObject<Envio> businessObjectEnvio = new DAOEnvio();
-        envio.setCod(businessObjectEnvio.lastCode().getCod());
+        
+        /**INICIO* Actualizo tabla de Envio*/ //1
+        Envio envio = new Envio();
+        BusinessObject<Envio> bOEnvio = new DAOEnvio(); /*1*falta fecha y hora**/
+        envio.setCod(bOEnvio.lastCode().getCod() + 1);
         envio.setId_dir(direccionenvio.getIdDir());
         envio.setEstado(0);
         //FALTA LA FECHA Y HORA, ACTUALIZAR CLASE, DAO, TABLA BD Y LAS INTERFACES
-        businessObjectEnvio.create(envio);
-        if (tipocliente == 10){
-            //BusinessObject<??> businessObject?? = new DAO??();
+        bOEnvio.create(envio);
+        /**FIN* Actualizo tabla de Envio*/
+        
+        /**INICIO* Actualizo tabla de Venta*/ //2
+        Venta venta = new Venta();
+        BusinessObject<Venta> bOVenta = new DAOVenta();
+        venta.setCOD_VENTA(bOVenta.lastCode().getCOD_VENTA() + 1);
+        venta.setDNI_V(vendedor.getDni());
+        venta.setSexo_V(vendedor.getSexo());
+        double pTotal = 0,pFinal = 0;
+        for (int i = 0;i<mercancias.size();i++){
+            pTotal =+ mercancias.get(i).getPrecio_u();
+            pFinal =+ (((100-descuentos.get(i))*(mercancias.get(i).getPrecio_u()))/100);
+        }
+        venta.setP_Total(pTotal);
+        venta.setP_Final(pFinal);
+        venta.setStatus_Payment(1);
+        venta.setCOD_ENVIO(envio.getCod());
+        
+        bOVenta.create(venta);
+        /**FIN* Actualizo tabla de Venta*/
+        
+        /**INICIO*Actualizo tabla de Renglones*/ //3
+        Renglon renglon;
+        BusinessObject<Renglon> bORenglon = new DAORenglon();
+        for(int j=0; j<mercancias.size();j++){
+            renglon = new Renglon();
+            renglon.setCOD_Renglon(bORenglon.lastCode().getCOD_Renglon() + 1);
+            renglon.setCOD_Venta(venta.getCOD_VENTA());
+            renglon.setCOD_Mercancia(mercancias.get(j).getCod());
+            renglon.setCantidad(mercancias.get(j).getCantidad());
+            renglon.setPrecio_U(mercancias.get(j).getPrecio_u());
+            renglon.setDescuento(descuentos.get(j));
+            renglon.setPrecio_F(((100-renglon.getDescuento())*(renglon.getPrecio_U()))/100);
             
+            bORenglon.create(renglon);
+        }
+        /**FIN* Actualizo tabla de Renglones*/
+        
+        /**INICIO* Actualizo tabla de CONVCLIENTE*/
+        if (tipocliente == 1){
+            ConectVenCF cvcf = new ConectVenCF();
+            BusinessObject<ConectVenCF> bOConectVenCF = new DAOConectVenCF();
+            cvcf.setCOD_VENTA(venta.getCOD_VENTA());
+            cvcf.setDNI(clientef.getDni());
+            cvcf.setSexo(clientef.getSexo());
+            
+            bOConectVenCF.create(cvcf);
             
             
             //BusinessObject<??> businessObject?? = new DAO??();
@@ -248,16 +305,21 @@ public class FinAltaVenta extends javax.swing.JFrame {
             //creo el envio al cliente
         }
         else{
-            //aca lo mismo de arriba pero con clientej
-            //BusinessObject<??> businessObject?? = new DAO??();
+            ConectVenCJ cvcj = new ConectVenCJ();
+            BusinessObject<ConectVenCJ> bOConectVenCJ = new DAOConectVenCJ();
+            cvcj.setCOD_VENTA(venta.getCOD_VENTA());
+            cvcj.setCUIT(clientej.getCUIT());
+            bOConectVenCJ.create(cvcj);
             //BusinessObject<??> businessObject?? = new DAO??();
         }
-            
+        /**FIN* Actualizo tabla de CONVCLIENTE*/
+        
+        /**INICIO* Actualizo tabla Mercancias*/ //5
         BusinessObject<Mercancia> businessObjectM = new DAOMercancia();
         for(int i = 0; i<mercancias.size();i++){//updateo la tabla de mercancias para actualizar la cantidad
             businessObjectM.update(mercancias.get(i));
         }
-            
+        /**FIN* Actualizo tabla Mercancias*/    
         
         
         dispose();

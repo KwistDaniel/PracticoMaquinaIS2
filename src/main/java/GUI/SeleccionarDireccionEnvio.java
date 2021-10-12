@@ -37,6 +37,7 @@ public class SeleccionarDireccionEnvio extends javax.swing.JFrame {
     Vendedor vendedor;
     ClienteF clientef;
     ClienteJ clientej;
+    ArrayList<Integer> descuentos;
     /**
      * Creates new form Menu
      */
@@ -48,7 +49,8 @@ public class SeleccionarDireccionEnvio extends javax.swing.JFrame {
             }
         };
     
-    public SeleccionarDireccionEnvio(ClienteF cfaux, ClienteJ cjaux,ArrayList<Mercancia> aux,Vendedor vaux,int tcliente) {
+    public SeleccionarDireccionEnvio(ClienteF cfaux, ClienteJ cjaux,ArrayList<Mercancia> aux,Vendedor vaux,int tcliente, ArrayList<Integer> descaux) {
+        descuentos = new ArrayList<Integer>(descaux);
         vendedor = new Vendedor(vaux);
         tipocliente = tcliente;
         if (tipocliente == 1){
@@ -255,7 +257,7 @@ public class SeleccionarDireccionEnvio extends javax.swing.JFrame {
     private void BVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BVolverActionPerformed
         // TODO add your handling code here:
         dispose();
-        SeleccionarEnvio se = new SeleccionarEnvio(clientef,clientej,mercancias,vendedor,tipocliente);
+        SeleccionarEnvio se = new SeleccionarEnvio(clientef,clientej,mercancias,vendedor,tipocliente,descuentos);
         se.setVisible(true);
     }//GEN-LAST:event_BVolverActionPerformed
 
@@ -270,7 +272,7 @@ public class SeleccionarDireccionEnvio extends javax.swing.JFrame {
         direccionenvio.setCodPostal((String) aux[5]);
         direccionenvio.setLocalidad((String) aux[6]);
         dispose();
-        FinAltaVenta fav = new FinAltaVenta(clientef,clientej,mercancias,vendedor,tipocliente,direccionenvio);
+        FinAltaVenta fav = new FinAltaVenta(clientef,clientej,mercancias,vendedor,tipocliente,direccionenvio,descuentos);
         fav.setVisible(true);
         
         

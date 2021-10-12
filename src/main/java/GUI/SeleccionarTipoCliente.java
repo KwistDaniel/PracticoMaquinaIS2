@@ -19,10 +19,12 @@ import javax.swing.JFrame;
 public class SeleccionarTipoCliente extends javax.swing.JFrame {
     ArrayList<Mercancia> mercancias;
     Vendedor vendedor;
+    ArrayList<Integer> descuentos;
     /**
      * Creates new form Menu
      */
-    public SeleccionarTipoCliente(ArrayList<Mercancia> aux, Vendedor vaux) {
+    public SeleccionarTipoCliente(ArrayList<Mercancia> aux, Vendedor vaux, ArrayList<Integer> descaux) {
+        descuentos = new ArrayList<Integer> (descaux);
         mercancias = new ArrayList<Mercancia>(aux);
         vendedor = new Vendedor(vaux);
         initComponents();
@@ -188,7 +190,7 @@ public class SeleccionarTipoCliente extends javax.swing.JFrame {
 
     private void BClienteFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BClienteFActionPerformed
         dispose();
-        SeleccionarClienteF scf = new SeleccionarClienteF(mercancias,vendedor);
+        SeleccionarClienteF scf = new SeleccionarClienteF(mercancias,vendedor,descuentos);
         scf.setVisible(true);
     }//GEN-LAST:event_BClienteFActionPerformed
 

@@ -15,6 +15,7 @@ import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.util.ArrayList;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
@@ -28,6 +29,7 @@ import javax.swing.table.DefaultTableModel;
 public class AltaVenta extends javax.swing.JFrame {
     Vendedor vendedor;
     ArrayList<Mercancia> mercancias;
+    ArrayList<Integer> descuentos;
     private final JTable tabla;
     
     DefaultTableModel tm = new DefaultTableModel(){
@@ -107,7 +109,7 @@ public class AltaVenta extends javax.swing.JFrame {
         BAgObj = new javax.swing.JButton();
         BElimSelec = new javax.swing.JButton();
         BAgDesc = new javax.swing.JButton();
-        jTextField1 = new javax.swing.JTextField();
+        TFDescuento = new javax.swing.JTextField();
         BSiguiente = new javax.swing.JButton();
         jPanel5 = new javax.swing.JPanel();
         TFFiltro = new javax.swing.JTextField();
@@ -160,7 +162,12 @@ public class AltaVenta extends javax.swing.JFrame {
         BAgDesc.setForeground(new java.awt.Color(250, 250, 250));
         BAgDesc.setText("Aplicar Descuento");
 
-        jTextField1.setText("jTextField1");
+        TFDescuento.setText("jTextField1");
+        TFDescuento.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                TFDescuentoActionPerformed(evt);
+            }
+        });
 
         BSiguiente.setBackground(new java.awt.Color(210, 4, 45));
         BSiguiente.setForeground(new java.awt.Color(250, 250, 250));
@@ -181,7 +188,7 @@ public class AltaVenta extends javax.swing.JFrame {
                     .addComponent(BElimSelec, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(BAgDesc, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(TFDescuento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addComponent(BAgObj, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
@@ -197,7 +204,7 @@ public class AltaVenta extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(BElimSelec)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(TFDescuento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(BAgDesc)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -311,8 +318,23 @@ public class AltaVenta extends javax.swing.JFrame {
     }//GEN-LAST:event_BAgObjActionPerformed
 
     private void BSiguienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BSiguienteActionPerformed
+        Object[] aux;
+        try{
+            for(int i=0;i<mercancias.size();i++){
+                if((Boolean)tabla.getValueAt(i, 12) == true){
+                    descuentos.add(Integer.parseInt(TFDescuento.getText()));
+                }
+                else{
+                    descuentos.add(0);
+                }
+            }
+        } catch (Exception e){
+            JOptionPane.showMessageDialog(null, "Error");
+        }
+        
+        
         dispose();
-        SeleccionarTipoCliente stc = new SeleccionarTipoCliente(mercancias,vendedor);
+        SeleccionarTipoCliente stc = new SeleccionarTipoCliente(mercancias,vendedor,descuentos);
         stc.setVisible(true);
         //ACA LLEVO A QUE CLIENTE SE LO VOY A VENDER, O CREO UNO NUEVO O SELECCIONO UNO (tabla con filtro va a venir bien)
         //DE AHI CREO UN ENVIO, O PERMITO SELECCIONAR UNA DE LAS DIRECCIONES DEL CLIENTE O LE CREO UNA
@@ -322,6 +344,10 @@ public class AltaVenta extends javax.swing.JFrame {
         tm.removeRow(tabla.getSelectedRow());
         mercancias.remove(tabla.getSelectedRow() + 1);
     }//GEN-LAST:event_BElimSelecActionPerformed
+
+    private void TFDescuentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TFDescuentoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_TFDescuentoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -371,12 +397,12 @@ public class AltaVenta extends javax.swing.JFrame {
     private javax.swing.JButton BElimSelec;
     private javax.swing.JButton BSiguiente;
     private javax.swing.JButton BVolver;
+    private javax.swing.JTextField TFDescuento;
     private javax.swing.JTextField TFFiltro;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
-    private javax.swing.JTextField jTextField1;
     // End of variables declaration//GEN-END:variables
 }

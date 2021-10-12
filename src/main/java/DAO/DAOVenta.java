@@ -5,66 +5,48 @@
  */
 package DAO;
 
-import DataBase.DataBase;
-import Objects.Envio;
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import Objects.Venta;
 import java.util.List;
 
 /**
  *
  * @author kwist
  */
-public class DAOEnvio implements BusinessObject<Envio> {
+public class DAOVenta implements BusinessObject<Venta> {
 
     @Override
-    public List<Envio> readAll() {
+    public List<Venta> readAll() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public Envio readOne(String... ids) {
+    public Venta readOne(String... ids) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public int create(Envio t) {
+    public int create(Venta t) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public int update(Envio t) {
+    public int update(Venta t) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public int delete(Envio t) {
+    public int delete(Venta t) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public List<Envio> readAllIds(String... ids) {
+    public List<Venta> readAllIds(String... ids) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public Envio lastCode() {
-        Envio envio = new Envio();
-        Connection connection = DataBase.getInstance().getConnection();
-        Statement statement;
-        try{
-            statement = connection.createStatement();
-            ResultSet rs = statement.executeQuery("SELECT MAX(COD) FROM Envio ");
-            envio.setCod(rs.getInt("COD"));
-        }catch (SQLException throwables){
-            throwables.printStackTrace();
-            envio.setCod(1); //para el primer envio
-            return envio;
-        }
-        DataBase.getInstance().disconnect();
-        return envio;
+    public Venta lastCode() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
 }

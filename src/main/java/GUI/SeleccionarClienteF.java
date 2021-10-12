@@ -30,6 +30,7 @@ import javax.swing.table.DefaultTableModel;
 public class SeleccionarClienteF extends javax.swing.JFrame {
     ArrayList<Mercancia> mercancias;
     Vendedor vendedor;
+    ArrayList<Integer> descuentos;
     /**
      * Creates new form Menu
      */
@@ -41,7 +42,8 @@ public class SeleccionarClienteF extends javax.swing.JFrame {
             }
         };
     
-    public SeleccionarClienteF(ArrayList<Mercancia> aux,Vendedor vaux) {
+    public SeleccionarClienteF(ArrayList<Mercancia> aux,Vendedor vaux, ArrayList<Integer> descaux) {
+        descuentos = new ArrayList<Integer>(descaux);
         vendedor = new Vendedor(vaux);
         mercancias = new ArrayList<Mercancia>(aux);
         initComponents();
@@ -237,7 +239,7 @@ public class SeleccionarClienteF extends javax.swing.JFrame {
         
         ClienteJ cjaux = new ClienteJ();
         dispose();
-        SeleccionarEnvio SE = new SeleccionarEnvio(aux1,cjaux,mercancias,vendedor,1);
+        SeleccionarEnvio SE = new SeleccionarEnvio(aux1,cjaux,mercancias,vendedor,1,descuentos);
         SE.setVisible(true);
         
     }//GEN-LAST:event_BSeleccionarActionPerformed

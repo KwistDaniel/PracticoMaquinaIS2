@@ -10,7 +10,8 @@ package Objects;
  * @author kwist
  */
 public class Renglon {
-    private int ID_Venta;
+    private int COD_Renglon;
+    private int COD_Venta;
     private int COD_Mercancia;
     private int Cantidad;
     private double Precio_U;
@@ -20,8 +21,9 @@ public class Renglon {
     public Renglon() {
     }
 
-    public Renglon(int ID_Venta, int COD_Mercancia, int Cantidad, double Precio_U, int Descuento, double Precio_F) {
-        this.ID_Venta = ID_Venta;
+    public Renglon(int COD_Renglon, int COD_Venta, int COD_Mercancia, int Cantidad, double Precio_U, int Descuento, double Precio_F) {
+        this.COD_Renglon = COD_Renglon;
+        this.COD_Venta = COD_Venta;
         this.COD_Mercancia = COD_Mercancia;
         this.Cantidad = Cantidad;
         this.Precio_U = Precio_U;
@@ -29,12 +31,20 @@ public class Renglon {
         this.Precio_F = Precio_F;
     }
 
-    public int getID_Venta() {
-        return ID_Venta;
+    public int getCOD_Renglon() {
+        return COD_Renglon;
     }
 
-    public void setID_Venta(int ID_Venta) {
-        this.ID_Venta = ID_Venta;
+    public void setCOD_Renglon(int COD_Renglon) {
+        this.COD_Renglon = COD_Renglon;
+    }
+
+    public int getCOD_Venta() {
+        return COD_Venta;
+    }
+
+    public void setCOD_Venta(int ID_Venta) {
+        this.COD_Venta = ID_Venta;
     }
 
     public int getCOD_Mercancia() {

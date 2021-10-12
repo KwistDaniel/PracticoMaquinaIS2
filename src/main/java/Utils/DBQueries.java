@@ -239,6 +239,7 @@ public class DBQueries {
         try {
             statement = connection.createStatement();
             statement.executeUpdate("CREATE TABLE RenglonVenta (" + 
+                    "COD INT NOT NULL," +
                     "ID_Venta INT NOT NULL," +
                     "COD_Mercancia INT NOT NULL," +
                     "Cantidad INT NOT NULL," +

@@ -24,10 +24,12 @@ public class SeleccionarEnvio extends javax.swing.JFrame {
     ClienteJ clientej;
     int tipocliente;
     Vendedor vendedor;
+    ArrayList<Integer> descuentos;
     /**
      * Creates new form Menu
      */
-    public SeleccionarEnvio(ClienteF cfaux, ClienteJ cjaux, ArrayList<Mercancia> aux, Vendedor vaux,int tcliente) {
+    public SeleccionarEnvio(ClienteF cfaux, ClienteJ cjaux, ArrayList<Mercancia> aux, Vendedor vaux,int tcliente, ArrayList<Integer> descaux) {
+        descuentos = new ArrayList<Integer>(descaux);
         this.tipocliente = tcliente;
         if(tipocliente == 1){
             clientef = new ClienteF(cfaux);
@@ -200,7 +202,7 @@ public class SeleccionarEnvio extends javax.swing.JFrame {
 
     private void VolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VolverActionPerformed
         dispose();
-        SeleccionarTipoCliente stc = new SeleccionarTipoCliente(mercancias,vendedor);
+        SeleccionarTipoCliente stc = new SeleccionarTipoCliente(mercancias,vendedor,descuentos);
         stc.setVisible(true);
     }//GEN-LAST:event_VolverActionPerformed
 
@@ -212,7 +214,7 @@ public class SeleccionarEnvio extends javax.swing.JFrame {
 
     private void BCargarEnvioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BCargarEnvioActionPerformed
         dispose();
-        SeleccionarDireccionEnvio sde = new SeleccionarDireccionEnvio(clientef,clientej,mercancias,vendedor,tipocliente);
+        SeleccionarDireccionEnvio sde = new SeleccionarDireccionEnvio(clientef,clientej,mercancias,vendedor,tipocliente,descuentos);
         sde.setVisible(true);
         //AltaEnvio ae = new AltaEnvio(clientef,clientej,mercancias,prioridad,tipocliente);
         //ae.setVisible(true);

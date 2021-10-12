@@ -5,47 +5,47 @@
  */
 package DAO;
 
-import Objects.ConectVenCF;
+import Objects.ConectVenCJ;
 import java.util.List;
 
 /**
  *
  * @author kwist
  */
-public class ConectVenCJ implements BusinessObject<ConectVenCF> {
+public class DAOConectVenCJ implements BusinessObject<ConectVenCJ>{
 
     @Override
-    public List<ConectVenCF> readAll() {
+    public List<ConectVenCJ> readAll() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public ConectVenCF readOne(String... ids) {
+    public ConectVenCJ readOne(String... ids) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public int create(ConectVenCF t) {
+    public int create(ConectVenCJ t) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public int update(ConectVenCF t) {
+    public int update(ConectVenCJ t) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public int delete(ConectVenCF t) {
+    public int delete(ConectVenCJ t) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public List<ConectVenCF> readAllIds(String... ids) {
+    public List<ConectVenCJ> readAllIds(String... ids) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public ConectVenCF lastCode() {
+    public ConectVenCJ lastCode() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
