@@ -168,6 +168,11 @@ public class AltaVenta extends javax.swing.JFrame {
                 TFDescuentoActionPerformed(evt);
             }
         });
+        TFDescuento.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                TFDescuentoKeyTyped(evt);
+            }
+        });
 
         BSiguiente.setBackground(new java.awt.Color(210, 4, 45));
         BSiguiente.setForeground(new java.awt.Color(250, 250, 250));
@@ -187,13 +192,11 @@ public class AltaVenta extends javax.swing.JFrame {
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(BElimSelec, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(BAgDesc, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addComponent(TFDescuento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
                     .addComponent(BAgObj, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(BSiguiente)))
+                        .addComponent(BSiguiente))
+                    .addComponent(TFDescuento))
                 .addContainerGap())
         );
         jPanel4Layout.setVerticalGroup(
@@ -348,6 +351,14 @@ public class AltaVenta extends javax.swing.JFrame {
     private void TFDescuentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TFDescuentoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_TFDescuentoActionPerformed
+
+    private void TFDescuentoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TFDescuentoKeyTyped
+        char c = evt.getKeyChar();
+        if(!((c >= '0') && (c<= '9'))){
+            getToolkit().beep();
+            evt.consume();
+        }
+    }//GEN-LAST:event_TFDescuentoKeyTyped
 
     /**
      * @param args the command line arguments

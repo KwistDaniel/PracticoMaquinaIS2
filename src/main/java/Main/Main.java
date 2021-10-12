@@ -28,20 +28,24 @@ public class Main {
         
             /**Ordenado**/
         DBQueries.tablaVendedores();
-        //DBQueries.tablaEnvios();
-        //DBQueries.tablaVendedores();
-        //DBQueries.tablaVentas();
-        //DBQueries.tablaRenglones();
-        //DBQueries.tablaConexionVenClientF();
-        //DBQueries.tablaConexionVenClientJ();
+        DBQueries.tablaMercancias();
+        DBQueries.tablaClientesFisicos();
+        DBQueries.tablaClientesJuridicos();
+        DBQueries.tablaDirecciones();
         
-        /*SinOrdenar*/
-        //DBQueries.tablaMercancias();
-        //DBQueries.tablaConexionDirClientF();
-        //DBQueries.tablaConexionDirClientJ();
-        //DBQueries.tablaDirecciones();
-        //DBQueries.tablaClientesFisicos();
-        //DBQueries.tablaClientesJuridicos();
+        DBQueries.tablaConexionDirClientF();
+        DBQueries.tablaConexionDirClientJ();
+        
+        DBQueries.tablaEnvios();
+        DBQueries.tablaVentas();
+        
+        DBQueries.tablaRenglonesVenta();
+        DBQueries.tablaConexionVenClientF();
+        DBQueries.tablaConexionVenClientJ();
+        
+        
+        
+        
         
         //jdbc:mariadb://
         /*

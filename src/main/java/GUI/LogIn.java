@@ -284,7 +284,7 @@ public class LogIn extends javax.swing.JFrame {
     private void BLogInActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BLogInActionPerformed
         String user,password;
         user = TFUser.getText();
-        password = TFPassword.getText();
+        password = String.valueOf(TFPassword.getPassword());
         Vendedor vendedorToValidate = new Vendedor();
         BusinessObject<Vendedor> bobjct = new DAOVendedor();
         vendedorToValidate = bobjct.readOne(user,password);

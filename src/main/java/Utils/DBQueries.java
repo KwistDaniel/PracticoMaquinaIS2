@@ -18,7 +18,7 @@ import java.sql.Statement;
  */
 public class DBQueries {
     public static void createAllTables(){
-        tablaClientesJuridicos();
+        /*tablaClientesJuridicos();
         tablaClientesFisicos();
         tablaDirecciones();
         tablaConexionDirClientF();
@@ -26,7 +26,7 @@ public class DBQueries {
         tablaEnvios();
         tablaVendedores();
         tablaVentas();
-        tablaRenglones();
+        tablaRenglonesVenta();*/ //ESTA SIN ORDENAR, TOMAR EL DEL MAIN
     }
     public static void tablaVendedores(){
         Connection connection = DataBase.getInstance().getConnection();
@@ -233,7 +233,7 @@ public class DBQueries {
         }
         DataBase.getInstance().disconnect();
     }
-    public static void tablaRenglones(){
+    public static void tablaRenglonesVenta(){
         Connection connection = DataBase.getInstance().getConnection();
         Statement statement;
         try {
@@ -253,6 +253,31 @@ public class DBQueries {
         DataBase.getInstance().disconnect();
     }
     
+    
+    
+    /**DROPS**/
+    public static void dropVendedores(){
+        Connection connection = DataBase.getInstance().getConnection();
+        Statement statement;
+        try {
+            statement = connection.createStatement();
+            statement.executeUpdate("DROP TABLE Vendedor");
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        DataBase.getInstance().disconnect();
+    }
+    public static void dropMercancias(){
+        Connection connection = DataBase.getInstance().getConnection();
+        Statement statement;
+        try {
+            statement = connection.createStatement();
+            statement.executeUpdate("DROP TABLE Mercancia");
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        DataBase.getInstance().disconnect();
+    }
     /*
     Queries importantes:
     **JOIN PARA CONSEGUIR DIRECCIONES DE UN CLIENTEF POR DNI Y SEXO:**
