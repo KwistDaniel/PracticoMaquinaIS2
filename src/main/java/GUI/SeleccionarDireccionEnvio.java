@@ -75,37 +75,22 @@ public class SeleccionarDireccionEnvio extends javax.swing.JFrame {
             }
         };*/
         
-        Object[][] objects;
-        Object[] headers;
         if (tipocliente == 1){
             BusinessObject<Direccion> businessObject = new DAODireccion();
-            //PREGUNTAR HERNAN, pyuedo pasar la query aca? o debo crear otra clase de direccion para clientej, xq si paso dni y sexo para armar la query, necesito otro readall con ids para el clientej
-            objects = Direccion.getDataVector(businessObject.readAllIds("SELECT ID_DIR FROM conectdirclif WHERE (DNI_CF='"+ clientef.getDni() +"') AND (SEXO_CF='" + clientef.getSexo() + "')"));
-            headers = Direccion.getHeaders();
+            Object[][] objectscf = Direccion.getDataVector(businessObject.readAllIds(clientef.getDni(), clientef.getSexo()));
+            Object[] headerscf = Direccion.getHeaders();
+            tm.setDataVector(objectscf, headerscf);
         }
         else{
             //TODAVIA NO ESTA IMPLEMENTADO!!!!
-            BusinessObject<Direccion> businessObject = new DAODireccion();;
-            objects = Direccion.getDataVector(businessObject.readAllIds("SELECT ID_DIR FROM conectdirclif WHERE (CUIT='"+ clientej.getCUIT() +"')"));
-            headers = Direccion.getHeaders();
+            BusinessObject<Direccion> businessObject = new DAODireccion();; //acomodar query abajo
+            Object[][] objectscj = Direccion.getDataVector(businessObject.readAllIds("SELECT ID_DIR FROM conectdirclif WHERE (CUIT='"+ clientej.getCUIT() +"')"));
+            Object[] headerscj = Direccion.getHeaders();
+            tm.setDataVector(objectscj, headerscj);
         }
         
         
-        tm.setDataVector(objects, headers);
         
-        ArrayList<Integer> codaelim = new ArrayList<Integer>();
-        for(int i=0; i < mercancias.size();i++){
-            codaelim.add((Integer)mercancias.get(i).getCod());
-        }
-        
-        for (int i=0; i < tm.getRowCount(); i++){
-            for (int j=0; j < codaelim.size(); j++){
-                if(tm.getValueAt(i, 0) == codaelim.get(j)){
-                    tm.removeRow(i);
-                    i--;
-                }
-            }
-        }
 
         
         tabla = new JTable(tm);

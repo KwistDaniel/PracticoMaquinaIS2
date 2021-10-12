@@ -23,5 +23,5 @@ public interface BusinessObject<T> {
     
     List<T> readAllIds(String... ids);
     
-    T lastCode();
+    int lastCode();
 }

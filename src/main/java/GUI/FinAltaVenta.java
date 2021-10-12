@@ -241,21 +241,20 @@ public class FinAltaVenta extends javax.swing.JFrame {
         //4- CREO EL CONETOR DE VENTA CON EL CLIENTE
         //5- UPDATE A MERCANCIA
         
-        
         /**INICIO* Actualizo tabla de Envio*/ //1
         Envio envio = new Envio();
         BusinessObject<Envio> bOEnvio = new DAOEnvio(); /*1*falta fecha y hora**/
-        envio.setCod(bOEnvio.lastCode().getCod() + 1);
+        envio.setCod(bOEnvio.lastCode() + 1);
         envio.setId_dir(direccionenvio.getIdDir());
         envio.setEstado(0);
         //FALTA LA FECHA Y HORA, ACTUALIZAR CLASE, DAO, TABLA BD Y LAS INTERFACES
         bOEnvio.create(envio);
         /**FIN* Actualizo tabla de Envio*/
-        
+        System.out.println("BBB");
         /**INICIO* Actualizo tabla de Venta*/ //2
         Venta venta = new Venta();
         BusinessObject<Venta> bOVenta = new DAOVenta();
-        venta.setCOD_VENTA(bOVenta.lastCode().getCOD_VENTA() + 1);
+        venta.setCOD_VENTA(bOVenta.lastCode() + 1);
         venta.setDNI_V(vendedor.getDni());
         venta.setSexo_V(vendedor.getSexo());
         double pTotal = 0,pFinal = 0;
@@ -270,13 +269,13 @@ public class FinAltaVenta extends javax.swing.JFrame {
         
         bOVenta.create(venta);
         /**FIN* Actualizo tabla de Venta*/
-        
+        System.out.println("CCC");
         /**INICIO*Actualizo tabla de Renglones*/ //3
         Renglon renglon;
         BusinessObject<Renglon> bORenglon = new DAORenglon();
         for(int j=0; j<mercancias.size();j++){
             renglon = new Renglon();
-            renglon.setCOD_Renglon(bORenglon.lastCode().getCOD_Renglon() + 1);
+            renglon.setCOD_Renglon(bORenglon.lastCode() + 1);
             renglon.setCOD_Venta(venta.getCOD_VENTA());
             renglon.setCOD_Mercancia(mercancias.get(j).getCod());
             renglon.setCantidad(mercancias.get(j).getCantidad());
@@ -287,7 +286,7 @@ public class FinAltaVenta extends javax.swing.JFrame {
             bORenglon.create(renglon);
         }
         /**FIN* Actualizo tabla de Renglones*/
-        
+        System.out.println("DDD");
         /**INICIO* Actualizo tabla de CONVCLIENTE*/
         if (tipocliente == 1){
             ConectVenCF cvcf = new ConectVenCF();
@@ -313,14 +312,14 @@ public class FinAltaVenta extends javax.swing.JFrame {
             //BusinessObject<??> businessObject?? = new DAO??();
         }
         /**FIN* Actualizo tabla de CONVCLIENTE*/
-        
+        System.out.println("EEE");
         /**INICIO* Actualizo tabla Mercancias*/ //5
         BusinessObject<Mercancia> businessObjectM = new DAOMercancia();
-        for(int i = 0; i<mercancias.size();i++){//updateo la tabla de mercancias para actualizar la cantidad
+        for(int i = 0; i<mercancias.size();i++){//updateo la tabla de mercancias para actualizar la cantidad FALTA ESTO, XQ NO LO RESTA 
             businessObjectM.update(mercancias.get(i));
         }
         /**FIN* Actualizo tabla Mercancias*/    
-        
+        System.out.println("FFF");
         
         dispose();
         MainMenu mm = new MainMenu(vendedor);

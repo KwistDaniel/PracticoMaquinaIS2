@@ -18,15 +18,18 @@ import java.sql.Statement;
  */
 public class DBQueries {
     public static void createAllTables(){
-        /*tablaClientesJuridicos();
+        tablaVendedores();
+        tablaMercancias();
         tablaClientesFisicos();
+        tablaClientesJuridicos();
         tablaDirecciones();
         tablaConexionDirClientF();
         tablaConexionDirClientJ();
         tablaEnvios();
-        tablaVendedores();
         tablaVentas();
-        tablaRenglonesVenta();*/ //ESTA SIN ORDENAR, TOMAR EL DEL MAIN
+        tablaRenglonesVenta();
+        tablaConexionVenClientF();
+        tablaConexionVenClientJ();
     }
     public static void tablaVendedores(){
         Connection connection = DataBase.getInstance().getConnection();
@@ -40,7 +43,7 @@ public class DBQueries {
                     "USER VARCHAR(255) NOT NULL," +
                     "PASS VARCHAR(255) NOT NULL," +
                     "TELEFONO LONGTEXT NOT NULL," +
-                    "SEXO VARCHAR(2) NOT NULL," +
+                    "SEXO VARCHAR(10) NOT NULL," +
                     "FNac VARCHAR(10) NOT NULL," +
                     "EMAIL LONGTEXT NOT NULL," +
                     "PRIORITY INT NOT NULL," +
@@ -61,7 +64,7 @@ public class DBQueries {
                     "NOMBRE VARCHAR(255) NOT NULL," +
                     "APELLIDO VARCHAR(255) NOT NULL," +
                     "TELEFONO LONGTEXT NOT NULL," +
-                    "SEXO VARCHAR(2) NOT NULL," +
+                    "SEXO VARCHAR(10) NOT NULL," +
                     "FNac VARCHAR(10) NOT NULL," +
                     "EMAIL LONGTEXT NOT NULL," +
                     "Status INT NOT NULL," +
@@ -98,7 +101,8 @@ public class DBQueries {
             statement.executeUpdate("CREATE TABLE ConectDirCliF (" +
                     "ID_DIR INT NOT NULL," +
                     "DNI_CF VARCHAR(10) NOT NULL," +
-                    "SEXO_CF VARCHAR(2) NOT NULL," + 
+                    "SEXO_CF VARCHAR(10) NOT NULL," + 
+                    "Status INT NOT NULL, " + 
                     "PRIMARY KEY(ID_DIR,DNI_CF,SEXO_CF))");
         } catch (SQLException throwables) {
             throwables.printStackTrace();
@@ -113,6 +117,7 @@ public class DBQueries {
             statement.executeUpdate("CREATE TABLE ConectDirCliJ (" +
                     "ID_DIR INT NOT NULL," +
                     "CUIT_CJ VARCHAR(15) NOT NULL," +
+                    "Status INT NOT NULL, " + 
                     "PRIMARY KEY(ID_DIR,CUIT_CJ))");
         } catch (SQLException throwables) {
             throwables.printStackTrace();
@@ -126,12 +131,12 @@ public class DBQueries {
             statement = connection.createStatement();
             statement.executeUpdate("CREATE TABLE Direccion (" + 
                     "ID INT NOT NULL," + 
-                    "CALLE LONGTEXT," + 
-                    "NUMERO LONGTEXT," + 
-                    "PISO LONGTEXT," + 
-                    "DEPTO LONGTEXT," + 
-                    "COD_POSTAL LONGTEXT," + 
-                    "LOCALIDAD LONGTEXT," + 
+                    "CALLE VARCHAR(255)," + 
+                    "NUMERO VARCHAR(255)," + 
+                    "PISO VARCHAR(255)," + 
+                    "DEPTO VARCHAR(255)," + 
+                    "COD_POSTAL VARCHAR(255)," + 
+                    "LOCALIDAD VARCHAR(255)," + 
                     "Status INT NOT NULL," +
                     "PRIMARY KEY (ID))");
         } catch (SQLException throwables) {
@@ -189,7 +194,7 @@ public class DBQueries {
             statement.executeUpdate("CREATE TABLE ConectVenCliF (" +
                     "COD_VENTA INT NOT NULL," +
                     "DNI_CF VARCHAR(10) NOT NULL," +
-                    "SEXO_CF VARCHAR(2) NOT NULL," + 
+                    "SEXO_CF VARCHAR(10) NOT NULL," + 
                     "PRIMARY KEY(COD_VENTA,DNI_CF,SEXO_CF))");
         } catch (SQLException throwables) {
             throwables.printStackTrace();
@@ -218,8 +223,8 @@ public class DBQueries {
             //Al proximo query, le meto los datos del vendedor tmb? como los manejo? y  como manejo al vendedor?
             statement.executeUpdate("CREATE TABLE Venta (" + //REVISAR ESTO COMO LO HAGO
                     "COD INT NOT NULL," +
-                    "DNI_VENDEDOR VARCHAR(255) NOT NULL," +
-                    "SEXO_VENDEDOR VARCHAR(255) NOT NULL," +
+                    "DNI_VENDEDOR VARCHAR(10) NOT NULL," +
+                    "SEXO_VENDEDOR VARCHAR(10) NOT NULL," +
                     "PRECIO_TOTAL VARCHAR(255) NOT NULL," +
                     "PRECIO_FINAL VARCHAR(255) NOT NULL," +
                     "ESTADO_PAGO INT NOT NULL," +
@@ -256,6 +261,21 @@ public class DBQueries {
     
     
     /**DROPS**/
+    public static void dropAllTables(){
+        dropClientesFisicos();
+        dropClientesJuridicos();
+        dropConexionDirClientF();
+        dropConexionDirClientJ();
+        dropVentas();
+        dropEnvios();
+        dropDirecciones();
+        dropConexionVenClientF();
+        dropConexionVenClienJ();
+        dropMercancias();
+        dropRenglonesVenta();
+        dropVendedores();
+
+    }
     public static void dropVendedores(){
         Connection connection = DataBase.getInstance().getConnection();
         Statement statement;
@@ -278,10 +298,188 @@ public class DBQueries {
         }
         DataBase.getInstance().disconnect();
     }
+    public static void dropClientesFisicos(){
+        Connection connection = DataBase.getInstance().getConnection();
+        Statement statement;
+        try {
+            statement = connection.createStatement();
+            statement.executeUpdate("DROP TABLE ClienteFisico");
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        DataBase.getInstance().disconnect();
+    }
+    public static void dropClientesJuridicos(){
+        Connection connection = DataBase.getInstance().getConnection();
+        Statement statement;
+        try {
+            statement = connection.createStatement();
+            statement.executeUpdate("DROP TABLE ClienteJuridico");
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        DataBase.getInstance().disconnect();
+    }
+    public static void dropConexionDirClientF(){
+        Connection connection = DataBase.getInstance().getConnection();
+        Statement statement;
+        try {
+            statement = connection.createStatement();
+            statement.executeUpdate("DROP TABLE ConectDirCliF");
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        DataBase.getInstance().disconnect();
+    }
+    public static void dropConexionDirClientJ(){
+        Connection connection = DataBase.getInstance().getConnection();
+        Statement statement;
+        try {
+            statement = connection.createStatement();
+            statement.executeUpdate("DROP TABLE ConectDirCliJ");
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        DataBase.getInstance().disconnect();
+    }
+    public static void dropDirecciones(){
+        Connection connection = DataBase.getInstance().getConnection();
+        Statement statement;
+        try {
+            statement = connection.createStatement();
+            statement.executeUpdate("DROP TABLE Direccion");
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        DataBase.getInstance().disconnect();
+    }
+    public static void dropVentas(){
+        Connection connection = DataBase.getInstance().getConnection();
+        Statement statement;
+        try {
+            statement = connection.createStatement();
+            statement.executeUpdate("DROP TABLE Venta");
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        DataBase.getInstance().disconnect();
+    }
+    public static void dropEnvios(){
+        Connection connection = DataBase.getInstance().getConnection();
+        Statement statement;
+        try {
+            statement = connection.createStatement();
+            statement.executeUpdate("DROP TABLE Envio");
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        DataBase.getInstance().disconnect();
+    }
+    public static void dropRenglonesVenta(){
+        Connection connection = DataBase.getInstance().getConnection();
+        Statement statement;
+        try {
+            statement = connection.createStatement();
+            statement.executeUpdate("DROP TABLE RenglonVenta");
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        DataBase.getInstance().disconnect();
+    }
+    public static void dropConexionVenClientF(){
+        Connection connection = DataBase.getInstance().getConnection();
+        Statement statement;
+        try {
+            statement = connection.createStatement();
+            statement.executeUpdate("DROP TABLE ConectVenCliF");
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        DataBase.getInstance().disconnect();
+    }
+    public static void dropConexionVenClienJ(){
+        Connection connection = DataBase.getInstance().getConnection();
+        Statement statement;
+        try {
+            statement = connection.createStatement();
+            statement.executeUpdate("DROP TABLE ConectVenCliJ");
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        DataBase.getInstance().disconnect();
+    }
+    
+    
+    
+    
+    /**INSERTS**/
+    public static void insertAllTables(){
+        insertVendedores();
+        insertMercancias();
+        insertClientesF();
+        insertDirecciones();
+        insertConectorDirClienteF();
+    }
+    public static void insertVendedores(){
+        Connection connection = DataBase.getInstance().getConnection();
+        Statement statement;
+        try {
+            statement = connection.createStatement();
+            statement.executeUpdate("INSERT INTO Vendedor VALUES ('36421350','Debora','Kwist','dkwist','36421350','3382-571051','Femenino','12/11/1991','deborakwist@gmail.com',2,1)");
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        DataBase.getInstance().disconnect();
+    }
+    public static void insertMercancias(){
+        Connection connection = DataBase.getInstance().getConnection();
+        Statement statement;
+        try {
+            statement = connection.createStatement();
+            statement.executeUpdate("INSERT INTO Mercancia VALUES (1,'Objeto1','Desc Obj1','15.2','20','Negro',10101,'Porcelanatos',1,20,10,200,1),(2,'Objeto2','Desc Obj2','17.2','3','Gris',10111,'Ceramicos',1,15,15,225,1),(3,'Objeto3','Desc Obj3','11.2','27','Gris',10112,'Ceramicos',2,15,15,225,1),(4,'Objeto4','Desc Obj4','45','35','Blanco',10201,'Porcelanatos',1,30,50,15000,1)");
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        DataBase.getInstance().disconnect();
+    }
+    public static void insertClientesF(){
+        Connection connection = DataBase.getInstance().getConnection();
+        Statement statement;
+        try {
+            statement = connection.createStatement();
+            statement.executeUpdate("INSERT INTO ClienteFisico VALUES ('39662252','Daniel','Kwist','3382-406601','Masculino','30/12/1996','kwistdaniel@gmail.com',1)");
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        DataBase.getInstance().disconnect();
+    }
+    public static void insertDirecciones(){
+        Connection connection = DataBase.getInstance().getConnection();
+        Statement statement;
+        try {
+            statement = connection.createStatement();
+            statement.executeUpdate("INSERT INTO Direccion VALUES (1,'Rivadavia','1305','2','2','5700','San Luis',1),(2,'Centenario','229','','','6100','Rufino',1)");
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        DataBase.getInstance().disconnect();
+    }
+    public static void insertConectorDirClienteF(){
+        Connection connection = DataBase.getInstance().getConnection();
+        Statement statement;
+        try {
+            statement = connection.createStatement();
+            statement.executeUpdate("INSERT INTO ConectDirCliF VALUES (1,'39662252','Masculino',1),(2,'39662252','Masculino',1)");
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        DataBase.getInstance().disconnect();
+    }
+    
     /*
     Queries importantes:
     **JOIN PARA CONSEGUIR DIRECCIONES DE UN CLIENTEF POR DNI Y SEXO:**
-    SELECT ID,CALLE,NUMERO,PISO,DEPTO,COD_POSTAL,LOCALIDAD FROM Direccion INNER JOIN (SELECT ID_DIR FROM conectdirclif WHERE (DNI_CF='39662252') AND (SEXO_CF='M')) AS DJ ON ID = DJ.ID_DIR WHERE (Status = 1)
+    SELECT ID,CALLE,NUMERO,PISO,DEPTO,COD_POSTAL,LOCALIDAD FROM Direccion INNER JOIN (SELECT ID_DIR FROM conectdirclif WHERE (DNI_CF='39662252') AND (SEXO_CF='Masculino')) AS DJ ON ID = DJ.ID_DIR WHERE (Status = 1)
     
     **JOIN PARA LISTAR VENTAS:
     SELECT //hacer como arriba, join de interseccion con subconsulta deberia andar

@@ -58,9 +58,7 @@ public class SeleccionarClienteF extends javax.swing.JFrame {
                 return column == 1;
             }
         };*/
-        System.out.println("AAAXX");
         BusinessObject<ClienteF> businessObject = new DAOClienteF();
-        System.out.println("BBBXX");
         Object[][] objects = ClienteF.getDataVector(businessObject.readAll());
         Object[] headers = ClienteF.getHeaders();
         tm.setDataVector(objects, headers);
@@ -234,7 +232,7 @@ public class SeleccionarClienteF extends javax.swing.JFrame {
         aux1.setTelefono((String) aux[4]);
         aux1.setfNac((String) aux[5]);
         aux1.setEmail((String) aux[6]);
-        aux1.toString();
+        System.out.println("SeleccionarClienteF : " + aux1.toString());
         //System.out.println("Nombre: " + aux1.getNombre() + " Apellido: " + aux1.getApellido() + " DNI: " + aux1.getDni() + " Sexo: " + aux1.getSexo() + " Telefono: " + aux1.getTelefono() + " Fecha Nac: " + aux1.getfNac() + " Email: " + aux1.getEmail());
         
         ClienteJ cjaux = new ClienteJ();

@@ -5,7 +5,11 @@
  */
 package DAO;
 
+import DataBase.DataBase;
 import Objects.Renglon;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.Statement;
 import java.util.List;
 
 /**
@@ -45,8 +49,24 @@ public class DAORenglon implements BusinessObject<Renglon>{
     }
 
     @Override
-    public Renglon lastCode() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public int lastCode() {
+        int aux = 0;
+        Connection connection = DataBase.getInstance().getConnection();
+        Statement statement;
+        try{
+            statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery("SELECT IFNULL(MAX(COD),0) AS MAXIMO FROM Renglon");
+            while(rs.next()){
+                aux = rs.getInt("MAXIMO");
+            }
+            
+        }catch (Exception throwables){
+            throwables.printStackTrace();
+            aux = 0;
+            return aux;
+        }
+        DataBase.getInstance().disconnect();
+        return aux;
     }
     
 }

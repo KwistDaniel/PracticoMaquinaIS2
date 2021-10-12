@@ -51,7 +51,7 @@ public class DAOConectDirCF implements BusinessObject<ConectDirCF> {
     }
 
     @Override
-    public ConectDirCF lastCode() {
+    public int lastCode() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     

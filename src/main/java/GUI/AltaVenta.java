@@ -48,6 +48,7 @@ public class AltaVenta extends javax.swing.JFrame {
             }
         };
     public AltaVenta(ArrayList<Mercancia> aux, Vendedor vaux){
+        descuentos = new ArrayList<Integer>();
         mercancias = new ArrayList<Mercancia>(aux);
         vendedor = new Vendedor(vaux);
         initComponents();
@@ -55,7 +56,7 @@ public class AltaVenta extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
         GridBagConstraints gridBagConstraints = new GridBagConstraints();
         
-        
+        TFDescuento.setText("0");
         
         Object[][] objects = Mercancia.getDataVector(mercancias);
         Object[] headers = Mercancia.getHeadersB();
@@ -321,21 +322,16 @@ public class AltaVenta extends javax.swing.JFrame {
     }//GEN-LAST:event_BAgObjActionPerformed
 
     private void BSiguienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BSiguienteActionPerformed
-        Object[] aux;
-        try{
-            for(int i=0;i<mercancias.size();i++){
-                if((Boolean)tabla.getValueAt(i, 12) == true){
-                    descuentos.add(Integer.parseInt(TFDescuento.getText()));
-                }
-                else{
-                    descuentos.add(0);
-                }
+        for(int i=0;i<mercancias.size();i++){
+            Boolean bl = Boolean.valueOf(tabla.getValueAt(i, 11).toString());
+            if(bl == true){
+                descuentos.add(Integer.parseInt(TFDescuento.getText()));
             }
-        } catch (Exception e){
-            JOptionPane.showMessageDialog(null, "Error");
+            else{
+                descuentos.add(Integer.parseInt("0"));
+            }
         }
-        
-        
+       
         dispose();
         SeleccionarTipoCliente stc = new SeleccionarTipoCliente(mercancias,vendedor,descuentos);
         stc.setVisible(true);

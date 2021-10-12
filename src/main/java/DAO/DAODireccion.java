@@ -50,31 +50,57 @@ public class DAODireccion implements BusinessObject<Direccion> {
         List<Direccion> direcciones = new ArrayList<>();
         Connection connection = DataBase.getInstance().getConnection();
         Statement statement;
-        try{
-            statement = connection.createStatement();
+        if(!(ids[1].equals(null))){
+            try{
+                statement = connection.createStatement();
             
-            ResultSet rs = statement.executeQuery("SELECT ID,CALLE,NUMERO,PISO,DEPTO,COD_POSTAL,LOCALIDAD FROM Direccion INNER JOIN (" + ids[0] + ") AS DJ ON ID = DJ.ID_DIR WHERE (Status=1)");
-            Direccion direccion;
-            while (rs.next()){
-                direccion = new Direccion();
-                direccion.setIdDir(rs.getInt("ID"));
-                direccion.setCalleDir(rs.getString("CALLE"));
-                direccion.setNumDir(rs.getString("NUMERO"));
-                direccion.setPisoDir(rs.getString("PISO"));
-                direccion.setDeptoDir(rs.getString("DEPTO"));
-                direccion.setCodPostal(rs.getString("COD_POSTAL"));
-                direccion.setLocalidad(rs.getString("LOCALIDAD"));
-                direcciones.add(direccion);
+                ResultSet rs = statement.executeQuery("SELECT ID,CALLE,NUMERO,PISO,DEPTO,COD_POSTAL,LOCALIDAD FROM Direccion INNER JOIN (SELECT ID_DIR FROM conectdirclif WHERE (DNI_CF='" + ids[0] + "') AND (SEXO_CF='" + ids[1]+ "')" + ") AS DJ ON ID = DJ.ID_DIR WHERE (Status=1)");
+                Direccion direccion;
+                while (rs.next()){
+                    direccion = new Direccion();
+                    direccion.setIdDir(rs.getInt("ID"));
+                    direccion.setCalleDir(rs.getString("CALLE"));
+                    direccion.setNumDir(rs.getString("NUMERO"));
+                    direccion.setPisoDir(rs.getString("PISO"));
+                    direccion.setDeptoDir(rs.getString("DEPTO"));
+                    direccion.setCodPostal(rs.getString("COD_POSTAL"));
+                    direccion.setLocalidad(rs.getString("LOCALIDAD"));
+                    direcciones.add(direccion);
+                }
+            }catch (SQLException throwables){
+                throwables.printStackTrace();
             }
-        }catch (SQLException throwables){
-            throwables.printStackTrace();
         }
+        else{
+            try{
+                statement = connection.createStatement();
+            
+                ResultSet rs = statement.executeQuery("SELECT ID,CALLE,NUMERO,PISO,DEPTO,COD_POSTAL,LOCALIDAD FROM Direccion INNER JOIN (SELECT ID_DIR FROM conectdirclij WHERE (CUIT_CJ='" + ids[0] + "')) AS DJ ON ID = DJ.ID_DIR WHERE (Status=1)");
+                Direccion direccion;
+                while (rs.next()){
+                    direccion = new Direccion();
+                    direccion.setIdDir(rs.getInt("ID"));
+                    direccion.setCalleDir(rs.getString("CALLE"));
+                    direccion.setNumDir(rs.getString("NUMERO"));
+                    direccion.setPisoDir(rs.getString("PISO"));
+                    direccion.setDeptoDir(rs.getString("DEPTO"));
+                    direccion.setCodPostal(rs.getString("COD_POSTAL"));
+                    direccion.setLocalidad(rs.getString("LOCALIDAD"));
+                    direcciones.add(direccion);
+                }
+            }catch (SQLException throwables){
+                throwables.printStackTrace();
+            }
+        }
+        
+        
+        
         DataBase.getInstance().disconnect();
         return direcciones;
     }
 
     @Override
-    public Direccion lastCode() {
+    public int lastCode() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     

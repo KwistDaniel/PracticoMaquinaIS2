@@ -27,25 +27,26 @@ public class Main {
         li.setVisible(true);
         
             /**Ordenado**/
-        DBQueries.tablaVendedores();
-        DBQueries.tablaMercancias();
-        DBQueries.tablaClientesFisicos();
-        DBQueries.tablaClientesJuridicos();
-        DBQueries.tablaDirecciones();
+        /**/
+        DBQueries.dropAllTables();
+        DBQueries.createAllTables();
+        DBQueries.insertAllTables();
+        /**/
         
-        DBQueries.tablaConexionDirClientF();
-        DBQueries.tablaConexionDirClientJ();
+        //ESTO ESTABA EN UN LUGAR NQV (SeleccionarDireccionEnvio) y no se donde va si es que va
+        /*ArrayList<Integer> codaelim = new ArrayList<Integer>();
+        for(int i=0; i < mercancias.size();i++){
+            codaelim.add((Integer)mercancias.get(i).getCod());
+        }
         
-        DBQueries.tablaEnvios();
-        DBQueries.tablaVentas();
-        
-        DBQueries.tablaRenglonesVenta();
-        DBQueries.tablaConexionVenClientF();
-        DBQueries.tablaConexionVenClientJ();
-        
-        
-        
-        
+        for (int i=0; i < tm.getRowCount(); i++){
+            for (int j=0; j < codaelim.size(); j++){
+                if(tm.getValueAt(i, 0) == codaelim.get(j)){
+                    tm.removeRow(i);
+                    i--;
+                }
+            }
+        }*/
         
         //jdbc:mariadb://
         /*

@@ -50,21 +50,24 @@ public class DAOEnvio implements BusinessObject<Envio> {
     }
 
     @Override
-    public Envio lastCode() {
-        Envio envio = new Envio();
+    public int lastCode() {
+        int aux = 0;
         Connection connection = DataBase.getInstance().getConnection();
         Statement statement;
         try{
             statement = connection.createStatement();
-            ResultSet rs = statement.executeQuery("SELECT MAX(COD) FROM Envio ");
-            envio.setCod(rs.getInt("COD"));
-        }catch (SQLException throwables){
+            ResultSet rs = statement.executeQuery("SELECT IFNULL(MAX(COD),0) AS MAXIMO FROM Envio");
+            while(rs.next()){
+                aux = rs.getInt("MAXIMO");
+            }
+            
+        }catch (Exception throwables){
             throwables.printStackTrace();
-            envio.setCod(1); //para el primer envio
-            return envio;
+            aux = 0;
+            return aux;
         }
         DataBase.getInstance().disconnect();
-        return envio;
+        return aux;
     }
     
 }

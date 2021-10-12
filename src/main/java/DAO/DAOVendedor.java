@@ -33,7 +33,7 @@ public class DAOVendedor implements BusinessObject<Vendedor> {
         Statement statement;
         try{
             statement = connection.createStatement();
-            ResultSet rs = statement.executeQuery("SELECT * FROM Usuario WHERE (Status=1) AND (id='" + ids[0] + "') AND (pass='" + ids[1] + "')");
+            ResultSet rs = statement.executeQuery("SELECT * FROM Vendedor WHERE (Status=1) AND (user='" + ids[0] + "') AND (pass='" + ids[1] + "')");
             while(rs.next()){
                 vendedor.setDni(rs.getString("DNI"));
                 vendedor.setNombre(rs.getString("NOMBRE"));
@@ -74,7 +74,7 @@ public class DAOVendedor implements BusinessObject<Vendedor> {
     }
 
     @Override
-    public Vendedor lastCode() {
+    public int lastCode() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

@@ -45,7 +45,7 @@ public class DAOConectVenCF implements BusinessObject<ConectVenCF>{
     }
 
     @Override
-    public ConectVenCF lastCode() {
+    public int lastCode() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     

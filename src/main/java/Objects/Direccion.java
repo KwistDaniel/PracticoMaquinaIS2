@@ -99,10 +99,10 @@ public class Direccion {
         this.localidad = localidad;
     }
     
-    public static Object[][] getDataVector(List<Direccion> direccion){
-        Object[][] objects = new Object[direccion.size()][0];
-        for(int i = 0; i < direccion.size() ; i++){
-            objects[i] = direccion.get(i).toObject();
+    public static Object[][] getDataVector(List<Direccion> direcciones){
+        Object[][] objects = new Object[direcciones.size()][0];
+        for(int i = 0; i < direcciones.size() ; i++){
+            objects[i] = direcciones.get(i).toObject();
         }   
         return objects;
     }
@@ -111,6 +111,11 @@ public class Direccion {
     }
     private Object[] toObject(){
         return new Object[]{getIdDir(),getCalleDir(),getNumDir(),getPisoDir(),getDeptoDir(),getCodPostal(),getLocalidad()};
+    }
+
+    @Override
+    public String toString() {
+        return "Direccion{" + "idDir=" + idDir + ", calleDir=" + calleDir + ", numDir=" + numDir + ", pisoDir=" + pisoDir + ", deptoDir=" + deptoDir + ", codPostal=" + codPostal + ", localidad=" + localidad + '}';
     }
     
     

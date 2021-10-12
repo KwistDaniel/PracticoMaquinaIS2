@@ -105,7 +105,7 @@ public class DAOMercancia implements BusinessObject<Mercancia> {
     }
 
     @Override
-    public Mercancia lastCode() {
+    public int lastCode() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
