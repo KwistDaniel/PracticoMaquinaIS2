@@ -17,15 +17,16 @@ import javax.swing.JFrame;
  * @author kwist
  */
 public class SeleccionarTipoCliente extends javax.swing.JFrame {
-    ArrayList<Mercancia> mercancias;
+    ArrayList<Mercancia> mercancias,restar;
     Vendedor vendedor;
     ArrayList<Integer> descuentos;
     /**
      * Creates new form Menu
      */
-    public SeleccionarTipoCliente(ArrayList<Mercancia> aux, Vendedor vaux, ArrayList<Integer> descaux) {
+    public SeleccionarTipoCliente(ArrayList<Mercancia> aux, Vendedor vaux, ArrayList<Integer> descaux,ArrayList<Mercancia> restaaux) {
         descuentos = new ArrayList<Integer> (descaux);
         mercancias = new ArrayList<Mercancia>(aux);
+        restar = new ArrayList<Mercancia>(restaaux);
         vendedor = new Vendedor(vaux);
         initComponents();
         this.setVisible(true);
@@ -184,13 +185,13 @@ public class SeleccionarTipoCliente extends javax.swing.JFrame {
 
     private void VolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VolverActionPerformed
         dispose();
-        AltaVenta av = new AltaVenta(mercancias,vendedor);
+        AltaVenta av = new AltaVenta(mercancias,vendedor,restar);
         av.setVisible(true);
     }//GEN-LAST:event_VolverActionPerformed
 
     private void BClienteFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BClienteFActionPerformed
         dispose();
-        SeleccionarClienteF scf = new SeleccionarClienteF(mercancias,vendedor,descuentos);
+        SeleccionarClienteF scf = new SeleccionarClienteF(mercancias,vendedor,descuentos,restar);
         scf.setVisible(true);
     }//GEN-LAST:event_BClienteFActionPerformed
 

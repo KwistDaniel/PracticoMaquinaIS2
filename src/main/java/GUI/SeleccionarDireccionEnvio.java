@@ -32,7 +32,7 @@ import javax.swing.table.DefaultTableModel;
  * @author kwist
  */
 public class SeleccionarDireccionEnvio extends javax.swing.JFrame {
-    ArrayList<Mercancia> mercancias;
+    ArrayList<Mercancia> mercancias,restar;
     int tipocliente;
     Vendedor vendedor;
     ClienteF clientef;
@@ -49,7 +49,7 @@ public class SeleccionarDireccionEnvio extends javax.swing.JFrame {
             }
         };
     
-    public SeleccionarDireccionEnvio(ClienteF cfaux, ClienteJ cjaux,ArrayList<Mercancia> aux,Vendedor vaux,int tcliente, ArrayList<Integer> descaux) {
+    public SeleccionarDireccionEnvio(ClienteF cfaux, ClienteJ cjaux,ArrayList<Mercancia> aux,Vendedor vaux,int tcliente, ArrayList<Integer> descaux, ArrayList<Mercancia> restaaux) {
         descuentos = new ArrayList<Integer>(descaux);
         vendedor = new Vendedor(vaux);
         tipocliente = tcliente;
@@ -60,6 +60,7 @@ public class SeleccionarDireccionEnvio extends javax.swing.JFrame {
             clientej = new ClienteJ(cjaux);
         }
         mercancias = new ArrayList<Mercancia>(aux);
+        restar = new ArrayList<Mercancia>(restaaux);
         initComponents();
         this.setVisible(true);
         this.setLocationRelativeTo(null);
@@ -242,7 +243,7 @@ public class SeleccionarDireccionEnvio extends javax.swing.JFrame {
     private void BVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BVolverActionPerformed
         // TODO add your handling code here:
         dispose();
-        SeleccionarEnvio se = new SeleccionarEnvio(clientef,clientej,mercancias,vendedor,tipocliente,descuentos);
+        SeleccionarEnvio se = new SeleccionarEnvio(clientef,clientej,mercancias,vendedor,tipocliente,descuentos,restar);
         se.setVisible(true);
     }//GEN-LAST:event_BVolverActionPerformed
 
@@ -257,7 +258,7 @@ public class SeleccionarDireccionEnvio extends javax.swing.JFrame {
         direccionenvio.setCodPostal((String) aux[5]);
         direccionenvio.setLocalidad((String) aux[6]);
         dispose();
-        FinAltaVenta fav = new FinAltaVenta(clientef,clientej,mercancias,vendedor,tipocliente,direccionenvio,descuentos);
+        FinAltaVenta fav = new FinAltaVenta(clientef,clientej,mercancias,vendedor,tipocliente,direccionenvio,descuentos,restar);
         fav.setVisible(true);
         
         

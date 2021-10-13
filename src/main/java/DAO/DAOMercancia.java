@@ -69,7 +69,7 @@ public class DAOMercancia implements BusinessObject<Mercancia> {
     @Override
     public int update(Mercancia mercancia) {
         String sqlUpdate = "UPDATE Mercancia SET NOMBRE = ?, DESCRIPCION = ?, PRECIO_UNITARIO = ?, CANTIDAD = ?, COLOR = ?, CATEGORIA = ?, CALIDAD = ?, MEDIDA_ANCHO = ?, MEDIDA_ALTO = ?, METROS_CUADRADOS = ?" +
-                "WHERE (COD = '" + mercancia.getCod() + "')";
+                " WHERE (COD = '" + mercancia.getCod() + "')";
         int exito =0;
         Connection connection = DataBase.getInstance().getConnection();
         PreparedStatement statement;

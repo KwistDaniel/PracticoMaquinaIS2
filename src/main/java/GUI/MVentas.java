@@ -196,7 +196,8 @@ public class MVentas extends javax.swing.JFrame {
     private void BMVentasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BMVentasActionPerformed
         dispose();
         ArrayList<Mercancia> aux = new ArrayList<Mercancia>();
-        AltaVenta AV = new AltaVenta(aux,vendedor);
+        ArrayList<Mercancia> restaaux = new ArrayList<Mercancia>();
+        AltaVenta AV = new AltaVenta(aux,vendedor,restaaux);
         AV.setVisible(true);
         
         

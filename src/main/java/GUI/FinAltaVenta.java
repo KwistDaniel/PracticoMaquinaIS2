@@ -34,7 +34,7 @@ import javax.swing.JOptionPane;
  * @author kwist
  */
 public class FinAltaVenta extends javax.swing.JFrame {
-    ArrayList<Mercancia> mercancias;
+    ArrayList<Mercancia> mercancias,restar;
     ClienteF clientef;
     ClienteJ clientej;
     int tipocliente;
@@ -50,7 +50,7 @@ public class FinAltaVenta extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);     
     }
     
-    public FinAltaVenta(ClienteF cfaux, ClienteJ cjaux, ArrayList<Mercancia> aux, Vendedor vaux,int tcliente,Direccion daux,ArrayList<Integer> descaux){
+    public FinAltaVenta(ClienteF cfaux, ClienteJ cjaux, ArrayList<Mercancia> aux, Vendedor vaux,int tcliente,Direccion daux,ArrayList<Integer> descaux,ArrayList<Mercancia> restaaux){
         vendedor = new Vendedor(vaux);
         tipocliente = tcliente;
         if (tipocliente == 1){
@@ -60,6 +60,7 @@ public class FinAltaVenta extends javax.swing.JFrame {
             clientej = new ClienteJ(cjaux);
         }
         mercancias = new ArrayList<Mercancia>(aux);
+        restar = new ArrayList<Mercancia>(restaaux);
         direccionenvio = new Direccion(daux);
         descuentos = new ArrayList<Integer>(descaux);
         
@@ -221,7 +222,7 @@ public class FinAltaVenta extends javax.swing.JFrame {
     private void BVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BVolverActionPerformed
         // TODO add your handling code here:
         dispose();
-        SeleccionarEnvio se = new SeleccionarEnvio(clientef,clientej,mercancias,vendedor,tipocliente,descuentos);
+        SeleccionarEnvio se = new SeleccionarEnvio(clientef,clientej,mercancias,vendedor,tipocliente,descuentos,restar);
         se.setVisible(true);
     }//GEN-LAST:event_BVolverActionPerformed
 
@@ -264,7 +265,6 @@ public class FinAltaVenta extends javax.swing.JFrame {
         }
         venta.setP_Total(pTotal);
         venta.setP_Final(pFinal);
-        venta.setStatus_Payment(1);
         venta.setCOD_ENVIO(envio.getCod());
         
         bOVenta.create(venta);
@@ -294,14 +294,7 @@ public class FinAltaVenta extends javax.swing.JFrame {
             cvcf.setCOD_VENTA(venta.getCOD_VENTA());
             cvcf.setDNI(clientef.getDni());
             cvcf.setSexo(clientef.getSexo());
-            
             bOConectVenCF.create(cvcf);
-            
-            
-            //BusinessObject<??> businessObject?? = new DAO??();
-            //creo la venta de clientes, esto seria un create para el DAO ConectVenCF
-            //BusinessObject<??> businessObject?? = new DAO??();
-            //creo el envio al cliente
         }
         else{
             ConectVenCJ cvcj = new ConectVenCJ();
@@ -309,14 +302,13 @@ public class FinAltaVenta extends javax.swing.JFrame {
             cvcj.setCOD_VENTA(venta.getCOD_VENTA());
             cvcj.setCUIT(clientej.getCUIT());
             bOConectVenCJ.create(cvcj);
-            //BusinessObject<??> businessObject?? = new DAO??();
         }
         /**FIN* Actualizo tabla de CONVCLIENTE*/
         System.out.println("EEE");
         /**INICIO* Actualizo tabla Mercancias*/ //5
         BusinessObject<Mercancia> businessObjectM = new DAOMercancia();
-        for(int i = 0; i<mercancias.size();i++){//updateo la tabla de mercancias para actualizar la cantidad FALTA ESTO, XQ NO LO RESTA 
-            businessObjectM.update(mercancias.get(i));
+        for(int i = 0; i<restar.size();i++){
+            businessObjectM.update(restar.get(i));
         }
         /**FIN* Actualizo tabla Mercancias*/    
         System.out.println("FFF");

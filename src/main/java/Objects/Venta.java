@@ -15,20 +15,18 @@ public class Venta {
     private String Sexo_V;
     private double P_Total;
     private double P_Final;
-    private int Status_Payment;
     private int COD_ENVIO;
     
     public Venta(){
         
     };
 
-    public Venta(int COD_VENTA, String DNI_V, String Sexo_V, double P_Total, double P_Final, int Status_Payment, int COD_ENVIO) {
+    public Venta(int COD_VENTA, String DNI_V, String Sexo_V, double P_Total, double P_Final, int COD_ENVIO) {
         this.COD_VENTA = COD_VENTA;
         this.DNI_V = DNI_V;
         this.Sexo_V = Sexo_V;
         this.P_Total = P_Total;
         this.P_Final = P_Final;
-        this.Status_Payment = Status_Payment;
         this.COD_ENVIO = COD_ENVIO;
     }
     
@@ -38,7 +36,6 @@ public class Venta {
         this.Sexo_V = aux.Sexo_V;
         this.P_Total = aux.P_Total;
         this.P_Final = aux.P_Final;
-        this.Status_Payment = aux.Status_Payment;
         this.COD_ENVIO = aux.COD_ENVIO;
     }
 
@@ -80,14 +77,6 @@ public class Venta {
 
     public void setP_Final(double P_Final) {
         this.P_Final = P_Final;
-    }
-
-    public int getStatus_Payment() {
-        return Status_Payment;
-    }
-
-    public void setStatus_Payment(int Status_Payment) {
-        this.Status_Payment = Status_Payment;
     }
 
     public int getCOD_ENVIO() {

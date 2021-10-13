@@ -8,6 +8,7 @@ package DAO;
 import DataBase.DataBase;
 import Objects.Envio;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -31,7 +32,25 @@ public class DAOEnvio implements BusinessObject<Envio> {
 
     @Override
     public int create(Envio t) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        String sqlInsert = " INSERT INTO Envio (COD, ID_DIR, ESTADO_ENVIO, Status)" +
+                " VALUES (?, ?, ?, ?)";
+        int exito = 0;
+        Connection connection = DataBase.getInstance().getConnection();
+        PreparedStatement statement;
+        try {
+            statement = connection.prepareStatement(sqlInsert);
+            statement.setInt(1, t.getCod());
+            statement.setInt(2, t.getId_dir());
+            statement.setInt(3, t.getEstado());
+            statement.setInt(4, 1);
+            statement.executeUpdate();
+            exito = 1;
+
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        DataBase.getInstance().disconnect();
+        return exito;
     }
 
     @Override

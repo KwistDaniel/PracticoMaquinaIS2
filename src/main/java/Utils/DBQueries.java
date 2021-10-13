@@ -227,9 +227,8 @@ public class DBQueries {
                     "SEXO_VENDEDOR VARCHAR(10) NOT NULL," +
                     "PRECIO_TOTAL VARCHAR(255) NOT NULL," +
                     "PRECIO_FINAL VARCHAR(255) NOT NULL," +
-                    "ESTADO_PAGO INT NOT NULL," +
-                    "STATUS INT NOT NULL," +
                     "COD_ENVIO INT NOT NULL," +
+                    "Status INT NOT NULL," +
                     "PRIMARY KEY(COD)," +
                     "FOREIGN KEY (COD_ENVIO) REFERENCES Envio(COD)," +
                     "FOREIGN KEY (DNI_VENDEDOR,SEXO_VENDEDOR) REFERENCES Vendedor(DNI,SEXO))");

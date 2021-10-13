@@ -19,7 +19,7 @@ import javax.swing.JFrame;
  * @author kwist
  */
 public class SeleccionarEnvio extends javax.swing.JFrame {
-    ArrayList<Mercancia> mercancias;
+    ArrayList<Mercancia> mercancias,restar;
     ClienteF clientef;
     ClienteJ clientej;
     int tipocliente;
@@ -28,7 +28,7 @@ public class SeleccionarEnvio extends javax.swing.JFrame {
     /**
      * Creates new form Menu
      */
-    public SeleccionarEnvio(ClienteF cfaux, ClienteJ cjaux, ArrayList<Mercancia> aux, Vendedor vaux,int tcliente, ArrayList<Integer> descaux) {
+    public SeleccionarEnvio(ClienteF cfaux, ClienteJ cjaux, ArrayList<Mercancia> aux, Vendedor vaux,int tcliente, ArrayList<Integer> descaux, ArrayList<Mercancia> restaaux) {
         descuentos = new ArrayList<Integer>(descaux);
         this.tipocliente = tcliente;
         if(tipocliente == 1){
@@ -39,6 +39,7 @@ public class SeleccionarEnvio extends javax.swing.JFrame {
         }
         
         mercancias = new ArrayList<Mercancia>(aux);
+        restar = new ArrayList<Mercancia>(restaaux);
         vendedor = new Vendedor(vaux);
         initComponents();
         this.setVisible(true);
@@ -202,7 +203,7 @@ public class SeleccionarEnvio extends javax.swing.JFrame {
 
     private void VolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VolverActionPerformed
         dispose();
-        SeleccionarTipoCliente stc = new SeleccionarTipoCliente(mercancias,vendedor,descuentos);
+        SeleccionarTipoCliente stc = new SeleccionarTipoCliente(mercancias,vendedor,descuentos,restar);
         stc.setVisible(true);
     }//GEN-LAST:event_VolverActionPerformed
 
@@ -214,7 +215,7 @@ public class SeleccionarEnvio extends javax.swing.JFrame {
 
     private void BCargarEnvioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BCargarEnvioActionPerformed
         dispose();
-        SeleccionarDireccionEnvio sde = new SeleccionarDireccionEnvio(clientef,clientej,mercancias,vendedor,tipocliente,descuentos);
+        SeleccionarDireccionEnvio sde = new SeleccionarDireccionEnvio(clientef,clientej,mercancias,vendedor,tipocliente,descuentos,restar);
         sde.setVisible(true);
         //AltaEnvio ae = new AltaEnvio(clientef,clientej,mercancias,prioridad,tipocliente);
         //ae.setVisible(true);

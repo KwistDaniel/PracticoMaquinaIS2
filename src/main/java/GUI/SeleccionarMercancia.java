@@ -28,7 +28,7 @@ import javax.swing.table.DefaultTableModel;
  * @author kwist
  */
 public class SeleccionarMercancia extends javax.swing.JFrame {
-    ArrayList<Mercancia> mercancias;
+    ArrayList<Mercancia> mercancias,restar;
     Vendedor vendedor;
     /**
      * Creates new form Menu
@@ -41,9 +41,10 @@ public class SeleccionarMercancia extends javax.swing.JFrame {
             }
         };
     
-    public SeleccionarMercancia(ArrayList<Mercancia> aux,Vendedor vaux) {
+    public SeleccionarMercancia(ArrayList<Mercancia> aux,Vendedor vaux,ArrayList<Mercancia> restaaux) {
         vendedor = new Vendedor(vaux);
         mercancias = new ArrayList<Mercancia>(aux);
+        restar = new ArrayList<Mercancia>(restaaux);
         initComponents();
         this.setVisible(true);
         this.setLocationRelativeTo(null);
@@ -225,7 +226,7 @@ public class SeleccionarMercancia extends javax.swing.JFrame {
     private void BVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BVolverActionPerformed
         // TODO add your handling code here:
         dispose();
-        AltaVenta av = new AltaVenta(mercancias,vendedor);
+        AltaVenta av = new AltaVenta(mercancias,vendedor,restar);
     }//GEN-LAST:event_BVolverActionPerformed
 
     private void BSeleccionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BSeleccionarActionPerformed
@@ -257,8 +258,10 @@ public class SeleccionarMercancia extends javax.swing.JFrame {
                     aux1.setMetcuad((int) aux[10]);
                     aux1.setPartida((int) aux[11]);
                     mercanciasaux.add(aux1);
+                    aux1.setCantidad((int)aux[4] - cant);
+                    restar.add(aux1);
                     dispose();
-                    AltaVenta AV = new AltaVenta(mercanciasaux,vendedor);
+                    AltaVenta AV = new AltaVenta(mercanciasaux,vendedor,restar);
                     AV.setVisible(true);
                 }
                 

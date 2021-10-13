@@ -28,7 +28,7 @@ import javax.swing.table.DefaultTableModel;
  * @author kwist
  */
 public class SeleccionarClienteF extends javax.swing.JFrame {
-    ArrayList<Mercancia> mercancias;
+    ArrayList<Mercancia> mercancias,restar;
     Vendedor vendedor;
     ArrayList<Integer> descuentos;
     /**
@@ -42,10 +42,11 @@ public class SeleccionarClienteF extends javax.swing.JFrame {
             }
         };
     
-    public SeleccionarClienteF(ArrayList<Mercancia> aux,Vendedor vaux, ArrayList<Integer> descaux) {
+    public SeleccionarClienteF(ArrayList<Mercancia> aux,Vendedor vaux, ArrayList<Integer> descaux,ArrayList<Mercancia> restaaux) {
         descuentos = new ArrayList<Integer>(descaux);
         vendedor = new Vendedor(vaux);
         mercancias = new ArrayList<Mercancia>(aux);
+        restar = new ArrayList<Mercancia>(restaaux);
         initComponents();
         this.setVisible(true);
         this.setLocationRelativeTo(null);
@@ -217,7 +218,7 @@ public class SeleccionarClienteF extends javax.swing.JFrame {
     private void BVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BVolverActionPerformed
         // TODO add your handling code here:
         dispose();
-        AltaVenta av = new AltaVenta(mercancias,vendedor);
+        AltaVenta av = new AltaVenta(mercancias,vendedor,restar);
         av.setVisible(true);
     }//GEN-LAST:event_BVolverActionPerformed
 
@@ -237,7 +238,7 @@ public class SeleccionarClienteF extends javax.swing.JFrame {
         
         ClienteJ cjaux = new ClienteJ();
         dispose();
-        SeleccionarEnvio SE = new SeleccionarEnvio(aux1,cjaux,mercancias,vendedor,1,descuentos);
+        SeleccionarEnvio SE = new SeleccionarEnvio(aux1,cjaux,mercancias,vendedor,1,descuentos,restar);
         SE.setVisible(true);
         
     }//GEN-LAST:event_BSeleccionarActionPerformed

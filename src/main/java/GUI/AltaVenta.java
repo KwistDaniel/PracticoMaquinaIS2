@@ -28,7 +28,7 @@ import javax.swing.table.DefaultTableModel;
  */
 public class AltaVenta extends javax.swing.JFrame {
     Vendedor vendedor;
-    ArrayList<Mercancia> mercancias;
+    ArrayList<Mercancia> mercancias,restar;
     ArrayList<Integer> descuentos;
     private final JTable tabla;
     
@@ -47,9 +47,10 @@ public class AltaVenta extends javax.swing.JFrame {
                 }
             }
         };
-    public AltaVenta(ArrayList<Mercancia> aux, Vendedor vaux){
+    public AltaVenta(ArrayList<Mercancia> aux, Vendedor vaux,ArrayList<Mercancia> restaaux){
         descuentos = new ArrayList<Integer>();
         mercancias = new ArrayList<Mercancia>(aux);
+        restar = new ArrayList<Mercancia>(restaaux);
         vendedor = new Vendedor(vaux);
         initComponents();
         this.setVisible(true);
@@ -317,7 +318,7 @@ public class AltaVenta extends javax.swing.JFrame {
 
     private void BAgObjActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BAgObjActionPerformed
         dispose();
-        SeleccionarMercancia sm = new SeleccionarMercancia(mercancias,vendedor);
+        SeleccionarMercancia sm = new SeleccionarMercancia(mercancias,vendedor,restar);
         sm.setVisible(true);
     }//GEN-LAST:event_BAgObjActionPerformed
 
@@ -333,7 +334,7 @@ public class AltaVenta extends javax.swing.JFrame {
         }
        
         dispose();
-        SeleccionarTipoCliente stc = new SeleccionarTipoCliente(mercancias,vendedor,descuentos);
+        SeleccionarTipoCliente stc = new SeleccionarTipoCliente(mercancias,vendedor,descuentos,restar);
         stc.setVisible(true);
         //ACA LLEVO A QUE CLIENTE SE LO VOY A VENDER, O CREO UNO NUEVO O SELECCIONO UNO (tabla con filtro va a venir bien)
         //DE AHI CREO UN ENVIO, O PERMITO SELECCIONAR UNA DE LAS DIRECCIONES DEL CLIENTE O LE CREO UNA
