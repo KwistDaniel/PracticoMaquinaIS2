@@ -177,7 +177,9 @@ public class DBQueries {
             statement.executeUpdate("CREATE TABLE Envio (" +
                     "COD INT NOT NULL," +
                     "ID_DIR INT NOT NULL," +
-                    "ESTADO_ENVIO VARCHAR(255) NOT NULL," +
+                    "ESTADO_ENVIO INT NOT NULL," +
+                    "FECHA_ENVIO VARCHAR(10) NOT NULL," +
+                    "HORA_ENVIO VARCHAR(6) NOT NULL," +
                     "Status INT NOT NULL," +
                     "FOREIGN KEY (ID_DIR) REFERENCES Direccion(ID), " +
                     "PRIMARY KEY(COD))");

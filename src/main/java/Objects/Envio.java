@@ -13,14 +13,18 @@ public class Envio {
     private int cod;
     private int id_dir;
     private int estado;
+    private String fecha;
+    private String hora;
 
     public Envio() {
     }
 
-    public Envio(int cod, int id_dir, int estado) {
+    public Envio(int cod, int id_dir, int estado, String fecha, String hora) {
         this.cod = cod;
         this.id_dir = id_dir;
         this.estado = estado;
+        this.fecha = fecha;
+        this.hora = hora;
     }
 
     public int getCod() {
@@ -45,6 +49,22 @@ public class Envio {
 
     public void setEstado(int estado) {
         this.estado = estado;
+    }
+
+    public String getFecha() {
+        return fecha;
+    }
+
+    public void setFecha(String fecha) {
+        this.fecha = fecha;
+    }
+
+    public String getHora() {
+        return hora;
+    }
+
+    public void setHora(String hora) {
+        this.hora = hora;
     }
     
     

@@ -19,7 +19,6 @@ public class Mercancia {
     private int cantidad;
     private double precio_u;
     private String color;
-    private int tipo; //0 cualq, 1 porcelanato y ceramicos
     private int partida;
     private int ancho;
     private int alto;
@@ -29,7 +28,7 @@ public class Mercancia {
     public Mercancia() {
     }
 
-    public Mercancia(int cod, String nombre, String categoria, String descripcion, int cantidad, double precio_u, String color, int tipo, int partida, int ancho, int alto, int metcuad, int calidad) {
+    public Mercancia(int cod, String nombre, String categoria, String descripcion, int cantidad, double precio_u, String color, int partida, int ancho, int alto, int metcuad, int calidad) {
         this.cod = cod;
         this.nombre = nombre;
         this.categoria = categoria;
@@ -43,6 +42,8 @@ public class Mercancia {
         this.metcuad = metcuad;
         this.calidad = calidad;
     }
+
+    
 
     public int getCod() {
         return cod;
@@ -139,6 +140,9 @@ public class Mercancia {
     public void setCalidad(int calidad) {
         this.calidad = calidad;
     }
+
+    
+    
     
     public static Object[][] getDataVector(List<Mercancia> mercancias){
         Object[][] objects = new Object[mercancias.size()][0];

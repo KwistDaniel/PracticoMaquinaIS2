@@ -32,8 +32,8 @@ public class DAOEnvio implements BusinessObject<Envio> {
 
     @Override
     public int create(Envio t) {
-        String sqlInsert = " INSERT INTO Envio (COD, ID_DIR, ESTADO_ENVIO, Status)" +
-                " VALUES (?, ?, ?, ?)";
+        String sqlInsert = " INSERT INTO Envio (COD, ID_DIR, ESTADO_ENVIO, FECHA_ENVIO, HORA_ENVIO, Status)" +
+                " VALUES (?, ?, ?, ?, ?, ?)";
         int exito = 0;
         Connection connection = DataBase.getInstance().getConnection();
         PreparedStatement statement;
@@ -42,7 +42,9 @@ public class DAOEnvio implements BusinessObject<Envio> {
             statement.setInt(1, t.getCod());
             statement.setInt(2, t.getId_dir());
             statement.setInt(3, t.getEstado());
-            statement.setInt(4, 1);
+            statement.setString(4, t.getFecha());
+            statement.setString(5, t.getHora());
+            statement.setInt(6, 1);
             statement.executeUpdate();
             exito = 1;
 

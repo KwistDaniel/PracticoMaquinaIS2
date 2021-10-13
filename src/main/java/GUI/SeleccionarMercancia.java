@@ -258,8 +258,9 @@ public class SeleccionarMercancia extends javax.swing.JFrame {
                     aux1.setMetcuad((int) aux[10]);
                     aux1.setPartida((int) aux[11]);
                     mercanciasaux.add(aux1);
-                    aux1.setCantidad((int)aux[4] - cant);
-                    restar.add(aux1);
+                    int newcant = ((int)aux[4] - cant);
+                    Mercancia aux2 = new Mercancia(aux1.getCod(),aux1.getNombre(),aux1.getCategoria(),aux1.getDescripcion(),newcant,aux1.getPrecio_u(),aux1.getColor(),aux1.getCalidad(),aux1.getAncho(),aux1.getAncho(),aux1.getMetcuad(),aux1.getPartida());
+                    restar.add(aux2);
                     dispose();
                     AltaVenta AV = new AltaVenta(mercanciasaux,vendedor,restar);
                     AV.setVisible(true);
@@ -269,10 +270,6 @@ public class SeleccionarMercancia extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "Valor incorrecto");
             }
         }
-        
-        
-        
-        
     }//GEN-LAST:event_BSeleccionarActionPerformed
 
     /**

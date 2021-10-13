@@ -25,6 +25,9 @@ import Objects.Mercancia;
 import Objects.Renglon;
 import Objects.Vendedor;
 import Objects.Venta;
+import Utils.Validates;
+import com.toedter.calendar.JDateChooser;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -37,10 +40,13 @@ public class FinAltaVenta extends javax.swing.JFrame {
     ArrayList<Mercancia> mercancias,restar;
     ClienteF clientef;
     ClienteJ clientej;
-    int tipocliente;
+    int tipocliente,flagfecha=0;
     Vendedor vendedor;
     Direccion direccionenvio;
     ArrayList<Integer> descuentos;
+    String fechenv = "";
+    String horaenv = "";
+    String HH = "",HM = "";
     /**
      * Creates new form Menu
      */
@@ -68,6 +74,7 @@ public class FinAltaVenta extends javax.swing.JFrame {
         initComponents();
         this.setVisible(true);
         this.setLocationRelativeTo(null); 
+        TFFechaEnv.setEditable(false);
     }
 
     /**
@@ -86,6 +93,14 @@ public class FinAltaVenta extends javax.swing.JFrame {
         BMostrarCliente = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
         BVolver = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        BElegirFecha = new javax.swing.JButton();
+        TFHH = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        TFFechaEnv = new javax.swing.JTextField();
+        TFHM = new javax.swing.JTextField();
+        jLabel4 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 0, 0));
@@ -150,19 +165,86 @@ public class FinAltaVenta extends javax.swing.JFrame {
             }
         });
 
+        jLabel1.setText("jLabel1");
+
+        BElegirFecha.setText("Elegir Fecha");
+        BElegirFecha.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BElegirFechaActionPerformed(evt);
+            }
+        });
+
+        TFHH.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                TFHHActionPerformed(evt);
+            }
+        });
+
+        jLabel2.setText("Hora: ");
+
+        jLabel3.setText("Fecha: ");
+
+        TFFechaEnv.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                TFFechaEnvActionPerformed(evt);
+            }
+        });
+
+        jLabel4.setText(":");
+
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                .addContainerGap(286, Short.MAX_VALUE)
-                .addComponent(BVolver)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                        .addContainerGap(286, Short.MAX_VALUE)
+                        .addComponent(BVolver))
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel4Layout.createSequentialGroup()
+                                .addGap(91, 91, 91)
+                                .addComponent(jLabel1)
+                                .addGap(18, 18, 18)
+                                .addComponent(BElegirFecha))
+                            .addGroup(jPanel4Layout.createSequentialGroup()
+                                .addGap(89, 89, 89)
+                                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel4Layout.createSequentialGroup()
+                                        .addComponent(jLabel3)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(TFFechaEnv, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(jPanel4Layout.createSequentialGroup()
+                                        .addComponent(jLabel2)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(TFHH, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jLabel4)
+                                        .addGap(9, 9, 9)
+                                        .addComponent(TFHM, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(113, 113, 113)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(BElegirFecha))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(TFFechaEnv, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel2)
+                    .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(TFHH, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(TFHM, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel4)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(BVolver)
                 .addContainerGap())
         );
@@ -242,13 +324,29 @@ public class FinAltaVenta extends javax.swing.JFrame {
         //4- CREO EL CONETOR DE VENTA CON EL CLIENTE
         //5- UPDATE A MERCANCIA
         
+        /*Consigo  Hora*/
+        HH = TFHH.getText();
+        HM = TFHM.getText();
+        
+        int a = Validates.validateIsNumber((String) HH);
+        if(Validates.validateHora(HH,HM) == 1){
+            horaenv = HH + ":" + HM;
+        }
+        
+        
+        
+        
+        
+        
         /**INICIO* Actualizo tabla de Envio*/ //1
         Envio envio = new Envio();
-        BusinessObject<Envio> bOEnvio = new DAOEnvio(); /*1*falta fecha y hora**/
+        //DAOEnvio.create(envio);
+        BusinessObject<Envio> bOEnvio = new DAOEnvio();
         envio.setCod(bOEnvio.lastCode() + 1);
         envio.setId_dir(direccionenvio.getIdDir());
+        envio.setFecha(fechenv);
+        envio.setHora(horaenv);
         envio.setEstado(0);
-        //FALTA LA FECHA Y HORA, ACTUALIZAR CLASE, DAO, TABLA BD Y LAS INTERFACES
         bOEnvio.create(envio);
         /**FIN* Actualizo tabla de Envio*/
         System.out.println("BBB");
@@ -318,6 +416,26 @@ public class FinAltaVenta extends javax.swing.JFrame {
         mm.setVisible(true);
     }//GEN-LAST:event_BCargaVentaActionPerformed
 
+    private void BElegirFechaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BElegirFechaActionPerformed
+        JDateChooser jd = new JDateChooser();
+        String message = "Elija la fecha de envio:\n";
+        Object[] params = {message,jd};
+        JOptionPane.showConfirmDialog(null,params,"Fecha de Envio", JOptionPane.PLAIN_MESSAGE);
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        fechenv=sdf.format(((JDateChooser)params[1]).getDate());
+        System.out.println("AAAA FECHA ELEGIDA: " + fechenv);
+        
+        TFFechaEnv.setText(fechenv);
+    }//GEN-LAST:event_BElegirFechaActionPerformed
+
+    private void TFFechaEnvActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TFFechaEnvActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_TFFechaEnvActionPerformed
+
+    private void TFHHActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TFHHActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_TFHHActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -362,8 +480,16 @@ public class FinAltaVenta extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BCargaVenta;
+    private javax.swing.JButton BElegirFecha;
     private javax.swing.JButton BMostrarCliente;
     private javax.swing.JButton BVolver;
+    private javax.swing.JTextField TFFechaEnv;
+    private javax.swing.JTextField TFHH;
+    private javax.swing.JTextField TFHM;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
