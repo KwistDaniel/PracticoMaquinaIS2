@@ -18,7 +18,7 @@ import java.util.List;
  *
  * @author kwist
  */
-public class DAOConectDirCF implements BusinessObject<ConectDirCF> {
+public class DAOConectDirCF implements DAO<ConectDirCF> {
 
     @Override
     public List<ConectDirCF> readAll() {

@@ -19,7 +19,7 @@ import java.util.List;
  *
  * @author kwist
  */
-public class DAOMercancia implements BusinessObject<Mercancia> {
+public class DAOMercancia implements DAO<Mercancia> {
 
     @Override
     public List<Mercancia> readAll() {

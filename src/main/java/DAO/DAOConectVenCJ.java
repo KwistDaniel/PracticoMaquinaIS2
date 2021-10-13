@@ -12,7 +12,7 @@ import java.util.List;
  *
  * @author kwist
  */
-public class DAOConectVenCJ implements BusinessObject<ConectVenCJ>{
+public class DAOConectVenCJ implements DAO<ConectVenCJ>{
 
     @Override
     public List<ConectVenCJ> readAll() {

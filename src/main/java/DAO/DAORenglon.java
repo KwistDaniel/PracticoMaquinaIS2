@@ -18,7 +18,7 @@ import java.util.List;
  *
  * @author kwist
  */
-public class DAORenglon implements BusinessObject<Renglon>{
+public class DAORenglon implements DAO<Renglon>{
 
     @Override
     public List<Renglon> readAll() {

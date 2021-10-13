@@ -18,7 +18,7 @@ import java.util.List;
  *
  * @author kwist
  */
-public class DAOClienteF implements BusinessObject<ClienteF> {
+public class DAOClienteF implements DAO<ClienteF> {
 
     @Override
     public List<ClienteF> readAll() {

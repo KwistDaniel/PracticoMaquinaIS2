@@ -16,7 +16,7 @@ import java.util.List;
  *
  * @author kwist
  */
-public class DAOConectVenCF implements BusinessObject<ConectVenCF>{
+public class DAOConectVenCF implements DAO<ConectVenCF>{
 
     @Override
     public List<ConectVenCF> readAll() {

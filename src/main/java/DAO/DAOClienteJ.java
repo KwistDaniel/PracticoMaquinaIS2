@@ -12,7 +12,7 @@ import java.util.List;
  *
  * @author kwist
  */
-public class DAOClienteJ implements BusinessObject<ClienteJ> {
+public class DAOClienteJ implements DAO<ClienteJ> {
 
     @Override
     public List<ClienteJ> readAll() {

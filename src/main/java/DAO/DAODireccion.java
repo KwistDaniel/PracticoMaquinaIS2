@@ -18,7 +18,7 @@ import java.util.List;
  *
  * @author kwist
  */
-public class DAODireccion implements BusinessObject<Direccion> {
+public class DAODireccion implements DAO<Direccion> {
 
     @Override
     public List<Direccion> readAll() {

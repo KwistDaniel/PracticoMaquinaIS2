@@ -18,7 +18,7 @@ import java.util.List;
  *
  * @author kwist
  */
-public class DAOEnvio implements BusinessObject<Envio> {
+public class DAOEnvio implements DAO<Envio> {
 
     @Override
     public List<Envio> readAll() {
