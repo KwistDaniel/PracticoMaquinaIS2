@@ -459,7 +459,6 @@ public class FinAltaVenta extends javax.swing.JFrame {
             renglon.setCantidad(mercancias.get(j).getCantidad());
             renglon.setPrecio_U(mercancias.get(j).getPrecio_u());
             renglon.setDescuento(descuentos.get(j));
-            System.out.println("Cantidad :" + renglon.getCantidad());
             double ptot = mercancias.get(j).getCantidad() * mercancias.get(j).getPrecio_u();
             double pfif = (((100 - descuentos.get(j)) * (ptot))/100);
 
@@ -506,7 +505,6 @@ public class FinAltaVenta extends javax.swing.JFrame {
         JOptionPane.showConfirmDialog(null,params,"Fecha de Envio", JOptionPane.PLAIN_MESSAGE);
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
         fechenv=sdf.format(((JDateChooser)params[1]).getDate());
-        System.out.println("AAAA FECHA ELEGIDA: " + fechenv);
         
         TFFechaEnv.setText(fechenv);
     }//GEN-LAST:event_BElegirFechaActionPerformed

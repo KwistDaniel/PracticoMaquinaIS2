@@ -448,7 +448,7 @@ public class DBQueries {
         Statement statement;
         try {
             statement = connection.createStatement();
-            statement.executeUpdate("INSERT INTO ClienteFisico VALUES ('39662252','Daniel','Kwist','3382-406601','Masculino','30/12/1996','kwistdaniel@gmail.com',1),(3,'Ejercito de los andes','1025','2','2','5700','San Luis',1),('42000189','Tobias','Burger','2664-509666','Masculino','29/04/1999','tovibur@hotmai.com',1)");
+            statement.executeUpdate("INSERT INTO ClienteFisico VALUES ('39662252','Daniel','Kwist','3382-406601','Masculino','30/12/1996','kwistdaniel@gmail.com',1),('42000189','Tobias','Burger','2664-509666','Masculino','29/04/1999','tovibur@hotmai.com',1)");
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
@@ -459,7 +459,7 @@ public class DBQueries {
         Statement statement;
         try {
             statement = connection.createStatement();
-            statement.executeUpdate("INSERT INTO Direccion VALUES (1,'Rivadavia','1305','2','2','5700','San Luis',1),(2,'Centenario','229','','','6100','Rufino',1)");
+            statement.executeUpdate("INSERT INTO Direccion VALUES (1,'Rivadavia','1305','2','2','5700','San Luis',1),(2,'Centenario','229','','','6100','Rufino',1),(3,'Ejercito de los andes','1025','2','2','5700','San Luis',1)");
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
