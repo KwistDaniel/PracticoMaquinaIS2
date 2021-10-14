@@ -6,7 +6,6 @@
 package GUI;
 
 import BusinessObject_Manager.BusinessObjectClienteF;
-import DAO.BusinessObject;
 import DAO.DAODireccion;
 import GUI.*;
 import Objects.ClienteF;

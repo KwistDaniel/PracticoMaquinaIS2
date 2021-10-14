@@ -6,7 +6,6 @@
 package GUI;
 
 import BusinessObject_Manager.BusinessObjectVendedor;
-import DAO.BusinessObject;
 import DAO.DAOVendedor;
 import GUI.*;
 import Objects.Vendedor;

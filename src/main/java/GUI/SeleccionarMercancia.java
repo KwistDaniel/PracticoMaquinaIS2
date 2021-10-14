@@ -7,7 +7,6 @@ package GUI;
 
 import BusinessObject_Manager.BusinessObjectMercancia;
 import BusinessObject_Manager.BusinessObjectVenta;
-import DAO.BusinessObject;
 import DAO.DAOMercancia;
 import GUI.*;
 import Objects.Mercancia;

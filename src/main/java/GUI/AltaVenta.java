@@ -5,7 +5,6 @@
  */
 package GUI;
 
-import DAO.BusinessObject;
 import DAO.DAOMercancia;
 import GUI.*;
 import Objects.Mercancia;
