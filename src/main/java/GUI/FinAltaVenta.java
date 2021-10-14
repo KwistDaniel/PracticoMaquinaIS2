@@ -10,7 +10,6 @@ import BusinessObject_Manager.BusinessObjectEnvio;
 import BusinessObject_Manager.BusinessObjectMercancia;
 import BusinessObject_Manager.BusinessObjectRenglon;
 import BusinessObject_Manager.BusinessObjectVenta;
-import DAO.BusinessObject;
 import DAO.DAOClienteF;
 import DAO.DAOConectVenCF;
 import DAO.DAOConectVenCJ;
