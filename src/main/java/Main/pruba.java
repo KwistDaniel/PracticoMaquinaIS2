@@ -10,5 +10,6 @@ package Main;
  * @author tovib
  */
 public class pruba {
-    
+    private int algo1;
+    private float algo2;
 }
