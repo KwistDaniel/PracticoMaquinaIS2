@@ -20,7 +20,7 @@ public class DataBase {
     private static String user = "user1";
     private static String password = "951753";
     
-    public DataBase(){
+    private DataBase(){//esto va priv
         try{
             connection = DriverManager.getConnection(url,user,password);
             System.out.println("Connected to the DB successfully");
