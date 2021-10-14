@@ -19,7 +19,7 @@ import java.util.List;
  *
  * @author kwist
  */
-public class DAOMercancia implements BusinessObject<Mercancia> {
+public class DAOMercancia implements DAO<Mercancia> {
 
     @Override
     public List<Mercancia> readAll() {
@@ -106,6 +106,11 @@ public class DAOMercancia implements BusinessObject<Mercancia> {
 
     @Override
     public int lastCode() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public List<Mercancia> readSome(String... ids) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

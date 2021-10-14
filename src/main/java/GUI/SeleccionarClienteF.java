@@ -5,8 +5,8 @@
  */
 package GUI;
 
-import DAO.BusinessObject;
-import DAO.DAOClienteF;
+
+import BusinessObject_Manager.BusinessObjectClienteF;
 import GUI.*;
 import Objects.ClienteF;
 import Objects.ClienteJ;
@@ -50,7 +50,7 @@ public class SeleccionarClienteF extends javax.swing.JFrame {
         initComponents();
         this.setVisible(true);
         this.setLocationRelativeTo(null);
-        
+        BSeleccionar.getRootPane().requestFocus();
         GridBagConstraints gridBagConstraints = new GridBagConstraints();
         
         /*DefaultTableModel tm = new DefaultTableModel(){
@@ -59,8 +59,7 @@ public class SeleccionarClienteF extends javax.swing.JFrame {
                 return column == 1;
             }
         };*/
-        BusinessObject<ClienteF> businessObject = new DAOClienteF();
-        Object[][] objects = ClienteF.getDataVector(businessObject.readAll());
+        Object[][] objects = ClienteF.getDataVector(BusinessObjectClienteF.listarClientesF());
         Object[] headers = ClienteF.getHeaders();
         tm.setDataVector(objects, headers);
         
@@ -81,7 +80,7 @@ public class SeleccionarClienteF extends javax.swing.JFrame {
                 
         tabla.setPreferredScrollableViewportSize(tabla.getPreferredSize());
         
-        scrollPane.setPreferredSize(new Dimension(600,450));
+        scrollPane.setPreferredSize(new Dimension(665,450));
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 1;
         gridBagConstraints.gridwidth = 4;
@@ -240,13 +239,11 @@ public class SeleccionarClienteF extends javax.swing.JFrame {
         aux1.setTelefono((String) aux[4]);
         aux1.setfNac((String) aux[5]);
         aux1.setEmail((String) aux[6]);
-        System.out.println("SeleccionarClienteF : " + aux1.toString());
-        //System.out.println("Nombre: " + aux1.getNombre() + " Apellido: " + aux1.getApellido() + " DNI: " + aux1.getDni() + " Sexo: " + aux1.getSexo() + " Telefono: " + aux1.getTelefono() + " Fecha Nac: " + aux1.getfNac() + " Email: " + aux1.getEmail());
         
         ClienteJ cjaux = new ClienteJ();
         dispose();
-        SeleccionarEnvio SE = new SeleccionarEnvio(aux1,cjaux,mercancias,vendedor,1,descuentos,restar);
-        SE.setVisible(true);
+        FinAltaVenta fav = new FinAltaVenta(aux1,cjaux,mercancias,vendedor,1,descuentos,restar);
+        fav.setVisible(true);
         
     }//GEN-LAST:event_BSeleccionarActionPerformed
 

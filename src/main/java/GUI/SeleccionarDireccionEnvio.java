@@ -5,7 +5,7 @@
  */
 package GUI;
 
-import DAO.BusinessObject;
+import BusinessObject_Manager.BusinessObjectClienteF;
 import DAO.DAODireccion;
 import GUI.*;
 import Objects.ClienteF;
@@ -79,17 +79,16 @@ public class SeleccionarDireccionEnvio extends javax.swing.JFrame {
         };*/
         
         if (tipocliente == 1){
-            BusinessObject<Direccion> businessObject = new DAODireccion();
-            Object[][] objectscf = Direccion.getDataVector(businessObject.readAllIds(clientef.getDni(), clientef.getSexo()));
+            Object[][] objectscf = Direccion.getDataVector(BusinessObjectClienteF.listarDireccionClientesF(clientef));
             Object[] headerscf = Direccion.getHeaders();
             tm.setDataVector(objectscf, headerscf);
         }
         else{
             //TODAVIA NO ESTA IMPLEMENTADO!!!!
-            BusinessObject<Direccion> businessObject = new DAODireccion();; //acomodar query abajo
-            Object[][] objectscj = Direccion.getDataVector(businessObject.readAllIds("SELECT ID_DIR FROM conectdirclif WHERE (CUIT='"+ clientej.getCUIT() +"')"));
-            Object[] headerscj = Direccion.getHeaders();
-            tm.setDataVector(objectscj, headerscj);
+            //BusinessObject<Direccion> businessObject = new DAODireccion();; //acomodar query abajo
+            //Object[][] objectscj = Direccion.getDataVector(businessObject.readAllIds("SELECT ID_DIR FROM conectdirclif WHERE (CUIT='"+ clientej.getCUIT() +"')"));
+            //Object[] headerscj = Direccion.getHeaders();
+            //tm.setDataVector(objectscj, headerscj);
         }
         
         
@@ -110,7 +109,7 @@ public class SeleccionarDireccionEnvio extends javax.swing.JFrame {
                 
         tabla.setPreferredScrollableViewportSize(tabla.getPreferredSize());
         
-        scrollPane.setPreferredSize(new Dimension(600,450));
+        scrollPane.setPreferredSize(new Dimension(665,450));
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 1;
         gridBagConstraints.gridwidth = 4;
@@ -251,8 +250,8 @@ public class SeleccionarDireccionEnvio extends javax.swing.JFrame {
     private void BVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BVolverActionPerformed
         // TODO add your handling code here:
         dispose();
-        SeleccionarEnvio se = new SeleccionarEnvio(clientef,clientej,mercancias,vendedor,tipocliente,descuentos,restar);
-        se.setVisible(true);
+        FinAltaVenta fav = new FinAltaVenta(clientef,clientej,mercancias,vendedor,tipocliente,descuentos,restar);
+        fav.setVisible(true);
     }//GEN-LAST:event_BVolverActionPerformed
 
     private void BSeleccionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BSeleccionarActionPerformed

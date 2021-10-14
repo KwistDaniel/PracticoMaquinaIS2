@@ -113,12 +113,10 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="-2" pref="133" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="1" attributes="0">
-                              <Component id="BClientes" min="-2" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="BMVentas" min="-2" max="-2" attributes="0"/>
-                                  <Component id="BStock" alignment="1" min="-2" max="-2" attributes="0"/>
-                              </Group>
+                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                              <Component id="BStock" alignment="1" max="32767" attributes="0"/>
+                              <Component id="BClientes" alignment="1" max="32767" attributes="0"/>
+                              <Component id="BMVentas" max="32767" attributes="0"/>
                           </Group>
                           <EmptySpace pref="159" max="32767" attributes="0"/>
                       </Group>
@@ -147,7 +145,7 @@
                     <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                       <Color blue="fa" green="fa" red="fa" type="rgb"/>
                     </Property>
-                    <Property name="text" type="java.lang.String" value="ASDASD"/>
+                    <Property name="text" type="java.lang.String" value="S/Implementar"/>
                   </Properties>
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BStockActionPerformed"/>
@@ -169,7 +167,7 @@
                 </Component>
                 <Component class="javax.swing.JButton" name="BClientes">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="Listar Ventas"/>
+                    <Property name="text" type="java.lang.String" value="S/Implementar"/>
                   </Properties>
                 </Component>
               </SubComponents>

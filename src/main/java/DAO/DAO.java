@@ -6,14 +6,17 @@
 package DAO;
 
 import java.util.List;
+
 /**
  *
  * @author kwist
  */
-public interface BusinessObject<T> {
+public interface DAO<T> {
     List<T> readAll();
     
     T readOne(String... ids);
+    
+    List<T> readSome(String... ids);
     
     int create(T t);
     

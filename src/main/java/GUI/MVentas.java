@@ -28,6 +28,7 @@ public class MVentas extends javax.swing.JFrame {
         vendedor = new Vendedor(vaux);
         this.setVisible(true);
         this.setLocationRelativeTo(null);
+        BMVentas.getRootPane().requestFocus();
     }
 
     /**
@@ -61,7 +62,7 @@ public class MVentas extends javax.swing.JFrame {
 
         BStock.setBackground(new java.awt.Color(210, 4, 45));
         BStock.setForeground(new java.awt.Color(250, 250, 250));
-        BStock.setText("ASDASD");
+        BStock.setText("S/Implementar");
         BStock.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BStockActionPerformed(evt);
@@ -77,7 +78,7 @@ public class MVentas extends javax.swing.JFrame {
             }
         });
 
-        BClientes.setText("Listar Ventas");
+        BClientes.setText("S/Implementar");
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -85,11 +86,10 @@ public class MVentas extends javax.swing.JFrame {
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(133, 133, 133)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(BClientes)
-                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(BMVentas)
-                        .addComponent(BStock, javax.swing.GroupLayout.Alignment.TRAILING)))
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(BStock, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(BClientes, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(BMVentas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(159, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(

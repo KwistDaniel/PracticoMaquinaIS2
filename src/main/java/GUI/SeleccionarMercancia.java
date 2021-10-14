@@ -5,7 +5,8 @@
  */
 package GUI;
 
-import DAO.BusinessObject;
+import BusinessObject_Manager.BusinessObjectMercancia;
+import BusinessObject_Manager.BusinessObjectVenta;
 import DAO.DAOMercancia;
 import GUI.*;
 import Objects.Mercancia;
@@ -48,17 +49,11 @@ public class SeleccionarMercancia extends javax.swing.JFrame {
         initComponents();
         this.setVisible(true);
         this.setLocationRelativeTo(null);
-        
+        BSeleccionar.getRootPane().requestFocus();
         GridBagConstraints gridBagConstraints = new GridBagConstraints();
         
-        /*DefaultTableModel tm = new DefaultTableModel(){
-            @Override
-            public boolean isCellEditable(int row, int column){
-                return column == 1;
-            }
-        };*/
-        BusinessObject<Mercancia> businessObject = new DAOMercancia();
-        Object[][] objects = Mercancia.getDataVector(businessObject.readAll());
+        
+        Object[][] objects = Mercancia.getDataVector(BusinessObjectVenta.listarMercancias());
         Object[] headers = Mercancia.getHeaders();
         tm.setDataVector(objects, headers);
         
@@ -91,7 +86,7 @@ public class SeleccionarMercancia extends javax.swing.JFrame {
                 
         tabla.setPreferredScrollableViewportSize(tabla.getPreferredSize());
         
-        scrollPane.setPreferredSize(new Dimension(600,450));
+        scrollPane.setPreferredSize(new Dimension(665,450));
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 1;
         gridBagConstraints.gridwidth = 4;
@@ -259,7 +254,7 @@ public class SeleccionarMercancia extends javax.swing.JFrame {
                     aux1.setPartida((int) aux[11]);
                     mercanciasaux.add(aux1);
                     int newcant = ((int)aux[4] - cant);
-                    Mercancia aux2 = new Mercancia(aux1.getCod(),aux1.getNombre(),aux1.getCategoria(),aux1.getDescripcion(),newcant,aux1.getPrecio_u(),aux1.getColor(),aux1.getCalidad(),aux1.getAncho(),aux1.getAncho(),aux1.getMetcuad(),aux1.getPartida());
+                    Mercancia aux2 = new Mercancia(aux1.getCod(),aux1.getNombre(),aux1.getCategoria(),aux1.getDescripcion(),newcant,aux1.getPrecio_u(),aux1.getColor(),aux1.getPartida(),aux1.getAncho(),aux1.getAncho(),aux1.getMetcuad(),aux1.getCalidad());
                     restar.add(aux2);
                     dispose();
                     AltaVenta AV = new AltaVenta(mercanciasaux,vendedor,restar);

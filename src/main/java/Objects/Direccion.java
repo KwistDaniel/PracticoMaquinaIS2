@@ -115,7 +115,7 @@ public class Direccion {
 
     @Override
     public String toString() {
-        return "Direccion{" + "idDir=" + idDir + ", calleDir=" + calleDir + ", numDir=" + numDir + ", pisoDir=" + pisoDir + ", deptoDir=" + deptoDir + ", codPostal=" + codPostal + ", localidad=" + localidad + '}';
+        return "Direccion: \n" + " ID: " + idDir + "\n Calle: " + calleDir + "\n Numero: " + numDir + "\n Piso: " + pisoDir + "\n Depto: " + deptoDir + "\n Codigo Postal: " + codPostal + "\n Localidad: " + localidad;
     }
     
     

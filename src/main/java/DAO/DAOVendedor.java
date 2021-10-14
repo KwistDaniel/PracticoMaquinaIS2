@@ -19,7 +19,7 @@ import java.util.List;
  *
  * @author kwist
  */
-public class DAOVendedor implements BusinessObject<Vendedor> {
+public class DAOVendedor implements DAO<Vendedor> {
 
     @Override
     public List<Vendedor> readAll() {
@@ -75,6 +75,11 @@ public class DAOVendedor implements BusinessObject<Vendedor> {
 
     @Override
     public int lastCode() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public List<Vendedor> readSome(String... ids) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

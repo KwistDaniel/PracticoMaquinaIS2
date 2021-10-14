@@ -18,7 +18,7 @@ import java.util.List;
  *
  * @author kwist
  */
-public class DAORenglon implements BusinessObject<Renglon>{
+public class DAORenglon implements DAO<Renglon>{
 
     @Override
     public List<Renglon> readAll() {
@@ -90,6 +90,11 @@ public class DAORenglon implements BusinessObject<Renglon>{
         }
         DataBase.getInstance().disconnect();
         return aux;
+    }
+
+    @Override
+    public List<Renglon> readSome(String... ids) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
 }

@@ -5,7 +5,7 @@
  */
 package GUI;
 
-import DAO.BusinessObject;
+import BusinessObject_Manager.BusinessObjectMercancia;
 import DAO.DAOMercancia;
 import GUI.*;
 import Objects.Mercancia;
@@ -43,8 +43,8 @@ public class ListarMercancias extends javax.swing.JFrame {
                 return column == 1;
             }
         };
-        BusinessObject<Mercancia> businessObject = new DAOMercancia();
-        Object[][] objects = Mercancia.getDataVector(businessObject.readAll());
+        
+        Object[][] objects = Mercancia.getDataVector(BusinessObjectMercancia.listarMercancias());
         Object[] headers = Mercancia.getHeaders();
         tm.setDataVector(objects, headers);
         

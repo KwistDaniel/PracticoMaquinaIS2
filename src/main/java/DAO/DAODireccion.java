@@ -18,7 +18,7 @@ import java.util.List;
  *
  * @author kwist
  */
-public class DAODireccion implements BusinessObject<Direccion> {
+public class DAODireccion implements DAO<Direccion> {
 
     @Override
     public List<Direccion> readAll() {
@@ -101,6 +101,11 @@ public class DAODireccion implements BusinessObject<Direccion> {
 
     @Override
     public int lastCode() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public List<Direccion> readSome(String... ids) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     

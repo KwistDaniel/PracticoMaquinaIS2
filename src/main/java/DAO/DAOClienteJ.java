@@ -12,7 +12,7 @@ import java.util.List;
  *
  * @author kwist
  */
-public class DAOClienteJ implements BusinessObject<ClienteJ> {
+public class DAOClienteJ implements DAO<ClienteJ> {
 
     @Override
     public List<ClienteJ> readAll() {
@@ -46,6 +46,11 @@ public class DAOClienteJ implements BusinessObject<ClienteJ> {
 
     @Override
     public int lastCode() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public List<ClienteJ> readSome(String... ids) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     

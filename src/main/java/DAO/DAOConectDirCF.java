@@ -18,7 +18,7 @@ import java.util.List;
  *
  * @author kwist
  */
-public class DAOConectDirCF implements BusinessObject<ConectDirCF> {
+public class DAOConectDirCF implements DAO<ConectDirCF> {
 
     @Override
     public List<ConectDirCF> readAll() {
@@ -53,6 +53,29 @@ public class DAOConectDirCF implements BusinessObject<ConectDirCF> {
     @Override
     public int lastCode() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public List<ConectDirCF> readSome(String... ids) {
+        List<ConectDirCF> conectoresdircf = new ArrayList<>();
+        Connection connection = DataBase.getInstance().getConnection();
+        Statement statement;
+        try{
+            statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery("SELECT * FROM ConectDirCliF WHERE ((Status = 1) && (DNI_CF = '" + ids[0] + "') && (SEXO_CF = '" + ids[1] + "') ) ");
+            ConectDirCF conectordircf;
+            while (rs.next()){
+                conectordircf = new ConectDirCF();
+                conectordircf.setID_DIR(rs.getInt("ID_DIR"));
+                conectordircf.setDNI(rs.getString("DNI_CF"));
+                conectordircf.setSexo(rs.getString("SEXO_CF"));
+                conectoresdircf.add(conectordircf);
+            }
+        }catch (SQLException throwables){
+            throwables.printStackTrace();
+        }
+        DataBase.getInstance().disconnect();
+        return conectoresdircf;
     }
     
 }

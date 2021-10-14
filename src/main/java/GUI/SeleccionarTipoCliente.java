@@ -31,6 +31,7 @@ public class SeleccionarTipoCliente extends javax.swing.JFrame {
         initComponents();
         this.setVisible(true);
         this.setLocationRelativeTo(null);
+        BClienteF.getRootPane().requestFocus();
                 
                 
     }

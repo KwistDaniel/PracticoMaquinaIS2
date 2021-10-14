@@ -18,7 +18,7 @@ import java.util.List;
  *
  * @author kwist
  */
-public class DAOVenta implements BusinessObject<Venta> {
+public class DAOVenta implements DAO<Venta> {
 
     @Override
     public List<Venta> readAll() {
@@ -90,6 +90,11 @@ public class DAOVenta implements BusinessObject<Venta> {
         }
         DataBase.getInstance().disconnect();
         return aux;
+    }
+
+    @Override
+    public List<Venta> readSome(String... ids) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
 }

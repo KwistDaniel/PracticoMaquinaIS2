@@ -16,7 +16,7 @@ import java.util.List;
  *
  * @author kwist
  */
-public class DAOConectVenCF implements BusinessObject<ConectVenCF>{
+public class DAOConectVenCF implements DAO<ConectVenCF>{
 
     @Override
     public List<ConectVenCF> readAll() {
@@ -67,6 +67,11 @@ public class DAOConectVenCF implements BusinessObject<ConectVenCF>{
 
     @Override
     public int lastCode() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public List<ConectVenCF> readSome(String... ids) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     

@@ -26,6 +26,14 @@ public class Envio {
         this.fecha = fecha;
         this.hora = hora;
     }
+    
+    public Envio(Envio aux){
+        this.cod = aux.cod;
+        this.id_dir = aux.id_dir;
+        this.estado = aux.estado;
+        this.fecha = aux.fecha;
+        this.hora = aux.hora;
+    }
 
     public int getCod() {
         return cod;

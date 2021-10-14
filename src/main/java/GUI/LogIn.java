@@ -5,7 +5,7 @@
  */
 package GUI;
 
-import DAO.BusinessObject;
+import BusinessObject_Manager.BusinessObjectVendedor;
 import DAO.DAOVendedor;
 import GUI.*;
 import Objects.Vendedor;
@@ -285,9 +285,7 @@ public class LogIn extends javax.swing.JFrame {
         String user,password;
         user = TFUser.getText();
         password = String.valueOf(TFPassword.getPassword());
-        Vendedor vendedorToValidate = new Vendedor();
-        BusinessObject<Vendedor> bobjct = new DAOVendedor();
-        vendedorToValidate = bobjct.readOne(user,password);
+        Vendedor vendedorToValidate = new Vendedor(BusinessObjectVendedor.buscarVendedor(user,password));
         
         try{
             if(vendedorToValidate.getUser().equals(user)){
