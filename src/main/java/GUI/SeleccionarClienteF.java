@@ -244,8 +244,8 @@ public class SeleccionarClienteF extends javax.swing.JFrame {
         
         ClienteJ cjaux = new ClienteJ();
         dispose();
-        SeleccionarEnvio SE = new SeleccionarEnvio(aux1,cjaux,mercancias,vendedor,1,descuentos,restar);
-        SE.setVisible(true);
+        FinAltaVenta fav = new FinAltaVenta(aux1,cjaux,mercancias,vendedor,1,descuentos,restar);
+        fav.setVisible(true);
         
     }//GEN-LAST:event_BSeleccionarActionPerformed
 

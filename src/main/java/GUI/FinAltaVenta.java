@@ -31,6 +31,7 @@ import Objects.Vendedor;
 import Objects.Venta;
 import Utils.Validates;
 import com.toedter.calendar.JDateChooser;
+import java.awt.event.ItemEvent;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import javax.swing.JFrame;
@@ -79,8 +80,31 @@ public class FinAltaVenta extends javax.swing.JFrame {
         this.setVisible(true);
         this.setLocationRelativeTo(null); 
         TFFechaEnv.setEditable(false);
+        BAgDir.setEnabled(false);
     }
 
+    public FinAltaVenta(ClienteF cfaux, ClienteJ cjaux, ArrayList<Mercancia> aux, Vendedor vaux,int tcliente,ArrayList<Integer> descaux,ArrayList<Mercancia> restaaux){
+        vendedor = new Vendedor(vaux);
+        tipocliente = tcliente;
+        if (tipocliente == 1){
+            clientef = new ClienteF(cfaux);
+        }
+        else{
+            clientej = new ClienteJ(cjaux);
+        }
+        mercancias = new ArrayList<Mercancia>(aux);
+        restar = new ArrayList<Mercancia>(restaaux);
+        descuentos = new ArrayList<Integer>(descaux);
+        
+        
+        initComponents();
+        this.setVisible(true);
+        this.setLocationRelativeTo(null); 
+        TFFechaEnv.setEditable(false);
+        BAgDir.setEnabled(false);
+    }
+    
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -105,6 +129,8 @@ public class FinAltaVenta extends javax.swing.JFrame {
         TFFechaEnv = new javax.swing.JTextField();
         TFHM = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
+        jCheckBox1 = new javax.swing.JCheckBox();
+        BAgDir = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 0, 0));
@@ -196,6 +222,30 @@ public class FinAltaVenta extends javax.swing.JFrame {
 
         jLabel4.setText(":");
 
+        jCheckBox1.setText("jCheckBox1");
+        jCheckBox1.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jCheckBox1ItemStateChanged(evt);
+            }
+        });
+        jCheckBox1.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                jCheckBox1StateChanged(evt);
+            }
+        });
+        jCheckBox1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCheckBox1ActionPerformed(evt);
+            }
+        });
+
+        BAgDir.setText("Agregar Direccion");
+        BAgDir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BAgDirActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
@@ -207,11 +257,6 @@ public class FinAltaVenta extends javax.swing.JFrame {
                         .addComponent(BVolver))
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel4Layout.createSequentialGroup()
-                                .addGap(91, 91, 91)
-                                .addComponent(jLabel1)
-                                .addGap(18, 18, 18)
-                                .addComponent(BElegirFecha))
                             .addGroup(jPanel4Layout.createSequentialGroup()
                                 .addGap(89, 89, 89)
                                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -226,14 +271,26 @@ public class FinAltaVenta extends javax.swing.JFrame {
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(jLabel4)
                                         .addGap(9, 9, 9)
-                                        .addComponent(TFHM, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                        .addComponent(TFHM, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addGroup(jPanel4Layout.createSequentialGroup()
+                                .addGap(91, 91, 91)
+                                .addComponent(jLabel1)
+                                .addGap(18, 18, 18)
+                                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jCheckBox1)
+                                    .addComponent(BElegirFecha)
+                                    .addComponent(BAgDir))))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                .addGap(113, 113, 113)
+                .addGap(29, 29, 29)
+                .addComponent(jCheckBox1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(BAgDir)
+                .addGap(36, 36, 36)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(BElegirFecha))
@@ -308,8 +365,8 @@ public class FinAltaVenta extends javax.swing.JFrame {
     private void BVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BVolverActionPerformed
         // TODO add your handling code here:
         dispose();
-        SeleccionarEnvio se = new SeleccionarEnvio(clientef,clientej,mercancias,vendedor,tipocliente,descuentos,restar);
-        se.setVisible(true);
+        SeleccionarTipoCliente stc = new SeleccionarTipoCliente(mercancias,vendedor,descuentos,restar);
+        stc.setVisible(true);
     }//GEN-LAST:event_BVolverActionPerformed
 
     private void BMostrarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BMostrarClienteActionPerformed
@@ -357,10 +414,11 @@ public class FinAltaVenta extends javax.swing.JFrame {
         Venta venta = new Venta(BusinessObjectVenta.nuevaVenta());
         venta.setDNI_V(vendedor.getDni());
         venta.setSexo_V(vendedor.getSexo());
-        double pTotal = 0,pFinal = 0;
+        double pTotal = 0,pFinal = 0; //VER ESTO
         for (int i = 0;i<mercancias.size();i++){
-            pTotal =+ mercancias.get(i).getPrecio_u();
-            pFinal =+ (((100-descuentos.get(i))*(mercancias.get(i).getPrecio_u()))/100);
+            pTotal = pTotal + mercancias.get(i).getPrecio_u() * mercancias.get(i).getCantidad();
+            
+            pFinal = pFinal + (((100 - descuentos.get(i)) * (mercancias.get(i).getPrecio_u() * mercancias.get(i).getCantidad()))/100);
         }
         venta.setP_Total(pTotal);
         venta.setP_Final(pFinal);
@@ -370,9 +428,6 @@ public class FinAltaVenta extends javax.swing.JFrame {
         /**FIN* Actualizo tabla de Venta*/
         System.out.println("CCC");
         /**INICIO*Actualizo tabla de Renglones*/ //3
-        
-        
-        
         for(int j=0; j<mercancias.size();j++){
             Renglon renglon = new Renglon(BusinessObjectRenglon.nuevoRenglon());
             renglon.setCOD_Venta(venta.getCOD_VENTA());
@@ -380,7 +435,11 @@ public class FinAltaVenta extends javax.swing.JFrame {
             renglon.setCantidad(mercancias.get(j).getCantidad());
             renglon.setPrecio_U(mercancias.get(j).getPrecio_u());
             renglon.setDescuento(descuentos.get(j));
-            renglon.setPrecio_F(((100-renglon.getDescuento())*(renglon.getPrecio_U()))/100);
+            System.out.println("Cantidad :" + renglon.getCantidad());
+            double ptot = mercancias.get(j).getCantidad() * mercancias.get(j).getPrecio_u();
+            double pfif = (((100 - descuentos.get(j)) * (ptot))/100);
+            System.out.println("Precio Final: " + pfif);
+            renglon.setPrecio_F(pfif);
             BusinessObjectRenglon.cargarRenglon(renglon);
         }
         /**FIN* Actualizo tabla de Renglones*/
@@ -436,6 +495,29 @@ public class FinAltaVenta extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_TFHHActionPerformed
 
+    private void BAgDirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BAgDirActionPerformed
+        dispose();
+        SeleccionarDireccionEnvio sde = new SeleccionarDireccionEnvio(clientef,clientej,mercancias,vendedor,tipocliente,descuentos,restar);
+        sde.setVisible(true);
+    }//GEN-LAST:event_BAgDirActionPerformed
+
+    private void jCheckBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox1ActionPerformed
+        
+    }//GEN-LAST:event_jCheckBox1ActionPerformed
+
+    private void jCheckBox1StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jCheckBox1StateChanged
+        
+    }//GEN-LAST:event_jCheckBox1StateChanged
+
+    private void jCheckBox1ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jCheckBox1ItemStateChanged
+        if(evt.getStateChange() == ItemEvent.SELECTED){
+            BAgDir.setEnabled(true);
+        }
+        if(evt.getStateChange() == ItemEvent.DESELECTED){
+            BAgDir.setEnabled(false);
+        }
+    }//GEN-LAST:event_jCheckBox1ItemStateChanged
+
     /**
      * @param args the command line arguments
      */
@@ -479,6 +561,7 @@ public class FinAltaVenta extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton BAgDir;
     private javax.swing.JButton BCargaVenta;
     private javax.swing.JButton BElegirFecha;
     private javax.swing.JButton BMostrarCliente;
@@ -486,6 +569,7 @@ public class FinAltaVenta extends javax.swing.JFrame {
     private javax.swing.JTextField TFFechaEnv;
     private javax.swing.JTextField TFHH;
     private javax.swing.JTextField TFHM;
+    private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
