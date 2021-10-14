@@ -254,7 +254,7 @@ public class SeleccionarMercancia extends javax.swing.JFrame {
                     aux1.setPartida((int) aux[11]);
                     mercanciasaux.add(aux1);
                     int newcant = ((int)aux[4] - cant);
-                    Mercancia aux2 = new Mercancia(aux1.getCod(),aux1.getNombre(),aux1.getCategoria(),aux1.getDescripcion(),newcant,aux1.getPrecio_u(),aux1.getColor(),aux1.getCalidad(),aux1.getAncho(),aux1.getAncho(),aux1.getMetcuad(),aux1.getPartida());
+                    Mercancia aux2 = new Mercancia(aux1.getCod(),aux1.getNombre(),aux1.getCategoria(),aux1.getDescripcion(),newcant,aux1.getPrecio_u(),aux1.getColor(),aux1.getPartida(),aux1.getAncho(),aux1.getAncho(),aux1.getMetcuad(),aux1.getCalidad());
                     restar.add(aux2);
                     dispose();
                     AltaVenta AV = new AltaVenta(mercanciasaux,vendedor,restar);
