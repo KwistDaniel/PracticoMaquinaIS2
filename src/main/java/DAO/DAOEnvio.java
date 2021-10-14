@@ -90,5 +90,10 @@ public class DAOEnvio implements DAO<Envio> {
         DataBase.getInstance().disconnect();
         return aux;
     }
+
+    @Override
+    public List<Envio> readSome(String... ids) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
 }

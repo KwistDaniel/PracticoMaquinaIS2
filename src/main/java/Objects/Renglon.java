@@ -30,6 +30,16 @@ public class Renglon {
         this.Descuento = Descuento;
         this.Precio_F = Precio_F;
     }
+    
+    public Renglon(Renglon aux){
+        this.COD_Renglon = aux.COD_Renglon;
+        this.COD_Venta = aux.COD_Venta;
+        this.COD_Mercancia = aux.COD_Mercancia;
+        this.Cantidad = aux.Cantidad;
+        this.Precio_U = aux.Precio_U;
+        this.Descuento = aux.Descuento;
+        this.Precio_F = aux.Precio_F;
+    }
 
     public int getCOD_Renglon() {
         return COD_Renglon;

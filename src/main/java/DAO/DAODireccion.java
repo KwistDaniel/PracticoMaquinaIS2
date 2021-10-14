@@ -103,5 +103,10 @@ public class DAODireccion implements DAO<Direccion> {
     public int lastCode() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
+    @Override
+    public List<Direccion> readSome(String... ids) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
 }

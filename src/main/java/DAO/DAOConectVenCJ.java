@@ -48,5 +48,10 @@ public class DAOConectVenCJ implements DAO<ConectVenCJ>{
     public int lastCode() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
+    @Override
+    public List<ConectVenCJ> readSome(String... ids) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
 }

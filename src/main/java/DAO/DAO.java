@@ -16,6 +16,8 @@ public interface DAO<T> {
     
     T readOne(String... ids);
     
+    List<T> readSome(String... ids);
+    
     int create(T t);
     
     int update(T t);

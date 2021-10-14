@@ -5,6 +5,11 @@
  */
 package GUI;
 
+import BusinessObject_Manager.BusinessObjectConVenCF;
+import BusinessObject_Manager.BusinessObjectEnvio;
+import BusinessObject_Manager.BusinessObjectMercancia;
+import BusinessObject_Manager.BusinessObjectRenglon;
+import BusinessObject_Manager.BusinessObjectVenta;
 import DAO.BusinessObject;
 import DAO.DAOClienteF;
 import DAO.DAOConectVenCF;
@@ -324,6 +329,8 @@ public class FinAltaVenta extends javax.swing.JFrame {
         //4- CREO EL CONETOR DE VENTA CON EL CLIENTE
         //5- UPDATE A MERCANCIA
         
+        //RECUPERAR EXITOS DE LOS DAO
+        
         /*Consigo  Hora*/
         HH = TFHH.getText();
         HM = TFHM.getText();
@@ -339,21 +346,16 @@ public class FinAltaVenta extends javax.swing.JFrame {
         
         
         /**INICIO* Actualizo tabla de Envio*/ //1
-        Envio envio = new Envio();
-        //DAOEnvio.create(envio);
-        BusinessObject<Envio> bOEnvio = new DAOEnvio();
-        envio.setCod(bOEnvio.lastCode() + 1);
+        Envio envio = new Envio(BusinessObjectEnvio.nuevoEnvio());
         envio.setId_dir(direccionenvio.getIdDir());
         envio.setFecha(fechenv);
         envio.setHora(horaenv);
         envio.setEstado(0);
-        bOEnvio.create(envio);
+        BusinessObjectEnvio.cargarEnvio(envio);
         /**FIN* Actualizo tabla de Envio*/
         System.out.println("BBB");
         /**INICIO* Actualizo tabla de Venta*/ //2
-        Venta venta = new Venta();
-        BusinessObject<Venta> bOVenta = new DAOVenta();
-        venta.setCOD_VENTA(bOVenta.lastCode() + 1);
+        Venta venta = new Venta(BusinessObjectVenta.nuevaVenta());
         venta.setDNI_V(vendedor.getDni());
         venta.setSexo_V(vendedor.getSexo());
         double pTotal = 0,pFinal = 0;
@@ -365,48 +367,47 @@ public class FinAltaVenta extends javax.swing.JFrame {
         venta.setP_Final(pFinal);
         venta.setCOD_ENVIO(envio.getCod());
         
-        bOVenta.create(venta);
+        BusinessObjectVenta.cargarVenta(venta);
         /**FIN* Actualizo tabla de Venta*/
         System.out.println("CCC");
         /**INICIO*Actualizo tabla de Renglones*/ //3
-        Renglon renglon;
-        BusinessObject<Renglon> bORenglon = new DAORenglon();
+        
+        
+        
         for(int j=0; j<mercancias.size();j++){
-            renglon = new Renglon();
-            renglon.setCOD_Renglon(bORenglon.lastCode() + 1);
+            Renglon renglon = new Renglon(BusinessObjectRenglon.nuevoRenglon());
             renglon.setCOD_Venta(venta.getCOD_VENTA());
             renglon.setCOD_Mercancia(mercancias.get(j).getCod());
             renglon.setCantidad(mercancias.get(j).getCantidad());
             renglon.setPrecio_U(mercancias.get(j).getPrecio_u());
             renglon.setDescuento(descuentos.get(j));
             renglon.setPrecio_F(((100-renglon.getDescuento())*(renglon.getPrecio_U()))/100);
-            
-            bORenglon.create(renglon);
+            BusinessObjectRenglon.cargarRenglon(renglon);
         }
         /**FIN* Actualizo tabla de Renglones*/
         System.out.println("DDD");
         /**INICIO* Actualizo tabla de CONVCLIENTE*/
         if (tipocliente == 1){
             ConectVenCF cvcf = new ConectVenCF();
-            BusinessObject<ConectVenCF> bOConectVenCF = new DAOConectVenCF();
+            
             cvcf.setCOD_VENTA(venta.getCOD_VENTA());
             cvcf.setDNI(clientef.getDni());
             cvcf.setSexo(clientef.getSexo());
-            bOConectVenCF.create(cvcf);
+            BusinessObjectConVenCF.cargarConectVenCF(cvcf);
         }
-        else{
+        else{ // NO IMPLEMENTADO
             ConectVenCJ cvcj = new ConectVenCJ();
-            BusinessObject<ConectVenCJ> bOConectVenCJ = new DAOConectVenCJ();
+            //BusinessObject<ConectVenCJ> bOConectVenCJ = new DAOConectVenCJ();
             cvcj.setCOD_VENTA(venta.getCOD_VENTA());
             cvcj.setCUIT(clientej.getCUIT());
-            bOConectVenCJ.create(cvcj);
+            //bOConectVenCJ.create(cvcj);
         }
         /**FIN* Actualizo tabla de CONVCLIENTE*/
         System.out.println("EEE");
         /**INICIO* Actualizo tabla Mercancias*/ //5
-        BusinessObject<Mercancia> businessObjectM = new DAOMercancia();
+        
         for(int i = 0; i<restar.size();i++){
-            businessObjectM.update(restar.get(i));
+            BusinessObjectMercancia.modificarMercancia(restar.get(i));
         }
         /**FIN* Actualizo tabla Mercancias*/    
         System.out.println("FFF");

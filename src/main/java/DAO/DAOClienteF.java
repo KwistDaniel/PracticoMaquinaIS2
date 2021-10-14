@@ -76,5 +76,10 @@ public class DAOClienteF implements DAO<ClienteF> {
     public int lastCode() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
+    @Override
+    public List<ClienteF> readSome(String... ids) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
 }

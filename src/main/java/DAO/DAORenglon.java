@@ -91,5 +91,10 @@ public class DAORenglon implements DAO<Renglon>{
         DataBase.getInstance().disconnect();
         return aux;
     }
+
+    @Override
+    public List<Renglon> readSome(String... ids) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
 }

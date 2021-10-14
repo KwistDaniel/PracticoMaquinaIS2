@@ -91,5 +91,10 @@ public class DAOVenta implements DAO<Venta> {
         DataBase.getInstance().disconnect();
         return aux;
     }
+
+    @Override
+    public List<Venta> readSome(String... ids) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
 }

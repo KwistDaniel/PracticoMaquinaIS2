@@ -20,8 +20,7 @@ public class BusinessObjectMercancia {
     
     public static ArrayList<Mercancia> listarMercancias(){
         mercanciaDAO = new DAOMercancia();
-        ArrayList<Mercancia> mercancias;
-        mercancias = new ArrayList<Mercancia>(mercanciaDAO.readAll());
+        ArrayList<Mercancia> mercancias = new ArrayList<Mercancia>(mercanciaDAO.readAll());
         return mercancias;
     }
     

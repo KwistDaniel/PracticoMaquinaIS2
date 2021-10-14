@@ -5,8 +5,8 @@
  */
 package GUI;
 
-import DAO.BusinessObject;
-import DAO.DAOClienteF;
+
+import BusinessObject_Manager.BusinessObjectClienteF;
 import GUI.*;
 import Objects.ClienteF;
 import Objects.ClienteJ;
@@ -59,8 +59,7 @@ public class SeleccionarClienteF extends javax.swing.JFrame {
                 return column == 1;
             }
         };*/
-        BusinessObject<ClienteF> businessObject = new DAOClienteF();
-        Object[][] objects = ClienteF.getDataVector(businessObject.readAll());
+        Object[][] objects = ClienteF.getDataVector(BusinessObjectClienteF.listarClientesF());
         Object[] headers = ClienteF.getHeaders();
         tm.setDataVector(objects, headers);
         

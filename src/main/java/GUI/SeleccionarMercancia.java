@@ -6,6 +6,7 @@
 package GUI;
 
 import BusinessObject_Manager.BusinessObjectMercancia;
+import BusinessObject_Manager.BusinessObjectVenta;
 import DAO.BusinessObject;
 import DAO.DAOMercancia;
 import GUI.*;
@@ -52,13 +53,8 @@ public class SeleccionarMercancia extends javax.swing.JFrame {
         
         GridBagConstraints gridBagConstraints = new GridBagConstraints();
         
-        /*DefaultTableModel tm = new DefaultTableModel(){
-            @Override
-            public boolean isCellEditable(int row, int column){
-                return column == 1;
-            }
-        };*/
-        Object[][] objects = Mercancia.getDataVector(BusinessObjectMercancia.listarMercancias());
+        
+        Object[][] objects = Mercancia.getDataVector(BusinessObjectVenta.listarMercancias());
         Object[] headers = Mercancia.getHeaders();
         tm.setDataVector(objects, headers);
         
