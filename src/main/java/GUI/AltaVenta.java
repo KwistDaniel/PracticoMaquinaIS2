@@ -55,6 +55,7 @@ public class AltaVenta extends javax.swing.JFrame {
         initComponents();
         this.setVisible(true);
         this.setLocationRelativeTo(null);
+        BAgObj.getRootPane().requestFocus();
         GridBagConstraints gridBagConstraints = new GridBagConstraints();
         
         TFDescuento.setText("0");
@@ -80,13 +81,13 @@ public class AltaVenta extends javax.swing.JFrame {
                 
         tabla.setPreferredScrollableViewportSize(tabla.getPreferredSize());
         
-        scrollPane.setPreferredSize(new Dimension(600,450));
+        scrollPane.setPreferredSize(new Dimension(665,450));
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 1;
         gridBagConstraints.gridwidth = 4;
         gridBagConstraints.gridheight = 4;
-        add(scrollPane, gridBagConstraints);
         
+        add(scrollPane, gridBagConstraints);
         
         jPanel3.setLayout(new BorderLayout());
         jPanel3.add(scrollPane, BorderLayout.CENTER);

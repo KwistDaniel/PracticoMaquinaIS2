@@ -78,13 +78,15 @@ public class FinAltaVenta extends javax.swing.JFrame {
         
         initComponents();
         this.setVisible(true);
-        this.setLocationRelativeTo(null); 
+        this.setLocationRelativeTo(null);
+        BMostrarCliente.getRootPane().requestFocus();
         TFFechaEnv.setEnabled(false);
         
-        BAgDir.setEnabled(false);
-        BElegirFecha.setEnabled(false);
-        TFHH.setEnabled(false);
-        TFHM.setEnabled(false);
+        BAgDir.setEnabled(true);
+        BElegirFecha.setEnabled(true);
+        TFHH.setEnabled(true);
+        TFHM.setEnabled(true);
+        jCheckBox1.setSelected(true);
     }
 
     public FinAltaVenta(ClienteF cfaux, ClienteJ cjaux, ArrayList<Mercancia> aux, Vendedor vaux,int tcliente,ArrayList<Integer> descaux,ArrayList<Mercancia> restaaux){
@@ -103,7 +105,8 @@ public class FinAltaVenta extends javax.swing.JFrame {
         
         initComponents();
         this.setVisible(true);
-        this.setLocationRelativeTo(null); 
+        this.setLocationRelativeTo(null);
+        BMostrarCliente.getRootPane().requestFocus();
         TFFechaEnv.setEditable(false);
         BAgDir.setEnabled(false);
         BElegirFecha.setEnabled(false);

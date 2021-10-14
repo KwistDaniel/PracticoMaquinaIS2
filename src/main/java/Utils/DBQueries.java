@@ -426,7 +426,7 @@ public class DBQueries {
         Statement statement;
         try {
             statement = connection.createStatement();
-            statement.executeUpdate("INSERT INTO Vendedor VALUES ('36421350','Debora','Kwist','dkwist','36421350','3382-571051','Femenino','12/11/1991','deborakwist@gmail.com',2,1)");
+            statement.executeUpdate("INSERT INTO Vendedor VALUES ('36421350','Debora','Kwist','dkwist','36421350','3382-571051','Femenino','12/11/1991','deborakwist@gmail.com',2,1),('11111111','Usuario','Admin','user','user','0000-000000','Masculino','11/11/1991','admin@gmail.com',1,1)");
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
