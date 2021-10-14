@@ -433,7 +433,7 @@ public class FinAltaVenta extends javax.swing.JFrame {
         envio.setEstado(0);
         BusinessObjectEnvio.cargarEnvio(envio);
         /**FIN* Actualizo tabla de Envio*/
-        System.out.println("BBB");
+
         /**INICIO* Actualizo tabla de Venta*/ //2
         Venta venta = new Venta(BusinessObjectVenta.nuevaVenta());
         venta.setDNI_V(vendedor.getDni());
@@ -450,7 +450,7 @@ public class FinAltaVenta extends javax.swing.JFrame {
         
         BusinessObjectVenta.cargarVenta(venta);
         /**FIN* Actualizo tabla de Venta*/
-        System.out.println("CCC");
+
         /**INICIO*Actualizo tabla de Renglones*/ //3
         for(int j=0; j<mercancias.size();j++){
             Renglon renglon = new Renglon(BusinessObjectRenglon.nuevoRenglon());
@@ -462,12 +462,12 @@ public class FinAltaVenta extends javax.swing.JFrame {
             System.out.println("Cantidad :" + renglon.getCantidad());
             double ptot = mercancias.get(j).getCantidad() * mercancias.get(j).getPrecio_u();
             double pfif = (((100 - descuentos.get(j)) * (ptot))/100);
-            System.out.println("Precio Final: " + pfif);
+
             renglon.setPrecio_F(pfif);
             BusinessObjectRenglon.cargarRenglon(renglon);
         }
         /**FIN* Actualizo tabla de Renglones*/
-        System.out.println("DDD");
+        
         /**INICIO* Actualizo tabla de CONVCLIENTE*/
         if (tipocliente == 1){
             ConectVenCF cvcf = new ConectVenCF();
@@ -485,14 +485,14 @@ public class FinAltaVenta extends javax.swing.JFrame {
             //bOConectVenCJ.create(cvcj);
         }
         /**FIN* Actualizo tabla de CONVCLIENTE*/
-        System.out.println("EEE");
+
         /**INICIO* Actualizo tabla Mercancias*/ //5
         
         for(int i = 0; i<restar.size();i++){
             BusinessObjectMercancia.modificarMercancia(restar.get(i));
         }
         /**FIN* Actualizo tabla Mercancias*/    
-        System.out.println("FFF");
+
         
         dispose();
         MainMenu mm = new MainMenu(vendedor);
