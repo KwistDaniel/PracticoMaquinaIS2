@@ -79,8 +79,12 @@ public class FinAltaVenta extends javax.swing.JFrame {
         initComponents();
         this.setVisible(true);
         this.setLocationRelativeTo(null); 
-        TFFechaEnv.setEditable(false);
+        TFFechaEnv.setEnabled(false);
+        
         BAgDir.setEnabled(false);
+        BElegirFecha.setEnabled(false);
+        TFHH.setEnabled(false);
+        TFHM.setEnabled(false);
     }
 
     public FinAltaVenta(ClienteF cfaux, ClienteJ cjaux, ArrayList<Mercancia> aux, Vendedor vaux,int tcliente,ArrayList<Integer> descaux,ArrayList<Mercancia> restaaux){
@@ -102,6 +106,9 @@ public class FinAltaVenta extends javax.swing.JFrame {
         this.setLocationRelativeTo(null); 
         TFFechaEnv.setEditable(false);
         BAgDir.setEnabled(false);
+        BElegirFecha.setEnabled(false);
+        TFHH.setEnabled(false);
+        TFHM.setEnabled(false);
     }
     
     
@@ -119,9 +126,9 @@ public class FinAltaVenta extends javax.swing.JFrame {
         jPanel3 = new javax.swing.JPanel();
         BCargaVenta = new javax.swing.JButton();
         BMostrarCliente = new javax.swing.JButton();
+        BMostrarDir = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
         BVolver = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
         BElegirFecha = new javax.swing.JButton();
         TFHH = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
@@ -131,6 +138,7 @@ public class FinAltaVenta extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         jCheckBox1 = new javax.swing.JCheckBox();
         BAgDir = new javax.swing.JButton();
+        jLabel5 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 0, 0));
@@ -154,10 +162,19 @@ public class FinAltaVenta extends javax.swing.JFrame {
 
         BMostrarCliente.setBackground(new java.awt.Color(210, 4, 45));
         BMostrarCliente.setForeground(new java.awt.Color(250, 250, 250));
-        BMostrarCliente.setText("Cliente");
+        BMostrarCliente.setText("Ver Cliente");
         BMostrarCliente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BMostrarClienteActionPerformed(evt);
+            }
+        });
+
+        BMostrarDir.setBackground(new java.awt.Color(210, 4, 45));
+        BMostrarDir.setForeground(new java.awt.Color(250, 250, 250));
+        BMostrarDir.setText("Ver Direccion");
+        BMostrarDir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BMostrarDirActionPerformed(evt);
             }
         });
 
@@ -167,17 +184,20 @@ public class FinAltaVenta extends javax.swing.JFrame {
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(136, 136, 136)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(BMostrarCliente)
-                    .addComponent(BCargaVenta))
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(BMostrarDir, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(BCargaVenta)
+                    .addComponent(BMostrarCliente, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(153, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addGap(76, 76, 76)
+                .addGap(43, 43, 43)
                 .addComponent(BMostrarCliente)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 286, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addComponent(BMostrarDir)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 279, Short.MAX_VALUE)
                 .addComponent(BCargaVenta)
                 .addGap(90, 90, 90))
         );
@@ -195,8 +215,8 @@ public class FinAltaVenta extends javax.swing.JFrame {
             }
         });
 
-        jLabel1.setText("jLabel1");
-
+        BElegirFecha.setBackground(new java.awt.Color(210, 4, 45));
+        BElegirFecha.setForeground(new java.awt.Color(250, 250, 250));
         BElegirFecha.setText("Elegir Fecha");
         BElegirFecha.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -222,7 +242,6 @@ public class FinAltaVenta extends javax.swing.JFrame {
 
         jLabel4.setText(":");
 
-        jCheckBox1.setText("jCheckBox1");
         jCheckBox1.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 jCheckBox1ItemStateChanged(evt);
@@ -239,12 +258,16 @@ public class FinAltaVenta extends javax.swing.JFrame {
             }
         });
 
+        BAgDir.setBackground(new java.awt.Color(210, 4, 45));
+        BAgDir.setForeground(new java.awt.Color(250, 250, 250));
         BAgDir.setText("Agregar Direccion");
         BAgDir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BAgDirActionPerformed(evt);
             }
         });
+
+        jLabel5.setText("Cargar Envio:");
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -256,30 +279,28 @@ public class FinAltaVenta extends javax.swing.JFrame {
                         .addContainerGap(286, Short.MAX_VALUE)
                         .addComponent(BVolver))
                     .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGap(53, 53, 53)
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel4Layout.createSequentialGroup()
-                                .addGap(89, 89, 89)
+                                .addComponent(jLabel5)
+                                .addGap(18, 18, 18)
+                                .addComponent(jCheckBox1))
+                            .addGroup(jPanel4Layout.createSequentialGroup()
+                                .addGap(33, 33, 33)
+                                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabel2)
+                                    .addComponent(jLabel3))
+                                .addGap(18, 18, 18)
                                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(BElegirFecha)
+                                    .addComponent(BAgDir)
+                                    .addComponent(TFFechaEnv, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGroup(jPanel4Layout.createSequentialGroup()
-                                        .addComponent(jLabel3)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(TFFechaEnv, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(jPanel4Layout.createSequentialGroup()
-                                        .addComponent(jLabel2)
-                                        .addGap(18, 18, 18)
                                         .addComponent(TFHH, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(jLabel4)
-                                        .addGap(9, 9, 9)
-                                        .addComponent(TFHM, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                            .addGroup(jPanel4Layout.createSequentialGroup()
-                                .addGap(91, 91, 91)
-                                .addComponent(jLabel1)
-                                .addGap(18, 18, 18)
-                                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jCheckBox1)
-                                    .addComponent(BElegirFecha)
-                                    .addComponent(BAgDir))))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(TFHM, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -287,24 +308,24 @@ public class FinAltaVenta extends javax.swing.JFrame {
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
                 .addGap(29, 29, 29)
-                .addComponent(jCheckBox1)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jCheckBox1)
+                    .addComponent(jLabel5))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(BAgDir)
-                .addGap(36, 36, 36)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(BElegirFecha)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(BElegirFecha))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(TFFechaEnv, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                    .addComponent(TFFechaEnv, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel2)
                     .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(TFHH, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(TFHM, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel4)))
+                        .addComponent(jLabel4)
+                        .addComponent(TFHM, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(BVolver)
                 .addContainerGap())
@@ -512,11 +533,21 @@ public class FinAltaVenta extends javax.swing.JFrame {
     private void jCheckBox1ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jCheckBox1ItemStateChanged
         if(evt.getStateChange() == ItemEvent.SELECTED){
             BAgDir.setEnabled(true);
+            BElegirFecha.setEnabled(true);
+            TFHH.setEnabled(true);
+            TFHM.setEnabled(true);
         }
         if(evt.getStateChange() == ItemEvent.DESELECTED){
             BAgDir.setEnabled(false);
+            BElegirFecha.setEnabled(false);
+            TFHH.setEnabled(false);
+            TFHM.setEnabled(false);
         }
     }//GEN-LAST:event_jCheckBox1ItemStateChanged
+
+    private void BMostrarDirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BMostrarDirActionPerformed
+        JOptionPane.showMessageDialog(null, direccionenvio.toString());
+    }//GEN-LAST:event_BMostrarDirActionPerformed
 
     /**
      * @param args the command line arguments
@@ -565,15 +596,16 @@ public class FinAltaVenta extends javax.swing.JFrame {
     private javax.swing.JButton BCargaVenta;
     private javax.swing.JButton BElegirFecha;
     private javax.swing.JButton BMostrarCliente;
+    private javax.swing.JButton BMostrarDir;
     private javax.swing.JButton BVolver;
     private javax.swing.JTextField TFFechaEnv;
     private javax.swing.JTextField TFHH;
     private javax.swing.JTextField TFHM;
     private javax.swing.JCheckBox jCheckBox1;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;

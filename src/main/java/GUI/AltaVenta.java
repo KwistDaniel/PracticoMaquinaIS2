@@ -119,9 +119,9 @@ public class AltaVenta extends javax.swing.JFrame {
         jPanel4 = new javax.swing.JPanel();
         BAgObj = new javax.swing.JButton();
         BElimSelec = new javax.swing.JButton();
-        BAgDesc = new javax.swing.JButton();
         TFDescuento = new javax.swing.JTextField();
         BSiguiente = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
         jPanel5 = new javax.swing.JPanel();
         BVolver = new javax.swing.JButton();
         TFFiltro = new javax.swing.JTextField();
@@ -169,15 +169,6 @@ public class AltaVenta extends javax.swing.JFrame {
             }
         });
 
-        BAgDesc.setBackground(new java.awt.Color(210, 4, 45));
-        BAgDesc.setForeground(new java.awt.Color(250, 250, 250));
-        BAgDesc.setText("Aplicar Descuento");
-        BAgDesc.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BAgDescActionPerformed(evt);
-            }
-        });
-
         TFDescuento.setText("jTextField1");
         TFDescuento.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -199,6 +190,8 @@ public class AltaVenta extends javax.swing.JFrame {
             }
         });
 
+        jLabel1.setText("Descuento:");
+
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
@@ -207,12 +200,14 @@ public class AltaVenta extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(BElimSelec, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(BAgDesc, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(BAgObj, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(BAgObj, javax.swing.GroupLayout.DEFAULT_SIZE, 126, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(BSiguiente))
-                    .addComponent(TFDescuento))
+                    .addComponent(TFDescuento)
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel4Layout.setVerticalGroup(
@@ -223,10 +218,10 @@ public class AltaVenta extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(BElimSelec)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(TFDescuento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(BAgDesc)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 439, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 451, Short.MAX_VALUE)
                 .addComponent(BSiguiente)
                 .addContainerGap())
         );
@@ -241,7 +236,7 @@ public class AltaVenta extends javax.swing.JFrame {
             }
         });
 
-        TFFiltro.setText("jTextField2");
+        TFFiltro.setText("filtro");
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
@@ -371,10 +366,6 @@ public class AltaVenta extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_TFDescuentoKeyTyped
 
-    private void BAgDescActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BAgDescActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_BAgDescActionPerformed
-
     /**
      * @param args the command line arguments
      */
@@ -418,13 +409,13 @@ public class AltaVenta extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton BAgDesc;
     private javax.swing.JButton BAgObj;
     private javax.swing.JButton BElimSelec;
     private javax.swing.JButton BSiguiente;
     private javax.swing.JButton BVolver;
     private javax.swing.JTextField TFDescuento;
     private javax.swing.JTextField TFFiltro;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
