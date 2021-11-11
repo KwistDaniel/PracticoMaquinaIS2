@@ -46,6 +46,7 @@ public class MVentas extends javax.swing.JFrame {
         BStock = new javax.swing.JButton();
         BMVentas = new javax.swing.JButton();
         BClientes = new javax.swing.JButton();
+        BListarEnvios = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
         BVolver = new javax.swing.JButton();
 
@@ -80,6 +81,15 @@ public class MVentas extends javax.swing.JFrame {
 
         BClientes.setText("S/Implementar");
 
+        BListarEnvios.setBackground(new java.awt.Color(210, 4, 45));
+        BListarEnvios.setForeground(new java.awt.Color(250, 250, 250));
+        BListarEnvios.setText("Envios");
+        BListarEnvios.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BListarEnviosActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -89,7 +99,8 @@ public class MVentas extends javax.swing.JFrame {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(BStock, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(BClientes, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(BMVentas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(BMVentas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(BListarEnvios, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(159, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
@@ -101,6 +112,8 @@ public class MVentas extends javax.swing.JFrame {
                 .addComponent(BClientes)
                 .addGap(18, 18, 18)
                 .addComponent(BStock)
+                .addGap(18, 18, 18)
+                .addComponent(BListarEnvios)
                 .addContainerGap(318, Short.MAX_VALUE))
         );
 
@@ -150,7 +163,7 @@ public class MVentas extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, 496, Short.MAX_VALUE)
+                    .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, 536, Short.MAX_VALUE)
                     .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -169,7 +182,7 @@ public class MVentas extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(19, 19, 19)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(19, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -206,6 +219,12 @@ public class MVentas extends javax.swing.JFrame {
     private void BStockActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BStockActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_BStockActionPerformed
+
+    private void BListarEnviosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BListarEnviosActionPerformed
+        dispose();
+        ListarEnvios LE = new ListarEnvios();
+        LE.setVisible(true);
+    }//GEN-LAST:event_BListarEnviosActionPerformed
 
     /**
      * @param args the command line arguments
@@ -259,6 +278,7 @@ public class MVentas extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BClientes;
+    private javax.swing.JButton BListarEnvios;
     private javax.swing.JButton BMVentas;
     private javax.swing.JButton BStock;
     private javax.swing.JButton BVolver;

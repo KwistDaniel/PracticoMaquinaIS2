@@ -46,6 +46,7 @@ public class MainMenu extends javax.swing.JFrame {
         BVentas = new javax.swing.JButton();
         BClientes = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
+        BStock1 = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
         BSalir = new javax.swing.JButton();
 
@@ -89,6 +90,15 @@ public class MainMenu extends javax.swing.JFrame {
 
         jButton1.setText("Pedidos");
 
+        BStock1.setBackground(new java.awt.Color(210, 4, 45));
+        BStock1.setForeground(new java.awt.Color(250, 250, 250));
+        BStock1.setText("Stock");
+        BStock1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BStock1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -104,7 +114,8 @@ public class MainMenu extends javax.swing.JFrame {
                         .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel3Layout.createSequentialGroup()
                             .addGap(133, 133, 133)
                             .addComponent(BVentas, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(132, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 42, Short.MAX_VALUE)
+                .addComponent(BStock1, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -115,8 +126,10 @@ public class MainMenu extends javax.swing.JFrame {
                 .addComponent(BClientes)
                 .addGap(18, 18, 18)
                 .addComponent(BStock)
-                .addGap(18, 18, 18)
-                .addComponent(jButton1)
+                .addGap(58, 58, 58)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton1)
+                    .addComponent(BStock1))
                 .addContainerGap(278, Short.MAX_VALUE))
         );
 
@@ -166,7 +179,7 @@ public class MainMenu extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, 496, Short.MAX_VALUE)
+                    .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, 536, Short.MAX_VALUE)
                     .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -185,7 +198,7 @@ public class MainMenu extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(19, 19, 19)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(19, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -225,6 +238,10 @@ public class MainMenu extends javax.swing.JFrame {
         ListarMercancias LM = new ListarMercancias();
         LM.setVisible(true);
     }//GEN-LAST:event_BStockActionPerformed
+
+    private void BStock1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BStock1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_BStock1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -272,6 +289,7 @@ public class MainMenu extends javax.swing.JFrame {
     private javax.swing.JButton BClientes;
     private javax.swing.JButton BSalir;
     private javax.swing.JButton BStock;
+    private javax.swing.JButton BStock1;
     private javax.swing.JButton BVentas;
     private javax.swing.JButton jButton1;
     private javax.swing.JPanel jPanel1;

@@ -5,6 +5,8 @@
  */
 package Objects;
 
+import java.util.List;
+
 /**
  *
  * @author kwist
@@ -75,7 +77,19 @@ public class Envio {
         this.hora = hora;
     }
     
-    
+    public static Object[][] getDataVector(List<Envio> envios){
+        Object[][] objects = new Object[envios.size()][0];
+        for(int i = 0; i < envios.size() ; i++){
+            objects[i] = envios.get(i).toObject();
+        }   
+        return objects;
+    }
+    public static Object[] getHeaders(){
+        return new Object[]{"Codigo","Direccion","Fecha","Hora","Estado"};
+    }
+    private Object[] toObject(){
+        return new Object[]{getCod(),getId_dir(),getFecha(),getHora(),getEstado()};
+    }
             
     
 }
