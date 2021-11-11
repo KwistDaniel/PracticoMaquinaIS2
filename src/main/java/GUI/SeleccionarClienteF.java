@@ -242,7 +242,7 @@ public class SeleccionarClienteF extends javax.swing.JFrame {
         
         ClienteJ cjaux = new ClienteJ();
         dispose();
-        FinAltaVenta fav = new FinAltaVenta(aux1,cjaux,mercancias,vendedor,1,descuentos,restar);
+        FinAltaVenta fav = new FinAltaVenta(aux1,cjaux,mercancias,vendedor,1,descuentos,restar,0);
         fav.setVisible(true);
         
     }//GEN-LAST:event_BSeleccionarActionPerformed

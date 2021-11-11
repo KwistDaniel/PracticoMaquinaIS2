@@ -6,7 +6,7 @@
 package GUI;
 
 
-import BusinessObject_Manager.BusinessObjectClienteF;
+import BusinessObject_Manager.BusinessObjectEnvio;
 import GUI.*;
 import Objects.ClienteF;
 import Objects.ClienteJ;

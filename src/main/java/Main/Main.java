@@ -28,9 +28,9 @@ public class Main {
         
             /**Ordenado**/
         /**/
-        DBQueries.dropAllTables ();
-        DBQueries.createAllTables();
-        DBQueries.insertAllTables();
+        //DBQueries.dropAllTables ();
+        //DBQueries.createAllTables();
+        //DBQueries.insertAllTables();
         /**/
     }
     

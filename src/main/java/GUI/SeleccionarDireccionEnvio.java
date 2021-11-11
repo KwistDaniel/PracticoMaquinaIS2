@@ -250,7 +250,7 @@ public class SeleccionarDireccionEnvio extends javax.swing.JFrame {
     private void BVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BVolverActionPerformed
         // TODO add your handling code here:
         dispose();
-        FinAltaVenta fav = new FinAltaVenta(clientef,clientej,mercancias,vendedor,tipocliente,descuentos,restar);
+        FinAltaVenta fav = new FinAltaVenta(clientef,clientej,mercancias,vendedor,tipocliente,descuentos,restar,1);
         fav.setVisible(true);
     }//GEN-LAST:event_BVolverActionPerformed
 
@@ -265,7 +265,7 @@ public class SeleccionarDireccionEnvio extends javax.swing.JFrame {
         direccionenvio.setCodPostal((String) aux[5]);
         direccionenvio.setLocalidad((String) aux[6]);
         dispose();
-        FinAltaVenta fav = new FinAltaVenta(clientef,clientej,mercancias,vendedor,tipocliente,direccionenvio,descuentos,restar);
+        FinAltaVenta fav = new FinAltaVenta(clientef,clientej,mercancias,vendedor,tipocliente,direccionenvio,descuentos,restar,1);
         fav.setVisible(true);
         
         
