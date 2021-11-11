@@ -62,7 +62,7 @@
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
                   <Component id="jPanel2" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace pref="19" max="32767" attributes="0"/>
+                  <EmptySpace max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -92,7 +92,7 @@
                   <Group type="102" alignment="1" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="1" attributes="0">
-                          <Component id="jPanel4" pref="496" max="32767" attributes="0"/>
+                          <Component id="jPanel4" pref="536" max="32767" attributes="0"/>
                           <Component id="jPanel3" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
@@ -117,6 +117,7 @@
                               <Component id="BStock" alignment="1" max="32767" attributes="0"/>
                               <Component id="BClientes" alignment="1" max="32767" attributes="0"/>
                               <Component id="BMVentas" max="32767" attributes="0"/>
+                              <Component id="BListarEnvios" alignment="1" max="32767" attributes="0"/>
                           </Group>
                           <EmptySpace pref="159" max="32767" attributes="0"/>
                       </Group>
@@ -131,6 +132,8 @@
                           <Component id="BClientes" min="-2" max="-2" attributes="0"/>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Component id="BStock" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                          <Component id="BListarEnvios" min="-2" max="-2" attributes="0"/>
                           <EmptySpace pref="318" max="32767" attributes="0"/>
                       </Group>
                   </Group>
@@ -169,6 +172,20 @@
                   <Properties>
                     <Property name="text" type="java.lang.String" value="S/Implementar"/>
                   </Properties>
+                </Component>
+                <Component class="javax.swing.JButton" name="BListarEnvios">
+                  <Properties>
+                    <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                      <Color blue="2d" green="4" red="d2" type="rgb"/>
+                    </Property>
+                    <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                      <Color blue="fa" green="fa" red="fa" type="rgb"/>
+                    </Property>
+                    <Property name="text" type="java.lang.String" value="Envios"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BListarEnviosActionPerformed"/>
+                  </Events>
                 </Component>
               </SubComponents>
             </Container>

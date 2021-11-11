@@ -12,6 +12,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -22,7 +23,27 @@ public class DAOEnvio implements DAO<Envio> {
 
     @Override
     public List<Envio> readAll() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        List<Envio> envios = new ArrayList<>();
+        Connection connection = DataBase.getInstance().getConnection();
+        Statement statement;
+        try{
+            statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery("SELECT * FROM Envio WHERE ( Status = 1 ) ");
+            Envio envio;
+            while (rs.next()){
+                envio = new Envio();
+                envio.setCod(rs.getInt("COD"));
+                envio.setId_dir(rs.getInt("ID_DIR"));
+                envio.setEstado(rs.getInt("ESTADO_ENVIO"));
+                envio.setFecha(rs.getString("FECHA_ENVIO"));
+                envio.setHora(rs.getString("HORA_ENVIO"));
+                envios.add(envio);
+            }
+        }catch (SQLException throwables){
+            throwables.printStackTrace();
+        }
+        DataBase.getInstance().disconnect();
+        return envios;
     }
 
     @Override

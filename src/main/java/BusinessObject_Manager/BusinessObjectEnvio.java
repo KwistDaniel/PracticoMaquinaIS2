@@ -8,6 +8,7 @@ package BusinessObject_Manager;
 import DAO.DAO;
 import DAO.DAOEnvio;
 import Objects.Envio;
+import java.util.ArrayList;
 
 /**
  *
@@ -26,5 +27,11 @@ public class BusinessObjectEnvio {
     public static int cargarEnvio(Envio e){
         envioDAO = new DAOEnvio();
         return envioDAO.create(e);
+    }
+    
+    public static ArrayList<Envio> listarEnvios(){
+        envioDAO = new DAOEnvio();
+        ArrayList<Envio> envios = new ArrayList<Envio> (envioDAO.readAll());
+        return envios;
     }
 }
