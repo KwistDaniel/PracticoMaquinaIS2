@@ -5,6 +5,7 @@
  */
 package GUI;
 
+import Objects.Envio;
 import Objects.Mercancia;
 import Objects.Vendedor;
 import java.util.ArrayList;
@@ -222,7 +223,8 @@ public class MVentas extends javax.swing.JFrame {
 
     private void BListarEnviosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BListarEnviosActionPerformed
         dispose();
-        ListarEnvios LE = new ListarEnvios();
+        ArrayList<Envio> aux = new ArrayList<Envio>();
+        ListarEnvios LE = new ListarEnvios(aux,vendedor);
         LE.setVisible(true);
     }//GEN-LAST:event_BListarEnviosActionPerformed
 

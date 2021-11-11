@@ -45,7 +45,7 @@ public class FinAltaVenta extends javax.swing.JFrame {
     ArrayList<Mercancia> mercancias,restar;
     ClienteF clientef;
     ClienteJ clientej;
-    int tipocliente,flagfecha=0;
+    int tipocliente,flagfecha=0,flagdir=0;
     Vendedor vendedor;
     Direccion direccionenvio;
     ArrayList<Integer> descuentos;
@@ -61,7 +61,7 @@ public class FinAltaVenta extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);     
     }
     
-    public FinAltaVenta(ClienteF cfaux, ClienteJ cjaux, ArrayList<Mercancia> aux, Vendedor vaux,int tcliente,Direccion daux,ArrayList<Integer> descaux,ArrayList<Mercancia> restaaux){
+    public FinAltaVenta(ClienteF cfaux, ClienteJ cjaux, ArrayList<Mercancia> aux, Vendedor vaux,int tcliente,Direccion daux,ArrayList<Integer> descaux,ArrayList<Mercancia> restaaux,int flagdiraux){
         vendedor = new Vendedor(vaux);
         tipocliente = tcliente;
         if (tipocliente == 1){
@@ -87,9 +87,14 @@ public class FinAltaVenta extends javax.swing.JFrame {
         TFHH.setEnabled(true);
         TFHM.setEnabled(true);
         jCheckBox1.setSelected(true);
+        flagdir = flagdiraux;
+        BMostrarDir.setEnabled(false);
+        if(flagdir==1){
+            BMostrarDir.setEnabled(true);
+        }
     }
 
-    public FinAltaVenta(ClienteF cfaux, ClienteJ cjaux, ArrayList<Mercancia> aux, Vendedor vaux,int tcliente,ArrayList<Integer> descaux,ArrayList<Mercancia> restaaux){
+    public FinAltaVenta(ClienteF cfaux, ClienteJ cjaux, ArrayList<Mercancia> aux, Vendedor vaux,int tcliente,ArrayList<Integer> descaux,ArrayList<Mercancia> restaaux,int flagdiraux){
         vendedor = new Vendedor(vaux);
         tipocliente = tcliente;
         if (tipocliente == 1){
@@ -112,6 +117,10 @@ public class FinAltaVenta extends javax.swing.JFrame {
         BElegirFecha.setEnabled(false);
         TFHH.setEnabled(false);
         TFHM.setEnabled(false);
+        BMostrarDir.setEnabled(false);
+        if(flagdir==1){
+            BMostrarDir.setEnabled(true);
+        }
     }
     
     
