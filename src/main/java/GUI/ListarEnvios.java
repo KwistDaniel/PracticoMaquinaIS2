@@ -17,14 +17,23 @@ import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
+import javax.swing.RowFilter;
 import javax.swing.ScrollPaneConstants;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
+import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
+import javax.swing.table.TableRowSorter;
 
 /**
  *
@@ -54,7 +63,7 @@ public class ListarEnvios extends javax.swing.JFrame {
         GridBagConstraints gridBagConstraints = new GridBagConstraints();
         
         
-        jPanel4.setLayout(new GridLayout(1,5,0,0));
+        
         
         
         Object[][] objects = Envio.getDataVector(BusinessObjectEnvio.listarEnvios());
@@ -68,8 +77,9 @@ public class ListarEnvios extends javax.swing.JFrame {
         tabla.setFocusable(false);
         tabla.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         tabla.getTableHeader().setReorderingAllowed(false);
-        
-        
+        tabla.setAutoCreateRowSorter(true);//para los filtros, tutorial de oracle
+        TableRowSorter<TableModel> sorter = new TableRowSorter<TableModel>(tabla.getModel());//para los filtros, tutorial de oracle
+        tabla.setRowSorter(sorter);//para los filtros, tutorial de oracle
         JScrollPane scrollPane = new JScrollPane(tabla);
         scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
         scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
@@ -90,25 +100,54 @@ public class ListarEnvios extends javax.swing.JFrame {
         jPanel6.add(scrollPane, BorderLayout.CENTER);
         
         
-        JTextField filtroCodigo = new JTextField();
-        JTextField filtroDir = new JTextField();
-        JTextField filtroFecha = new JTextField();
-        JTextField filtroHora = new JTextField();
-        JTextField filtroEstado = new JTextField();
-        
-        filtroCodigo.setPreferredSize(new Dimension(tabla.getColumnModel().getColumn(0).getWidth(),22));
-        filtroDir.setPreferredSize(new Dimension(tabla.getColumnModel().getColumn(1).getWidth(),22));
-        filtroFecha.setPreferredSize(new Dimension(tabla.getColumnModel().getColumn(2).getWidth(),22));
-        filtroHora.setPreferredSize(new Dimension(tabla.getColumnModel().getColumn(3).getWidth(),22));
-        filtroEstado.setPreferredSize(new Dimension(tabla.getColumnModel().getColumn(4).getWidth(),22));
         
         
-        jPanel4.add(filtroCodigo);
-        jPanel4.add(filtroDir);
-        jPanel4.add(filtroFecha);
-        jPanel4.add(filtroHora);
-        jPanel4.add(filtroEstado);
-                
+        /**
+         * Filtro de la tabla
+         */
+        //GridLayout para agregar los textfields
+        jPanel4.setLayout(new GridLayout(1,1,0,0)); 
+        
+        //Textfields
+        JTextField filtro = new JTextField();
+        //Configuro las dimensiones
+        filtro.setPreferredSize(new Dimension(tabla.getColumnModel().getColumn(0).getWidth() + tabla.getColumnModel().getColumn(1).getWidth() + tabla.getColumnModel().getColumn(2).getWidth() + tabla.getColumnModel().getColumn(3).getWidth() + tabla.getColumnModel().getColumn(4).getWidth(),22));
+        
+        /**
+         * Listener para filtrar
+         */
+        filtro.getDocument().addDocumentListener(new DocumentListener() {
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+                String str = filtro.getText();
+                if(str.trim().length() == 0){
+                    sorter.setRowFilter(null);
+                }
+                else{
+                    sorter.setRowFilter(RowFilter.regexFilter("(?i)" + str));
+                }
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+                String str = filtro.getText();
+                if(str.trim().length() == 0){
+                    sorter.setRowFilter(null);
+                }
+                else{
+                    sorter.setRowFilter(RowFilter.regexFilter("(?i)" + str));
+                }
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }
+        });
+        
+
+        //Los agrego al panel
+        jPanel4.add(filtro);
     }
 
     private ListarEnvios() {
@@ -120,6 +159,9 @@ public class ListarEnvios extends javax.swing.JFrame {
      * WARNING: Do NOT modify this code. The content of this method is always
      * regenerated by the Form Editor.
      */
+    
+    
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -128,7 +170,6 @@ public class ListarEnvios extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
         jPanel6 = new javax.swing.JPanel();
-        jTextField1 = new javax.swing.JTextField();
         jPanel3 = new javax.swing.JPanel();
         BVolver = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
@@ -157,23 +198,15 @@ public class ListarEnvios extends javax.swing.JFrame {
 
         jPanel6.setBackground(new java.awt.Color(245, 245, 220));
 
-        jTextField1.setText("jTextField1");
-
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
         jPanel6Layout.setHorizontalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel6Layout.createSequentialGroup()
-                .addGap(365, 365, 365)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGap(0, 1075, Short.MAX_VALUE)
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
-                .addContainerGap(333, Short.MAX_VALUE)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(72, 72, 72))
+            .addGap(0, 427, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -240,7 +273,7 @@ public class ListarEnvios extends javax.swing.JFrame {
                 .addComponent(jButton1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(BConfEnv)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 539, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(BVolver)
                 .addContainerGap())
         );
@@ -611,6 +644,5 @@ public class ListarEnvios extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel6;
-    private javax.swing.JTextField jTextField1;
     // End of variables declaration//GEN-END:variables
 }
