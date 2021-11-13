@@ -429,7 +429,7 @@ public class FinAltaVenta extends javax.swing.JFrame {
             horaenv = HH + ":" + HM;
         }
         
-        
+        //DE ULTIMA, DEJAR QUE ME CREE UN ENVIO SIN DATOS, SOLO EL CODIGO, Y DESPUES LIMPIAR ESE ENVIO DEL LISTAR ENVIO, HACER QUE SI LA DIR == NULL O ALGO ASI LE HAGO UN REMOVE DE LA TABLA, ESTO ES XQ LA VENTA NECSITA UN ENVIO PARECE, SINO PROBAR, VOFI
         
         
         

@@ -440,7 +440,30 @@ public class ListarEnvios extends javax.swing.JFrame {
     }//GEN-LAST:event_BModifActionPerformed
 
     private void BConfEnvActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BConfEnvActionPerformed
-        // TODO add your handling code here:
+        Object[] aux = tm.getDataVector().elementAt(tabla.getSelectedRow()).toArray();
+        if((int) aux[4] == 1){
+            JOptionPane.showMessageDialog(null, "Este envio ya fue entregado");
+        }
+        else{
+            BusinessObjectEnvio boEnvio = new BusinessObjectEnvio();
+            Envio aux1 = new Envio();
+            aux1.setCod((int) aux[0]);
+            aux1.setId_dir((int) aux[1]);
+            aux1.setFecha((String) aux[2]);
+            aux1.setHora((String) aux[3]);
+            aux1.setEstado(1);
+            if(boEnvio.actualizarEstado(aux1) == 1){
+                JOptionPane.showMessageDialog(null, "Estado de Envio actualizado");
+            }
+            else{
+                JOptionPane.showMessageDialog(null, "No se pudo actualizar el estado de Envio");
+            }
+            dispose();
+            ListarEnvios le = new ListarEnvios(new ArrayList<Envio>(),vendedor);
+            le.setVisible(true);
+            
+        }
+
     }//GEN-LAST:event_BConfEnvActionPerformed
 
     /**
