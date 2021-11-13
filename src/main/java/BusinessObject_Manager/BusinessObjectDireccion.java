@@ -23,5 +23,11 @@ public class BusinessObjectDireccion {
         ArrayList<Direccion> direcciones = new ArrayList<Direccion>(direccionDAO.readAllIds(cf.getDni(),cf.getSexo()));
         return direcciones;
     }
+    
+    public static Direccion readDir(String... ids){
+        direccionDAO = new DAODireccion();
+        Direccion dir = new Direccion(direccionDAO.readOne(ids[0]));
+        return dir;
+    }
 
 }

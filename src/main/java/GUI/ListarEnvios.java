@@ -6,6 +6,7 @@
 package GUI;
 
 
+import BusinessObject_Manager.BusinessObjectDireccion;
 import BusinessObject_Manager.BusinessObjectEnvio;
 import GUI.*;
 import Objects.ClienteF;
@@ -14,24 +15,31 @@ import Objects.Envio;
 import Objects.Mercancia;
 import Objects.Vendedor;
 import java.awt.BorderLayout;
+import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import javax.swing.DefaultCellEditor;
+import javax.swing.JButton;
+import javax.swing.JCheckBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
 import javax.swing.RowFilter;
 import javax.swing.ScrollPaneConstants;
+import javax.swing.UIManager;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
 
@@ -59,7 +67,7 @@ public class ListarEnvios extends javax.swing.JFrame {
         initComponents();
         this.setVisible(true);
         this.setLocationRelativeTo(null);
-        BSeleccionar.getRootPane().requestFocus();
+        BModif.getRootPane().requestFocus();
         GridBagConstraints gridBagConstraints = new GridBagConstraints();
         
         
@@ -77,6 +85,11 @@ public class ListarEnvios extends javax.swing.JFrame {
         tabla.setFocusable(false);
         tabla.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         tabla.getTableHeader().setReorderingAllowed(false);
+        //Creo los botones
+        tabla.getColumn("Codigo de Direccion").setCellRenderer(new ButtonRenderer());
+        tabla.getColumn("Codigo de Direccion").setCellEditor(new ButtonEditor(new JCheckBox(),new BusinessObjectDireccion(),true));
+        
+        
         tabla.setAutoCreateRowSorter(true);//para los filtros, tutorial de oracle
         TableRowSorter<TableModel> sorter = new TableRowSorter<TableModel>(tabla.getModel());//para los filtros, tutorial de oracle
         tabla.setRowSorter(sorter);//para los filtros, tutorial de oracle
@@ -154,6 +167,94 @@ public class ListarEnvios extends javax.swing.JFrame {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+    static class ButtonRenderer extends JButton implements TableCellRenderer{
+        public ButtonRenderer(){
+            setOpaque(true);
+        }
+        @Override
+        public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column){
+            if(isSelected){
+                setForeground(table.getSelectionForeground());
+                setBackground(table.getSelectionBackground());
+            }
+            else{
+                setForeground(table.getForeground());
+                setBackground(UIManager.getColor("Button.backgound"));
+            }
+            setText((value == null) ? "" : value.toString());
+            return this;
+        }
+    }
+    
+    static class ButtonEditor extends DefaultCellEditor {
+
+        protected JButton button;
+        private String label;
+        private String label2;
+        private boolean isPushed;
+        private boolean isLabel2;
+        private BusinessObjectDireccion boDir;
+
+        public ButtonEditor(JCheckBox checkBox, BusinessObjectDireccion businessObject, boolean isLabel2) {
+            super(checkBox);
+            this.boDir = businessObject;
+            button = new JButton();
+            button.setOpaque(true);
+            button.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    fireEditingStopped();
+                }
+            });
+
+            this.isLabel2 = isLabel2;
+        }
+
+        @Override
+        public Component getTableCellEditorComponent(JTable table, Object value, boolean isSelected, int row, int column) {
+            if (isSelected) {
+                button.setForeground(table.getSelectionForeground());
+                button.setBackground(table.getSelectionBackground());
+            } else {
+                button.setForeground(table.getForeground());
+                button.setBackground(table.getBackground());
+            }
+            label = (value == null) ? "" : value.toString();
+            if (isLabel2) {
+                label2 = (value == null) ? "" : table.getValueAt(row, column + 1).toString();
+            }
+
+            button.setText(label);
+            isPushed = true;
+            return button;
+        }
+
+        @Override
+        public Object getCellEditorValue() {
+
+            String[] ids;
+
+            if (isLabel2) {
+                ids = new String[]{label, label2};
+            } else {
+                ids = new String[]{label};
+            }
+
+            if (isPushed) {
+                Object object = boDir.readDir(ids[0]);
+
+                JOptionPane.showMessageDialog(null, object.toString());
+            }
+            isPushed = false;
+            return label;
+        }
+
+        @Override
+        public boolean stopCellEditing() {
+            isPushed = false;
+            return super.stopCellEditing();
+        }
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -172,8 +273,8 @@ public class ListarEnvios extends javax.swing.JFrame {
         jPanel6 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
         BVolver = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
-        BSeleccionar = new javax.swing.JButton();
+        BBorrar = new javax.swing.JButton();
+        BModif = new javax.swing.JButton();
         BConfEnv = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -184,6 +285,8 @@ public class ListarEnvios extends javax.swing.JFrame {
         jPanel1.setBackground(new java.awt.Color(210, 4, 45));
 
         jPanel2.setBackground(new java.awt.Color(245, 245, 220));
+
+        jPanel4.setBackground(new java.awt.Color(245, 245, 220));
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -242,20 +345,22 @@ public class ListarEnvios extends javax.swing.JFrame {
             }
         });
 
-        jButton1.setText("Agregar Cliente");
+        BBorrar.setBackground(new java.awt.Color(210, 4, 45));
+        BBorrar.setForeground(new java.awt.Color(250, 250, 250));
+        BBorrar.setText("Eliminar Seleccionado");
 
-        BSeleccionar.setBackground(new java.awt.Color(210, 4, 45));
-        BSeleccionar.setForeground(new java.awt.Color(250, 250, 250));
-        BSeleccionar.setText("Agregar Seleccionado");
-        BSeleccionar.addActionListener(new java.awt.event.ActionListener() {
+        BModif.setBackground(new java.awt.Color(210, 4, 45));
+        BModif.setForeground(new java.awt.Color(250, 250, 250));
+        BModif.setText("Modificar Seleccionado");
+        BModif.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BSeleccionarActionPerformed(evt);
+                BModifActionPerformed(evt);
             }
         });
 
         BConfEnv.setBackground(new java.awt.Color(210, 4, 45));
         BConfEnv.setForeground(new java.awt.Color(250, 250, 250));
-        BConfEnv.setText("Agregar Seleccionado");
+        BConfEnv.setText("Actualizar Estado de Envio");
         BConfEnv.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BConfEnvActionPerformed(evt);
@@ -268,9 +373,9 @@ public class ListarEnvios extends javax.swing.JFrame {
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(BSeleccionar)
-                .addGap(50, 50, 50)
-                .addComponent(jButton1)
+                .addComponent(BModif)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(BBorrar)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(BConfEnv)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -280,17 +385,13 @@ public class ListarEnvios extends javax.swing.JFrame {
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(BVolver)
-                            .addComponent(jButton1)
-                            .addComponent(BConfEnv))
-                        .addGap(21, 21, 21))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                        .addComponent(BSeleccionar)
-                        .addGap(30, 30, 30))))
+                .addContainerGap(30, Short.MAX_VALUE)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(BModif)
+                    .addComponent(BBorrar)
+                    .addComponent(BConfEnv)
+                    .addComponent(BVolver))
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -311,7 +412,7 @@ public class ListarEnvios extends javax.swing.JFrame {
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(37, Short.MAX_VALUE))
+                .addContainerGap(15, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -322,9 +423,7 @@ public class ListarEnvios extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -336,9 +435,9 @@ public class ListarEnvios extends javax.swing.JFrame {
         mv.setVisible(true);
     }//GEN-LAST:event_BVolverActionPerformed
 
-    private void BSeleccionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BSeleccionarActionPerformed
+    private void BModifActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BModifActionPerformed
         
-    }//GEN-LAST:event_BSeleccionarActionPerformed
+    }//GEN-LAST:event_BModifActionPerformed
 
     private void BConfEnvActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BConfEnvActionPerformed
         // TODO add your handling code here:
@@ -635,10 +734,10 @@ public class ListarEnvios extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton BBorrar;
     private javax.swing.JButton BConfEnv;
-    private javax.swing.JButton BSeleccionar;
+    private javax.swing.JButton BModif;
     private javax.swing.JButton BVolver;
-    private javax.swing.JButton jButton1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;

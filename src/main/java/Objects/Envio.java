@@ -5,6 +5,7 @@
  */
 package Objects;
 
+import java.awt.Button;
 import java.util.List;
 
 /**
@@ -85,11 +86,10 @@ public class Envio {
         return objects;
     }
     public static Object[] getHeaders(){
-        return new Object[]{"Codigo","Direccion","Fecha","Hora","Estado"};
+        return new Object[]{"Codigo de Envio","Codigo de Direccion","Fecha","Hora","Estado"};
     }
     private Object[] toObject(){
         return new Object[]{getCod(),getId_dir(),getFecha(),getHora(),getEstado()};
     }
-            
     
 }
