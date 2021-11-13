@@ -449,6 +449,7 @@ public class ListarEnvios extends javax.swing.JFrame {
         aux1.setId_dir((int) aux[1]);
         aux1.setFecha((String) aux[2]);
         aux1.setHora((String) aux[3]);
+        aux1.setEstado((int) aux[4]);
     }//GEN-LAST:event_BModifActionPerformed
 
     private void BConfEnvActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BConfEnvActionPerformed
@@ -487,24 +488,24 @@ public class ListarEnvios extends javax.swing.JFrame {
         if(envioaux.getEstado() == 1){
             estado = "Entregado";
         }
-        String saux = new String("Codigo: " + envioaux.getCod() + "Direccion: " + diraux.getCalleDir() + diraux.getNumDir() + "Fecha: " + envioaux.getFecha() + "Hora: " + envioaux.getHora() + "Estado de Entrega: " + estado);
+        String saux = new String("Codigo: " + envioaux.getCod() + "\nDireccion: " + diraux.getCalleDir() + " " + diraux.getNumDir() + "\nFecha: " + envioaux.getFecha() + "\nHora: " + envioaux.getHora() + "\nEstado de Entrega: " + estado);
         int seleccion = JOptionPane.showConfirmDialog(rootPane,saux, "Eliminar Envio",
                 JOptionPane.YES_NO_OPTION,
                 JOptionPane.QUESTION_MESSAGE);
         if(seleccion == JOptionPane.YES_OPTION){
             BusinessObjectEnvio boe = new BusinessObjectEnvio();
             if(boe.eliminarEnvio(envioaux) == 1){
-                JOptionPane.showInputDialog("Envio eliminado correctamente");
+                JOptionPane.showMessageDialog(null,"Envio eliminado correctamente");
                 dispose();
-                ListarEnvios le = new ListarEnvios();
+                ListarEnvios le = new ListarEnvios(new ArrayList<Envio>(),vendedor);
                 le.setVisible(true);
             }
             else{
-                JOptionPane.showInputDialog("No se pudo eliminar el Envio");
+                JOptionPane.showMessageDialog(null,"No se pudo eliminar el Envio");
             }
         }
         else{
-            JOptionPane.showInputDialog("No se elimino el envio");
+            JOptionPane.showMessageDialog(null,"No se elimino el envio");
         }
     }//GEN-LAST:event_BBorrarActionPerformed
 
