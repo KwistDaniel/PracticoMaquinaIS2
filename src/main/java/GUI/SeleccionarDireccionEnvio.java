@@ -12,6 +12,7 @@ import Objects.ClienteF;
 import Objects.ClienteJ;
 import Objects.ConectDirCF;
 import Objects.Direccion;
+import Objects.Envio;
 import Objects.Mercancia;
 import Objects.Vendedor;
 import com.toedter.calendar.JDateChooser;
@@ -37,9 +38,11 @@ public class SeleccionarDireccionEnvio extends javax.swing.JFrame {
     ArrayList<Mercancia> mercancias,restar;
     int tipocliente;
     Vendedor vendedor;
+    Envio envio;
     ClienteF clientef;
     ClienteJ clientej;
     ArrayList<Integer> descuentos;
+    int vengode=0;
     /**
      * Creates new form Menu
      */
@@ -52,6 +55,7 @@ public class SeleccionarDireccionEnvio extends javax.swing.JFrame {
         };
     
     public SeleccionarDireccionEnvio(ClienteF cfaux, ClienteJ cjaux,ArrayList<Mercancia> aux,Vendedor vaux,int tcliente, ArrayList<Integer> descaux, ArrayList<Mercancia> restaaux) {
+        vengode = 1;
         descuentos = new ArrayList<Integer>(descaux);
         vendedor = new Vendedor(vaux);
         tipocliente = tcliente;
@@ -125,6 +129,73 @@ public class SeleccionarDireccionEnvio extends javax.swing.JFrame {
                 
     }
 
+    public SeleccionarDireccionEnvio(Envio e,Vendedor vaux) {
+        vengode = 2;
+        envio = new Envio(e);
+        vendedor = new Vendedor(vaux);
+        initComponents();
+        this.setVisible(true);
+        this.setLocationRelativeTo(null);
+        
+        //ahora hago una tabla si es ClienteF y otra si es ClienteJ, por ahora solo implementar todo ClienteF.
+        
+        GridBagConstraints gridBagConstraints = new GridBagConstraints();
+        
+        /*DefaultTableModel tm = new DefaultTableModel(){
+            @Override
+            public boolean isCellEditable(int row, int column){
+                return column == 1;
+            }
+        };*/
+        
+        if (tipocliente == 1){
+            Object[][] objectscf = Direccion.getDataVector(BusinessObjectClienteF.listarDireccionClientesF(clientef));
+            Object[] headerscf = Direccion.getHeaders();
+            tm.setDataVector(objectscf, headerscf);
+        }
+        else{
+            //TODAVIA NO ESTA IMPLEMENTADO!!!!
+            //BusinessObject<Direccion> businessObject = new DAODireccion();; //acomodar query abajo
+            //Object[][] objectscj = Direccion.getDataVector(businessObject.readAllIds("SELECT ID_DIR FROM conectdirclif WHERE (CUIT='"+ clientej.getCUIT() +"')"));
+            //Object[] headerscj = Direccion.getHeaders();
+            //tm.setDataVector(objectscj, headerscj);
+        }
+        
+        
+        
+
+        
+        tabla = new JTable(tm);
+        tabla.setFocusable(false);
+        tabla.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        tabla.getTableHeader().setReorderingAllowed(false);
+        
+        
+        JScrollPane scrollPane = new JScrollPane(tabla);
+        scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+        scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+        scrollPane.getHorizontalScrollBar().setUnitIncrement(20);
+        scrollPane.getVerticalScrollBar().setUnitIncrement(20);
+                
+        tabla.setPreferredScrollableViewportSize(tabla.getPreferredSize());
+        
+        scrollPane.setPreferredSize(new Dimension(665,450));
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.gridwidth = 4;
+        gridBagConstraints.gridheight = 4;
+        add(scrollPane, gridBagConstraints);
+        
+        
+        jPanel2.setLayout(new BorderLayout());
+        jPanel2.add(scrollPane, BorderLayout.CENTER);
+        
+        
+        
+                
+    }
+    
+    
     private SeleccionarDireccionEnvio() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
@@ -265,8 +336,18 @@ public class SeleccionarDireccionEnvio extends javax.swing.JFrame {
         direccionenvio.setCodPostal((String) aux[5]);
         direccionenvio.setLocalidad((String) aux[6]);
         dispose();
-        FinAltaVenta fav = new FinAltaVenta(clientef,clientej,mercancias,vendedor,tipocliente,direccionenvio,descuentos,restar,1);
-        fav.setVisible(true);
+        
+        switch(vengode){
+            case 1: 
+                FinAltaVenta fav = new FinAltaVenta(clientef,clientej,mercancias,vendedor,tipocliente,direccionenvio,descuentos,restar,1);
+                fav.setVisible(true);
+                break;
+            case 2: 
+                ModificarEnvio me = new ModificarEnvio(envio,vendedor);
+                me.setVisible(true);
+                break;
+        }
+        
         
         
         

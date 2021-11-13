@@ -459,6 +459,13 @@ public class ListarEnvios extends javax.swing.JFrame {
             aux1.setFecha((String) aux[2]);
             aux1.setHora((String) aux[3]);
             aux1.setEstado((int) aux[4]);
+            
+            
+            
+            
+            dispose();
+            ModificarEnvio me = new ModificarEnvio(aux1,vendedor);
+            me.setVisible(true);
         }
         catch(Exception e){
             JOptionPane.showMessageDialog(null, "No se selecciono ningun Envio");
