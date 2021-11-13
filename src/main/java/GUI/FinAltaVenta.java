@@ -418,30 +418,47 @@ public class FinAltaVenta extends javax.swing.JFrame {
         //4- CREO EL CONETOR DE VENTA CON EL CLIENTE
         //5- UPDATE A MERCANCIA
         
-        //RECUPERAR EXITOS DE LOS DAO
-        
-        /*Consigo  Hora*/
-        HH = TFHH.getText();
-        HM = TFHM.getText();
-        
-        int a = Validates.validateIsNumber((String) HH);
-        if(Validates.validateHora(HH,HM) == 1){
-            horaenv = HH + ":" + HM;
+        Envio envio = new Envio(BusinessObjectEnvio.nuevoEnvio());
+        if(jCheckBox1.isSelected()){
+            //Tiene Envio
+            /*Consigo  Hora*/
+            HH = TFHH.getText();
+            HM = TFHM.getText();
+
+            int a = Validates.validateIsNumber((String) HH);
+            if(Validates.validateHora(HH,HM) == 1){
+                horaenv = HH + ":" + HM;
+            }
+            
+            /**INICIO* Actualizo tabla de Envio*/ //1
+            envio.setId_dir(direccionenvio.getIdDir());
+            envio.setFecha(fechenv);
+            envio.setHora(horaenv);
+            envio.setEstado(0);
+            BusinessObjectEnvio.cargarEnvio(envio);
+            /**FIN* Actualizo tabla de Envio*/
+        }
+        else{
+            //No tiene envio
+            /**INICIO* Actualizo tabla de Envio*/ //1
+            envio.setId_dir(1);
+            envio.setFecha("0");
+            envio.setHora("");
+            envio.setEstado(0);
+            BusinessObjectEnvio.cargarEnvio(envio);
+            /**FIN* Actualizo tabla de Envio*/
         }
         
-        //DE ULTIMA, DEJAR QUE ME CREE UN ENVIO SIN DATOS, SOLO EL CODIGO, Y DESPUES LIMPIAR ESE ENVIO DEL LISTAR ENVIO, HACER QUE SI LA DIR == NULL O ALGO ASI LE HAGO UN REMOVE DE LA TABLA, ESTO ES XQ LA VENTA NECSITA UN ENVIO PARECE, SINO PROBAR, VOFI
         
         
         
         
-        /**INICIO* Actualizo tabla de Envio*/ //1
-        Envio envio = new Envio(BusinessObjectEnvio.nuevoEnvio());
-        envio.setId_dir(direccionenvio.getIdDir());
-        envio.setFecha(fechenv);
-        envio.setHora(horaenv);
-        envio.setEstado(0);
-        BusinessObjectEnvio.cargarEnvio(envio);
-        /**FIN* Actualizo tabla de Envio*/
+        
+        
+        
+        
+        
+       
 
         /**INICIO* Actualizo tabla de Venta*/ //2
         Venta venta = new Venta(BusinessObjectVenta.nuevaVenta());

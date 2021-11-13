@@ -80,8 +80,16 @@ public class ListarEnvios extends javax.swing.JFrame {
         Object[] headers = Envio.getHeaders();
         tm.setDataVector(objects, headers);
         
-        
-        
+        /**Elimino los envios a dir 1, ya que estos son envios que no estan dados de alta todavia
+         * La direccion con ID 1 es una direccion reservada para poder mantener las relaciones en la base de datos
+         * al crear una venta para la cual no se le da de alta un envio.
+        */
+        for (int i=0; i < tm.getRowCount(); i++){
+            if((int) tm.getValueAt(i, 0) == 1){
+                tm.removeRow(i);
+                i--;
+            }
+        }
         
         tabla = new JTable(tm);
         tabla.setFocusable(false);
@@ -443,70 +451,86 @@ public class ListarEnvios extends javax.swing.JFrame {
     }//GEN-LAST:event_BVolverActionPerformed
 
     private void BModifActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BModifActionPerformed
-        Object[] aux = tm.getDataVector().elementAt(tabla.getSelectedRow()).toArray();
-        Envio aux1 = new Envio();
-        aux1.setCod((int) aux[0]);
-        aux1.setId_dir((int) aux[1]);
-        aux1.setFecha((String) aux[2]);
-        aux1.setHora((String) aux[3]);
-        aux1.setEstado((int) aux[4]);
-    }//GEN-LAST:event_BModifActionPerformed
-
-    private void BConfEnvActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BConfEnvActionPerformed
-        Object[] aux = tm.getDataVector().elementAt(tabla.getSelectedRow()).toArray();
-        if((int) aux[4] == 1){
-            JOptionPane.showMessageDialog(null, "Este envio ya fue entregado");
-        }
-        else{
-            BusinessObjectEnvio boEnvio = new BusinessObjectEnvio();
+        try{
+            Object[] aux = tm.getDataVector().elementAt(tabla.getSelectedRow()).toArray();
             Envio aux1 = new Envio();
             aux1.setCod((int) aux[0]);
             aux1.setId_dir((int) aux[1]);
             aux1.setFecha((String) aux[2]);
             aux1.setHora((String) aux[3]);
-            aux1.setEstado(1);
-            if(boEnvio.actualizarEstado(aux1) == 1){
-                JOptionPane.showMessageDialog(null, "Estado de Envio actualizado");
+            aux1.setEstado((int) aux[4]);
+        }
+        catch(Exception e){
+            JOptionPane.showMessageDialog(null, "No se selecciono ningun Envio");
+        }
+        
+        
+    }//GEN-LAST:event_BModifActionPerformed
+
+    private void BConfEnvActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BConfEnvActionPerformed
+        try{
+            Object[] aux = tm.getDataVector().elementAt(tabla.getSelectedRow()).toArray();
+            if((int) aux[4] == 1){
+                JOptionPane.showMessageDialog(null, "Este envio ya fue entregado");
             }
             else{
-                JOptionPane.showMessageDialog(null, "No se pudo actualizar el estado de Envio");
-            }
-            dispose();
-            ListarEnvios le = new ListarEnvios(new ArrayList<Envio>(),vendedor);
-            le.setVisible(true);
-            
-        }
-
-    }//GEN-LAST:event_BConfEnvActionPerformed
-
-    private void BBorrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BBorrarActionPerformed
-        Object[] aux = tm.getDataVector().elementAt(tabla.getSelectedRow()).toArray();
-        Envio envioaux = new Envio((int) aux[0],(int) aux[1],(int) aux[4],(String) aux[2],(String) aux[3]);
-        BusinessObjectDireccion bod = new BusinessObjectDireccion();
-        Direccion diraux = bod.readDir(String.valueOf(envioaux.getId_dir()));
-        String estado = new String("Sin Entregar");
-        if(envioaux.getEstado() == 1){
-            estado = "Entregado";
-        }
-        String saux = new String("Codigo: " + envioaux.getCod() + "\nDireccion: " + diraux.getCalleDir() + " " + diraux.getNumDir() + "\nFecha: " + envioaux.getFecha() + "\nHora: " + envioaux.getHora() + "\nEstado de Entrega: " + estado);
-        int seleccion = JOptionPane.showConfirmDialog(rootPane,saux, "Eliminar Envio",
-                JOptionPane.YES_NO_OPTION,
-                JOptionPane.QUESTION_MESSAGE);
-        if(seleccion == JOptionPane.YES_OPTION){
-            BusinessObjectEnvio boe = new BusinessObjectEnvio();
-            if(boe.eliminarEnvio(envioaux) == 1){
-                JOptionPane.showMessageDialog(null,"Envio eliminado correctamente");
+                BusinessObjectEnvio boEnvio = new BusinessObjectEnvio();
+                Envio aux1 = new Envio();
+                aux1.setCod((int) aux[0]);
+                aux1.setId_dir((int) aux[1]);
+                aux1.setFecha((String) aux[2]);
+                aux1.setHora((String) aux[3]);
+                aux1.setEstado(1);
+                if(boEnvio.actualizarEstado(aux1) == 1){
+                    JOptionPane.showMessageDialog(null, "Estado de Envio actualizado");
+                }
+                else{
+                    JOptionPane.showMessageDialog(null, "No se pudo actualizar el estado de Envio");
+                }
                 dispose();
                 ListarEnvios le = new ListarEnvios(new ArrayList<Envio>(),vendedor);
                 le.setVisible(true);
             }
+        }
+        catch(Exception e){
+            JOptionPane.showMessageDialog(null, "No se selecciono ningun Envio");
+        }
+    }//GEN-LAST:event_BConfEnvActionPerformed
+
+    private void BBorrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BBorrarActionPerformed
+        try{
+            Object[] aux = tm.getDataVector().elementAt(tabla.getSelectedRow()).toArray();
+            Envio envioaux = new Envio((int) aux[0],(int) aux[1],(int) aux[4],(String) aux[2],(String) aux[3]);
+            BusinessObjectDireccion bod = new BusinessObjectDireccion();
+            Direccion diraux = bod.readDir(String.valueOf(envioaux.getId_dir()));
+            String estado = new String("Sin Entregar");
+            if(envioaux.getEstado() == 1){
+                estado = "Entregado";
+            }
+            String saux = new String("Codigo: " + envioaux.getCod() + "\nDireccion: " + diraux.getCalleDir() + " " + diraux.getNumDir() + "\nFecha: " + envioaux.getFecha() + "\nHora: " + envioaux.getHora() + "\nEstado de Entrega: " + estado);
+            int seleccion = JOptionPane.showConfirmDialog(rootPane,saux, "Eliminar Envio",
+                    JOptionPane.YES_NO_OPTION,
+                    JOptionPane.QUESTION_MESSAGE);
+            if(seleccion == JOptionPane.YES_OPTION){
+                BusinessObjectEnvio boe = new BusinessObjectEnvio();
+                if(boe.eliminarEnvio(envioaux) == 1){
+                    JOptionPane.showMessageDialog(null,"Envio eliminado correctamente");
+                    dispose();
+                    ListarEnvios le = new ListarEnvios(new ArrayList<Envio>(),vendedor);
+                    le.setVisible(true);
+                }
+                else{
+                    JOptionPane.showMessageDialog(null,"No se pudo eliminar el Envio");
+                }
+            }
             else{
-                JOptionPane.showMessageDialog(null,"No se pudo eliminar el Envio");
+                JOptionPane.showMessageDialog(null,"No se elimino el envio");
             }
         }
-        else{
-            JOptionPane.showMessageDialog(null,"No se elimino el envio");
+        catch(Exception e){
+            JOptionPane.showMessageDialog(null, "No se selecciono ningun Envio");
         }
+        
     }//GEN-LAST:event_BBorrarActionPerformed
 
     /**
