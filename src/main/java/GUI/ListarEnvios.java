@@ -443,7 +443,12 @@ public class ListarEnvios extends javax.swing.JFrame {
     }//GEN-LAST:event_BVolverActionPerformed
 
     private void BModifActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BModifActionPerformed
-        
+        Object[] aux = tm.getDataVector().elementAt(tabla.getSelectedRow()).toArray();
+        Envio aux1 = new Envio();
+        aux1.setCod((int) aux[0]);
+        aux1.setId_dir((int) aux[1]);
+        aux1.setFecha((String) aux[2]);
+        aux1.setHora((String) aux[3]);
     }//GEN-LAST:event_BModifActionPerformed
 
     private void BConfEnvActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BConfEnvActionPerformed
@@ -490,6 +495,9 @@ public class ListarEnvios extends javax.swing.JFrame {
             BusinessObjectEnvio boe = new BusinessObjectEnvio();
             if(boe.eliminarEnvio(envioaux) == 1){
                 JOptionPane.showInputDialog("Envio eliminado correctamente");
+                dispose();
+                ListarEnvios le = new ListarEnvios();
+                le.setVisible(true);
             }
             else{
                 JOptionPane.showInputDialog("No se pudo eliminar el Envio");
