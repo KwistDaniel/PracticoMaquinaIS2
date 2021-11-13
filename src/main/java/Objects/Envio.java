@@ -91,5 +91,6 @@ public class Envio {
     private Object[] toObject(){
         return new Object[]{getCod(),getId_dir(),getFecha(),getHora(),getEstado()};
     }
+
     
 }

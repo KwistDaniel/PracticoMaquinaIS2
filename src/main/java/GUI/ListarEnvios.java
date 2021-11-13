@@ -11,9 +11,11 @@ import BusinessObject_Manager.BusinessObjectEnvio;
 import GUI.*;
 import Objects.ClienteF;
 import Objects.ClienteJ;
+import Objects.Direccion;
 import Objects.Envio;
 import Objects.Mercancia;
 import Objects.Vendedor;
+import Utils.*;
 import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.Dimension;
@@ -348,6 +350,11 @@ public class ListarEnvios extends javax.swing.JFrame {
         BBorrar.setBackground(new java.awt.Color(210, 4, 45));
         BBorrar.setForeground(new java.awt.Color(250, 250, 250));
         BBorrar.setText("Eliminar Seleccionado");
+        BBorrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BBorrarActionPerformed(evt);
+            }
+        });
 
         BModif.setBackground(new java.awt.Color(210, 4, 45));
         BModif.setForeground(new java.awt.Color(250, 250, 250));
@@ -465,6 +472,33 @@ public class ListarEnvios extends javax.swing.JFrame {
         }
 
     }//GEN-LAST:event_BConfEnvActionPerformed
+
+    private void BBorrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BBorrarActionPerformed
+        Object[] aux = tm.getDataVector().elementAt(tabla.getSelectedRow()).toArray();
+        Envio envioaux = new Envio((int) aux[0],(int) aux[1],(int) aux[4],(String) aux[2],(String) aux[3]);
+        BusinessObjectDireccion bod = new BusinessObjectDireccion();
+        Direccion diraux = bod.readDir(String.valueOf(envioaux.getId_dir()));
+        String estado = new String("Sin Entregar");
+        if(envioaux.getEstado() == 1){
+            estado = "Entregado";
+        }
+        String saux = new String("Codigo: " + envioaux.getCod() + "Direccion: " + diraux.getCalleDir() + diraux.getNumDir() + "Fecha: " + envioaux.getFecha() + "Hora: " + envioaux.getHora() + "Estado de Entrega: " + estado);
+        int seleccion = JOptionPane.showConfirmDialog(rootPane,saux, "Eliminar Envio",
+                JOptionPane.YES_NO_OPTION,
+                JOptionPane.QUESTION_MESSAGE);
+        if(seleccion == JOptionPane.YES_OPTION){
+            BusinessObjectEnvio boe = new BusinessObjectEnvio();
+            if(boe.eliminarEnvio(envioaux) == 1){
+                JOptionPane.showInputDialog("Envio eliminado correctamente");
+            }
+            else{
+                JOptionPane.showInputDialog("No se pudo eliminar el Envio");
+            }
+        }
+        else{
+            JOptionPane.showInputDialog("No se elimino el envio");
+        }
+    }//GEN-LAST:event_BBorrarActionPerformed
 
     /**
      * @param args the command line arguments
