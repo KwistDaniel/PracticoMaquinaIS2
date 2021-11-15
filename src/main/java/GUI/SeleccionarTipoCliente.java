@@ -20,10 +20,11 @@ public class SeleccionarTipoCliente extends javax.swing.JFrame {
     ArrayList<Mercancia> mercancias,restar;
     Vendedor vendedor;
     ArrayList<Integer> descuentos;
+     //false venta true presupuesto
     /**
      * Creates new form Menu
      */
-    public SeleccionarTipoCliente(ArrayList<Mercancia> aux, Vendedor vaux, ArrayList<Integer> descaux,ArrayList<Mercancia> restaaux) {
+    public SeleccionarTipoCliente(ArrayList<Mercancia> aux, Vendedor vaux, ArrayList<Integer> descaux,ArrayList<Mercancia> restaaux ) {
         descuentos = new ArrayList<Integer> (descaux);
         mercancias = new ArrayList<Mercancia>(aux);
         restar = new ArrayList<Mercancia>(restaaux);
@@ -31,9 +32,7 @@ public class SeleccionarTipoCliente extends javax.swing.JFrame {
         initComponents();
         this.setVisible(true);
         this.setLocationRelativeTo(null);
-        BClienteF.getRootPane().requestFocus();
-                
-                
+        BClienteF.getRootPane().requestFocus();     
     }
 
     private SeleccionarTipoCliente() {
@@ -71,6 +70,11 @@ public class SeleccionarTipoCliente extends javax.swing.JFrame {
         BClienteJ.setBackground(new java.awt.Color(210, 4, 45));
         BClienteJ.setForeground(new java.awt.Color(250, 250, 250));
         BClienteJ.setText("Cliente Juridico");
+        BClienteJ.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BClienteJActionPerformed(evt);
+            }
+        });
 
         BClienteF.setBackground(new java.awt.Color(210, 4, 45));
         BClienteF.setForeground(new java.awt.Color(250, 250, 250));
@@ -120,7 +124,7 @@ public class SeleccionarTipoCliente extends javax.swing.JFrame {
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                .addContainerGap(286, Short.MAX_VALUE)
+                .addContainerGap(291, Short.MAX_VALUE)
                 .addComponent(Volver)
                 .addContainerGap())
         );
@@ -148,7 +152,7 @@ public class SeleccionarTipoCliente extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, 496, Short.MAX_VALUE)
+                    .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, 498, Short.MAX_VALUE)
                     .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -195,6 +199,10 @@ public class SeleccionarTipoCliente extends javax.swing.JFrame {
         SeleccionarClienteF scf = new SeleccionarClienteF(mercancias,vendedor,descuentos,restar);
         scf.setVisible(true);
     }//GEN-LAST:event_BClienteFActionPerformed
+
+    private void BClienteJActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BClienteJActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_BClienteJActionPerformed
 
     /**
      * @param args the command line arguments

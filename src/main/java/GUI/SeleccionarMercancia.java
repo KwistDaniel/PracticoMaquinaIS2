@@ -31,6 +31,7 @@ import javax.swing.table.DefaultTableModel;
 public class SeleccionarMercancia extends javax.swing.JFrame {
     ArrayList<Mercancia> mercancias,restar;
     Vendedor vendedor;
+    boolean venta_presupuesto;
     /**
      * Creates new form Menu
      */
@@ -42,13 +43,14 @@ public class SeleccionarMercancia extends javax.swing.JFrame {
             }
         };
     
-    public SeleccionarMercancia(ArrayList<Mercancia> aux,Vendedor vaux,ArrayList<Mercancia> restaaux) {
+    public SeleccionarMercancia(ArrayList<Mercancia> aux,Vendedor vaux,ArrayList<Mercancia> restaaux, boolean venta_presupuesto) {
         vendedor = new Vendedor(vaux);
         mercancias = new ArrayList<Mercancia>(aux);
         restar = new ArrayList<Mercancia>(restaaux);
         initComponents();
         this.setVisible(true);
         this.setLocationRelativeTo(null);
+        this.venta_presupuesto = venta_presupuesto;
         BSeleccionar.getRootPane().requestFocus();
         GridBagConstraints gridBagConstraints = new GridBagConstraints();
         
@@ -220,49 +222,101 @@ public class SeleccionarMercancia extends javax.swing.JFrame {
 
     private void BVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BVolverActionPerformed
         // TODO add your handling code here:
-        dispose();
-        AltaVenta av = new AltaVenta(mercancias,vendedor,restar);
+        
+        if (venta_presupuesto){
+            dispose();
+            AltaPresupuesto ap = new AltaPresupuesto (mercancias,vendedor,restar);
+        }
+        else{
+            dispose();
+            AltaVenta av = new AltaVenta(mercancias,vendedor,restar);
+        }
+        
     }//GEN-LAST:event_BVolverActionPerformed
 
     private void BSeleccionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BSeleccionarActionPerformed
-        String control = JOptionPane.showInputDialog("Ingrese una cantidad");
-        
-        if (control == null){
-            JOptionPane.showMessageDialog(null, "Valor incorrecto");
-        }
-        else{
-            try{
-                int cant = Integer.parseInt(control);
-                ArrayList<Mercancia> mercanciasaux = new ArrayList<Mercancia>(mercancias);
-                Object[] aux = tm.getDataVector().elementAt(tabla.getSelectedRow()).toArray();
-                if (cant > (int) aux[4] || cant <=0){
+        if (this.venta_presupuesto){
+            String control = JOptionPane.showInputDialog("Ingrese una cantidad");
+
+            if (control == null){
+                JOptionPane.showMessageDialog(null, "Valor incorrecto");
+            }
+            else{
+                try{
+                    int cant = Integer.parseInt(control);
+                    ArrayList<Mercancia> mercanciasaux = new ArrayList<Mercancia>(mercancias);
+                    Object[] aux = tm.getDataVector().elementAt(tabla.getSelectedRow()).toArray();
+                    if (cant > (int) aux[4] || cant <=0){
+                        JOptionPane.showMessageDialog(null, "Valor incorrecto");
+                    }
+                    else{
+                        Mercancia aux1 = new Mercancia();
+                        aux1.setCod((int) aux[0]);
+                        aux1.setNombre((String) aux[1]);
+                        aux1.setDescripcion((String) aux[2]);
+                        aux1.setPrecio_u((double) aux[3]);
+                        aux1.setCantidad(cant);
+                        aux1.setColor((String) aux[5]);
+                        aux1.setCategoria((String) aux[6]);
+                        aux1.setCalidad((int) aux[7]);
+                        aux1.setAncho((int) aux[8]);
+                        aux1.setAlto((int) aux[9]);
+                        aux1.setMetcuad((int) aux[10]);
+                        aux1.setPartida((int) aux[11]);
+                        mercanciasaux.add(aux1);
+                        int newcant = ((int)aux[4] - cant);
+                        Mercancia aux2 = new Mercancia(aux1.getCod(),aux1.getNombre(),aux1.getCategoria(),aux1.getDescripcion(),newcant,aux1.getPrecio_u(),aux1.getColor(),aux1.getPartida(),aux1.getAncho(),aux1.getAncho(),aux1.getMetcuad(),aux1.getCalidad());
+                        restar.add(aux2);
+                        dispose();
+                        AltaPresupuesto AP = new AltaPresupuesto(mercanciasaux,vendedor,restar);
+                        AP.setVisible(true);
+                    }
+
+                }catch(Exception e){
                     JOptionPane.showMessageDialog(null, "Valor incorrecto");
                 }
-                else{
-                    Mercancia aux1 = new Mercancia();
-                    aux1.setCod((int) aux[0]);
-                    aux1.setNombre((String) aux[1]);
-                    aux1.setDescripcion((String) aux[2]);
-                    aux1.setPrecio_u((double) aux[3]);
-                    aux1.setCantidad(cant);
-                    aux1.setColor((String) aux[5]);
-                    aux1.setCategoria((String) aux[6]);
-                    aux1.setCalidad((int) aux[7]);
-                    aux1.setAncho((int) aux[8]);
-                    aux1.setAlto((int) aux[9]);
-                    aux1.setMetcuad((int) aux[10]);
-                    aux1.setPartida((int) aux[11]);
-                    mercanciasaux.add(aux1);
-                    int newcant = ((int)aux[4] - cant);
-                    Mercancia aux2 = new Mercancia(aux1.getCod(),aux1.getNombre(),aux1.getCategoria(),aux1.getDescripcion(),newcant,aux1.getPrecio_u(),aux1.getColor(),aux1.getPartida(),aux1.getAncho(),aux1.getAncho(),aux1.getMetcuad(),aux1.getCalidad());
-                    restar.add(aux2);
-                    dispose();
-                    AltaVenta AV = new AltaVenta(mercanciasaux,vendedor,restar);
-                    AV.setVisible(true);
-                }
-                
-            }catch(Exception e){
+            }
+        }
+        else {
+            String control = JOptionPane.showInputDialog("Ingrese una cantidad");
+
+            if (control == null){
                 JOptionPane.showMessageDialog(null, "Valor incorrecto");
+            }
+            else{
+                try{
+                    int cant = Integer.parseInt(control);
+                    ArrayList<Mercancia> mercanciasaux = new ArrayList<Mercancia>(mercancias);
+                    Object[] aux = tm.getDataVector().elementAt(tabla.getSelectedRow()).toArray();
+                    if (cant > (int) aux[4] || cant <=0){
+                        JOptionPane.showMessageDialog(null, "Valor incorrecto");
+                    }
+                    else{
+                        Mercancia aux1 = new Mercancia();
+                        aux1.setCod((int) aux[0]);
+                        aux1.setNombre((String) aux[1]);
+                        aux1.setDescripcion((String) aux[2]);
+                        aux1.setPrecio_u((double) aux[3]);
+                        aux1.setCantidad(cant);
+                        aux1.setColor((String) aux[5]);
+                        aux1.setCategoria((String) aux[6]);
+                        aux1.setCalidad((int) aux[7]);
+                        aux1.setAncho((int) aux[8]);
+                        aux1.setAlto((int) aux[9]);
+                        aux1.setMetcuad((int) aux[10]);
+                        aux1.setPartida((int) aux[11]);
+                        mercanciasaux.add(aux1);
+                        int newcant = ((int)aux[4] - cant);
+                        Mercancia aux2 = new Mercancia(aux1.getCod(),aux1.getNombre(),aux1.getCategoria(),aux1.getDescripcion(),newcant,aux1.getPrecio_u(),aux1.getColor(),aux1.getPartida(),aux1.getAncho(),aux1.getAncho(),aux1.getMetcuad(),aux1.getCalidad());
+                        restar.add(aux2);
+                        dispose();
+                        AltaVenta AV = new AltaVenta(mercanciasaux,vendedor,restar);
+                        AV.setVisible(true);
+                    }
+
+                }catch(Exception e){
+                    JOptionPane.showMessageDialog(null, "Valor incorrecto");
+                }
             }
         }
     }//GEN-LAST:event_BSeleccionarActionPerformed

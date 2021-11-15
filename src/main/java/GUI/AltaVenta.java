@@ -32,6 +32,7 @@ public class AltaVenta extends javax.swing.JFrame {
     ArrayList<Integer> descuentos;
     private final JTable tabla;
     
+    
     DefaultTableModel tm = new DefaultTableModel(){
             /*@Override
             public boolean isCellEditable(int row, int column){
@@ -64,14 +65,10 @@ public class AltaVenta extends javax.swing.JFrame {
         Object[] headers = Mercancia.getHeadersB();
         tm.setDataVector(objects, headers);
         
-        
-        
-        
         tabla = new JTable(tm);
         tabla.setFocusable(false);
         tabla.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         tabla.getTableHeader().setReorderingAllowed(false);
-        
         
         JScrollPane scrollPane = new JScrollPane(tabla);
         scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
@@ -98,8 +95,6 @@ public class AltaVenta extends javax.swing.JFrame {
             tm.setValueAt(true, i, 12);
             tm.setValueAt(false, i, 12);
         }
-        
-        
     }
 
     private AltaVenta() {
@@ -201,7 +196,7 @@ public class AltaVenta extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(BElimSelec, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(BAgObj, javax.swing.GroupLayout.DEFAULT_SIZE, 126, Short.MAX_VALUE)
+                    .addComponent(BAgObj, javax.swing.GroupLayout.DEFAULT_SIZE, 118, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(BSiguiente))
@@ -222,7 +217,7 @@ public class AltaVenta extends javax.swing.JFrame {
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(TFDescuento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 451, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 448, Short.MAX_VALUE)
                 .addComponent(BSiguiente)
                 .addContainerGap())
         );
@@ -328,7 +323,7 @@ public class AltaVenta extends javax.swing.JFrame {
 
     private void BAgObjActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BAgObjActionPerformed
         dispose();
-        SeleccionarMercancia sm = new SeleccionarMercancia(mercancias,vendedor,restar);
+        SeleccionarMercancia sm = new SeleccionarMercancia(mercancias,vendedor,restar,false);
         sm.setVisible(true);
     }//GEN-LAST:event_BAgObjActionPerformed
 
