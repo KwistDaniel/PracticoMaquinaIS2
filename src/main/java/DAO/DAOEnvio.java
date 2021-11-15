@@ -78,12 +78,44 @@ public class DAOEnvio implements DAO<Envio> {
 
     @Override
     public int update(Envio t) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        String sqlUpdate = " UPDATE Envio SET ID_DIR = ?, ESTADO_ENVIO = ?, FECHA_ENVIO = ?, HORA_ENVIO = ?" +
+                " WHERE (COD = '" + t.getCod() + "')";
+        int exito = 0;
+        Connection connection = DataBase.getInstance().getConnection();
+        PreparedStatement statement;
+        try {
+            statement = connection.prepareStatement(sqlUpdate);
+            statement.setInt(1, t.getId_dir());
+            statement.setInt(2, t.getEstado());
+            statement.setString(3, t.getFecha());
+            statement.setString(4, t.getHora());
+            statement.executeUpdate();
+            exito = 1;
+
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        DataBase.getInstance().disconnect();
+        return exito;
     }
 
     @Override
     public int delete(Envio t) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        String sqlUpdate = " UPDATE Envio SET Status = 0" +
+                " WHERE (COD = '" + t.getCod() + "')";
+        int exito = 0;
+        Connection connection = DataBase.getInstance().getConnection();
+        PreparedStatement statement;
+        try {
+            statement = connection.prepareStatement(sqlUpdate);
+            statement.executeUpdate();
+            exito = 1;
+
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        DataBase.getInstance().disconnect();
+        return exito;
     }
 
     @Override

@@ -27,7 +27,26 @@ public class DAODireccion implements DAO<Direccion> {
 
     @Override
     public Direccion readOne(String... ids) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Direccion direccion = new Direccion();
+        Connection connection = DataBase.getInstance().getConnection();
+        Statement statement;
+        try{
+            statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery("SELECT * FROM Direccion WHERE (Status=1) AND (id='" + ids[0] + "')");
+            while(rs.next()){
+                direccion.setIdDir(rs.getInt("ID"));
+                direccion.setCalleDir(rs.getString("CALLE"));
+                direccion.setNumDir(rs.getString("NUMERO"));
+                direccion.setPisoDir(rs.getString("PISO"));
+                direccion.setDeptoDir(rs.getString("DEPTO"));
+                direccion.setCodPostal(rs.getString("COD_POSTAL"));
+                direccion.setLocalidad(rs.getString("LOCALIDAD"));
+            }
+        }catch(SQLException throwables){
+            throwables.printStackTrace();
+        }
+        DataBase.getInstance().disconnect();
+        return direccion;
     }
 
     @Override
@@ -50,7 +69,7 @@ public class DAODireccion implements DAO<Direccion> {
         List<Direccion> direcciones = new ArrayList<>();
         Connection connection = DataBase.getInstance().getConnection();
         Statement statement;
-        if(!(ids[1].equals(null))){
+        if(!(ids[1].equals("cj"))){
             try{
                 statement = connection.createStatement();
             

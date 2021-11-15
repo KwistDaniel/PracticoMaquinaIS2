@@ -34,4 +34,14 @@ public class BusinessObjectEnvio {
         ArrayList<Envio> envios = new ArrayList<Envio> (envioDAO.readAll());
         return envios;
     }
+    
+    public static int actualizarEstado(Envio e){
+        envioDAO = new DAOEnvio();
+        return envioDAO.update(e);
+    }
+    
+    public static int eliminarEnvio(Envio e){
+        envioDAO = new DAOEnvio();
+        return envioDAO.delete(e);
+    }
 }

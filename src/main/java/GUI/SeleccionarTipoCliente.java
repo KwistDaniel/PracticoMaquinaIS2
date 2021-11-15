@@ -201,7 +201,9 @@ public class SeleccionarTipoCliente extends javax.swing.JFrame {
     }//GEN-LAST:event_BClienteFActionPerformed
 
     private void BClienteJActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BClienteJActionPerformed
-        // TODO add your handling code here:
+        dispose();
+        SeleccionarClienteJ scj = new SeleccionarClienteJ(mercancias,vendedor,descuentos,restar);
+        scj.setVisible(true);
     }//GEN-LAST:event_BClienteJActionPerformed
 
     /**

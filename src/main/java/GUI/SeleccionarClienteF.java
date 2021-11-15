@@ -17,6 +17,7 @@ import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.util.ArrayList;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
@@ -229,21 +230,28 @@ public class SeleccionarClienteF extends javax.swing.JFrame {
     }//GEN-LAST:event_BVolverActionPerformed
 
     private void BSeleccionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BSeleccionarActionPerformed
+        try{
+            Object[] aux = tm.getDataVector().elementAt(tabla.getSelectedRow()).toArray();
+            ClienteF aux1 = new ClienteF();
+            aux1.setNombre((String) aux[0]);
+            aux1.setApellido((String) aux[1]);
+            aux1.setDni((String) aux[2]);
+            aux1.setSexo((String) aux[3]);
+            aux1.setTelefono((String) aux[4]);
+            aux1.setfNac((String) aux[5]);
+            aux1.setEmail((String) aux[6]);
+            aux1.setSitIva((String) aux[7]);
+            aux1.setCuit_l((String) aux[8]);
+
+            ClienteJ cjaux = new ClienteJ();
+            dispose();
+            FinAltaVenta fav = new FinAltaVenta(aux1,cjaux,mercancias,vendedor,1,descuentos,restar,0);
+            fav.setVisible(true);
+        }
+        catch(Exception e){
+            JOptionPane.showMessageDialog(null, "No se selecciono ningun Cliente");
+        }
         
-        Object[] aux = tm.getDataVector().elementAt(tabla.getSelectedRow()).toArray();
-        ClienteF aux1 = new ClienteF();
-        aux1.setNombre((String) aux[0]);
-        aux1.setApellido((String) aux[1]);
-        aux1.setDni((String) aux[2]);
-        aux1.setSexo((String) aux[3]);
-        aux1.setTelefono((String) aux[4]);
-        aux1.setfNac((String) aux[5]);
-        aux1.setEmail((String) aux[6]);
-        
-        ClienteJ cjaux = new ClienteJ();
-        dispose();
-        FinAltaVenta fav = new FinAltaVenta(aux1,cjaux,mercancias,vendedor,1,descuentos,restar,0);
-        fav.setVisible(true);
         
     }//GEN-LAST:event_BSeleccionarActionPerformed
 

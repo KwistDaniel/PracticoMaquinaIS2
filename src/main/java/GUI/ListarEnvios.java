@@ -6,24 +6,44 @@
 package GUI;
 
 
+import BusinessObject_Manager.BusinessObjectDireccion;
 import BusinessObject_Manager.BusinessObjectEnvio;
 import GUI.*;
 import Objects.ClienteF;
 import Objects.ClienteJ;
+import Objects.Direccion;
 import Objects.Envio;
 import Objects.Mercancia;
 import Objects.Vendedor;
+import Utils.*;
 import java.awt.BorderLayout;
+import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
+import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import javax.swing.DefaultCellEditor;
+import javax.swing.JButton;
+import javax.swing.JCheckBox;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
+import javax.swing.RowFilter;
 import javax.swing.ScrollPaneConstants;
+import javax.swing.UIManager;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
+import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableCellRenderer;
+import javax.swing.table.TableModel;
+import javax.swing.table.TableRowSorter;
 
 /**
  *
@@ -49,28 +69,48 @@ public class ListarEnvios extends javax.swing.JFrame {
         initComponents();
         this.setVisible(true);
         this.setLocationRelativeTo(null);
-        BSeleccionar.getRootPane().requestFocus();
+        BModif.getRootPane().requestFocus();
         GridBagConstraints gridBagConstraints = new GridBagConstraints();
         
-        /*DefaultTableModel tm = new DefaultTableModel(){
-            @Override
-            public boolean isCellEditable(int row, int column){
-                return column == 1;
-            }
-        };*/
+        
+        
+        
+        
         Object[][] objects = Envio.getDataVector(BusinessObjectEnvio.listarEnvios());
         Object[] headers = Envio.getHeaders();
         tm.setDataVector(objects, headers);
         
-        
-        
+        /**Elimino los envios a dir 1, ya que estos son envios que no estan dados de alta todavia
+         * La direccion con ID 1 es una direccion reservada para poder mantener las relaciones en la base de datos
+         * al crear una venta para la cual no se le da de alta un envio.
+        */
+        for (int i=0; i < tm.getRowCount(); i++){
+            if((int) tm.getValueAt(i, 1) == 1){
+                tm.removeRow(i);
+                i--;
+            }
+        }
+        for (int i=0; i < tm.getRowCount(); i++){
+            if((int) tm.getValueAt(i, 4) == 1){
+                tm.setValueAt("Entregado", i, 4);
+            }
+            else{
+                tm.setValueAt("Sin Entregar", i, 4);
+            }
+        }
         
         tabla = new JTable(tm);
         tabla.setFocusable(false);
         tabla.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         tabla.getTableHeader().setReorderingAllowed(false);
+        //Creo los botones
+        tabla.getColumn("Codigo de Direccion").setCellRenderer(new ButtonRenderer());
+        tabla.getColumn("Codigo de Direccion").setCellEditor(new ButtonEditor(new JCheckBox(),new BusinessObjectDireccion(),true));
         
         
+        tabla.setAutoCreateRowSorter(true);//para los filtros, tutorial de oracle
+        TableRowSorter<TableModel> sorter = new TableRowSorter<TableModel>(tabla.getModel());//para los filtros, tutorial de oracle
+        tabla.setRowSorter(sorter);//para los filtros, tutorial de oracle
         JScrollPane scrollPane = new JScrollPane(tabla);
         scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
         scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
@@ -87,39 +127,172 @@ public class ListarEnvios extends javax.swing.JFrame {
         add(scrollPane, gridBagConstraints);
         
         
-        jPanel2.setLayout(new BorderLayout());
-        jPanel2.add(scrollPane, BorderLayout.CENTER);
+        jPanel6.setLayout(new BorderLayout());
+        jPanel6.add(scrollPane, BorderLayout.CENTER);
         
-        JTextField jtfCod = new JTextField();
-        JTextField jtfDir = new JTextField();
-        jtfCod.setBounds(5, 5, 200, 50);
-        jtfDir.setBounds(5, 5, 200, 50);
-        jPanel5.add(jtfCod);
-        jPanel5.add(jtfDir);
         
-                
+        
+        
+        /**
+         * Filtro de la tabla
+         */
+        //GridLayout para agregar los textfields
+        jPanel4.setLayout(new GridLayout(1,1,0,0)); 
+        
+        //Textfields
+        JTextField filtro = new JTextField();
+        //Configuro las dimensiones
+        filtro.setPreferredSize(new Dimension(tabla.getColumnModel().getColumn(0).getWidth() + tabla.getColumnModel().getColumn(1).getWidth() + tabla.getColumnModel().getColumn(2).getWidth() + tabla.getColumnModel().getColumn(3).getWidth() + tabla.getColumnModel().getColumn(4).getWidth(),22));
+        
+        /**
+         * Listener para filtrar
+         */
+        filtro.getDocument().addDocumentListener(new DocumentListener() {
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+                String str = filtro.getText();
+                if(str.trim().length() == 0){
+                    sorter.setRowFilter(null);
+                }
+                else{
+                    sorter.setRowFilter(RowFilter.regexFilter("(?i)" + str));
+                }
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+                String str = filtro.getText();
+                if(str.trim().length() == 0){
+                    sorter.setRowFilter(null);
+                }
+                else{
+                    sorter.setRowFilter(RowFilter.regexFilter("(?i)" + str));
+                }
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }
+        });
+        
+
+        //Los agrego al panel
+        jPanel4.add(filtro);
     }
 
     private ListarEnvios() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+    static class ButtonRenderer extends JButton implements TableCellRenderer{
+        public ButtonRenderer(){
+            setOpaque(true);
+        }
+        @Override
+        public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column){
+            if(isSelected){
+                setForeground(table.getSelectionForeground());
+                setBackground(table.getSelectionBackground());
+            }
+            else{
+                setForeground(table.getForeground());
+                setBackground(UIManager.getColor("Button.backgound"));
+            }
+            setText((value == null) ? "" : value.toString());
+            return this;
+        }
+    }
+    
+    static class ButtonEditor extends DefaultCellEditor {
+
+        protected JButton button;
+        private String label;
+        private String label2;
+        private boolean isPushed;
+        private boolean isLabel2;
+        private BusinessObjectDireccion boDir;
+
+        public ButtonEditor(JCheckBox checkBox, BusinessObjectDireccion businessObject, boolean isLabel2) {
+            super(checkBox);
+            this.boDir = businessObject;
+            button = new JButton();
+            button.setOpaque(true);
+            button.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    fireEditingStopped();
+                }
+            });
+
+            this.isLabel2 = isLabel2;
+        }
+
+        @Override
+        public Component getTableCellEditorComponent(JTable table, Object value, boolean isSelected, int row, int column) {
+            if (isSelected) {
+                button.setForeground(table.getSelectionForeground());
+                button.setBackground(table.getSelectionBackground());
+            } else {
+                button.setForeground(table.getForeground());
+                button.setBackground(table.getBackground());
+            }
+            label = (value == null) ? "" : value.toString();
+            if (isLabel2) {
+                label2 = (value == null) ? "" : table.getValueAt(row, column + 1).toString();
+            }
+
+            button.setText(label);
+            isPushed = true;
+            return button;
+        }
+
+        @Override
+        public Object getCellEditorValue() {
+
+            String[] ids;
+
+            if (isLabel2) {
+                ids = new String[]{label, label2};
+            } else {
+                ids = new String[]{label};
+            }
+
+            if (isPushed) {
+                Object object = boDir.readDir(ids[0]);
+
+                JOptionPane.showMessageDialog(null, object.toString());
+            }
+            isPushed = false;
+            return label;
+        }
+
+        @Override
+        public boolean stopCellEditing() {
+            isPushed = false;
+            return super.stopCellEditing();
+        }
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
      * regenerated by the Form Editor.
      */
+    
+    
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
+        jPanel4 = new javax.swing.JPanel();
+        jPanel6 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
         BVolver = new javax.swing.JButton();
-        jPanel5 = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
-        BSeleccionar = new javax.swing.JButton();
+        BBorrar = new javax.swing.JButton();
+        BModif = new javax.swing.JButton();
         BConfEnv = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -131,15 +304,51 @@ public class ListarEnvios extends javax.swing.JFrame {
 
         jPanel2.setBackground(new java.awt.Color(245, 245, 220));
 
+        jPanel4.setBackground(new java.awt.Color(245, 245, 220));
+
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 50, Short.MAX_VALUE)
+        );
+
+        jPanel6.setBackground(new java.awt.Color(245, 245, 220));
+
+        javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
+        jPanel6.setLayout(jPanel6Layout);
+        jPanel6Layout.setHorizontalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 1075, Short.MAX_VALUE)
+        );
+        jPanel6Layout.setVerticalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 427, Short.MAX_VALUE)
+        );
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1087, Short.MAX_VALUE)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 495, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         jPanel3.setBackground(new java.awt.Color(245, 245, 220));
@@ -154,31 +363,27 @@ public class ListarEnvios extends javax.swing.JFrame {
             }
         });
 
-        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
-        jPanel5.setLayout(jPanel5Layout);
-        jPanel5Layout.setHorizontalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
-        jPanel5Layout.setVerticalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 43, Short.MAX_VALUE)
-        );
-
-        jButton1.setText("Agregar Cliente");
-
-        BSeleccionar.setBackground(new java.awt.Color(210, 4, 45));
-        BSeleccionar.setForeground(new java.awt.Color(250, 250, 250));
-        BSeleccionar.setText("Agregar Seleccionado");
-        BSeleccionar.addActionListener(new java.awt.event.ActionListener() {
+        BBorrar.setBackground(new java.awt.Color(210, 4, 45));
+        BBorrar.setForeground(new java.awt.Color(250, 250, 250));
+        BBorrar.setText("Eliminar Seleccionado");
+        BBorrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BSeleccionarActionPerformed(evt);
+                BBorrarActionPerformed(evt);
+            }
+        });
+
+        BModif.setBackground(new java.awt.Color(210, 4, 45));
+        BModif.setForeground(new java.awt.Color(250, 250, 250));
+        BModif.setText("Modificar Seleccionado");
+        BModif.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BModifActionPerformed(evt);
             }
         });
 
         BConfEnv.setBackground(new java.awt.Color(210, 4, 45));
         BConfEnv.setForeground(new java.awt.Color(250, 250, 250));
-        BConfEnv.setText("Agregar Seleccionado");
+        BConfEnv.setText("Actualizar Estado de Envio");
         BConfEnv.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BConfEnvActionPerformed(evt);
@@ -191,36 +396,25 @@ public class ListarEnvios extends javax.swing.JFrame {
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(6, 6, 6)
-                        .addComponent(BSeleccionar)
-                        .addGap(44, 44, 44)
-                        .addComponent(jButton1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(BConfEnv)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(BVolver))
-                    .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(BModif)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(BBorrar)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(BConfEnv)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(BVolver)
                 .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(BVolver)
-                            .addComponent(jButton1)
-                            .addComponent(BConfEnv))
-                        .addGap(21, 21, 21))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(BSeleccionar)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap(30, Short.MAX_VALUE)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(BModif)
+                    .addComponent(BBorrar)
+                    .addComponent(BConfEnv)
+                    .addComponent(BVolver))
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -241,7 +435,7 @@ public class ListarEnvios extends javax.swing.JFrame {
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(11, Short.MAX_VALUE))
+                .addContainerGap(15, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -264,13 +458,101 @@ public class ListarEnvios extends javax.swing.JFrame {
         mv.setVisible(true);
     }//GEN-LAST:event_BVolverActionPerformed
 
-    private void BSeleccionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BSeleccionarActionPerformed
+    private void BModifActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BModifActionPerformed
+        try{
+            int estadoentrega = 0;
+            Object[] aux = tm.getDataVector().elementAt(tabla.getSelectedRow()).toArray();
+            if(((String)aux[4]).equals("Entregado")){
+            estadoentrega = 1;
+        }
+            Envio aux1 = new Envio();
+            aux1.setCod((int) aux[0]);
+            aux1.setId_dir((int) aux[1]);
+            aux1.setFecha((String) aux[2]);
+            aux1.setHora((String) aux[3]);
+            aux1.setEstado(estadoentrega);
+            
+            dispose();
+            ModificarEnvio me = new ModificarEnvio(aux1,vendedor);
+            me.setVisible(true);
+        }
+        catch(Exception e){
+            JOptionPane.showMessageDialog(null, "No se selecciono ningun Envio");
+        }
         
-    }//GEN-LAST:event_BSeleccionarActionPerformed
+        
+    }//GEN-LAST:event_BModifActionPerformed
 
     private void BConfEnvActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BConfEnvActionPerformed
-        // TODO add your handling code here:
+        try{
+            Object[] aux = tm.getDataVector().elementAt(tabla.getSelectedRow()).toArray();
+            if(((String) aux[4]).equals("Entregado")){
+                JOptionPane.showMessageDialog(null, "Este envio ya fue entregado");
+            }
+            else{
+                BusinessObjectEnvio boEnvio = new BusinessObjectEnvio();
+                Envio aux1 = new Envio();
+                aux1.setCod((int) aux[0]);
+                aux1.setId_dir((int) aux[1]);
+                aux1.setFecha((String) aux[2]);
+                aux1.setHora((String) aux[3]);
+                aux1.setEstado(1);
+                if(boEnvio.actualizarEstado(aux1) == 1){
+                    JOptionPane.showMessageDialog(null, "Estado de Envio actualizado");
+                }
+                else{
+                    JOptionPane.showMessageDialog(null, "No se pudo actualizar el estado de Envio");
+                }
+                dispose();
+                ListarEnvios le = new ListarEnvios(new ArrayList<Envio>(),vendedor);
+                le.setVisible(true);
+            }
+        }
+        catch(Exception e){
+            JOptionPane.showMessageDialog(null, "No se selecciono ningun Envio");
+        }
     }//GEN-LAST:event_BConfEnvActionPerformed
+
+    private void BBorrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BBorrarActionPerformed
+        try{
+            int estadoentrega = 0;
+            Object[] aux = tm.getDataVector().elementAt(tabla.getSelectedRow()).toArray();
+            if(((String) aux[4]).equals("Entregado")){
+                estadoentrega = 1;
+            }
+            
+            Envio envioaux = new Envio((int) aux[0],(int) aux[1],estadoentrega,(String) aux[2],(String) aux[3]);
+            BusinessObjectDireccion bod = new BusinessObjectDireccion();
+            Direccion diraux = bod.readDir(String.valueOf(envioaux.getId_dir()));
+            String estado = new String("Sin Entregar");
+            if(envioaux.getEstado() == 1){
+                estado = "Entregado";
+            }
+            String saux = new String("Codigo: " + envioaux.getCod() + "\nDireccion: " + diraux.getCalleDir() + " " + diraux.getNumDir() + "\nFecha: " + envioaux.getFecha() + "\nHora: " + envioaux.getHora() + "\nEstado de Entrega: " + estado);
+            int seleccion = JOptionPane.showConfirmDialog(rootPane,saux, "Eliminar Envio",
+                    JOptionPane.YES_NO_OPTION,
+                    JOptionPane.QUESTION_MESSAGE);
+            if(seleccion == JOptionPane.YES_OPTION){
+                BusinessObjectEnvio boe = new BusinessObjectEnvio();
+                if(boe.eliminarEnvio(envioaux) == 1){
+                    JOptionPane.showMessageDialog(null,"Envio eliminado correctamente");
+                    dispose();
+                    ListarEnvios le = new ListarEnvios(new ArrayList<Envio>(),vendedor);
+                    le.setVisible(true);
+                }
+                else{
+                    JOptionPane.showMessageDialog(null,"No se pudo eliminar el Envio");
+                }
+            }
+            else{
+                JOptionPane.showMessageDialog(null,"No se elimino el envio");
+            }
+        }
+        catch(Exception e){
+            JOptionPane.showMessageDialog(null, "No se selecciono ningun Envio");
+        }
+        
+    }//GEN-LAST:event_BBorrarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -563,13 +845,14 @@ public class ListarEnvios extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton BBorrar;
     private javax.swing.JButton BConfEnv;
-    private javax.swing.JButton BSeleccionar;
+    private javax.swing.JButton BModif;
     private javax.swing.JButton BVolver;
-    private javax.swing.JButton jButton1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel5;
+    private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel6;
     // End of variables declaration//GEN-END:variables
 }
