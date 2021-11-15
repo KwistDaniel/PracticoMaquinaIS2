@@ -347,7 +347,7 @@ public class AltaVenta extends javax.swing.JFrame {
         try{
             int selectedrow = tabla.getSelectedRow();
             tm.removeRow(selectedrow);
-            mercancias.remove(selectedrow); //aca le saque un + 1
+            mercancias.remove(selectedrow); //aca le saque un + 1, parece que era lo que generaba problemas al eliminar
         }
         catch(Exception e){
             JOptionPane.showMessageDialog(null, "No se selecciono ninguna Mercancia");
