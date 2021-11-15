@@ -69,7 +69,7 @@ public class DAODireccion implements DAO<Direccion> {
         List<Direccion> direcciones = new ArrayList<>();
         Connection connection = DataBase.getInstance().getConnection();
         Statement statement;
-        if(!(ids[1].equals(null))){
+        if(!(ids[1].equals("cj"))){
             try{
                 statement = connection.createStatement();
             

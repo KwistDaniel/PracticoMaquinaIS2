@@ -8,6 +8,7 @@ package BusinessObject_Manager;
 import DAO.DAO;
 import DAO.DAODireccion;
 import Objects.ClienteF;
+import Objects.ClienteJ;
 import Objects.Direccion;
 import java.util.ArrayList;
 
@@ -24,6 +25,11 @@ public class BusinessObjectDireccion {
         return direcciones;
     }
     
+    public static ArrayList<Direccion> direccionesClientesJ(ClienteJ cj){
+        direccionDAO = new DAODireccion();
+        ArrayList<Direccion> direcciones = new ArrayList<Direccion>(direccionDAO.readAllIds(cj.getCUIT(),"cj"));
+        return direcciones;
+    }
     public static Direccion readDir(String... ids){
         direccionDAO = new DAODireccion();
         Direccion dir = new Direccion(direccionDAO.readOne(ids[0]));

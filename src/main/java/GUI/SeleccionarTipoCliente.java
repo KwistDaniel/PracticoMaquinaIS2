@@ -71,6 +71,11 @@ public class SeleccionarTipoCliente extends javax.swing.JFrame {
         BClienteJ.setBackground(new java.awt.Color(210, 4, 45));
         BClienteJ.setForeground(new java.awt.Color(250, 250, 250));
         BClienteJ.setText("Cliente Juridico");
+        BClienteJ.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BClienteJActionPerformed(evt);
+            }
+        });
 
         BClienteF.setBackground(new java.awt.Color(210, 4, 45));
         BClienteF.setForeground(new java.awt.Color(250, 250, 250));
@@ -195,6 +200,12 @@ public class SeleccionarTipoCliente extends javax.swing.JFrame {
         SeleccionarClienteF scf = new SeleccionarClienteF(mercancias,vendedor,descuentos,restar);
         scf.setVisible(true);
     }//GEN-LAST:event_BClienteFActionPerformed
+
+    private void BClienteJActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BClienteJActionPerformed
+        dispose();
+        SeleccionarClienteJ scj = new SeleccionarClienteJ(mercancias,vendedor,descuentos,restar);
+        scj.setVisible(true);
+    }//GEN-LAST:event_BClienteJActionPerformed
 
     /**
      * @param args the command line arguments

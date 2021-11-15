@@ -7,6 +7,7 @@ package GUI;
 
 
 import BusinessObject_Manager.BusinessObjectClienteF;
+import BusinessObject_Manager.BusinessObjectClienteJ;
 import GUI.*;
 import Objects.ClienteF;
 import Objects.ClienteJ;
@@ -28,7 +29,7 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author kwist
  */
-public class SeleccionarClienteF extends javax.swing.JFrame {
+public class SeleccionarClienteJ extends javax.swing.JFrame {
     ArrayList<Mercancia> mercancias,restar;
     Vendedor vendedor;
     ArrayList<Integer> descuentos;
@@ -43,7 +44,7 @@ public class SeleccionarClienteF extends javax.swing.JFrame {
             }
         };
     
-    public SeleccionarClienteF(ArrayList<Mercancia> aux,Vendedor vaux, ArrayList<Integer> descaux,ArrayList<Mercancia> restaaux) {
+    public SeleccionarClienteJ(ArrayList<Mercancia> aux,Vendedor vaux, ArrayList<Integer> descaux,ArrayList<Mercancia> restaaux) {
         descuentos = new ArrayList<Integer>(descaux);
         vendedor = new Vendedor(vaux);
         mercancias = new ArrayList<Mercancia>(aux);
@@ -60,8 +61,8 @@ public class SeleccionarClienteF extends javax.swing.JFrame {
                 return column == 1;
             }
         };*/
-        Object[][] objects = ClienteF.getDataVector(BusinessObjectClienteF.listarClientesF());
-        Object[] headers = ClienteF.getHeaders();
+        Object[][] objects = ClienteJ.getDataVector(BusinessObjectClienteJ.listarClientesJ());
+        Object[] headers = ClienteJ.getHeaders();
         tm.setDataVector(objects, headers);
         
         
@@ -97,7 +98,7 @@ public class SeleccionarClienteF extends javax.swing.JFrame {
                 
     }
 
-    private SeleccionarClienteF() {
+    private SeleccionarClienteJ() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
@@ -232,20 +233,17 @@ public class SeleccionarClienteF extends javax.swing.JFrame {
     private void BSeleccionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BSeleccionarActionPerformed
         try{
             Object[] aux = tm.getDataVector().elementAt(tabla.getSelectedRow()).toArray();
-            ClienteF aux1 = new ClienteF();
-            aux1.setNombre((String) aux[0]);
-            aux1.setApellido((String) aux[1]);
-            aux1.setDni((String) aux[2]);
-            aux1.setSexo((String) aux[3]);
-            aux1.setTelefono((String) aux[4]);
-            aux1.setfNac((String) aux[5]);
-            aux1.setEmail((String) aux[6]);
-            aux1.setSitIva((String) aux[7]);
-            aux1.setCuit_l((String) aux[8]);
+            ClienteJ aux1 = new ClienteJ();
+            aux1.setCUIT((String) aux[0]);
+            aux1.setNombre((String) aux[1]);
+            aux1.setSitIVA((String) aux[2]);
+            aux1.setTelefono((String) aux[3]);
+            aux1.setEmail((String) aux[4]);
+            aux1.setfFund((String) aux[5]);
 
-            ClienteJ cjaux = new ClienteJ();
+            ClienteF cfaux = new ClienteF();
             dispose();
-            FinAltaVenta fav = new FinAltaVenta(aux1,cjaux,mercancias,vendedor,1,descuentos,restar,0);
+            FinAltaVenta fav = new FinAltaVenta(cfaux,aux1,mercancias,vendedor,2,descuentos,restar,0);
             fav.setVisible(true);
         }
         catch(Exception e){
@@ -272,14 +270,78 @@ public class SeleccionarClienteF extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(SeleccionarClienteF.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(SeleccionarClienteJ.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(SeleccionarClienteF.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(SeleccionarClienteJ.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(SeleccionarClienteF.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(SeleccionarClienteJ.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(SeleccionarClienteF.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(SeleccionarClienteJ.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
@@ -348,7 +410,7 @@ public class SeleccionarClienteF extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new SeleccionarClienteF().setVisible(true);
+                new SeleccionarClienteJ().setVisible(true);
             }
         });
     }

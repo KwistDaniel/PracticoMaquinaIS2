@@ -38,6 +38,8 @@ public class DAOClienteF implements DAO<ClienteF> {
                 clientef.setSexo(rs.getString("SEXO"));
                 clientef.setfNac(rs.getString("FNac"));
                 clientef.setEmail(rs.getString("EMAIL"));
+                clientef.setSitIva(rs.getString("SITIVA"));
+                clientef.setCuit_l(rs.getString("CUITL"));
                 clientesf.add(clientef);
             }
         }catch (SQLException throwables){

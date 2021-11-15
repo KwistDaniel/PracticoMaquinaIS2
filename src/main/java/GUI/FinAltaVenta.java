@@ -6,6 +6,7 @@
 package GUI;
 
 import BusinessObject_Manager.BusinessObjectConVenCF;
+import BusinessObject_Manager.BusinessObjectConVenCJ;
 import BusinessObject_Manager.BusinessObjectEnvio;
 import BusinessObject_Manager.BusinessObjectMercancia;
 import BusinessObject_Manager.BusinessObjectRenglon;
@@ -139,6 +140,7 @@ public class FinAltaVenta extends javax.swing.JFrame {
         BCargaVenta = new javax.swing.JButton();
         BMostrarCliente = new javax.swing.JButton();
         BMostrarDir = new javax.swing.JButton();
+        BMercancias = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
         BVolver = new javax.swing.JButton();
         BElegirFecha = new javax.swing.JButton();
@@ -190,17 +192,23 @@ public class FinAltaVenta extends javax.swing.JFrame {
             }
         });
 
+        BMercancias.setBackground(new java.awt.Color(210, 4, 45));
+        BMercancias.setForeground(new java.awt.Color(250, 250, 250));
+        BMercancias.setText("Ver mercancias");
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(136, 136, 136)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(BMostrarDir, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(BCargaVenta)
-                    .addComponent(BMostrarCliente, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(153, Short.MAX_VALUE))
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(BMostrarDir, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(BMercancias, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(BMostrarCliente, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(BCargaVenta, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addContainerGap(143, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -209,7 +217,9 @@ public class FinAltaVenta extends javax.swing.JFrame {
                 .addComponent(BMostrarCliente)
                 .addGap(18, 18, 18)
                 .addComponent(BMostrarDir)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 279, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addComponent(BMercancias)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 239, Short.MAX_VALUE)
                 .addComponent(BCargaVenta)
                 .addGap(90, 90, 90))
         );
@@ -406,8 +416,8 @@ public class FinAltaVenta extends javax.swing.JFrame {
         if(tipocliente == 1){
             JOptionPane.showMessageDialog(null, clientef.toString());
         }
-        else{
-            //not supported yet
+        else if (tipocliente == 2){
+            JOptionPane.showMessageDialog(null, clientej.toString());
         }
     }//GEN-LAST:event_BMostrarClienteActionPerformed
 
@@ -502,12 +512,13 @@ public class FinAltaVenta extends javax.swing.JFrame {
             cvcf.setSexo(clientef.getSexo());
             BusinessObjectConVenCF.cargarConectVenCF(cvcf);
         }
-        else{ // NO IMPLEMENTADO
+        else if (tipocliente == 2){
             ConectVenCJ cvcj = new ConectVenCJ();
-            //BusinessObject<ConectVenCJ> bOConectVenCJ = new DAOConectVenCJ();
+            
             cvcj.setCOD_VENTA(venta.getCOD_VENTA());
             cvcj.setCUIT(clientej.getCUIT());
-            //bOConectVenCJ.create(cvcj);
+            BusinessObjectConVenCJ.cargarConectVenCJ(cvcj);
+            
         }
         /**FIN* Actualizo tabla de CONVCLIENTE*/
 
@@ -518,7 +529,7 @@ public class FinAltaVenta extends javax.swing.JFrame {
         }
         /**FIN* Actualizo tabla Mercancias*/    
 
-        
+        JOptionPane.showMessageDialog(null, "Venta cargada correctamente");
         dispose();
         MainMenu mm = new MainMenu(vendedor);
         mm.setVisible(true);
@@ -622,6 +633,7 @@ public class FinAltaVenta extends javax.swing.JFrame {
     private javax.swing.JButton BAgDir;
     private javax.swing.JButton BCargaVenta;
     private javax.swing.JButton BElegirFecha;
+    private javax.swing.JButton BMercancias;
     private javax.swing.JButton BMostrarCliente;
     private javax.swing.JButton BMostrarDir;
     private javax.swing.JButton BVolver;
