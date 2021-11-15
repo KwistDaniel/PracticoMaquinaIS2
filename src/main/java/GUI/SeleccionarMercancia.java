@@ -69,11 +69,13 @@ public class SeleccionarMercancia extends javax.swing.JFrame {
             codaelim.add((Integer)mercancias.get(i).getCod());
         }
         
-        for (int i=0; i < tm.getRowCount(); i++){
-            for (int j=0; j < codaelim.size(); j++){
+        int rows = tm.getRowCount(),cantcodigo = codaelim.size();
+        
+        for (int i=0; i < rows; i++){
+            for (int j=0; j < cantcodigo; j++){
                 if(tm.getValueAt(i, 0) == codaelim.get(j)){
                     tm.removeRow(i);
-                    i--;
+                    rows--;
                 }
             }
         }

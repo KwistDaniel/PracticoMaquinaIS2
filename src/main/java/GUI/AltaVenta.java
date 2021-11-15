@@ -344,8 +344,14 @@ public class AltaVenta extends javax.swing.JFrame {
     }//GEN-LAST:event_BSiguienteActionPerformed
 
     private void BElimSelecActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BElimSelecActionPerformed
-        tm.removeRow(tabla.getSelectedRow());
-        mercancias.remove(tabla.getSelectedRow() + 1);
+        try{
+            int selectedrow = tabla.getSelectedRow();
+            tm.removeRow(selectedrow);
+            mercancias.remove(selectedrow); //aca le saque un + 1
+        }
+        catch(Exception e){
+            JOptionPane.showMessageDialog(null, "No se selecciono ninguna Mercancia");
+        }
     }//GEN-LAST:event_BElimSelecActionPerformed
 
     private void TFDescuentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TFDescuentoActionPerformed

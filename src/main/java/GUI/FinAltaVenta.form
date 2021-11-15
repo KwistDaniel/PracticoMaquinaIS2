@@ -194,6 +194,9 @@
                     </Property>
                     <Property name="text" type="java.lang.String" value="Ver mercancias"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BMercanciasActionPerformed"/>
+                  </Events>
                 </Component>
               </SubComponents>
             </Container>

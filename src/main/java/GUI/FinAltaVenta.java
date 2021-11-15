@@ -195,6 +195,11 @@ public class FinAltaVenta extends javax.swing.JFrame {
         BMercancias.setBackground(new java.awt.Color(210, 4, 45));
         BMercancias.setForeground(new java.awt.Color(250, 250, 250));
         BMercancias.setText("Ver mercancias");
+        BMercancias.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BMercanciasActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -586,6 +591,15 @@ public class FinAltaVenta extends javax.swing.JFrame {
     private void BMostrarDirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BMostrarDirActionPerformed
         JOptionPane.showMessageDialog(null, direccionenvio.toString());
     }//GEN-LAST:event_BMostrarDirActionPerformed
+
+    private void BMercanciasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BMercanciasActionPerformed
+        String mostrar = new String();
+        for (int i = 0;i<mercancias.size();i++){
+            Mercancia aux = new Mercancia(mercancias.get(i));
+            mostrar = mostrar + "\n" + aux.toString();
+        }
+        JOptionPane.showMessageDialog(null, mostrar);
+    }//GEN-LAST:event_BMercanciasActionPerformed
 
     /**
      * @param args the command line arguments
