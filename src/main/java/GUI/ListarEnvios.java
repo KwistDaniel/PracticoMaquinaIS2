@@ -85,9 +85,17 @@ public class ListarEnvios extends javax.swing.JFrame {
          * al crear una venta para la cual no se le da de alta un envio.
         */
         for (int i=0; i < tm.getRowCount(); i++){
-            if((int) tm.getValueAt(i, 0) == 1){
+            if((int) tm.getValueAt(i, 1) == 1){
                 tm.removeRow(i);
                 i--;
+            }
+        }
+        for (int i=0; i < tm.getRowCount(); i++){
+            if((int) tm.getValueAt(i, 4) == 1){
+                tm.setValueAt("Entregado", i, 4);
+            }
+            else{
+                tm.setValueAt("Sin Entregar", i, 4);
             }
         }
         
@@ -452,16 +460,17 @@ public class ListarEnvios extends javax.swing.JFrame {
 
     private void BModifActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BModifActionPerformed
         try{
+            int estadoentrega = 0;
             Object[] aux = tm.getDataVector().elementAt(tabla.getSelectedRow()).toArray();
+            if(((String)aux[4]).equals("Entregado")){
+            estadoentrega = 1;
+        }
             Envio aux1 = new Envio();
             aux1.setCod((int) aux[0]);
             aux1.setId_dir((int) aux[1]);
             aux1.setFecha((String) aux[2]);
             aux1.setHora((String) aux[3]);
-            aux1.setEstado((int) aux[4]);
-            
-            
-            
+            aux1.setEstado(estadoentrega);
             
             dispose();
             ModificarEnvio me = new ModificarEnvio(aux1,vendedor);
@@ -477,7 +486,7 @@ public class ListarEnvios extends javax.swing.JFrame {
     private void BConfEnvActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BConfEnvActionPerformed
         try{
             Object[] aux = tm.getDataVector().elementAt(tabla.getSelectedRow()).toArray();
-            if((int) aux[4] == 1){
+            if(((String) aux[4]).equals("Entregado")){
                 JOptionPane.showMessageDialog(null, "Este envio ya fue entregado");
             }
             else{
@@ -506,8 +515,13 @@ public class ListarEnvios extends javax.swing.JFrame {
 
     private void BBorrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BBorrarActionPerformed
         try{
+            int estadoentrega = 0;
             Object[] aux = tm.getDataVector().elementAt(tabla.getSelectedRow()).toArray();
-            Envio envioaux = new Envio((int) aux[0],(int) aux[1],(int) aux[4],(String) aux[2],(String) aux[3]);
+            if(((String) aux[4]).equals("Entregado")){
+                estadoentrega = 1;
+            }
+            
+            Envio envioaux = new Envio((int) aux[0],(int) aux[1],estadoentrega,(String) aux[2],(String) aux[3]);
             BusinessObjectDireccion bod = new BusinessObjectDireccion();
             Direccion diraux = bod.readDir(String.valueOf(envioaux.getId_dir()));
             String estado = new String("Sin Entregar");

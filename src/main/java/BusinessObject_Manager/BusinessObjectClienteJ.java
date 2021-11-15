@@ -26,7 +26,7 @@ public class BusinessObjectClienteJ {
         return clientesj;
     }
     
-    public static ArrayList<Direccion> listarDireccionClientesF(ClienteJ cj){
+    public static ArrayList<Direccion> listarDireccionClientesJ(ClienteJ cj){
         
         ArrayList<Direccion> direccionescj = new ArrayList<Direccion>(BusinessObjectDireccion.direccionesClientesJ(cj));
         return direccionescj;

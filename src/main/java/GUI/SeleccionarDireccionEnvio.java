@@ -6,6 +6,7 @@
 package GUI;
 
 import BusinessObject_Manager.BusinessObjectClienteF;
+import BusinessObject_Manager.BusinessObjectClienteJ;
 import DAO.DAODireccion;
 import GUI.*;
 import Objects.ClienteF;
@@ -87,12 +88,10 @@ public class SeleccionarDireccionEnvio extends javax.swing.JFrame {
             Object[] headerscf = Direccion.getHeaders();
             tm.setDataVector(objectscf, headerscf);
         }
-        else{
-            //TODAVIA NO ESTA IMPLEMENTADO!!!!
-            //BusinessObject<Direccion> businessObject = new DAODireccion();; //acomodar query abajo
-            //Object[][] objectscj = Direccion.getDataVector(businessObject.readAllIds("SELECT ID_DIR FROM conectdirclif WHERE (CUIT='"+ clientej.getCUIT() +"')"));
-            //Object[] headerscj = Direccion.getHeaders();
-            //tm.setDataVector(objectscj, headerscj);
+        else if (tipocliente == 2){
+            Object[][] objectscj = Direccion.getDataVector(BusinessObjectClienteJ.listarDireccionClientesJ(clientej));
+            Object[] headerscj = Direccion.getHeaders();
+            tm.setDataVector(objectscj, headerscj);
         }
         
         
@@ -154,11 +153,9 @@ public class SeleccionarDireccionEnvio extends javax.swing.JFrame {
             tm.setDataVector(objectscf, headerscf);
         }
         else{
-            //TODAVIA NO ESTA IMPLEMENTADO!!!!
-            //BusinessObject<Direccion> businessObject = new DAODireccion();; //acomodar query abajo
-            //Object[][] objectscj = Direccion.getDataVector(businessObject.readAllIds("SELECT ID_DIR FROM conectdirclif WHERE (CUIT='"+ clientej.getCUIT() +"')"));
-            //Object[] headerscj = Direccion.getHeaders();
-            //tm.setDataVector(objectscj, headerscj);
+            Object[][] objectscj = Direccion.getDataVector(BusinessObjectClienteJ.listarDireccionClientesJ(clientej));
+            Object[] headerscj = Direccion.getHeaders();
+            tm.setDataVector(objectscj, headerscj);
         }
         
         

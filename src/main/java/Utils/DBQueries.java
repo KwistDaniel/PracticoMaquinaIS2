@@ -462,8 +462,8 @@ public class DBQueries {
         try {
             statement = connection.createStatement();
             statement.executeUpdate("INSERT INTO ClienteFisico VALUES "
-                    + "('39662252','Daniel','Kwist','3382-406601','Masculino','30/12/1996','kwistdaniel@gmail.com',Monotributo,20-39662252-2,1),"
-                    + "('42000189','Tobias','Burger','2664-509666','Masculino','29/04/1999','tovibur@hotmai.com',Consumidor Final,20-42000189-5,1)");
+                    + "('39662252','Daniel','Kwist','3382-406601','Masculino','30/12/1996','kwistdaniel@gmail.com','Monotributo','20-39662252-2',1),"
+                    + "('42000189','Tobias','Burger','2664-509666','Masculino','29/04/1999','tovibur@hotmai.com','Consumidor Final','20-42000189-5',1)");
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
