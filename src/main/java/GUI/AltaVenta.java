@@ -32,6 +32,7 @@ public class AltaVenta extends javax.swing.JFrame {
     ArrayList<Integer> descuentos;
     private final JTable tabla;
     
+    
     DefaultTableModel tm = new DefaultTableModel(){
             /*@Override
             public boolean isCellEditable(int row, int column){
@@ -64,14 +65,10 @@ public class AltaVenta extends javax.swing.JFrame {
         Object[] headers = Mercancia.getHeadersB();
         tm.setDataVector(objects, headers);
         
-        
-        
-        
         tabla = new JTable(tm);
         tabla.setFocusable(false);
         tabla.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         tabla.getTableHeader().setReorderingAllowed(false);
-        
         
         JScrollPane scrollPane = new JScrollPane(tabla);
         scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
@@ -98,8 +95,6 @@ public class AltaVenta extends javax.swing.JFrame {
             tm.setValueAt(true, i, 12);
             tm.setValueAt(false, i, 12);
         }
-        
-        
     }
 
     private AltaVenta() {
@@ -321,7 +316,7 @@ public class AltaVenta extends javax.swing.JFrame {
 
     private void BAgObjActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BAgObjActionPerformed
         dispose();
-        SeleccionarMercancia sm = new SeleccionarMercancia(mercancias,vendedor,restar);
+        SeleccionarMercancia sm = new SeleccionarMercancia(mercancias,vendedor,restar,false);
         sm.setVisible(true);
     }//GEN-LAST:event_BAgObjActionPerformed
 
