@@ -67,6 +67,8 @@ public class DBQueries {
                     "SEXO VARCHAR(10) NOT NULL," +
                     "FNac VARCHAR(10) NOT NULL," +
                     "EMAIL LONGTEXT NOT NULL," +
+                    "SITIVA VARCHAR(30) NOT NULL," + 
+                    "CUITL VARCHAR(15)," +
                     "Status INT NOT NULL," +
                     "PRIMARY KEY(DNI,SEXO))");
         } catch (SQLException throwables) {
@@ -82,10 +84,10 @@ public class DBQueries {
             statement.executeUpdate("CREATE TABLE ClienteJuridico (" +
                     "CUIT VARCHAR(15) NOT NULL," +
                     "NOMBRE VARCHAR(255) NOT NULL," +
-                    "TELEFONO LONGTEXT NOT NULL," +
                     "SITIVA VARCHAR(255) NOT NULL," +
-                    "FFund VARCHAR(10)," +
+                    "TELEFONO LONGTEXT NOT NULL," +
                     "EMAIL LONGTEXT NOT NULL," +
+                    "FFund VARCHAR(10)," +
                     "Status INT NOT NULL," +
                     "PRIMARY KEY(CUIT))");
         } catch (SQLException throwables) {
@@ -176,10 +178,10 @@ public class DBQueries {
             statement = connection.createStatement();
             statement.executeUpdate("CREATE TABLE Envio (" +
                     "COD INT NOT NULL," +
-                    "ID_DIR INT NOT NULL," +
-                    "ESTADO_ENVIO INT NOT NULL," +
-                    "FECHA_ENVIO VARCHAR(10) NOT NULL," +
-                    "HORA_ENVIO VARCHAR(6) NOT NULL," +
+                    "ID_DIR INT," +
+                    "ESTADO_ENVIO INT," +
+                    "FECHA_ENVIO VARCHAR(10)," +
+                    "HORA_ENVIO VARCHAR(6)," +
                     "Status INT NOT NULL," +
                     "FOREIGN KEY (ID_DIR) REFERENCES Direccion(ID), " +
                     "PRIMARY KEY(COD))");
@@ -418,15 +420,19 @@ public class DBQueries {
         insertVendedores();
         insertMercancias();
         insertClientesF();
+        insertClientesJ();
         insertDirecciones();
         insertConectorDirClienteF();
+        insertConectorDirClienteJ();
     }
     public static void insertVendedores(){
         Connection connection = DataBase.getInstance().getConnection();
         Statement statement;
         try {
             statement = connection.createStatement();
-            statement.executeUpdate("INSERT INTO Vendedor VALUES ('36421350','Debora','Kwist','dkwist','36421350','3382-571051','Femenino','12/11/1991','deborakwist@gmail.com',2,1),('11111111','Usuario','Admin','user','user','0000-000000','Masculino','11/11/1991','admin@gmail.com',1,1)");
+            statement.executeUpdate("INSERT INTO Vendedor VALUES "
+                    + "('36421350','Debora','Kwist','dkwist','36421350','3382-571051','Femenino','12/11/1991','deborakwist@gmail.com',2,1),"
+                    + "('11111111','Usuario','Admin','user','user','0000-000000','Masculino','11/11/1991','admin@gmail.com',1,1)");
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
@@ -437,7 +443,14 @@ public class DBQueries {
         Statement statement;
         try {
             statement = connection.createStatement();
-            statement.executeUpdate("INSERT INTO Mercancia VALUES (1,'Objeto1','Desc Obj1','15.2','20','Negro',10101,'Porcelanatos',1,20,10,200,1),(2,'Objeto2','Desc Obj2','17.2','3','Gris',10111,'Ceramicos',1,15,15,225,1),(3,'Objeto3','Desc Obj3','11.2','27','Gris',10112,'Ceramicos',2,15,15,225,1),(4,'Objeto4','Desc Obj4','45','35','Blanco',10201,'Porcelanatos',1,30,50,15000,1),(5,'Objeto5','Desc Obj5','921','25','Azul Cielo',154201,'Griferia',1,17,52,1500,1),(6,'Objeto6','Desc Obj6','225','26','Rojo',1501,'Ceramica',2,28,28,7500,1),(7,'Objeto7','Desc Obj7','396','1505','Celeste',14201,'Mosaico',4,17,17,250,1)");
+            statement.executeUpdate("INSERT INTO Mercancia VALUES "
+                    + "(1,'Objeto1','Desc Obj1','15.2','20','Negro',10101,'Porcelanatos',1,20,10,200,1),"
+                    + "(2,'Objeto2','Desc Obj2','17.2','3','Gris',10111,'Ceramicos',1,15,15,225,1),"
+                    + "(3,'Objeto3','Desc Obj3','11.2','27','Gris',10112,'Ceramicos',2,15,15,225,1),"
+                    + "(4,'Objeto4','Desc Obj4','45','35','Blanco',10201,'Porcelanatos',1,30,50,15000,1),"
+                    + "(5,'Objeto5','Desc Obj5','921','25','Azul Cielo',154201,'Griferia',1,17,52,1500,1),"
+                    + "(6,'Objeto6','Desc Obj6','225','26','Rojo',1501,'Ceramica',2,28,28,7500,1),"
+                    + "(7,'Objeto7','Desc Obj7','396','1505','Celeste',14201,'Mosaico',4,17,17,250,1)");
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
@@ -448,7 +461,22 @@ public class DBQueries {
         Statement statement;
         try {
             statement = connection.createStatement();
-            statement.executeUpdate("INSERT INTO ClienteFisico VALUES ('39662252','Daniel','Kwist','3382-406601','Masculino','30/12/1996','kwistdaniel@gmail.com',1),('42000189','Tobias','Burger','2664-509666','Masculino','29/04/1999','tovibur@hotmai.com',1)");
+            statement.executeUpdate("INSERT INTO ClienteFisico VALUES "
+                    + "('39662252','Daniel','Kwist','3382-406601','Masculino','30/12/1996','kwistdaniel@gmail.com','Monotributo','20-39662252-2',1),"
+                    + "('42000189','Tobias','Burger','2664-509666','Masculino','29/04/1999','tovibur@hotmai.com','Consumidor Final','20-42000189-5',1)");
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        DataBase.getInstance().disconnect();
+    }
+    public static void insertClientesJ(){
+        Connection connection = DataBase.getInstance().getConnection();
+        Statement statement;
+        try {
+            statement = connection.createStatement();
+            statement.executeUpdate("INSERT INTO ClienteJuridico VALUES "
+                    + "('20-123456789-3','Constructora 1 SRL','Resposable Inscripto','2664-405540','contructora@const.com','31/12/2000',1),"
+                    + "('20-457896656-3','Constructora 2','Responsable Inscripto','2664-558899','example@ex.com','12/11/2001',1)");
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
@@ -459,7 +487,14 @@ public class DBQueries {
         Statement statement;
         try {
             statement = connection.createStatement();
-            statement.executeUpdate("INSERT INTO Direccion VALUES (1,'Rivadavia','1305','2','2','5700','San Luis',1),(2,'Centenario','229','','','6100','Rufino',1),(3,'Ejercito de los andes','1025','2','2','5700','San Luis',1)");
+            statement.executeUpdate("INSERT INTO Direccion VALUES "
+                    + "(1,'Reservada','1','1','1','1','1',1),"
+                    + "(2,'Rivadavia','1305','2','2','5700','San Luis',1),"
+                    + "(3,'Centenario','229','','','6100','Rufino',1),"
+                    + "(4,'Ejercito de los andes','1025','2','2','5700','San Luis',1),"
+                    + "(5,'Bolivar','1045','','','5700','San Luis',1),"
+                    + "(6,'Tomas Jofre','456','5','4','5700','San Luis',1),"
+                    + "(7,'Junin','774','','','5700','San Luis',1)");
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
@@ -470,7 +505,24 @@ public class DBQueries {
         Statement statement;
         try {
             statement = connection.createStatement();
-            statement.executeUpdate("INSERT INTO ConectDirCliF VALUES (1,'39662252','Masculino',1),(2,'39662252','Masculino',1),(3,'42000189','Masculino',1)");
+            statement.executeUpdate("INSERT INTO ConectDirCliF VALUES "
+                    + "(2,'39662252','Masculino',1),"
+                    + "(3,'39662252','Masculino',1),"
+                    + "(4,'42000189','Masculino',1)");
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        DataBase.getInstance().disconnect();
+    }
+    public static void insertConectorDirClienteJ(){
+        Connection connection = DataBase.getInstance().getConnection();
+        Statement statement;
+        try {
+            statement = connection.createStatement();
+            statement.executeUpdate("INSERT INTO ConectDirCliJ VALUES "
+                    + "(5,'20-123456789-3',1),"
+                    + "(6,'20-123456789-3',1),"
+                    + "(7,'20-457896656-3',1)");
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }

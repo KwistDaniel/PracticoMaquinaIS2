@@ -43,7 +43,20 @@ public class Mercancia {
         this.calidad = calidad;
     }
 
-    
+    public Mercancia(Mercancia aux) {
+        this.cod = aux.cod;
+        this.nombre = aux.nombre;
+        this.categoria = aux.categoria;
+        this.descripcion = aux.descripcion;
+        this.cantidad = aux.cantidad;
+        this.precio_u = aux.precio_u;
+        this.color = aux.color;
+        this.partida = aux.partida;
+        this.ancho = aux.ancho;
+        this.alto = aux.alto;
+        this.metcuad = aux.metcuad;
+        this.calidad = aux.calidad;
+    }
 
     public int getCod() {
         return cod;
@@ -164,12 +177,12 @@ public class Mercancia {
     }
     
     private Object[] toObjectB(){
-        return new Object[]{getCod(),getNombre(),getDescripcion(),getPrecio_u(),getCantidad(),getColor(),getCategoria(),getCalidad(),getAncho(),getAlto(),getMetcuad(),false};
+        return new Object[]{getCod(),getNombre(),getDescripcion(),getPrecio_u(),getCantidad(),getColor(),getCategoria(),getCalidad(),getAncho(),getAlto(),getMetcuad(),getPartida(),false};
     }
 
     @Override
     public String toString() {
-        return cod + " " + nombre + " " + descripcion; 
+        return " Codigo: " + getCod() + "\n Nombre: " + getNombre() + "\n Descripcion: " + getDescripcion() + "\n Precio Unitario: " + getPrecio_u() + "\n Cantidad: " + getCantidad() + "\n Color:" + getColor() + "\n Categoria: " + getCategoria() + "\n Calidad: " + getCalidad() + "\n Ancho: " + getAncho() + "\n Alto: " + getAlto() + "\n Metros Cuadrados: " + getMetcuad() + "\n Partida: " + getPartida();
     }
     
     

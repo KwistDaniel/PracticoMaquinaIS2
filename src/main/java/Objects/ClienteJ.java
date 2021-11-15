@@ -5,15 +5,16 @@
  */
 package Objects;
 
+import java.util.List;
+
 /**
  *
  * @author kwist
  */
 public class ClienteJ {
     private String CUIT;
-    private String sitIVA;
     private String nombre;
-    private int idDir; //REVISAR
+    private String sitIVA;
     private String telefono;
     private String email;
     private String fFund;
@@ -23,18 +24,16 @@ public class ClienteJ {
     }
     public ClienteJ(ClienteJ aux) {
         this.CUIT = aux.CUIT;
-        this.sitIVA = aux.sitIVA;
         this.nombre = aux.nombre;
-        this.idDir = aux.idDir;
+        this.sitIVA = aux.sitIVA;
         this.telefono = aux.telefono;
         this.email = aux.email;
         this.fFund = aux.fFund;
     }
-    public ClienteJ(String CUIT, String sitIVA, String nombre, int idDir, String telefono, String email, String fFund) {
+    public ClienteJ(String CUIT, String sitIVA, String nombre, String telefono, String email, String fFund) {
         this.CUIT = CUIT;
         this.sitIVA = sitIVA;
         this.nombre = nombre;
-        this.idDir = idDir;
         this.telefono = telefono;
         this.email = email;
         this.fFund = fFund;
@@ -64,14 +63,6 @@ public class ClienteJ {
         this.nombre = nombre;
     }
 
-    public int getIdDir() {
-        return idDir;
-    }
-
-    public void setIdDir(int idDir) {
-        this.idDir = idDir;
-    }
-
     public String getTelefono() {
         return telefono;
     }
@@ -94,6 +85,20 @@ public class ClienteJ {
 
     public void setfFund(String fFund) {
         this.fFund = fFund;
+    }
+    
+    public static Object[][] getDataVector(List<ClienteJ> clientej){
+        Object[][] objects = new Object[clientej.size()][0];
+        for(int i = 0; i < clientej.size() ; i++){
+            objects[i] = clientej.get(i).toObject();
+        }   
+        return objects;
+    }
+    public static Object[] getHeaders(){
+        return new Object[]{"CUIT","Nombre","Situacion IVA","Telefono","Email","Fecha Fundacion"};
+    }
+    private Object[] toObject(){
+        return new Object[]{getCUIT(),getNombre(),getSitIVA(),getTelefono(),getEmail(),getfFund()};
     }
 
     @Override

@@ -121,11 +121,10 @@ public class AltaVenta extends javax.swing.JFrame {
         BAgObj = new javax.swing.JButton();
         BElimSelec = new javax.swing.JButton();
         TFDescuento = new javax.swing.JTextField();
-        BSiguiente = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
-        jPanel5 = new javax.swing.JPanel();
         BVolver = new javax.swing.JButton();
-        TFFiltro = new javax.swing.JTextField();
+        jPanel5 = new javax.swing.JPanel();
+        BSiguiente = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 0, 0));
@@ -182,16 +181,17 @@ public class AltaVenta extends javax.swing.JFrame {
             }
         });
 
-        BSiguiente.setBackground(new java.awt.Color(210, 4, 45));
-        BSiguiente.setForeground(new java.awt.Color(250, 250, 250));
-        BSiguiente.setText("Siguiente");
-        BSiguiente.addActionListener(new java.awt.event.ActionListener() {
+        jLabel1.setText("Descuento:");
+
+        BVolver.setBackground(new java.awt.Color(210, 4, 45));
+        BVolver.setForeground(new java.awt.Color(250, 250, 250));
+        BVolver.setText("Cancelar Venta");
+        BVolver.setActionCommand("Exit");
+        BVolver.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BSiguienteActionPerformed(evt);
+                BVolverActionPerformed(evt);
             }
         });
-
-        jLabel1.setText("Descuento:");
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -202,13 +202,13 @@ public class AltaVenta extends javax.swing.JFrame {
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(BElimSelec, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(BAgObj, javax.swing.GroupLayout.DEFAULT_SIZE, 126, Short.MAX_VALUE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(BSiguiente))
                     .addComponent(TFDescuento)
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addComponent(jLabel1)
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(BVolver)))
                 .addContainerGap())
         );
         jPanel4Layout.setVerticalGroup(
@@ -223,40 +223,33 @@ public class AltaVenta extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(TFDescuento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 451, Short.MAX_VALUE)
-                .addComponent(BSiguiente)
+                .addComponent(BVolver)
                 .addContainerGap())
         );
 
-        BVolver.setBackground(new java.awt.Color(210, 4, 45));
-        BVolver.setForeground(new java.awt.Color(250, 250, 250));
-        BVolver.setText("Cancelar Venta");
-        BVolver.setActionCommand("Exit");
-        BVolver.addActionListener(new java.awt.event.ActionListener() {
+        BSiguiente.setBackground(new java.awt.Color(210, 4, 45));
+        BSiguiente.setForeground(new java.awt.Color(250, 250, 250));
+        BSiguiente.setText("Continuar");
+        BSiguiente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BVolverActionPerformed(evt);
+                BSiguienteActionPerformed(evt);
             }
         });
-
-        TFFiltro.setText("filtro");
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
-                .addGap(41, 41, 41)
-                .addComponent(BVolver)
+                .addContainerGap()
+                .addComponent(BSiguiente)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(jPanel5Layout.createSequentialGroup()
-                .addComponent(TFFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, 452, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
-                .addComponent(TFFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 78, Short.MAX_VALUE)
-                .addComponent(BVolver)
+                .addContainerGap(100, Short.MAX_VALUE)
+                .addComponent(BSiguiente)
                 .addContainerGap())
         );
 
@@ -351,8 +344,14 @@ public class AltaVenta extends javax.swing.JFrame {
     }//GEN-LAST:event_BSiguienteActionPerformed
 
     private void BElimSelecActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BElimSelecActionPerformed
-        tm.removeRow(tabla.getSelectedRow());
-        mercancias.remove(tabla.getSelectedRow() + 1);
+        try{
+            int selectedrow = tabla.getSelectedRow();
+            tm.removeRow(selectedrow);
+            mercancias.remove(selectedrow); //aca le saque un + 1, parece que era lo que generaba problemas al eliminar
+        }
+        catch(Exception e){
+            JOptionPane.showMessageDialog(null, "No se selecciono ninguna Mercancia");
+        }
     }//GEN-LAST:event_BElimSelecActionPerformed
 
     private void TFDescuentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TFDescuentoActionPerformed
@@ -415,7 +414,6 @@ public class AltaVenta extends javax.swing.JFrame {
     private javax.swing.JButton BSiguiente;
     private javax.swing.JButton BVolver;
     private javax.swing.JTextField TFDescuento;
-    private javax.swing.JTextField TFFiltro;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;

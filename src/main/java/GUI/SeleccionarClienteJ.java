@@ -5,24 +5,18 @@
  */
 package GUI;
 
+
 import BusinessObject_Manager.BusinessObjectClienteF;
 import BusinessObject_Manager.BusinessObjectClienteJ;
-import DAO.DAODireccion;
 import GUI.*;
 import Objects.ClienteF;
 import Objects.ClienteJ;
-import Objects.ConectDirCF;
-import Objects.Direccion;
-import Objects.Envio;
 import Objects.Mercancia;
 import Objects.Vendedor;
-import com.toedter.calendar.JDateChooser;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.List;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
@@ -35,15 +29,10 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author kwist
  */
-public class SeleccionarDireccionEnvio extends javax.swing.JFrame {
+public class SeleccionarClienteJ extends javax.swing.JFrame {
     ArrayList<Mercancia> mercancias,restar;
-    int tipocliente;
     Vendedor vendedor;
-    Envio envio;
-    ClienteF clientef;
-    ClienteJ clientej;
     ArrayList<Integer> descuentos;
-    int vengode=0;
     /**
      * Creates new form Menu
      */
@@ -55,25 +44,15 @@ public class SeleccionarDireccionEnvio extends javax.swing.JFrame {
             }
         };
     
-    public SeleccionarDireccionEnvio(ClienteF cfaux, ClienteJ cjaux,ArrayList<Mercancia> aux,Vendedor vaux,int tcliente, ArrayList<Integer> descaux, ArrayList<Mercancia> restaaux) {
-        vengode = 1;
+    public SeleccionarClienteJ(ArrayList<Mercancia> aux,Vendedor vaux, ArrayList<Integer> descaux,ArrayList<Mercancia> restaaux) {
         descuentos = new ArrayList<Integer>(descaux);
         vendedor = new Vendedor(vaux);
-        tipocliente = tcliente;
-        if (tipocliente == 1){
-            clientef = new ClienteF(cfaux);
-        }
-        else{
-            clientej = new ClienteJ(cjaux);
-        }
         mercancias = new ArrayList<Mercancia>(aux);
         restar = new ArrayList<Mercancia>(restaaux);
         initComponents();
         this.setVisible(true);
         this.setLocationRelativeTo(null);
-        
-        //ahora hago una tabla si es ClienteF y otra si es ClienteJ, por ahora solo implementar todo ClienteF.
-        
+        BSeleccionar.getRootPane().requestFocus();
         GridBagConstraints gridBagConstraints = new GridBagConstraints();
         
         /*DefaultTableModel tm = new DefaultTableModel(){
@@ -82,21 +61,12 @@ public class SeleccionarDireccionEnvio extends javax.swing.JFrame {
                 return column == 1;
             }
         };*/
-        
-        if (tipocliente == 1){
-            Object[][] objectscf = Direccion.getDataVector(BusinessObjectClienteF.listarDireccionClientesF(clientef));
-            Object[] headerscf = Direccion.getHeaders();
-            tm.setDataVector(objectscf, headerscf);
-        }
-        else if (tipocliente == 2){
-            Object[][] objectscj = Direccion.getDataVector(BusinessObjectClienteJ.listarDireccionClientesJ(clientej));
-            Object[] headerscj = Direccion.getHeaders();
-            tm.setDataVector(objectscj, headerscj);
-        }
+        Object[][] objects = ClienteJ.getDataVector(BusinessObjectClienteJ.listarClientesJ());
+        Object[] headers = ClienteJ.getHeaders();
+        tm.setDataVector(objects, headers);
         
         
         
-
         
         tabla = new JTable(tm);
         tabla.setFocusable(false);
@@ -128,72 +98,7 @@ public class SeleccionarDireccionEnvio extends javax.swing.JFrame {
                 
     }
 
-    public SeleccionarDireccionEnvio(Envio e,Vendedor vaux) {
-        vengode = 2;
-        envio = new Envio(e);
-        vendedor = new Vendedor(vaux);
-        initComponents();
-        this.setVisible(true);
-        this.setLocationRelativeTo(null);
-        
-        //ahora hago una tabla si es ClienteF y otra si es ClienteJ, por ahora solo implementar todo ClienteF.
-        
-        GridBagConstraints gridBagConstraints = new GridBagConstraints();
-        
-        /*DefaultTableModel tm = new DefaultTableModel(){
-            @Override
-            public boolean isCellEditable(int row, int column){
-                return column == 1;
-            }
-        };*/
-        
-        if (tipocliente == 1){
-            Object[][] objectscf = Direccion.getDataVector(BusinessObjectClienteF.listarDireccionClientesF(clientef));
-            Object[] headerscf = Direccion.getHeaders();
-            tm.setDataVector(objectscf, headerscf);
-        }
-        else{
-            Object[][] objectscj = Direccion.getDataVector(BusinessObjectClienteJ.listarDireccionClientesJ(clientej));
-            Object[] headerscj = Direccion.getHeaders();
-            tm.setDataVector(objectscj, headerscj);
-        }
-        
-        
-        
-
-        
-        tabla = new JTable(tm);
-        tabla.setFocusable(false);
-        tabla.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-        tabla.getTableHeader().setReorderingAllowed(false);
-        
-        
-        JScrollPane scrollPane = new JScrollPane(tabla);
-        scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-        scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-        scrollPane.getHorizontalScrollBar().setUnitIncrement(20);
-        scrollPane.getVerticalScrollBar().setUnitIncrement(20);
-                
-        tabla.setPreferredScrollableViewportSize(tabla.getPreferredSize());
-        
-        scrollPane.setPreferredSize(new Dimension(665,450));
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 1;
-        gridBagConstraints.gridwidth = 4;
-        gridBagConstraints.gridheight = 4;
-        add(scrollPane, gridBagConstraints);
-        
-        
-        jPanel2.setLayout(new BorderLayout());
-        jPanel2.add(scrollPane, BorderLayout.CENTER);
-        
-        
-        
-                
-    }
-    
-    
-    private SeleccionarDireccionEnvio() {
+    private SeleccionarClienteJ() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
@@ -254,7 +159,7 @@ public class SeleccionarDireccionEnvio extends javax.swing.JFrame {
             }
         });
 
-        jButton1.setText("Agregar Direccion");
+        jButton1.setText("Agregar Cliente");
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -263,7 +168,7 @@ public class SeleccionarDireccionEnvio extends javax.swing.JFrame {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(BSeleccionar)
-                .addGap(18, 18, 18)
+                .addGap(81, 81, 81)
                 .addComponent(jButton1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(BVolver)
@@ -273,11 +178,14 @@ public class SeleccionarDireccionEnvio extends javax.swing.JFrame {
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                 .addContainerGap(30, Short.MAX_VALUE)
+                .addComponent(BVolver)
+                .addGap(21, 21, 21))
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(20, 20, 20)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(BVolver)
                     .addComponent(BSeleccionar)
                     .addComponent(jButton1))
-                .addGap(21, 21, 21))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -318,36 +226,29 @@ public class SeleccionarDireccionEnvio extends javax.swing.JFrame {
     private void BVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BVolverActionPerformed
         // TODO add your handling code here:
         dispose();
-        FinAltaVenta fav = new FinAltaVenta(clientef,clientej,mercancias,vendedor,tipocliente,descuentos,restar,1);
-        fav.setVisible(true);
+        AltaVenta av = new AltaVenta(mercancias,vendedor,restar);
+        av.setVisible(true);
     }//GEN-LAST:event_BVolverActionPerformed
 
     private void BSeleccionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BSeleccionarActionPerformed
-        Object[] aux = tm.getDataVector().elementAt(tabla.getSelectedRow()).toArray();
-        Direccion direccionenvio = new Direccion();
-        direccionenvio.setIdDir((int) aux[0]);
-        direccionenvio.setCalleDir((String) aux[1]);
-        direccionenvio.setNumDir((String) aux[2]);
-        direccionenvio.setPisoDir((String) aux[3]);
-        direccionenvio.setDeptoDir((String) aux[4]);
-        direccionenvio.setCodPostal((String) aux[5]);
-        direccionenvio.setLocalidad((String) aux[6]);
-        dispose();
-        
-        switch(vengode){
-            case 1: 
-                FinAltaVenta fav = new FinAltaVenta(clientef,clientej,mercancias,vendedor,tipocliente,direccionenvio,descuentos,restar,1);
-                fav.setVisible(true);
-                break;
-            case 2: 
-                ModificarEnvio me = new ModificarEnvio(envio,vendedor);
-                me.setVisible(true);
-                break;
+        try{
+            Object[] aux = tm.getDataVector().elementAt(tabla.getSelectedRow()).toArray();
+            ClienteJ aux1 = new ClienteJ();
+            aux1.setCUIT((String) aux[0]);
+            aux1.setNombre((String) aux[1]);
+            aux1.setSitIVA((String) aux[2]);
+            aux1.setTelefono((String) aux[3]);
+            aux1.setEmail((String) aux[4]);
+            aux1.setfFund((String) aux[5]);
+
+            ClienteF cfaux = new ClienteF();
+            dispose();
+            FinAltaVenta fav = new FinAltaVenta(cfaux,aux1,mercancias,vendedor,2,descuentos,restar,0);
+            fav.setVisible(true);
         }
-        
-        
-        
-        
+        catch(Exception e){
+            JOptionPane.showMessageDialog(null, "No se selecciono ningun Cliente");
+        }
         
         
     }//GEN-LAST:event_BSeleccionarActionPerformed
@@ -369,14 +270,110 @@ public class SeleccionarDireccionEnvio extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(SeleccionarDireccionEnvio.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(SeleccionarClienteJ.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(SeleccionarDireccionEnvio.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(SeleccionarClienteJ.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(SeleccionarDireccionEnvio.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(SeleccionarClienteJ.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(SeleccionarDireccionEnvio.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(SeleccionarClienteJ.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
@@ -413,7 +410,7 @@ public class SeleccionarDireccionEnvio extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new SeleccionarDireccionEnvio().setVisible(true);
+                new SeleccionarClienteJ().setVisible(true);
             }
         });
     }
