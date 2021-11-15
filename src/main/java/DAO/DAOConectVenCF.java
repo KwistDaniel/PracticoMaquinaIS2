@@ -9,7 +9,9 @@ import DataBase.DataBase;
 import Objects.ConectVenCF;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.List;
 
 /**
@@ -25,7 +27,22 @@ public class DAOConectVenCF implements DAO<ConectVenCF>{
 
     @Override
     public ConectVenCF readOne(String... ids) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        ConectVenCF cvcf = new ConectVenCF();
+        Connection connection = DataBase.getInstance().getConnection();
+        Statement statement;
+        try{
+            statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery("SELECT * FROM ConectVenCliF WHERE (COD_VENTA='" + ids[0] + "')");
+            while(rs.next()){
+                cvcf.setCOD_VENTA(rs.getInt("COD_VENTA"));
+                cvcf.setDNI(rs.getString("DNI_CF"));
+                cvcf.setSexo(rs.getString("SEXO_CF"));
+            }
+        }catch(SQLException throwables){
+            throwables.printStackTrace();
+        }
+        DataBase.getInstance().disconnect();
+        return cvcf;
     }
 
     @Override

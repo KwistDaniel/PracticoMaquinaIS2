@@ -40,6 +40,11 @@ public class BusinessObjectEnvio {
         return envioDAO.update(e);
     }
     
+    public static int modificarEnvio(Envio e){
+        envioDAO = new DAOEnvio();
+        return envioDAO.update(e);
+    }
+    
     public static int eliminarEnvio(Envio e){
         envioDAO = new DAOEnvio();
         return envioDAO.delete(e);

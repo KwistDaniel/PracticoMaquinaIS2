@@ -20,6 +20,11 @@ public class ConectVenCJ {
         this.COD_VENTA = COD_VENTA;
         this.CUIT = CUIT;
     }
+    
+    public ConectVenCJ(ConectVenCJ cvcj) {
+        this.COD_VENTA = cvcj.COD_VENTA;
+        this.CUIT = cvcj.CUIT;
+    }
 
     public int getCOD_VENTA() {
         return COD_VENTA;

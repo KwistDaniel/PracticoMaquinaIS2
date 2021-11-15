@@ -22,6 +22,12 @@ public class ConectVenCF {
         this.DNI = DNI;
         this.Sexo = Sexo;
     }
+    
+    public ConectVenCF(ConectVenCF cvcf) {
+        this.COD_VENTA = cvcf.COD_VENTA;
+        this.DNI = cvcf.DNI;
+        this.Sexo = cvcf.Sexo;
+    }
 
     public int getCOD_VENTA() {
         return COD_VENTA;

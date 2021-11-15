@@ -27,7 +27,20 @@ public class DAOVenta implements DAO<Venta> {
 
     @Override
     public Venta readOne(String... ids) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Venta venta = new Venta();
+        Connection connection = DataBase.getInstance().getConnection();
+        Statement statement;
+        try{
+            statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery("SELECT * FROM Venta WHERE (Status=1) AND (COD_ENVIO='" + ids[0] + "')");
+            while(rs.next()){
+                venta.setCOD_VENTA(rs.getInt("COD"));
+            }
+        }catch(SQLException throwables){
+            throwables.printStackTrace();
+        }
+        DataBase.getInstance().disconnect();
+        return venta;
     }
 
     @Override

@@ -32,11 +32,17 @@ import Objects.Vendedor;
 import Objects.Venta;
 import Utils.Validates;
 import com.toedter.calendar.JDateChooser;
+import java.awt.Dimension;
 import java.awt.event.ItemEvent;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.ListSelectionModel;
+import javax.swing.ScrollPaneConstants;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -53,6 +59,14 @@ public class FinAltaVenta extends javax.swing.JFrame {
     String fechenv = "";
     String horaenv = "";
     String HH = "",HM = "";
+    
+    private JTable tabla;
+    DefaultTableModel tm = new DefaultTableModel(){
+            @Override
+            public boolean isCellEditable(int row, int column){
+                return column == 1;
+            }
+        };
     /**
      * Creates new form Menu
      */
@@ -593,12 +607,24 @@ public class FinAltaVenta extends javax.swing.JFrame {
     }//GEN-LAST:event_BMostrarDirActionPerformed
 
     private void BMercanciasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BMercanciasActionPerformed
-        String mostrar = new String();
-        for (int i = 0;i<mercancias.size();i++){
-            Mercancia aux = new Mercancia(mercancias.get(i));
-            mostrar = mostrar + "\n" + aux.toString();
-        }
-        JOptionPane.showMessageDialog(null, mostrar);
+        Object[][] objects = Mercancia.getDataVector(mercancias);
+        Object[] headers = Mercancia.getHeaders();
+        tm.setDataVector(objects, headers);
+        
+        tabla = new JTable(tm);
+        tabla.setFocusable(false);
+        tabla.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        tabla.getTableHeader().setReorderingAllowed(false);
+        JScrollPane scrollPane = new JScrollPane(tabla);
+        scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+        scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+        scrollPane.getHorizontalScrollBar().setUnitIncrement(20);
+        scrollPane.getVerticalScrollBar().setUnitIncrement(20);
+                
+        tabla.setPreferredScrollableViewportSize(tabla.getPreferredSize());
+        
+        scrollPane.setPreferredSize(new Dimension(665,450));
+        JOptionPane.showMessageDialog(null, scrollPane);
     }//GEN-LAST:event_BMercanciasActionPerformed
 
     /**
