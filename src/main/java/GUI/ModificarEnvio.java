@@ -288,7 +288,7 @@ public class ModificarEnvio extends javax.swing.JFrame {
     }//GEN-LAST:event_BVolverActionPerformed
 
     private void BModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BModificarActionPerformed
-        int er1 = 0;
+        boolean erhora = false, erfecha = false;
         try{
             HH = TFHH.getText();
             HM = TFHM.getText();
@@ -296,16 +296,23 @@ public class ModificarEnvio extends javax.swing.JFrame {
             int a = Validates.validateIsNumber((String) HH);
             if(Validates.validateHora(HH,HM) == 1){
                 int hh = Integer.parseInt(HH), hm = Integer.parseInt(HM);
-                if(!(hh >= 0 && hh <= 23) && !(hm >= 0 && hm <= 59)){
-                    lherror.setVisible(true);
-                    er1 = 1;
+                if(((hh < 0 || hh > 23) && (hm < 0 || hm > 59))){
+                    erhora = true;
                 }
                 else{
                     horaenv = HH + ":" + HM;
-                    lherror.setVisible(false);
                 }
             }
-            if(!(er1 == 1)){
+            else{
+                erhora = true;
+            }
+            if(fechenv.equals("")){
+                erfecha = true;
+            }
+            else{
+                erfecha = false;
+            }
+            if((!(erhora)) && (!(erfecha))){
                 Envio envioaux = new Envio();
                 envioaux.setCod(envio.getCod());
                 /*Recupero datos*/
@@ -338,7 +345,9 @@ public class ModificarEnvio extends javax.swing.JFrame {
                     JOptionPane.showMessageDialog(null,"No modifico el envio");
                 }
             }
-            
+            else{
+                JOptionPane.showMessageDialog(null,"Valores Incorrectos");
+            }
         }
         catch(Exception e){
             JOptionPane.showMessageDialog(null, "No se pudo modificar el envio");
