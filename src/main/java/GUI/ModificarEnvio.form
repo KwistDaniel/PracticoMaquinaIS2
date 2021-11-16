@@ -118,25 +118,28 @@
                                   <Component id="BVolver" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
                               </Group>
-                              <Group type="102" attributes="0">
+                              <Group type="102" alignment="0" attributes="0">
                                   <Group type="103" groupAlignment="1" attributes="0">
                                       <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
                                       <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
                                   </Group>
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                      <Component id="CBEntregado" min="-2" max="-2" attributes="0"/>
-                                      <Component id="TFFechaEnv" max="32767" attributes="0"/>
-                                      <Component id="BSeleccionarDireccion" max="32767" attributes="0"/>
-                                      <Component id="BSeleccionarFecha" alignment="0" max="32767" attributes="0"/>
-                                      <Group type="102" attributes="0">
-                                          <Component id="TFHH" min="-2" pref="43" max="-2" attributes="0"/>
-                                          <EmptySpace max="-2" attributes="0"/>
-                                          <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
-                                          <EmptySpace max="-2" attributes="0"/>
-                                          <Component id="TFHM" min="-2" pref="43" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Component id="lherror" min="-2" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                          <Component id="CBEntregado" min="-2" max="-2" attributes="0"/>
+                                          <Component id="TFFechaEnv" max="32767" attributes="0"/>
+                                          <Component id="BSeleccionarDireccion" max="32767" attributes="0"/>
+                                          <Component id="BSeleccionarFecha" alignment="0" max="32767" attributes="0"/>
+                                          <Group type="102" attributes="0">
+                                              <Component id="TFHH" min="-2" pref="43" max="-2" attributes="0"/>
+                                              <EmptySpace max="-2" attributes="0"/>
+                                              <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
+                                              <EmptySpace max="-2" attributes="0"/>
+                                              <Component id="TFHM" min="-2" pref="43" max="-2" attributes="0"/>
+                                          </Group>
+                                          <Component id="BMostrarDir" alignment="0" max="32767" attributes="0"/>
                                       </Group>
-                                      <Component id="BMostrarDir" alignment="0" max="32767" attributes="0"/>
                                   </Group>
                                   <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                               </Group>
@@ -164,10 +167,12 @@
                               <Component id="TFHM" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
+                          <Component id="lherror" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
                           <Component id="CBEntregado" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
                           <Component id="BMostrarDir" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace pref="258" max="32767" attributes="0"/>
+                          <EmptySpace pref="223" max="32767" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="BVolver" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="BModificar" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -280,6 +285,14 @@
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BMostrarDirActionPerformed"/>
                   </Events>
+                </Component>
+                <Component class="javax.swing.JLabel" name="lherror">
+                  <Properties>
+                    <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                      <Color blue="2d" green="4" red="d2" type="rgb"/>
+                    </Property>
+                    <Property name="text" type="java.lang.String" value="Hora incorrecta"/>
+                  </Properties>
                 </Component>
               </SubComponents>
             </Container>

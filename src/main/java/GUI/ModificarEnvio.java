@@ -86,6 +86,7 @@ public class ModificarEnvio extends javax.swing.JFrame {
         CBEntregado = new javax.swing.JCheckBox();
         BModificar = new javax.swing.JButton();
         BMostrarDir = new javax.swing.JToggleButton();
+        lherror = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 0, 0));
@@ -165,6 +166,9 @@ public class ModificarEnvio extends javax.swing.JFrame {
             }
         });
 
+        lherror.setForeground(new java.awt.Color(210, 4, 45));
+        lherror.setText("Hora incorrecta");
+
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
@@ -182,18 +186,20 @@ public class ModificarEnvio extends javax.swing.JFrame {
                             .addComponent(jLabel3)
                             .addComponent(jLabel2))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(CBEntregado)
-                            .addComponent(TFFechaEnv)
-                            .addComponent(BSeleccionarDireccion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(BSeleccionarFecha, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addGroup(jPanel4Layout.createSequentialGroup()
-                                .addComponent(TFHH, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel4)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(TFHM, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(BMostrarDir, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lherror)
+                            .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(CBEntregado)
+                                .addComponent(TFFechaEnv)
+                                .addComponent(BSeleccionarDireccion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(BSeleccionarFecha, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(jPanel4Layout.createSequentialGroup()
+                                    .addComponent(TFHH, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(jLabel4)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(TFHM, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(BMostrarDir, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                         .addGap(0, 0, Short.MAX_VALUE))))
         );
         jPanel4Layout.setVerticalGroup(
@@ -214,10 +220,12 @@ public class ModificarEnvio extends javax.swing.JFrame {
                     .addComponent(jLabel4)
                     .addComponent(TFHM, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lherror)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(CBEntregado)
-                .addGap(18, 18, 18)
+                .addGap(31, 31, 31)
                 .addComponent(BMostrarDir)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 258, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 223, Short.MAX_VALUE)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(BVolver)
                     .addComponent(BModificar))
@@ -280,45 +288,57 @@ public class ModificarEnvio extends javax.swing.JFrame {
     }//GEN-LAST:event_BVolverActionPerformed
 
     private void BModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BModificarActionPerformed
+        int er1 = 0;
         try{
             HH = TFHH.getText();
             HM = TFHM.getText();
 
             int a = Validates.validateIsNumber((String) HH);
             if(Validates.validateHora(HH,HM) == 1){
-                horaenv = HH + ":" + HM;
-            }
-            Envio envioaux = new Envio();
-            envioaux.setCod(envio.getCod());
-            /*Recupero datos*/
-            envioaux.setId_dir(direccionenvio.getIdDir());
-            envioaux.setFecha(fechenv);
-            envioaux.setHora(horaenv);
-            if (CBEntregado.isSelected() == true){
-                envioaux.setEstado(1);
-            }
-            else{
-                envioaux.setEstado(0);
-            }
-            String saux = new String("Codigo: " + envioaux.getCod() + "\nDireccion: " + direccionenvio.getCalleDir() + " " + direccionenvio.getNumDir() + "\nFecha: " + envioaux.getFecha() + "\nHora: " + envioaux.getHora() + "\nEstado de Entrega: " + envioaux.getEstado());
-            int seleccion = JOptionPane.showConfirmDialog(rootPane,saux, "Confirmar los cambios",
-            JOptionPane.YES_NO_OPTION,
-            JOptionPane.QUESTION_MESSAGE);
-            if(seleccion == JOptionPane.YES_OPTION){
-                BusinessObjectEnvio boe = new BusinessObjectEnvio();
-                if(boe.modificarEnvio(envioaux) == 1){
-                    JOptionPane.showMessageDialog(null,"Envio modificado correctamente");
-                    dispose();
-                    ListarEnvios le = new ListarEnvios(new ArrayList<Envio>(),vendedor);
-                    le.setVisible(true);
+                int hh = Integer.parseInt(HH), hm = Integer.parseInt(HM);
+                if(!(hh >= 0 && hh <= 23) && !(hm >= 0 && hm <= 59)){
+                    lherror.setVisible(true);
+                    er1 = 1;
                 }
                 else{
-                    JOptionPane.showMessageDialog(null,"No se pudo modificar el Envio");
+                    horaenv = HH + ":" + HM;
+                    lherror.setVisible(false);
                 }
             }
-            else{
-                JOptionPane.showMessageDialog(null,"No modifico el envio");
+            if(!(er1 == 1)){
+                Envio envioaux = new Envio();
+                envioaux.setCod(envio.getCod());
+                /*Recupero datos*/
+                envioaux.setId_dir(direccionenvio.getIdDir());
+                envioaux.setFecha(fechenv);
+                envioaux.setHora(horaenv);
+                if (CBEntregado.isSelected() == true){
+                    envioaux.setEstado(1);
+                }
+                else{
+                    envioaux.setEstado(0);
+                }
+                String saux = new String("Codigo: " + envioaux.getCod() + "\nDireccion: " + direccionenvio.getCalleDir() + " " + direccionenvio.getNumDir() + "\nFecha: " + envioaux.getFecha() + "\nHora: " + envioaux.getHora() + "\nEstado de Entrega: " + envioaux.getEstado());
+                int seleccion = JOptionPane.showConfirmDialog(rootPane,saux, "Confirmar los cambios",
+                JOptionPane.YES_NO_OPTION,
+                JOptionPane.QUESTION_MESSAGE);
+                if(seleccion == JOptionPane.YES_OPTION){
+                    BusinessObjectEnvio boe = new BusinessObjectEnvio();
+                    if(boe.modificarEnvio(envioaux) == 1){
+                        JOptionPane.showMessageDialog(null,"Envio modificado correctamente");
+                        dispose();
+                        ListarEnvios le = new ListarEnvios(new ArrayList<Envio>(),vendedor);
+                        le.setVisible(true);
+                    }
+                    else{
+                        JOptionPane.showMessageDialog(null,"No se pudo modificar el Envio");
+                    }
+                }
+                else{
+                    JOptionPane.showMessageDialog(null,"No modifico el envio");
+                }
             }
+            
         }
         catch(Exception e){
             JOptionPane.showMessageDialog(null, "No se pudo modificar el envio");
@@ -421,5 +441,6 @@ public class ModificarEnvio extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel4;
+    private javax.swing.JLabel lherror;
     // End of variables declaration//GEN-END:variables
 }
