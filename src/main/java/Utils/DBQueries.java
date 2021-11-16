@@ -50,7 +50,7 @@ public class DBQueries {
                     "Status INT NOT NULL," +
                     "PRIMARY KEY(DNI,SEXO))");
         } catch (SQLException throwables) {
-            throwables.printStackTrace();
+            throwables.printStackTrace(System.out);
         }
         DataBase.getInstance().disconnect();
     }
@@ -72,7 +72,7 @@ public class DBQueries {
                     "Status INT NOT NULL," +
                     "PRIMARY KEY(DNI,SEXO))");
         } catch (SQLException throwables) {
-            throwables.printStackTrace();
+            throwables.printStackTrace(System.out);
         }
         DataBase.getInstance().disconnect();
     }
@@ -91,7 +91,7 @@ public class DBQueries {
                     "Status INT NOT NULL," +
                     "PRIMARY KEY(CUIT))");
         } catch (SQLException throwables) {
-            throwables.printStackTrace();
+            throwables.printStackTrace(System.out);
         }
         DataBase.getInstance().disconnect();
     }
@@ -107,7 +107,7 @@ public class DBQueries {
                     "Status INT NOT NULL, " + 
                     "PRIMARY KEY(ID_DIR,DNI_CF,SEXO_CF))");
         } catch (SQLException throwables) {
-            throwables.printStackTrace();
+            throwables.printStackTrace(System.out);
         }
         DataBase.getInstance().disconnect();
     }
@@ -122,7 +122,7 @@ public class DBQueries {
                     "Status INT NOT NULL, " + 
                     "PRIMARY KEY(ID_DIR,CUIT_CJ))");
         } catch (SQLException throwables) {
-            throwables.printStackTrace();
+            throwables.printStackTrace(System.out);
         }
         DataBase.getInstance().disconnect();
     }
@@ -142,7 +142,7 @@ public class DBQueries {
                     "Status INT NOT NULL," +
                     "PRIMARY KEY (ID))");
         } catch (SQLException throwables) {
-            throwables.printStackTrace();
+            throwables.printStackTrace(System.out);
         }
         DataBase.getInstance().disconnect();
     }
@@ -165,9 +165,9 @@ public class DBQueries {
                     "MEDIDA_ALTO INT," +
                     "METROS_CUADRADOS INT," +
                     "Status INT NOT NULL," +
-                    "PRIMARY KEY(COD))");
+                    "PRIMARY KEY(COD,PARTIDA))");
         } catch (SQLException throwables) {
-            throwables.printStackTrace();
+            throwables.printStackTrace(System.out);
         }
         DataBase.getInstance().disconnect();
     }
@@ -186,7 +186,7 @@ public class DBQueries {
                     "FOREIGN KEY (ID_DIR) REFERENCES Direccion(ID), " +
                     "PRIMARY KEY(COD))");
         } catch (SQLException throwables) {
-            throwables.printStackTrace();
+            throwables.printStackTrace(System.out);
         }
         DataBase.getInstance().disconnect();
     }
@@ -201,7 +201,7 @@ public class DBQueries {
                     "SEXO_CF VARCHAR(10) NOT NULL," + 
                     "PRIMARY KEY(COD_VENTA,DNI_CF,SEXO_CF))");
         } catch (SQLException throwables) {
-            throwables.printStackTrace();
+            throwables.printStackTrace(System.out);
         }
         DataBase.getInstance().disconnect();
     }
@@ -215,7 +215,7 @@ public class DBQueries {
                     "CUIT_CJ VARCHAR(15) NOT NULL," +
                     "PRIMARY KEY(COD_VENTA,CUIT_CJ))");
         } catch (SQLException throwables) {
-            throwables.printStackTrace();
+            throwables.printStackTrace(System.out);
         }
         DataBase.getInstance().disconnect();
     }
@@ -237,7 +237,7 @@ public class DBQueries {
                     "FOREIGN KEY (COD_ENVIO) REFERENCES Envio(COD)," +
                     "FOREIGN KEY (DNI_VENDEDOR,SEXO_VENDEDOR) REFERENCES Vendedor(DNI,SEXO))");
         } catch (SQLException throwables) {
-            throwables.printStackTrace();
+            throwables.printStackTrace(System.out);
         }
         DataBase.getInstance().disconnect();
     }
@@ -256,7 +256,7 @@ public class DBQueries {
                     "Precio_F REAL NOT NULL," +
                     "PRIMARY KEY(ID_Venta,COD_Mercancia))");
         } catch (SQLException throwables) {
-            throwables.printStackTrace();
+            throwables.printStackTrace(System.out);
         }
         DataBase.getInstance().disconnect();
     }
@@ -286,7 +286,7 @@ public class DBQueries {
             statement = connection.createStatement();
             statement.executeUpdate("DROP TABLE Vendedor");
         } catch (SQLException throwables) {
-            throwables.printStackTrace();
+            throwables.printStackTrace(System.out);
         }
         DataBase.getInstance().disconnect();
     }
@@ -297,7 +297,7 @@ public class DBQueries {
             statement = connection.createStatement();
             statement.executeUpdate("DROP TABLE Mercancia");
         } catch (SQLException throwables) {
-            throwables.printStackTrace();
+            throwables.printStackTrace(System.out);
         }
         DataBase.getInstance().disconnect();
     }
@@ -308,7 +308,7 @@ public class DBQueries {
             statement = connection.createStatement();
             statement.executeUpdate("DROP TABLE ClienteFisico");
         } catch (SQLException throwables) {
-            throwables.printStackTrace();
+            throwables.printStackTrace(System.out);
         }
         DataBase.getInstance().disconnect();
     }
@@ -319,7 +319,7 @@ public class DBQueries {
             statement = connection.createStatement();
             statement.executeUpdate("DROP TABLE ClienteJuridico");
         } catch (SQLException throwables) {
-            throwables.printStackTrace();
+            throwables.printStackTrace(System.out);
         }
         DataBase.getInstance().disconnect();
     }
@@ -330,7 +330,7 @@ public class DBQueries {
             statement = connection.createStatement();
             statement.executeUpdate("DROP TABLE ConectDirCliF");
         } catch (SQLException throwables) {
-            throwables.printStackTrace();
+            throwables.printStackTrace(System.out);
         }
         DataBase.getInstance().disconnect();
     }
@@ -341,7 +341,7 @@ public class DBQueries {
             statement = connection.createStatement();
             statement.executeUpdate("DROP TABLE ConectDirCliJ");
         } catch (SQLException throwables) {
-            throwables.printStackTrace();
+            throwables.printStackTrace(System.out);
         }
         DataBase.getInstance().disconnect();
     }
@@ -352,7 +352,7 @@ public class DBQueries {
             statement = connection.createStatement();
             statement.executeUpdate("DROP TABLE Direccion");
         } catch (SQLException throwables) {
-            throwables.printStackTrace();
+            throwables.printStackTrace(System.out);
         }
         DataBase.getInstance().disconnect();
     }
@@ -363,7 +363,7 @@ public class DBQueries {
             statement = connection.createStatement();
             statement.executeUpdate("DROP TABLE Venta");
         } catch (SQLException throwables) {
-            throwables.printStackTrace();
+            throwables.printStackTrace(System.out);
         }
         DataBase.getInstance().disconnect();
     }
@@ -374,7 +374,7 @@ public class DBQueries {
             statement = connection.createStatement();
             statement.executeUpdate("DROP TABLE Envio");
         } catch (SQLException throwables) {
-            throwables.printStackTrace();
+            throwables.printStackTrace(System.out);
         }
         DataBase.getInstance().disconnect();
     }
@@ -385,7 +385,7 @@ public class DBQueries {
             statement = connection.createStatement();
             statement.executeUpdate("DROP TABLE RenglonVenta");
         } catch (SQLException throwables) {
-            throwables.printStackTrace();
+            throwables.printStackTrace(System.out);
         }
         DataBase.getInstance().disconnect();
     }
@@ -396,7 +396,7 @@ public class DBQueries {
             statement = connection.createStatement();
             statement.executeUpdate("DROP TABLE ConectVenCliF");
         } catch (SQLException throwables) {
-            throwables.printStackTrace();
+            throwables.printStackTrace(System.out);
         }
         DataBase.getInstance().disconnect();
     }
@@ -407,7 +407,7 @@ public class DBQueries {
             statement = connection.createStatement();
             statement.executeUpdate("DROP TABLE ConectVenCliJ");
         } catch (SQLException throwables) {
-            throwables.printStackTrace();
+            throwables.printStackTrace(System.out);
         }
         DataBase.getInstance().disconnect();
     }
@@ -434,7 +434,7 @@ public class DBQueries {
                     + "('36421350','Debora','Kwist','dkwist','36421350','3382-571051','Femenino','12/11/1991','deborakwist@gmail.com',2,1),"
                     + "('11111111','Usuario','Admin','user','user','0000-000000','Masculino','11/11/1991','admin@gmail.com',1,1)");
         } catch (SQLException throwables) {
-            throwables.printStackTrace();
+            throwables.printStackTrace(System.out);
         }
         DataBase.getInstance().disconnect();
     }
@@ -452,7 +452,7 @@ public class DBQueries {
                     + "(6,'Objeto6','Desc Obj6','225','26','Rojo',1501,'Ceramica',2,28,28,7500,1),"
                     + "(7,'Objeto7','Desc Obj7','396','1505','Celeste',14201,'Mosaico',4,17,17,250,1)");
         } catch (SQLException throwables) {
-            throwables.printStackTrace();
+            throwables.printStackTrace(System.out);
         }
         DataBase.getInstance().disconnect();
     }
@@ -465,7 +465,7 @@ public class DBQueries {
                     + "('39662252','Daniel','Kwist','3382-406601','Masculino','30/12/1996','kwistdaniel@gmail.com','Monotributo','20-39662252-2',1),"
                     + "('42000189','Tobias','Burger','2664-509666','Masculino','29/04/1999','tovibur@hotmai.com','Consumidor Final','20-42000189-5',1)");
         } catch (SQLException throwables) {
-            throwables.printStackTrace();
+            throwables.printStackTrace(System.out);
         }
         DataBase.getInstance().disconnect();
     }
@@ -478,7 +478,7 @@ public class DBQueries {
                     + "('20-123456789-3','Constructora 1 SRL','Resposable Inscripto','2664-405540','contructora@const.com','31/12/2000',1),"
                     + "('20-457896656-3','Constructora 2','Responsable Inscripto','2664-558899','example@ex.com','12/11/2001',1)");
         } catch (SQLException throwables) {
-            throwables.printStackTrace();
+            throwables.printStackTrace(System.out);
         }
         DataBase.getInstance().disconnect();
     }
@@ -496,7 +496,7 @@ public class DBQueries {
                     + "(6,'Tomas Jofre','456','5','4','5700','San Luis',1),"
                     + "(7,'Junin','774','','','5700','San Luis',1)");
         } catch (SQLException throwables) {
-            throwables.printStackTrace();
+            throwables.printStackTrace(System.out);
         }
         DataBase.getInstance().disconnect();
     }
@@ -510,7 +510,7 @@ public class DBQueries {
                     + "(3,'39662252','Masculino',1),"
                     + "(4,'42000189','Masculino',1)");
         } catch (SQLException throwables) {
-            throwables.printStackTrace();
+            throwables.printStackTrace(System.out);
         }
         DataBase.getInstance().disconnect();
     }
@@ -524,7 +524,7 @@ public class DBQueries {
                     + "(6,'20-123456789-3',1),"
                     + "(7,'20-457896656-3',1)");
         } catch (SQLException throwables) {
-            throwables.printStackTrace();
+            throwables.printStackTrace(System.out);
         }
         DataBase.getInstance().disconnect();
     }
