@@ -29,8 +29,14 @@ public class BusinessObjectVenta {
         v.setCOD_VENTA(ventaDAO.lastCode() + 1);
         return v;
     }
+    
     public static int cargarVenta(Venta v){
         ventaDAO = new DAOVenta();
         return ventaDAO.create(v);
+    }
+    
+    public static int recuperarVenta(int c){
+        ventaDAO = new DAOVenta();
+        return ventaDAO.readOne(String.valueOf(c)).getCOD_VENTA();
     }
 }

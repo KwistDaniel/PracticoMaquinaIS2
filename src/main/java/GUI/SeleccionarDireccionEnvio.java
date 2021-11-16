@@ -60,49 +60,31 @@ public class SeleccionarDireccionEnvio extends javax.swing.JFrame {
         descuentos = new ArrayList<Integer>(descaux);
         vendedor = new Vendedor(vaux);
         tipocliente = tcliente;
-        if (tipocliente == 1){
-            clientef = new ClienteF(cfaux);
-        }
-        else{
-            clientej = new ClienteJ(cjaux);
-        }
         mercancias = new ArrayList<Mercancia>(aux);
         restar = new ArrayList<Mercancia>(restaaux);
         initComponents();
         this.setVisible(true);
         this.setLocationRelativeTo(null);
         
-        //ahora hago una tabla si es ClienteF y otra si es ClienteJ, por ahora solo implementar todo ClienteF.
-        
         GridBagConstraints gridBagConstraints = new GridBagConstraints();
         
-        /*DefaultTableModel tm = new DefaultTableModel(){
-            @Override
-            public boolean isCellEditable(int row, int column){
-                return column == 1;
-            }
-        };*/
-        
         if (tipocliente == 1){
+            clientef = new ClienteF(cfaux);
             Object[][] objectscf = Direccion.getDataVector(BusinessObjectClienteF.listarDireccionClientesF(clientef));
             Object[] headerscf = Direccion.getHeaders();
             tm.setDataVector(objectscf, headerscf);
         }
         else if (tipocliente == 2){
+            clientej = new ClienteJ(cjaux);
             Object[][] objectscj = Direccion.getDataVector(BusinessObjectClienteJ.listarDireccionClientesJ(clientej));
             Object[] headerscj = Direccion.getHeaders();
             tm.setDataVector(objectscj, headerscj);
         }
         
-        
-        
-
-        
         tabla = new JTable(tm);
         tabla.setFocusable(false);
         tabla.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         tabla.getTableHeader().setReorderingAllowed(false);
-        
         
         JScrollPane scrollPane = new JScrollPane(tabla);
         scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
@@ -119,54 +101,38 @@ public class SeleccionarDireccionEnvio extends javax.swing.JFrame {
         gridBagConstraints.gridheight = 4;
         add(scrollPane, gridBagConstraints);
         
-        
         jPanel2.setLayout(new BorderLayout());
         jPanel2.add(scrollPane, BorderLayout.CENTER);
-        
-        
-        
-                
+               
     }
 
-    public SeleccionarDireccionEnvio(Envio e,Vendedor vaux) {
+    public SeleccionarDireccionEnvio(Envio e,Vendedor vaux,int tcliente,ClienteF cfaux, ClienteJ cjaux) {
         vengode = 2;
         envio = new Envio(e);
         vendedor = new Vendedor(vaux);
+        tipocliente = tcliente;
         initComponents();
         this.setVisible(true);
         this.setLocationRelativeTo(null);
-        
-        //ahora hago una tabla si es ClienteF y otra si es ClienteJ, por ahora solo implementar todo ClienteF.
-        
         GridBagConstraints gridBagConstraints = new GridBagConstraints();
         
-        /*DefaultTableModel tm = new DefaultTableModel(){
-            @Override
-            public boolean isCellEditable(int row, int column){
-                return column == 1;
-            }
-        };*/
-        
         if (tipocliente == 1){
+            clientef = new ClienteF(cfaux);
             Object[][] objectscf = Direccion.getDataVector(BusinessObjectClienteF.listarDireccionClientesF(clientef));
             Object[] headerscf = Direccion.getHeaders();
             tm.setDataVector(objectscf, headerscf);
         }
         else{
+            clientej = new ClienteJ(cjaux);
             Object[][] objectscj = Direccion.getDataVector(BusinessObjectClienteJ.listarDireccionClientesJ(clientej));
             Object[] headerscj = Direccion.getHeaders();
             tm.setDataVector(objectscj, headerscj);
         }
         
-        
-        
-
-        
         tabla = new JTable(tm);
         tabla.setFocusable(false);
         tabla.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         tabla.getTableHeader().setReorderingAllowed(false);
-        
         
         JScrollPane scrollPane = new JScrollPane(tabla);
         scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
@@ -183,13 +149,8 @@ public class SeleccionarDireccionEnvio extends javax.swing.JFrame {
         gridBagConstraints.gridheight = 4;
         add(scrollPane, gridBagConstraints);
         
-        
         jPanel2.setLayout(new BorderLayout());
-        jPanel2.add(scrollPane, BorderLayout.CENTER);
-        
-        
-        
-                
+        jPanel2.add(scrollPane, BorderLayout.CENTER);     
     }
     
     
@@ -340,7 +301,7 @@ public class SeleccionarDireccionEnvio extends javax.swing.JFrame {
                 fav.setVisible(true);
                 break;
             case 2: 
-                ModificarEnvio me = new ModificarEnvio(envio,vendedor);
+                ModificarEnvio me = new ModificarEnvio(envio,vendedor,direccionenvio);
                 me.setVisible(true);
                 break;
         }

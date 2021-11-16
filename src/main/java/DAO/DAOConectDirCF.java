@@ -57,6 +57,7 @@ public class DAOConectDirCF implements DAO<ConectDirCF> {
 
     @Override
     public List<ConectDirCF> readSome(String... ids) {
+        //Aparentemente sin uso todavia. (Find Usages no devolvio resultados)
         List<ConectDirCF> conectoresdircf = new ArrayList<>();
         Connection connection = DataBase.getInstance().getConnection();
         Statement statement;

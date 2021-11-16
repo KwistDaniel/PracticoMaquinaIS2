@@ -9,7 +9,9 @@ import DataBase.DataBase;
 import Objects.ConectVenCJ;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.List;
 
 /**
@@ -25,7 +27,21 @@ public class DAOConectVenCJ implements DAO<ConectVenCJ>{
 
     @Override
     public ConectVenCJ readOne(String... ids) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        ConectVenCJ cvcj = new ConectVenCJ();
+        Connection connection = DataBase.getInstance().getConnection();
+        Statement statement;
+        try{
+            statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery("SELECT * FROM ConectVenCliJ WHERE (COD_VENTA='" + ids[0] + "')");
+            while(rs.next()){
+                cvcj.setCOD_VENTA(rs.getInt("COD_VENTA"));
+                cvcj.setCUIT(rs.getString("CUIT_CJ"));
+            }
+        }catch(SQLException throwables){
+            throwables.printStackTrace();
+        }
+        DataBase.getInstance().disconnect();
+        return cvcj;
     }
 
     @Override
