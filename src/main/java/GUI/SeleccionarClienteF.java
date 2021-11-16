@@ -115,7 +115,7 @@ public class SeleccionarClienteF extends javax.swing.JFrame {
         jPanel3 = new javax.swing.JPanel();
         BVolver = new javax.swing.JButton();
         BSeleccionar = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        BCrearCliente = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 0, 0));
@@ -138,6 +138,7 @@ public class SeleccionarClienteF extends javax.swing.JFrame {
         );
 
         jPanel3.setBackground(new java.awt.Color(245, 245, 220));
+        jPanel3.setPreferredSize(new java.awt.Dimension(582, 58));
 
         BVolver.setBackground(new java.awt.Color(210, 4, 45));
         BVolver.setForeground(new java.awt.Color(250, 250, 250));
@@ -158,7 +159,14 @@ public class SeleccionarClienteF extends javax.swing.JFrame {
             }
         });
 
-        jButton1.setText("Agregar Cliente");
+        BCrearCliente.setBackground(new java.awt.Color(210, 4, 45));
+        BCrearCliente.setForeground(new java.awt.Color(250, 250, 250));
+        BCrearCliente.setText("Agregar Cliente");
+        BCrearCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BCrearClienteActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -167,8 +175,8 @@ public class SeleccionarClienteF extends javax.swing.JFrame {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(BSeleccionar)
-                .addGap(81, 81, 81)
-                .addComponent(jButton1)
+                .addGap(18, 18, 18)
+                .addComponent(BCrearCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(BVolver)
                 .addContainerGap())
@@ -176,15 +184,15 @@ public class SeleccionarClienteF extends javax.swing.JFrame {
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addContainerGap(30, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(BVolver)
                 .addGap(21, 21, 21))
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(20, 20, 20)
+                .addGap(20, 30, Short.MAX_VALUE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(BSeleccionar)
-                    .addComponent(jButton1))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(BCrearCliente))
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -194,14 +202,14 @@ public class SeleccionarClienteF extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, 1075, Short.MAX_VALUE)
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(19, Short.MAX_VALUE)
+                .addContainerGap(34, Short.MAX_VALUE)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -254,6 +262,10 @@ public class SeleccionarClienteF extends javax.swing.JFrame {
         
         
     }//GEN-LAST:event_BSeleccionarActionPerformed
+
+    private void BCrearClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BCrearClienteActionPerformed
+        JOptionPane.showMessageDialog(null, "Funcionalidad sin implementar");
+    }//GEN-LAST:event_BCrearClienteActionPerformed
 
     /**
      * @param args the command line arguments
@@ -354,9 +366,9 @@ public class SeleccionarClienteF extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton BCrearCliente;
     private javax.swing.JButton BSeleccionar;
     private javax.swing.JButton BVolver;
-    private javax.swing.JButton jButton1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
