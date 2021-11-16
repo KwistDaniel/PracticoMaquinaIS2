@@ -10,6 +10,7 @@ import Objects.Mercancia;
 import Objects.Vendedor;
 import java.util.ArrayList;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -44,9 +45,8 @@ public class MVentas extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
-        BStock = new javax.swing.JButton();
+        BListarVentas = new javax.swing.JButton();
         BMVentas = new javax.swing.JButton();
-        BClientes = new javax.swing.JButton();
         BListarEnvios = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
         BVolver = new javax.swing.JButton();
@@ -64,12 +64,12 @@ public class MVentas extends javax.swing.JFrame {
 
         jPanel3.setBackground(new java.awt.Color(245, 245, 220));
 
-        BStock.setBackground(new java.awt.Color(210, 4, 45));
-        BStock.setForeground(new java.awt.Color(250, 250, 250));
-        BStock.setText("S/Implementar");
-        BStock.addActionListener(new java.awt.event.ActionListener() {
+        BListarVentas.setBackground(new java.awt.Color(210, 4, 45));
+        BListarVentas.setForeground(new java.awt.Color(250, 250, 250));
+        BListarVentas.setText("Listar Ventas");
+        BListarVentas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BStockActionPerformed(evt);
+                BListarVentasActionPerformed(evt);
             }
         });
 
@@ -82,11 +82,9 @@ public class MVentas extends javax.swing.JFrame {
             }
         });
 
-        BClientes.setText("S/Implementar");
-
         BListarEnvios.setBackground(new java.awt.Color(210, 4, 45));
         BListarEnvios.setForeground(new java.awt.Color(250, 250, 250));
-        BListarEnvios.setText("Envios");
+        BListarEnvios.setText("Listar Envios");
         BListarEnvios.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BListarEnviosActionPerformed(evt);
@@ -100,9 +98,8 @@ public class MVentas extends javax.swing.JFrame {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(133, 133, 133)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(BStock, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(BClientes, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(BMVentas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(BListarVentas, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(BMVentas, javax.swing.GroupLayout.DEFAULT_SIZE, 109, Short.MAX_VALUE)
                     .addComponent(BListarEnvios, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(163, Short.MAX_VALUE))
         );
@@ -112,12 +109,10 @@ public class MVentas extends javax.swing.JFrame {
                 .addGap(76, 76, 76)
                 .addComponent(BMVentas)
                 .addGap(18, 18, 18)
-                .addComponent(BClientes)
-                .addGap(18, 18, 18)
-                .addComponent(BStock)
+                .addComponent(BListarVentas)
                 .addGap(18, 18, 18)
                 .addComponent(BListarEnvios)
-                .addContainerGap(318, Short.MAX_VALUE))
+                .addContainerGap(362, Short.MAX_VALUE))
         );
 
         jPanel4.setBackground(new java.awt.Color(245, 245, 220));
@@ -161,7 +156,7 @@ public class MVentas extends javax.swing.JFrame {
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jButton2)
                             .addComponent(jButton1))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addGap(0, 150, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel4Layout.setVerticalGroup(
@@ -245,9 +240,9 @@ public class MVentas extends javax.swing.JFrame {
         
     }//GEN-LAST:event_BMVentasActionPerformed
 
-    private void BStockActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BStockActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_BStockActionPerformed
+    private void BListarVentasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BListarVentasActionPerformed
+        JOptionPane.showMessageDialog(null, "Funcionalidad sin implementar");
+    }//GEN-LAST:event_BListarVentasActionPerformed
 
     private void BListarEnviosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BListarEnviosActionPerformed
         dispose();
@@ -319,10 +314,9 @@ public class MVentas extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton BClientes;
     private javax.swing.JButton BListarEnvios;
+    private javax.swing.JButton BListarVentas;
     private javax.swing.JButton BMVentas;
-    private javax.swing.JButton BStock;
     private javax.swing.JButton BVolver;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;

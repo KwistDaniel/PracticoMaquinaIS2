@@ -114,9 +114,8 @@
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="-2" pref="133" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                              <Component id="BStock" alignment="1" max="32767" attributes="0"/>
-                              <Component id="BClientes" alignment="1" max="32767" attributes="0"/>
-                              <Component id="BMVentas" max="32767" attributes="0"/>
+                              <Component id="BListarVentas" alignment="1" max="32767" attributes="0"/>
+                              <Component id="BMVentas" pref="109" max="32767" attributes="0"/>
                               <Component id="BListarEnvios" alignment="1" max="32767" attributes="0"/>
                           </Group>
                           <EmptySpace pref="163" max="32767" attributes="0"/>
@@ -129,18 +128,16 @@
                           <EmptySpace min="-2" pref="76" max="-2" attributes="0"/>
                           <Component id="BMVentas" min="-2" max="-2" attributes="0"/>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
-                          <Component id="BClientes" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace type="separate" max="-2" attributes="0"/>
-                          <Component id="BStock" min="-2" max="-2" attributes="0"/>
+                          <Component id="BListarVentas" min="-2" max="-2" attributes="0"/>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Component id="BListarEnvios" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace pref="318" max="32767" attributes="0"/>
+                          <EmptySpace pref="362" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
               </Layout>
               <SubComponents>
-                <Component class="javax.swing.JButton" name="BStock">
+                <Component class="javax.swing.JButton" name="BListarVentas">
                   <Properties>
                     <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                       <Color blue="2d" green="4" red="d2" type="rgb"/>
@@ -148,10 +145,10 @@
                     <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                       <Color blue="fa" green="fa" red="fa" type="rgb"/>
                     </Property>
-                    <Property name="text" type="java.lang.String" value="S/Implementar"/>
+                    <Property name="text" type="java.lang.String" value="Listar Ventas"/>
                   </Properties>
                   <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BStockActionPerformed"/>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BListarVentasActionPerformed"/>
                   </Events>
                 </Component>
                 <Component class="javax.swing.JButton" name="BMVentas">
@@ -168,11 +165,6 @@
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BMVentasActionPerformed"/>
                   </Events>
                 </Component>
-                <Component class="javax.swing.JButton" name="BClientes">
-                  <Properties>
-                    <Property name="text" type="java.lang.String" value="S/Implementar"/>
-                  </Properties>
-                </Component>
                 <Component class="javax.swing.JButton" name="BListarEnvios">
                   <Properties>
                     <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
@@ -181,7 +173,7 @@
                     <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                       <Color blue="fa" green="fa" red="fa" type="rgb"/>
                     </Property>
-                    <Property name="text" type="java.lang.String" value="Envios"/>
+                    <Property name="text" type="java.lang.String" value="Listar Envios"/>
                   </Properties>
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BListarEnviosActionPerformed"/>
@@ -214,7 +206,7 @@
                                       <Component id="jButton2" alignment="0" min="-2" max="-2" attributes="0"/>
                                       <Component id="jButton1" alignment="0" min="-2" max="-2" attributes="0"/>
                                   </Group>
-                                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                                  <EmptySpace min="0" pref="150" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>

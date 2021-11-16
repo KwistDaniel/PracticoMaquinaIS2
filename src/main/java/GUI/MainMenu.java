@@ -9,6 +9,7 @@ import Objects.Mercancia;
 import Objects.Vendedor;
 import java.util.ArrayList;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -46,7 +47,6 @@ public class MainMenu extends javax.swing.JFrame {
         BVentas = new javax.swing.JButton();
         BClientes = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
-        BStock1 = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
         BSalir = new javax.swing.JButton();
 
@@ -88,14 +88,12 @@ public class MainMenu extends javax.swing.JFrame {
             }
         });
 
+        jButton1.setBackground(new java.awt.Color(210, 4, 45));
+        jButton1.setForeground(new java.awt.Color(250, 250, 250));
         jButton1.setText("Pedidos");
-
-        BStock1.setBackground(new java.awt.Color(210, 4, 45));
-        BStock1.setForeground(new java.awt.Color(250, 250, 250));
-        BStock1.setText("Stock");
-        BStock1.addActionListener(new java.awt.event.ActionListener() {
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BStock1ActionPerformed(evt);
+                jButton1ActionPerformed(evt);
             }
         });
 
@@ -114,8 +112,7 @@ public class MainMenu extends javax.swing.JFrame {
                         .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel3Layout.createSequentialGroup()
                             .addGap(133, 133, 133)
                             .addComponent(BVentas, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 42, Short.MAX_VALUE)
-                .addComponent(BStock1, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(132, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -126,11 +123,9 @@ public class MainMenu extends javax.swing.JFrame {
                 .addComponent(BClientes)
                 .addGap(18, 18, 18)
                 .addComponent(BStock)
-                .addGap(58, 58, 58)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(BStock1))
-                .addContainerGap(278, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(jButton1)
+                .addContainerGap(318, Short.MAX_VALUE))
         );
 
         jPanel4.setBackground(new java.awt.Color(245, 245, 220));
@@ -230,7 +225,7 @@ public class MainMenu extends javax.swing.JFrame {
     }//GEN-LAST:event_BVentasActionPerformed
 
     private void BClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BClientesActionPerformed
-        // TODO add your handling code here:
+        JOptionPane.showMessageDialog(null, "Funcionalidad sin implementar");
     }//GEN-LAST:event_BClientesActionPerformed
 
     private void BStockActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BStockActionPerformed
@@ -239,9 +234,9 @@ public class MainMenu extends javax.swing.JFrame {
         LM.setVisible(true);
     }//GEN-LAST:event_BStockActionPerformed
 
-    private void BStock1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BStock1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_BStock1ActionPerformed
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        JOptionPane.showMessageDialog(null, "Funcionalidad sin implementar");
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -289,7 +284,6 @@ public class MainMenu extends javax.swing.JFrame {
     private javax.swing.JButton BClientes;
     private javax.swing.JButton BSalir;
     private javax.swing.JButton BStock;
-    private javax.swing.JButton BStock1;
     private javax.swing.JButton BVentas;
     private javax.swing.JButton jButton1;
     private javax.swing.JPanel jPanel1;
