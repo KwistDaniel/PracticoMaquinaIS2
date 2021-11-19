@@ -30,6 +30,7 @@ import javax.swing.JCheckBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
@@ -62,6 +63,7 @@ public class ListarEnvios extends javax.swing.JFrame {
                 return column == 1;
             }
         };
+    JScrollPane scrollPane = new JScrollPane();
     
     public ListarEnvios(ArrayList<Envio> aux,Vendedor vaux) {
         vendedor = new Vendedor(vaux);
@@ -69,11 +71,8 @@ public class ListarEnvios extends javax.swing.JFrame {
         initComponents();
         this.setVisible(true);
         this.setLocationRelativeTo(null);
-        BModif.getRootPane().requestFocus();
+        //BModif.getRootPane().requestFocus(); no se que obda esto
         GridBagConstraints gridBagConstraints = new GridBagConstraints();
-        
-        
-        
         
         
         Object[][] objects = Envio.getDataVector(BusinessObjectEnvio.listarEnvios());
@@ -111,7 +110,7 @@ public class ListarEnvios extends javax.swing.JFrame {
         tabla.setAutoCreateRowSorter(true);//para los filtros, tutorial de oracle
         TableRowSorter<TableModel> sorter = new TableRowSorter<TableModel>(tabla.getModel());//para los filtros, tutorial de oracle
         tabla.setRowSorter(sorter);//para los filtros, tutorial de oracle
-        JScrollPane scrollPane = new JScrollPane(tabla);
+        scrollPane = new JScrollPane(tabla);
         scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
         scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
         scrollPane.getHorizontalScrollBar().setUnitIncrement(20);
@@ -185,7 +184,7 @@ public class ListarEnvios extends javax.swing.JFrame {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    static class ButtonRenderer extends JButton implements TableCellRenderer{
+    class ButtonRenderer extends JButton implements TableCellRenderer{
         public ButtonRenderer(){
             setOpaque(true);
         }
@@ -204,7 +203,7 @@ public class ListarEnvios extends javax.swing.JFrame {
         }
     }
     
-    static class ButtonEditor extends DefaultCellEditor {
+    class ButtonEditor extends DefaultCellEditor {
 
         protected JButton button;
         private String label;
@@ -260,8 +259,10 @@ public class ListarEnvios extends javax.swing.JFrame {
 
             if (isPushed) {
                 Object object = boDir.readDir(ids[0]);
-
-                JOptionPane.showMessageDialog(null, object.toString());
+                dispose();
+                ListarEnvios le = new ListarEnvios(new ArrayList<Envio>(),vendedor);
+                le.setVisible(true);
+                Utils.popUpMSG(object.toString(), "Direccion de Envio");
             }
             isPushed = false;
             return label;
@@ -459,12 +460,14 @@ public class ListarEnvios extends javax.swing.JFrame {
     }//GEN-LAST:event_BVolverActionPerformed
 
     private void BModifActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BModifActionPerformed
+        
         try{
+            
             int estadoentrega = 0;
             Object[] aux = tm.getDataVector().elementAt(tabla.getSelectedRow()).toArray();
             if(((String)aux[4]).equals("Entregado")){
-            estadoentrega = 1;
-        }
+                estadoentrega = 1;
+            }
             Envio aux1 = new Envio();
             aux1.setCod((int) aux[0]);
             aux1.setId_dir((int) aux[1]);

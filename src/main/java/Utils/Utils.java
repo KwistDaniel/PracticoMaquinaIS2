@@ -33,6 +33,8 @@ public class Utils {
     public static String WRONGVALUE = "Valor incorrecto";
     public static String SELECTAMOUNT = "Seleccione una cantidad";
     public static String ADVICE = "Aviso";
+    public static String DIR = "Direccion";
+    public static String CL = "Cliente";
     
     public static String LOGINERROR = "Datos de inicio de sesion incorrectos";
     

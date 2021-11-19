@@ -437,10 +437,10 @@ public class FinAltaVenta extends javax.swing.JFrame {
 
     private void BMostrarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BMostrarClienteActionPerformed
         if(tipocliente == 1){
-            JOptionPane.showMessageDialog(null, clientef.toString());
+            Utils.popUpMSG(clientef.toString(), Utils.CL);
         }
         else if (tipocliente == 2){
-            JOptionPane.showMessageDialog(null, clientej.toString());
+            Utils.popUpMSG(clientej.toString(), Utils.CL);
         }
     }//GEN-LAST:event_BMostrarClienteActionPerformed
 
@@ -633,7 +633,7 @@ public class FinAltaVenta extends javax.swing.JFrame {
     }//GEN-LAST:event_jCheckBox1ItemStateChanged
 
     private void BMostrarDirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BMostrarDirActionPerformed
-        JOptionPane.showMessageDialog(null, direccionenvio.toString());
+        Utils.popUpMSG(direccionenvio.toString(), Utils.DIR);
     }//GEN-LAST:event_BMostrarDirActionPerformed
 
     private void BMercanciasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BMercanciasActionPerformed
