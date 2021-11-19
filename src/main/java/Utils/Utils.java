@@ -71,7 +71,7 @@ public class Utils {
         UI.put("Panel.background",backgroundColor);
         UI.put("Button.background",backgroundColor);
         UI.put("Button.foreground",fontColor);
-        JOptionPane.showMessageDialog(null, msg, ttl, JOptionPane.INFORMATION_MESSAGE);
+        JOptionPane.showMessageDialog(null, msg, ttl, JOptionPane.PLAIN_MESSAGE);
     }
     
     public static int popUpYNOp(String msg, String ttl){
@@ -83,7 +83,7 @@ public class Utils {
         UI.put("Button.foreground",fontColor);
         return JOptionPane.showConfirmDialog(null,msg,ttl,
                     JOptionPane.YES_NO_OPTION,
-                    JOptionPane.QUESTION_MESSAGE);
+                    JOptionPane.PLAIN_MESSAGE);
     }
     
     public static String popUpInD(String msg, String ttl){
@@ -93,7 +93,7 @@ public class Utils {
         UI.put("Panel.background",backgroundColor);
         UI.put("Button.background",backgroundColor);
         UI.put("Button.foreground",fontColor);
-        return JOptionPane.showInputDialog(null,msg,ttl,JOptionPane.INFORMATION_MESSAGE);
+        return JOptionPane.showInputDialog(null,msg,ttl,JOptionPane.PLAIN_MESSAGE);
     }
     
     public static boolean validateDate(final String dateToValidate){

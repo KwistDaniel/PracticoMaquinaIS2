@@ -33,16 +33,19 @@ import Objects.Venta;
 import Utils.Utils;
 import Utils.Validates;
 import com.toedter.calendar.JDateChooser;
+import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.event.ItemEvent;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
 import javax.swing.ScrollPaneConstants;
+import javax.swing.UIManager;
 import javax.swing.table.DefaultTableModel;
 
 /**
