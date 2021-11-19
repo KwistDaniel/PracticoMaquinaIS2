@@ -30,6 +30,7 @@ import Objects.Mercancia;
 import Objects.Renglon;
 import Objects.Vendedor;
 import Objects.Venta;
+import Utils.Utils;
 import Utils.Validates;
 import com.toedter.calendar.JDateChooser;
 import java.awt.Dimension;
@@ -446,121 +447,137 @@ public class FinAltaVenta extends javax.swing.JFrame {
         //3- CARGO CADA RENGLON DE VENTA
         //4- CREO EL CONETOR DE VENTA CON EL CLIENTE
         //5- UPDATE A MERCANCIA
-        boolean erhora = false, erfecha = false;
+        boolean erhora = false, erfecha = false, erdir = false;
+        Envio envio = new Envio();
         
-        
-        Envio envio = new Envio(BusinessObjectEnvio.nuevoEnvio());
-        if(jCheckBox1.isSelected()){
-            //Tiene Envio
-            /*Consigo  Hora*/
-            HH = TFHH.getText();
-            HM = TFHM.getText();
-            int a = Validates.validateIsNumber((String) HH);
-            if(Validates.validateHora(HH,HM) == 1){
-                int hh = Integer.parseInt(HH), hm = Integer.parseInt(HM);
-                if(((hh < 0 || hh > 23) && (hm < 0 || hm > 59))){
-                    erhora = true;
+        int seleccion = Utils.popUpYNOp(Utils.VENCONFIRM,Utils.ADVICE);
+        if(seleccion == JOptionPane.YES_OPTION){
+            if(jCheckBox1.isSelected()){
+                //Tiene Envio
+                /*Consigo  Hora*/
+                HH = TFHH.getText();
+                HM = TFHM.getText();
+                if(HH.equals(null) || HM.equals(null)){//Veo si hora es valida
+                    Utils.popUpMSG(Utils.HORERR, Utils.ERROR);
                 }
                 else{
-                    horaenv = HH + ":" + HM;
+                    if(Validates.validateHora(HH,HM) == 1){
+                        int hh = Integer.parseInt(HH), hm = Integer.parseInt(HM);
+                        if(((hh < 0 || hh > 23) && (hm < 0 || hm > 59))){
+                            erhora = true;
+                        }
+                        else{
+                            horaenv = HH + ":" + HM;
+                        }
+                    }
+                    else{
+                        erhora = true;
+                    }
+                }
+                if(fechenv.equals("")){//Veo si la fecha es valida (mismo dia actual o a futuro, compara con san luis)
+                    erfecha = true;
+                }
+                else{
+                    if(Utils.validateDate(fechenv)){
+                        erfecha = false;
+                    }
+                    else{
+                        erfecha = true;
+                    }
+                }
+                if(direccionenvio == null){
+                    erdir = true;
+                }
+                else{
+                    erdir = false;
+                }
+                if((!(erhora)) && (!(erfecha)) && (!(erdir))){
+                    /**INICIO* Actualizo tabla de Envio*/ //1
+                    envio = new Envio(BusinessObjectEnvio.nuevoEnvio());
+                    envio.setId_dir(direccionenvio.getIdDir());
+                    envio.setFecha(fechenv);
+                    envio.setHora(horaenv);
+                    envio.setEstado(0);
+                    BusinessObjectEnvio.cargarEnvio(envio);
+                    /**FIN* Actualizo tabla de Envio*/
                 }
             }
             else{
-                erhora = true;
-            }
-            if(fechenv.equals("")){
-                erfecha = true;
-            }
-            else{
-                erfecha = false;
-            }
-            if((!(erhora)) && (!(erfecha))){
+                //No tiene envio
                 /**INICIO* Actualizo tabla de Envio*/ //1
-                envio.setId_dir(direccionenvio.getIdDir());
-                envio.setFecha(fechenv);
-                envio.setHora(horaenv);
+                envio = new Envio(BusinessObjectEnvio.nuevoEnvio());
+                envio.setId_dir(1);
+                envio.setFecha("0");
+                envio.setHora("");
                 envio.setEstado(0);
                 BusinessObjectEnvio.cargarEnvio(envio);
                 /**FIN* Actualizo tabla de Envio*/
             }
-        }
-        else{
-            //No tiene envio
-            /**INICIO* Actualizo tabla de Envio*/ //1
-            envio.setId_dir(1);
-            envio.setFecha("0");
-            envio.setHora("");
-            envio.setEstado(0);
-            BusinessObjectEnvio.cargarEnvio(envio);
-            /**FIN* Actualizo tabla de Envio*/
-        }
-        if((!(erhora)) && (!(erfecha))){
-            /**INICIO* Actualizo tabla de Venta*/ //2
-            Venta venta = new Venta(BusinessObjectVenta.nuevaVenta());
-            venta.setDNI_V(vendedor.getDni());
-            venta.setSexo_V(vendedor.getSexo());
-            double pTotal = 0,pFinal = 0; //VER ESTO
-            for (int i = 0;i<mercancias.size();i++){
-                pTotal = pTotal + mercancias.get(i).getPrecio_u() * mercancias.get(i).getCantidad();
+            if((!(erhora)) && (!(erfecha)) && (!(erdir))){
+                /**INICIO* Actualizo tabla de Venta*/ //2
+                Venta venta = new Venta(BusinessObjectVenta.nuevaVenta());
+                venta.setDNI_V(vendedor.getDni());
+                venta.setSexo_V(vendedor.getSexo());
+                double pTotal = 0,pFinal = 0; //VER ESTO
+                for (int i = 0;i<mercancias.size();i++){
+                    pTotal = pTotal + mercancias.get(i).getPrecio_u() * mercancias.get(i).getCantidad();
+                    pFinal = pFinal + (((100 - descuentos.get(i)) * (mercancias.get(i).getPrecio_u() * mercancias.get(i).getCantidad()))/100);
+                }
+                venta.setP_Total(pTotal);
+                venta.setP_Final(pFinal);
+                venta.setCOD_ENVIO(envio.getCod());
 
-                pFinal = pFinal + (((100 - descuentos.get(i)) * (mercancias.get(i).getPrecio_u() * mercancias.get(i).getCantidad()))/100);
+                BusinessObjectVenta.cargarVenta(venta);
+                /**FIN* Actualizo tabla de Venta*/
+
+                /**INICIO*Actualizo tabla de Renglones*/ //3
+                for(int j=0; j<mercancias.size();j++){
+                    Renglon renglon = new Renglon(BusinessObjectRenglon.nuevoRenglon());
+                    renglon.setCOD_Venta(venta.getCOD_VENTA());
+                    renglon.setCOD_Mercancia(mercancias.get(j).getCod());
+                    renglon.setCantidad(mercancias.get(j).getCantidad());
+                    renglon.setPrecio_U(mercancias.get(j).getPrecio_u());
+                    renglon.setDescuento(descuentos.get(j));
+                    double ptot = mercancias.get(j).getCantidad() * mercancias.get(j).getPrecio_u();
+                    double pfif = (((100 - descuentos.get(j)) * (ptot))/100);
+
+                    renglon.setPrecio_F(pfif);
+                    BusinessObjectRenglon.cargarRenglon(renglon);
+                }
+                /**FIN* Actualizo tabla de Renglones*/
+
+                /**INICIO* Actualizo tabla de CONVCLIENTE*/
+                if (tipocliente == 1){
+                    ConectVenCF cvcf = new ConectVenCF();
+
+                    cvcf.setCOD_VENTA(venta.getCOD_VENTA());
+                    cvcf.setDNI(clientef.getDni());
+                    cvcf.setSexo(clientef.getSexo());
+                    BusinessObjectConVenCF.cargarConectVenCF(cvcf);
+                }
+                else if (tipocliente == 2){
+                    ConectVenCJ cvcj = new ConectVenCJ();
+
+                    cvcj.setCOD_VENTA(venta.getCOD_VENTA());
+                    cvcj.setCUIT(clientej.getCUIT());
+                    BusinessObjectConVenCJ.cargarConectVenCJ(cvcj);
+
+                }
+                /**FIN* Actualizo tabla de CONVCLIENTE*/
+
+                /**INICIO* Actualizo tabla Mercancias*/ //5
+                for(int i = 0; i<restar.size();i++){
+                    BusinessObjectMercancia.modificarMercancia(restar.get(i));
+                }
+                /**FIN* Actualizo tabla Mercancias*/    
+                Utils.popUpMSG(Utils.VENCONF, Utils.EXITO);
+                dispose();
+                MainMenu mm = new MainMenu(vendedor);
+                mm.setVisible(true);
             }
-            venta.setP_Total(pTotal);
-            venta.setP_Final(pFinal);
-            venta.setCOD_ENVIO(envio.getCod());
-
-            BusinessObjectVenta.cargarVenta(venta);
-            /**FIN* Actualizo tabla de Venta*/
-
-            /**INICIO*Actualizo tabla de Renglones*/ //3
-            for(int j=0; j<mercancias.size();j++){
-                Renglon renglon = new Renglon(BusinessObjectRenglon.nuevoRenglon());
-                renglon.setCOD_Venta(venta.getCOD_VENTA());
-                renglon.setCOD_Mercancia(mercancias.get(j).getCod());
-                renglon.setCantidad(mercancias.get(j).getCantidad());
-                renglon.setPrecio_U(mercancias.get(j).getPrecio_u());
-                renglon.setDescuento(descuentos.get(j));
-                double ptot = mercancias.get(j).getCantidad() * mercancias.get(j).getPrecio_u();
-                double pfif = (((100 - descuentos.get(j)) * (ptot))/100);
-
-                renglon.setPrecio_F(pfif);
-                BusinessObjectRenglon.cargarRenglon(renglon);
+            else{
+                Utils.popUpMSG(Utils.WRONGVALUE, Utils.ERROR);
             }
-            /**FIN* Actualizo tabla de Renglones*/
-
-            /**INICIO* Actualizo tabla de CONVCLIENTE*/
-            if (tipocliente == 1){
-                ConectVenCF cvcf = new ConectVenCF();
-
-                cvcf.setCOD_VENTA(venta.getCOD_VENTA());
-                cvcf.setDNI(clientef.getDni());
-                cvcf.setSexo(clientef.getSexo());
-                BusinessObjectConVenCF.cargarConectVenCF(cvcf);
-            }
-            else if (tipocliente == 2){
-                ConectVenCJ cvcj = new ConectVenCJ();
-
-                cvcj.setCOD_VENTA(venta.getCOD_VENTA());
-                cvcj.setCUIT(clientej.getCUIT());
-                BusinessObjectConVenCJ.cargarConectVenCJ(cvcj);
-
-            }
-            /**FIN* Actualizo tabla de CONVCLIENTE*/
-
-            /**INICIO* Actualizo tabla Mercancias*/ //5
-
-            for(int i = 0; i<restar.size();i++){
-                BusinessObjectMercancia.modificarMercancia(restar.get(i));
-            }
-            /**FIN* Actualizo tabla Mercancias*/    
-
-            JOptionPane.showMessageDialog(null, "Venta cargada correctamente");
-            dispose();
-            MainMenu mm = new MainMenu(vendedor);
-            mm.setVisible(true);
-        }
-        else{
-            JOptionPane.showMessageDialog(null,"Valores Incorrectos");
         }
     }//GEN-LAST:event_BCargaVentaActionPerformed
 

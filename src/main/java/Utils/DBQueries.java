@@ -225,7 +225,7 @@ public class DBQueries {
         try {
             statement = connection.createStatement();
             //Al proximo query, le meto los datos del vendedor tmb? como los manejo? y  como manejo al vendedor?
-            statement.executeUpdate("CREATE TABLE Venta (" + //REVISAR ESTO COMO LO HAGO
+            statement.executeUpdate("CREATE TABLE Venta (" +
                     "COD INT NOT NULL," +
                     "DNI_VENDEDOR VARCHAR(10) NOT NULL," +
                     "SEXO_VENDEDOR VARCHAR(10) NOT NULL," +

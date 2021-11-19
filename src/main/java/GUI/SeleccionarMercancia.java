@@ -11,6 +11,7 @@ import DAO.DAOMercancia;
 import GUI.*;
 import Objects.Mercancia;
 import Objects.Vendedor;
+import Utils.Utils;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
@@ -194,7 +195,7 @@ public class SeleccionarMercancia extends javax.swing.JFrame {
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGap(0, 1063, Short.MAX_VALUE)
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -209,7 +210,7 @@ public class SeleccionarMercancia extends javax.swing.JFrame {
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 427, Short.MAX_VALUE)
+            .addGap(0, 433, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -289,11 +290,11 @@ public class SeleccionarMercancia extends javax.swing.JFrame {
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(19, Short.MAX_VALUE)
+                .addContainerGap(31, Short.MAX_VALUE)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(37, 37, 37))
+                .addGap(19, 19, 19))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -325,88 +326,49 @@ public class SeleccionarMercancia extends javax.swing.JFrame {
     }//GEN-LAST:event_BVolverActionPerformed
 
     private void BSeleccionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BSeleccionarActionPerformed
-        if (this.venta_presupuesto){
-            String control = JOptionPane.showInputDialog("Ingrese una cantidad");
-
-            if (control == null){
-                JOptionPane.showMessageDialog(null, "Valor incorrecto");
-            }
-            else{
-                try{
-                    int cant = Integer.parseInt(control);
-                    ArrayList<Mercancia> mercanciasaux = new ArrayList<Mercancia>(mercancias);
-                    Object[] aux = tm.getDataVector().elementAt(tabla.getSelectedRow()).toArray();
-                    if (cant > (int) aux[4] || cant <=0){
-                        JOptionPane.showMessageDialog(null, "Valor incorrecto");
-                    }
-                    else{
-                        Mercancia aux1 = new Mercancia();
-                        aux1.setCod((int) aux[0]);
-                        aux1.setNombre((String) aux[1]);
-                        aux1.setDescripcion((String) aux[2]);
-                        aux1.setPrecio_u((double) aux[3]);
-                        aux1.setCantidad(cant);
-                        aux1.setColor((String) aux[5]);
-                        aux1.setCategoria((String) aux[6]);
-                        aux1.setCalidad((int) aux[7]);
-                        aux1.setAncho((int) aux[8]);
-                        aux1.setAlto((int) aux[9]);
-                        aux1.setMetcuad((int) aux[10]);
-                        aux1.setPartida((int) aux[11]);
-                        mercanciasaux.add(aux1);
-                        int newcant = ((int)aux[4] - cant);
-                        Mercancia aux2 = new Mercancia(aux1.getCod(),aux1.getNombre(),aux1.getCategoria(),aux1.getDescripcion(),newcant,aux1.getPrecio_u(),aux1.getColor(),aux1.getPartida(),aux1.getAncho(),aux1.getAncho(),aux1.getMetcuad(),aux1.getCalidad());
-                        restar.add(aux2);
-                        dispose();
+        String control = Utils.popUpInD(Utils.SELECTAMOUNT, Utils.ADVICE);
+        if (control == null){
+            Utils.popUpMSG(Utils.WRONGVALUE, Utils.ERROR);
+        }
+        else{
+            try{
+                int cant = Integer.parseInt(control);
+                ArrayList<Mercancia> mercanciasaux = new ArrayList<Mercancia>(mercancias);
+                Object[] aux = tm.getDataVector().elementAt(tabla.getSelectedRow()).toArray();
+                if (cant > (int) aux[4] || cant <=0){
+                    Utils.popUpMSG(Utils.WRONGVALUE, Utils.ERROR);
+                }
+                else{
+                    Mercancia aux1 = new Mercancia();
+                    aux1.setCod((int) aux[0]);
+                    aux1.setNombre((String) aux[1]);
+                    aux1.setDescripcion((String) aux[2]);
+                    aux1.setPrecio_u((double) aux[3]);
+                    aux1.setCantidad(cant);
+                    aux1.setColor((String) aux[5]);
+                    aux1.setCategoria((String) aux[6]);
+                    aux1.setCalidad((int) aux[7]);
+                    aux1.setAncho((int) aux[8]);
+                    aux1.setAlto((int) aux[9]);
+                    aux1.setMetcuad((int) aux[10]);
+                    aux1.setPartida((int) aux[11]);
+                    mercanciasaux.add(aux1);
+                    int newcant = ((int)aux[4] - cant);
+                    Mercancia aux2 = new Mercancia(aux1.getCod(),aux1.getNombre(),aux1.getCategoria(),aux1.getDescripcion(),newcant,aux1.getPrecio_u(),aux1.getColor(),aux1.getPartida(),aux1.getAncho(),aux1.getAncho(),aux1.getMetcuad(),aux1.getCalidad());
+                    restar.add(aux2);
+                    dispose();
+                    if(this.venta_presupuesto){
                         AltaPresupuesto AP = new AltaPresupuesto(mercanciasaux,vendedor,restar);
                         AP.setVisible(true);
                     }
-
-                }catch(Exception e){
-                    JOptionPane.showMessageDialog(null, "Valor incorrecto");
-                }
-            }
-        }
-        else {
-            String control = JOptionPane.showInputDialog("Ingrese una cantidad");
-
-            if (control == null){
-                JOptionPane.showMessageDialog(null, "Valor incorrecto");
-            }
-            else{
-                try{
-                    int cant = Integer.parseInt(control);
-                    ArrayList<Mercancia> mercanciasaux = new ArrayList<Mercancia>(mercancias);
-                    Object[] aux = tm.getDataVector().elementAt(tabla.getSelectedRow()).toArray();
-                    if (cant > (int) aux[4] || cant <=0){
-                        JOptionPane.showMessageDialog(null, "Valor incorrecto");
-                    }
                     else{
-                        Mercancia aux1 = new Mercancia();
-                        aux1.setCod((int) aux[0]);
-                        aux1.setNombre((String) aux[1]);
-                        aux1.setDescripcion((String) aux[2]);
-                        aux1.setPrecio_u((double) aux[3]);
-                        aux1.setCantidad(cant);
-                        aux1.setColor((String) aux[5]);
-                        aux1.setCategoria((String) aux[6]);
-                        aux1.setCalidad((int) aux[7]);
-                        aux1.setAncho((int) aux[8]);
-                        aux1.setAlto((int) aux[9]);
-                        aux1.setMetcuad((int) aux[10]);
-                        aux1.setPartida((int) aux[11]);
-                        mercanciasaux.add(aux1);
-                        int newcant = ((int)aux[4] - cant);
-                        Mercancia aux2 = new Mercancia(aux1.getCod(),aux1.getNombre(),aux1.getCategoria(),aux1.getDescripcion(),newcant,aux1.getPrecio_u(),aux1.getColor(),aux1.getPartida(),aux1.getAncho(),aux1.getAncho(),aux1.getMetcuad(),aux1.getCalidad());
-                        restar.add(aux2);
-                        dispose();
                         AltaVenta AV = new AltaVenta(mercanciasaux,vendedor,restar);
                         AV.setVisible(true);
                     }
 
-                }catch(Exception e){
-                    JOptionPane.showMessageDialog(null, "Valor incorrecto");
                 }
+            }catch(Exception e){
+                Utils.popUpMSG(Utils.WRONGVALUE, Utils.ERROR);
             }
         }
     }//GEN-LAST:event_BSeleccionarActionPerformed

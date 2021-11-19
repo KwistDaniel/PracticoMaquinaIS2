@@ -303,7 +303,7 @@ public class LogIn extends javax.swing.JFrame {
                 MME.setVisible(true);
             }
         } catch(Exception e){
-            JOptionPane.showMessageDialog(null, "Datos Incorrectos");
+            Utils.popUpMSG(Utils.LOGINERROR,Utils.ERROR);
         }
         
         

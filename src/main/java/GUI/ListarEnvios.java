@@ -477,7 +477,7 @@ public class ListarEnvios extends javax.swing.JFrame {
             me.setVisible(true);
         }
         catch(Exception e){
-            JOptionPane.showMessageDialog(null, "No se selecciono ningun Envio");
+            Utils.popUpMSG(Utils.ENVIONOSEL, Utils.ERROR);
         }
         
         
@@ -487,7 +487,7 @@ public class ListarEnvios extends javax.swing.JFrame {
         try{
             Object[] aux = tm.getDataVector().elementAt(tabla.getSelectedRow()).toArray();
             if(((String) aux[4]).equals("Entregado")){
-                JOptionPane.showMessageDialog(null, "Este envio ya fue entregado");
+                Utils.popUpMSG(Utils.ENVIOYAENT, Utils.ERROR);
             }
             else{
                 BusinessObjectEnvio boEnvio = new BusinessObjectEnvio();
@@ -498,10 +498,10 @@ public class ListarEnvios extends javax.swing.JFrame {
                 aux1.setHora((String) aux[3]);
                 aux1.setEstado(1);
                 if(boEnvio.actualizarEstado(aux1) == 1){
-                    JOptionPane.showMessageDialog(null, "Estado de Envio actualizado");
+                    Utils.popUpMSG(Utils.ENVIOESTACT, Utils.EXITO);
                 }
                 else{
-                    JOptionPane.showMessageDialog(null, "No se pudo actualizar el estado de Envio");
+                    Utils.popUpMSG(Utils.ENVIONOESTACT, Utils.ERROR);
                 }
                 dispose();
                 ListarEnvios le = new ListarEnvios(new ArrayList<Envio>(),vendedor);
@@ -509,7 +509,7 @@ public class ListarEnvios extends javax.swing.JFrame {
             }
         }
         catch(Exception e){
-            JOptionPane.showMessageDialog(null, "No se selecciono ningun Envio");
+            Utils.popUpMSG(Utils.ENVIONOSEL, Utils.ERROR);
         }
     }//GEN-LAST:event_BConfEnvActionPerformed
 
@@ -529,27 +529,25 @@ public class ListarEnvios extends javax.swing.JFrame {
                 estado = "Entregado";
             }
             String saux = new String("Codigo: " + envioaux.getCod() + "\nDireccion: " + diraux.getCalleDir() + " " + diraux.getNumDir() + "\nFecha: " + envioaux.getFecha() + "\nHora: " + envioaux.getHora() + "\nEstado de Entrega: " + estado);
-            int seleccion = JOptionPane.showConfirmDialog(rootPane,saux, "Eliminar Envio",
-                    JOptionPane.YES_NO_OPTION,
-                    JOptionPane.QUESTION_MESSAGE);
+            int seleccion = Utils.popUpYNOp(saux,"Eliminar Envio");
             if(seleccion == JOptionPane.YES_OPTION){
                 BusinessObjectEnvio boe = new BusinessObjectEnvio();
                 if(boe.eliminarEnvio(envioaux) == 1){
-                    JOptionPane.showMessageDialog(null,"Envio eliminado correctamente");
+                    Utils.popUpMSG(Utils.ENVIOELIM, Utils.EXITO);
                     dispose();
                     ListarEnvios le = new ListarEnvios(new ArrayList<Envio>(),vendedor);
                     le.setVisible(true);
                 }
                 else{
-                    JOptionPane.showMessageDialog(null,"No se pudo eliminar el Envio");
+                    Utils.popUpMSG(Utils.ENVIONOELIM, Utils.ERROR);
                 }
             }
             else{
-                JOptionPane.showMessageDialog(null,"No se elimino el envio");
+                Utils.popUpMSG(Utils.OPCANCEL, Utils.ERROR);
             }
         }
         catch(Exception e){
-            JOptionPane.showMessageDialog(null, "No se selecciono ningun Envio");
+            Utils.popUpMSG(Utils.ENVIONOSEL, Utils.ERROR);
         }
         
     }//GEN-LAST:event_BBorrarActionPerformed
