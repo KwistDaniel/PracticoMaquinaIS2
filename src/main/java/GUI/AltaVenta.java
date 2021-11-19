@@ -9,6 +9,7 @@ import DAO.DAOMercancia;
 import GUI.*;
 import Objects.Mercancia;
 import Objects.Vendedor;
+import Utils.Utils;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
@@ -95,6 +96,9 @@ public class AltaVenta extends javax.swing.JFrame {
             tm.setValueAt(true, i, 12);
             tm.setValueAt(false, i, 12);
         }
+        
+        
+        jPanel5.setBackground(Utils.foregroundColor);
     }
 
     private AltaVenta() {
