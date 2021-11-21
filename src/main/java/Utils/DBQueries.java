@@ -70,6 +70,7 @@ public class DBQueries {
                     "Nombre varchar(50) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,"+
                     "Cuotas int(2) NOT NULL,"+
                     "Porcentaje enum('5','10','15','20','25','30','35','40','45','50') CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,"+
+                    "status int(11) NOT NULL"+
                     "PRIMARY KEY(plan_ID))"+
                     "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4");
         } catch (SQLException throwables) {
@@ -494,6 +495,23 @@ public class DBQueries {
         insertDirecciones();
         insertConectorDirClienteF();
         insertConectorDirClienteJ();
+        insertPlanes_pago();
+    }
+    public static void insertPlanes_pago(){
+        Connection connection = DataBase.getInstance().getConnection();
+        Statement statement;
+        try {
+            statement = connection.createStatement();
+            statement.executeUpdate("INSERT INTO Planes_pago VALUES "
+                    + "('1','Daquino','12','10',1),"
+                    + "('2','Ahora12','12','5',1),"
+                    + "('1','Ahora18','18','10',1),"
+                    + "('1','Ahora24','24','20',1),"
+                    + "('1','Tarjeta X','16','15',1),");
+        } catch (SQLException throwables) {
+            throwables.printStackTrace(System.out);
+        }
+        DataBase.getInstance().disconnect();
     }
     public static void insertVendedores(){
         Connection connection = DataBase.getInstance().getConnection();
