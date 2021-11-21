@@ -15,14 +15,23 @@ import Objects.Vendedor;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
+import java.awt.GridLayout;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
+import javax.swing.RowFilter;
 import javax.swing.ScrollPaneConstants;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
+import javax.swing.table.TableRowSorter;
 
 /**
  *
@@ -32,6 +41,7 @@ public class SeleccionarClienteF extends javax.swing.JFrame {
     ArrayList<Mercancia> mercancias,restar;
     Vendedor vendedor;
     ArrayList<Integer> descuentos;
+    boolean controlfiltro = true;
     /**
      * Creates new form Menu
      */
@@ -72,7 +82,9 @@ public class SeleccionarClienteF extends javax.swing.JFrame {
         tabla.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         tabla.getTableHeader().setReorderingAllowed(false);
         
-        
+        tabla.setAutoCreateRowSorter(true);//para los filtros, tutorial de oracle
+        TableRowSorter<TableModel> sorter = new TableRowSorter<TableModel>(tabla.getModel());//para los filtros, tutorial de oracle
+        tabla.setRowSorter(sorter);//para los filtros, tutorial de oracle
         JScrollPane scrollPane = new JScrollPane(tabla);
         scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
         scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
@@ -89,10 +101,64 @@ public class SeleccionarClienteF extends javax.swing.JFrame {
         add(scrollPane, gridBagConstraints);
         
         
-        jPanel2.setLayout(new BorderLayout());
-        jPanel2.add(scrollPane, BorderLayout.CENTER);
+        jPanel5.setLayout(new BorderLayout());
+        jPanel5.add(scrollPane, BorderLayout.CENTER);
         
+        /**
+         * Filtro de la tabla
+         */
+        //GridLayout para agregar los textfields
+        jPanel4.setLayout(new GridLayout(1,1,0,0)); 
         
+        //Textfields
+        JTextField filtro = new JTextField();
+        //Configuro las dimensiones
+        filtro.setPreferredSize(new Dimension(tabla.getColumnModel().getColumn(0).getWidth() + tabla.getColumnModel().getColumn(1).getWidth() + tabla.getColumnModel().getColumn(2).getWidth() + tabla.getColumnModel().getColumn(3).getWidth() + tabla.getColumnModel().getColumn(4).getWidth(),22));
+        filtro.setText("Filtro");
+        /**
+         * Listener para filtrar
+         */
+        filtro.addMouseListener(new MouseAdapter(){
+            @Override
+            public void mouseClicked(MouseEvent e){
+                if(controlfiltro){
+                    filtro.setText("");
+                }
+                controlfiltro = false;
+            }
+        });
+        filtro.getDocument().addDocumentListener(new DocumentListener() {
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+                String str = filtro.getText();
+                if(str.trim().length() == 0){
+                    sorter.setRowFilter(null);
+                }
+                else{
+                    sorter.setRowFilter(RowFilter.regexFilter("(?i)" + str));
+                }
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+                String str = filtro.getText();
+                if(str.trim().length() == 0){
+                    sorter.setRowFilter(null);
+                }
+                else{
+                    sorter.setRowFilter(RowFilter.regexFilter("(?i)" + str));
+                }
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }
+        });
+        
+
+        //Los agrego al panel
+        jPanel4.add(filtro);
         
                 
     }
@@ -112,6 +178,8 @@ public class SeleccionarClienteF extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
+        jPanel4 = new javax.swing.JPanel();
+        jPanel5 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
         BVolver = new javax.swing.JButton();
         BSeleccionar = new javax.swing.JButton();
@@ -126,15 +194,51 @@ public class SeleccionarClienteF extends javax.swing.JFrame {
 
         jPanel2.setBackground(new java.awt.Color(245, 245, 220));
 
+        jPanel4.setBackground(new java.awt.Color(245, 245, 220));
+
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 1063, Short.MAX_VALUE)
+        );
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 50, Short.MAX_VALUE)
+        );
+
+        jPanel5.setBackground(new java.awt.Color(245, 245, 220));
+
+        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
+        jPanel5.setLayout(jPanel5Layout);
+        jPanel5Layout.setHorizontalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+        jPanel5Layout.setVerticalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 426, Short.MAX_VALUE)
+        );
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1075, Short.MAX_VALUE)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 494, Short.MAX_VALUE)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         jPanel3.setBackground(new java.awt.Color(245, 245, 220));
@@ -234,8 +338,8 @@ public class SeleccionarClienteF extends javax.swing.JFrame {
     private void BVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BVolverActionPerformed
         // TODO add your handling code here:
         dispose();
-        AltaVenta av = new AltaVenta(mercancias,vendedor,restar);
-        av.setVisible(true);
+        SeleccionarTipoCliente stc = new SeleccionarTipoCliente(mercancias,vendedor,descuentos,restar);
+        stc.setVisible(true);
     }//GEN-LAST:event_BVolverActionPerformed
 
     private void BSeleccionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BSeleccionarActionPerformed
@@ -373,5 +477,7 @@ public class SeleccionarClienteF extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
     // End of variables declaration//GEN-END:variables
 }

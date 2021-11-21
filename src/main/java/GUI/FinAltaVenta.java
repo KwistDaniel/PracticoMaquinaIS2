@@ -33,16 +33,20 @@ import Objects.Venta;
 import Utils.Utils;
 import Utils.Validates;
 import com.toedter.calendar.JDateChooser;
+import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.event.ItemEvent;
+import java.awt.event.KeyEvent;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
 import javax.swing.ScrollPaneConstants;
+import javax.swing.UIManager;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -271,6 +275,14 @@ public class FinAltaVenta extends javax.swing.JFrame {
                 TFHHActionPerformed(evt);
             }
         });
+        TFHH.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                TFHHKeyPressed(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                TFHHKeyTyped(evt);
+            }
+        });
 
         jLabel2.setText("Hora: ");
 
@@ -279,6 +291,15 @@ public class FinAltaVenta extends javax.swing.JFrame {
         TFFechaEnv.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 TFFechaEnvActionPerformed(evt);
+            }
+        });
+
+        TFHM.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                TFHMKeyPressed(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                TFHMKeyTyped(evt);
             }
         });
 
@@ -434,10 +455,10 @@ public class FinAltaVenta extends javax.swing.JFrame {
 
     private void BMostrarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BMostrarClienteActionPerformed
         if(tipocliente == 1){
-            JOptionPane.showMessageDialog(null, clientef.toString());
+            Utils.popUpMSG(clientef.toString(), Utils.CL);
         }
         else if (tipocliente == 2){
-            JOptionPane.showMessageDialog(null, clientej.toString());
+            Utils.popUpMSG(clientej.toString(), Utils.CL);
         }
     }//GEN-LAST:event_BMostrarClienteActionPerformed
 
@@ -630,7 +651,7 @@ public class FinAltaVenta extends javax.swing.JFrame {
     }//GEN-LAST:event_jCheckBox1ItemStateChanged
 
     private void BMostrarDirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BMostrarDirActionPerformed
-        JOptionPane.showMessageDialog(null, direccionenvio.toString());
+        Utils.popUpMSG(direccionenvio.toString(), Utils.DIR);
     }//GEN-LAST:event_BMostrarDirActionPerformed
 
     private void BMercanciasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BMercanciasActionPerformed
@@ -653,6 +674,34 @@ public class FinAltaVenta extends javax.swing.JFrame {
         scrollPane.setPreferredSize(new Dimension(665,450));
         JOptionPane.showMessageDialog(null, scrollPane);
     }//GEN-LAST:event_BMercanciasActionPerformed
+
+    private void TFHHKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TFHHKeyPressed
+
+    }//GEN-LAST:event_TFHHKeyPressed
+
+    private void TFHMKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TFHMKeyPressed
+
+    }//GEN-LAST:event_TFHMKeyPressed
+
+    private void TFHHKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TFHHKeyTyped
+        char c = evt.getKeyChar();
+        if(!(Character.isDigit(c) || (c == KeyEvent.VK_BACK_SPACE) || (c == KeyEvent.VK_DELETE))){
+            evt.consume();
+        }
+        if(TFHH.getText().length() > 1){
+            evt.consume();
+        }
+    }//GEN-LAST:event_TFHHKeyTyped
+
+    private void TFHMKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TFHMKeyTyped
+        char c = evt.getKeyChar();
+        if(!(Character.isDigit(c) || (c == KeyEvent.VK_BACK_SPACE) || (c == KeyEvent.VK_DELETE))){
+            evt.consume();
+        }
+        if(TFHM.getText().length() > 1){
+            evt.consume();
+        }
+    }//GEN-LAST:event_TFHMKeyTyped
 
     /**
      * @param args the command line arguments

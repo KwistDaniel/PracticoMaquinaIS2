@@ -277,10 +277,17 @@ public class SeleccionarDireccionEnvio extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void BVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BVolverActionPerformed
-        // TODO add your handling code here:
         dispose();
-        FinAltaVenta fav = new FinAltaVenta(clientef,clientej,mercancias,vendedor,tipocliente,descuentos,restar,1);
-        fav.setVisible(true);
+        switch(vengode){
+            case 1: 
+                FinAltaVenta fav = new FinAltaVenta(clientef,clientej,mercancias,vendedor,tipocliente,descuentos,restar,1);
+                fav.setVisible(true);
+                break;
+            case 2: 
+                ModificarEnvio me = new ModificarEnvio(envio,vendedor);
+                me.setVisible(true);
+                break;
+        }
     }//GEN-LAST:event_BVolverActionPerformed
 
     private void BSeleccionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BSeleccionarActionPerformed

@@ -23,6 +23,8 @@ import java.awt.GridBagConstraints;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import javax.swing.DefaultCellEditor;
 import javax.swing.JButton;
@@ -30,6 +32,7 @@ import javax.swing.JCheckBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
@@ -52,6 +55,7 @@ import javax.swing.table.TableRowSorter;
 public class ListarEnvios extends javax.swing.JFrame {
     Vendedor vendedor;
     ArrayList<Envio> envios;
+    boolean controlfiltro = true;
     /**
      * Creates new form Menu
      */
@@ -62,6 +66,7 @@ public class ListarEnvios extends javax.swing.JFrame {
                 return column == 1;
             }
         };
+    JScrollPane scrollPane = new JScrollPane();
     
     public ListarEnvios(ArrayList<Envio> aux,Vendedor vaux) {
         vendedor = new Vendedor(vaux);
@@ -69,11 +74,8 @@ public class ListarEnvios extends javax.swing.JFrame {
         initComponents();
         this.setVisible(true);
         this.setLocationRelativeTo(null);
-        BModif.getRootPane().requestFocus();
+        //BModif.getRootPane().requestFocus(); no se que obda esto
         GridBagConstraints gridBagConstraints = new GridBagConstraints();
-        
-        
-        
         
         
         Object[][] objects = Envio.getDataVector(BusinessObjectEnvio.listarEnvios());
@@ -111,7 +113,7 @@ public class ListarEnvios extends javax.swing.JFrame {
         tabla.setAutoCreateRowSorter(true);//para los filtros, tutorial de oracle
         TableRowSorter<TableModel> sorter = new TableRowSorter<TableModel>(tabla.getModel());//para los filtros, tutorial de oracle
         tabla.setRowSorter(sorter);//para los filtros, tutorial de oracle
-        JScrollPane scrollPane = new JScrollPane(tabla);
+        scrollPane = new JScrollPane(tabla);
         scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
         scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
         scrollPane.getHorizontalScrollBar().setUnitIncrement(20);
@@ -143,10 +145,19 @@ public class ListarEnvios extends javax.swing.JFrame {
         JTextField filtro = new JTextField();
         //Configuro las dimensiones
         filtro.setPreferredSize(new Dimension(tabla.getColumnModel().getColumn(0).getWidth() + tabla.getColumnModel().getColumn(1).getWidth() + tabla.getColumnModel().getColumn(2).getWidth() + tabla.getColumnModel().getColumn(3).getWidth() + tabla.getColumnModel().getColumn(4).getWidth(),22));
-        
+        filtro.setText("Filtro");
         /**
          * Listener para filtrar
          */
+        filtro.addMouseListener(new MouseAdapter(){
+            @Override
+            public void mouseClicked(MouseEvent e){
+                if(controlfiltro){
+                    filtro.setText("");
+                }
+                controlfiltro = false;
+            }
+        });
         filtro.getDocument().addDocumentListener(new DocumentListener() {
             @Override
             public void insertUpdate(DocumentEvent e) {
@@ -185,7 +196,7 @@ public class ListarEnvios extends javax.swing.JFrame {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    static class ButtonRenderer extends JButton implements TableCellRenderer{
+    class ButtonRenderer extends JButton implements TableCellRenderer{
         public ButtonRenderer(){
             setOpaque(true);
         }
@@ -204,7 +215,7 @@ public class ListarEnvios extends javax.swing.JFrame {
         }
     }
     
-    static class ButtonEditor extends DefaultCellEditor {
+    class ButtonEditor extends DefaultCellEditor {
 
         protected JButton button;
         private String label;
@@ -260,8 +271,10 @@ public class ListarEnvios extends javax.swing.JFrame {
 
             if (isPushed) {
                 Object object = boDir.readDir(ids[0]);
-
-                JOptionPane.showMessageDialog(null, object.toString());
+                dispose();
+                ListarEnvios le = new ListarEnvios(new ArrayList<Envio>(),vendedor);
+                le.setVisible(true);
+                Utils.popUpMSG(object.toString(), "Direccion de Envio");
             }
             isPushed = false;
             return label;
@@ -310,7 +323,7 @@ public class ListarEnvios extends javax.swing.JFrame {
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGap(0, 1075, Short.MAX_VALUE)
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -337,17 +350,17 @@ public class ListarEnvios extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -459,12 +472,14 @@ public class ListarEnvios extends javax.swing.JFrame {
     }//GEN-LAST:event_BVolverActionPerformed
 
     private void BModifActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BModifActionPerformed
+        
         try{
+            
             int estadoentrega = 0;
             Object[] aux = tm.getDataVector().elementAt(tabla.getSelectedRow()).toArray();
             if(((String)aux[4]).equals("Entregado")){
-            estadoentrega = 1;
-        }
+                estadoentrega = 1;
+            }
             Envio aux1 = new Envio();
             aux1.setCod((int) aux[0]);
             aux1.setId_dir((int) aux[1]);

@@ -28,14 +28,18 @@ public class Utils {
     public static Color foregroundColor = Color.decode("#f5f5DC");
     public static Color fontColor = Color.decode("#FAFAFA");
     
+    public static String FUNCNOIMP = "Funcionalidad sin implementar";
     public static String ERROR = "Error";
     public static String EXITO = "Exito";
     public static String WRONGVALUE = "Valor incorrecto";
     public static String SELECTAMOUNT = "Seleccione una cantidad";
     public static String ADVICE = "Aviso";
+    public static String DIR = "Direccion";
+    public static String CL = "Cliente";
     
     public static String LOGINERROR = "Datos de inicio de sesion incorrectos";
     
+    public static String VENERRNOMERC = "No se han seleccionado mercancias";
     public static String VENCONFIRM = "¿Desea cargar la venta?";
     public static String VENCONF = "Se ha cargado la venta correctamente";
     public static String HORERR = "Hora incorrecta";
@@ -46,6 +50,9 @@ public class Utils {
     public static String ENVIOYAENT = "Este envio ya fue entregado";
     public static String ENVIOESTACT = "Estado del envio actualizado correctamente";
     public static String ENVIONOESTACT = "No se pudo actualizar el estado del envio";
+    public static String ENVIOMODIF = "¿Desea modificar el envio?";
+    public static String ENVIOMODIFCOR = "Envio Modificado Correctamente";
+    public static String ENVIONOMODIF = "No se pudo modificar el envio";
     
     public static String OPCANCEL = "Operacion cancelada";
     
@@ -71,7 +78,7 @@ public class Utils {
         UI.put("Panel.background",backgroundColor);
         UI.put("Button.background",backgroundColor);
         UI.put("Button.foreground",fontColor);
-        JOptionPane.showMessageDialog(null, msg, ttl, JOptionPane.INFORMATION_MESSAGE);
+        JOptionPane.showMessageDialog(null, msg, ttl, JOptionPane.PLAIN_MESSAGE);
     }
     
     public static int popUpYNOp(String msg, String ttl){
@@ -83,7 +90,7 @@ public class Utils {
         UI.put("Button.foreground",fontColor);
         return JOptionPane.showConfirmDialog(null,msg,ttl,
                     JOptionPane.YES_NO_OPTION,
-                    JOptionPane.QUESTION_MESSAGE);
+                    JOptionPane.PLAIN_MESSAGE);
     }
     
     public static String popUpInD(String msg, String ttl){
@@ -93,7 +100,7 @@ public class Utils {
         UI.put("Panel.background",backgroundColor);
         UI.put("Button.background",backgroundColor);
         UI.put("Button.foreground",fontColor);
-        return JOptionPane.showInputDialog(null,msg,ttl,JOptionPane.INFORMATION_MESSAGE);
+        return JOptionPane.showInputDialog(null,msg,ttl,JOptionPane.PLAIN_MESSAGE);
     }
     
     public static boolean validateDate(final String dateToValidate){
