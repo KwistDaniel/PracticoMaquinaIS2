@@ -152,7 +152,7 @@ public class AltaVenta extends javax.swing.JFrame {
 
         BAgObj.setBackground(new java.awt.Color(210, 4, 45));
         BAgObj.setForeground(new java.awt.Color(250, 250, 250));
-        BAgObj.setText("Agregar Objeto");
+        BAgObj.setText("Agregar Mercancia");
         BAgObj.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BAgObjActionPerformed(evt);
@@ -161,7 +161,7 @@ public class AltaVenta extends javax.swing.JFrame {
 
         BElimSelec.setBackground(new java.awt.Color(210, 4, 45));
         BElimSelec.setForeground(new java.awt.Color(250, 250, 250));
-        BElimSelec.setText("Eliminar Selec");
+        BElimSelec.setText("Eliminar Mercancia");
         BElimSelec.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BElimSelecActionPerformed(evt);
@@ -175,6 +175,9 @@ public class AltaVenta extends javax.swing.JFrame {
             }
         });
         TFDescuento.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                TFDescuentoKeyReleased(evt);
+            }
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 TFDescuentoKeyTyped(evt);
             }
@@ -199,16 +202,15 @@ public class AltaVenta extends javax.swing.JFrame {
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(BElimSelec, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(BAgObj, javax.swing.GroupLayout.DEFAULT_SIZE, 126, Short.MAX_VALUE)
                     .addComponent(TFDescuento)
                     .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(BVolver)))
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1)
+                            .addComponent(BVolver))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
+            .addComponent(BElimSelec, javax.swing.GroupLayout.DEFAULT_SIZE, 138, Short.MAX_VALUE)
+            .addComponent(BAgObj, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -325,21 +327,30 @@ public class AltaVenta extends javax.swing.JFrame {
     }//GEN-LAST:event_BAgObjActionPerformed
 
     private void BSiguienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BSiguienteActionPerformed
-        for(int i=0;i<mercancias.size();i++){
-            Boolean bl = Boolean.valueOf(tabla.getValueAt(i, 12).toString());
-            if(bl == true){
-                descuentos.add(Integer.parseInt(TFDescuento.getText()));
-            }
-            else{
-                descuentos.add(0);
-            }
+        if(tm.getRowCount() == 0){
+            Utils.popUpMSG(Utils.VENERRNOMERC, Utils.ERROR);
         }
-       //System.out.println("Descuento registrado: " + descuentos.get(0));
-        dispose();
-        SeleccionarTipoCliente stc = new SeleccionarTipoCliente(mercancias,vendedor,descuentos,restar);
-        stc.setVisible(true);
-        //ACA LLEVO A QUE CLIENTE SE LO VOY A VENDER, O CREO UNO NUEVO O SELECCIONO UNO (tabla con filtro va a venir bien)
-        //DE AHI CREO UN ENVIO, O PERMITO SELECCIONAR UNA DE LAS DIRECCIONES DEL CLIENTE O LE CREO UNA
+        else{
+            for(int i=0;i<mercancias.size();i++){
+                int auxdesc;
+                Boolean bl = Boolean.valueOf(tabla.getValueAt(i, 12).toString());
+                if(bl == true){
+                    try{
+                        auxdesc = Integer.parseInt(TFDescuento.getText());
+                    }catch(Exception e){
+                        auxdesc = 0;
+                    }
+                    descuentos.add(auxdesc);
+                }
+                else{
+                    descuentos.add(0);
+                }
+            }
+            dispose();
+            SeleccionarTipoCliente stc = new SeleccionarTipoCliente(mercancias,vendedor,descuentos,restar);
+            stc.setVisible(true);
+        }
+        
     }//GEN-LAST:event_BSiguienteActionPerformed
 
     private void BElimSelecActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BElimSelecActionPerformed
@@ -360,10 +371,20 @@ public class AltaVenta extends javax.swing.JFrame {
     private void TFDescuentoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TFDescuentoKeyTyped
         char c = evt.getKeyChar();
         if(!((c >= '0') && (c<= '9'))){
-            getToolkit().beep();
+            evt.consume();
+        }
+        if(TFDescuento.getText().length() > 2){
             evt.consume();
         }
     }//GEN-LAST:event_TFDescuentoKeyTyped
+
+    private void TFDescuentoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TFDescuentoKeyReleased
+        if(TFDescuento.getText().length() > 0){
+            if(Integer.parseInt(TFDescuento.getText()) > 100){
+                TFDescuento.setText("" + TFDescuento.getText().substring(0,TFDescuento.getText().length() - 1));
+            }
+        }
+    }//GEN-LAST:event_TFDescuentoKeyReleased
 
     /**
      * @param args the command line arguments

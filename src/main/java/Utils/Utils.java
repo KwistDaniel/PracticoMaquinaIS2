@@ -28,6 +28,7 @@ public class Utils {
     public static Color foregroundColor = Color.decode("#f5f5DC");
     public static Color fontColor = Color.decode("#FAFAFA");
     
+    public static String FUNCNOIMP = "Funcionalidad sin implementar";
     public static String ERROR = "Error";
     public static String EXITO = "Exito";
     public static String WRONGVALUE = "Valor incorrecto";
@@ -38,6 +39,7 @@ public class Utils {
     
     public static String LOGINERROR = "Datos de inicio de sesion incorrectos";
     
+    public static String VENERRNOMERC = "No se han seleccionado mercancias";
     public static String VENCONFIRM = "¿Desea cargar la venta?";
     public static String VENCONF = "Se ha cargado la venta correctamente";
     public static String HORERR = "Hora incorrecta";
@@ -48,6 +50,9 @@ public class Utils {
     public static String ENVIOYAENT = "Este envio ya fue entregado";
     public static String ENVIOESTACT = "Estado del envio actualizado correctamente";
     public static String ENVIONOESTACT = "No se pudo actualizar el estado del envio";
+    public static String ENVIOMODIF = "¿Desea modificar el envio?";
+    public static String ENVIOMODIFCOR = "Envio Modificado Correctamente";
+    public static String ENVIONOMODIF = "No se pudo modificar el envio";
     
     public static String OPCANCEL = "Operacion cancelada";
     

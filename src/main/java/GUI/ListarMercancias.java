@@ -9,6 +9,7 @@ import BusinessObject_Manager.BusinessObjectMercancia;
 import DAO.DAOMercancia;
 import GUI.*;
 import Objects.Mercancia;
+import Objects.Vendedor;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
@@ -29,8 +30,9 @@ public class ListarMercancias extends javax.swing.JFrame {
      * Creates new form Menu
      */
     private final JTable tabla;
-    public ListarMercancias() {
-        
+    Vendedor vendedor;
+    public ListarMercancias(Vendedor aux) {
+        vendedor = new Vendedor(aux);
         initComponents();
         this.setVisible(true);
         this.setLocationRelativeTo(null);
@@ -81,6 +83,10 @@ public class ListarMercancias extends javax.swing.JFrame {
                 
     }
 
+    private ListarMercancias() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -93,9 +99,7 @@ public class ListarMercancias extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
-        Ventas = new javax.swing.JButton();
-        Deposito = new javax.swing.JButton();
+        BVolver = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 0, 0));
@@ -119,31 +123,13 @@ public class ListarMercancias extends javax.swing.JFrame {
 
         jPanel3.setBackground(new java.awt.Color(245, 245, 220));
 
-        jButton1.setBackground(new java.awt.Color(210, 4, 45));
-        jButton1.setForeground(new java.awt.Color(250, 250, 250));
-        jButton1.setText("Salir");
-        jButton1.setActionCommand("Exit");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        BVolver.setBackground(new java.awt.Color(210, 4, 45));
+        BVolver.setForeground(new java.awt.Color(250, 250, 250));
+        BVolver.setText("Salir");
+        BVolver.setActionCommand("Exit");
+        BVolver.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-
-        Ventas.setBackground(new java.awt.Color(210, 4, 45));
-        Ventas.setForeground(new java.awt.Color(250, 250, 250));
-        Ventas.setText("jButton2");
-        Ventas.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                VentasActionPerformed(evt);
-            }
-        });
-
-        Deposito.setBackground(new java.awt.Color(210, 4, 45));
-        Deposito.setForeground(new java.awt.Color(250, 250, 250));
-        Deposito.setText("jButton3");
-        Deposito.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                DepositoActionPerformed(evt);
+                BVolverActionPerformed(evt);
             }
         });
 
@@ -153,25 +139,15 @@ public class ListarMercancias extends javax.swing.JFrame {
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(23, 23, 23)
-                .addComponent(jButton1)
-                .addGap(81, 81, 81)
-                .addComponent(Ventas)
-                .addGap(18, 18, 18)
-                .addComponent(Deposito)
+                .addComponent(BVolver)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton1)
+                .addContainerGap(30, Short.MAX_VALUE)
+                .addComponent(BVolver)
                 .addGap(21, 21, 21))
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(22, 22, 22)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(Ventas)
-                    .addComponent(Deposito))
-                .addContainerGap(29, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -209,18 +185,12 @@ public class ListarMercancias extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void BVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BVolverActionPerformed
         // TODO add your handling code here:
-        System.exit(0);
-    }//GEN-LAST:event_jButton1ActionPerformed
-
-    private void VentasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VentasActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_VentasActionPerformed
-
-    private void DepositoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DepositoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_DepositoActionPerformed
+        dispose();
+        MainMenu mm = new MainMenu(vendedor);
+        mm.setVisible(true);
+    }//GEN-LAST:event_BVolverActionPerformed
 
     /**
      * @param args the command line arguments
@@ -265,9 +235,7 @@ public class ListarMercancias extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton Deposito;
-    private javax.swing.JButton Ventas;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton BVolver;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;

@@ -7,6 +7,7 @@ package GUI;
 
 import Objects.Mercancia;
 import Objects.Vendedor;
+import Utils.Utils;
 import java.util.ArrayList;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -29,6 +30,10 @@ public class MainMenu extends javax.swing.JFrame {
         this.setVisible(true);
         this.setLocationRelativeTo(null);
         BVentas.getRootPane().requestFocus();
+        if(aux.getPrioridad() == 3){
+            BVentas.setVisible(false);
+            BClientes.setVisible(false);
+        }
     }
 
     /**
@@ -211,31 +216,29 @@ public class MainMenu extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void BSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BSalirActionPerformed
-        // TODO add your handling code here:
         dispose();
         LogIn LI = new LogIn();
         LI.setVisible(true);
     }//GEN-LAST:event_BSalirActionPerformed
 
     private void BVentasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BVentasActionPerformed
-        // TODO add your handling code here:
         dispose();
         MVentas mv = new MVentas(vendedor);
         mv.setVisible(true);
     }//GEN-LAST:event_BVentasActionPerformed
 
     private void BClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BClientesActionPerformed
-        JOptionPane.showMessageDialog(null, "Funcionalidad sin implementar");
+         Utils.popUpMSG(Utils.FUNCNOIMP, Utils.ADVICE);
     }//GEN-LAST:event_BClientesActionPerformed
 
     private void BStockActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BStockActionPerformed
         dispose();
-        ListarMercancias LM = new ListarMercancias();
+        ListarMercancias LM = new ListarMercancias(vendedor);
         LM.setVisible(true);
     }//GEN-LAST:event_BStockActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        JOptionPane.showMessageDialog(null, "Funcionalidad sin implementar");
+        Utils.popUpMSG(Utils.FUNCNOIMP, Utils.ADVICE);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
