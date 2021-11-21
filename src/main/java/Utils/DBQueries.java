@@ -38,14 +38,19 @@ public class DBQueries {
             statement = connection.createStatement();
             statement.executeUpdate("CREATE TABLE presupuesto (" +
             "presu_ID int(11) NOT NULL,"+
-            "DNI_Vendedor varchar(10) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,"+
+            "DNI_Vendedor varchar(10) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,"+
             "sexoVendedor varchar(10) NOT NULL,"+
-            "Fis_CUIT_L varchar(15) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,"+
+            "DNI_FIS varchar(10) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,"+
+            "Sexo_Fis varchar(10) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,"+
             "Jur_CUIT varchar(15) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,"+
-            "Cod_Merc int(11) NOT NULL,"+
-            "DNI_admin varchar(10) DEFAULT NULL,"+
             "plan_ID int(11) DEFAULT NULL,"+
+            "Rengl-ID` int(11) NOT NULL,"+
+            "REngl-CodM` int(11) NOT NULL,"+        
             "status int(11) NOT NULL"+
+            "FOREIGN KEY (DNI_Vendedor,sexoVendedor) REFERENCES Vendedor(DNI,SEXO))"+
+            "FOREIGN KEY (Jur_CUIT) REFERENCES clientejuridico(CUIT)," +
+            "FOREIGN KEY (Jur_CUIT) REFERENCES clientejuridico(CUIT)," +
+            "FOREIGN KEY (COD_ENVIO) REFERENCES Envio(COD)," +                    
             "PRIMARY KEY(presu_ID))"+
             "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;"); //
         } catch (SQLException throwables) {
