@@ -36,17 +36,33 @@ public class DBQueries {
         Statement statement;
         try {
             statement = connection.createStatement();
-            statement.executeUpdate("CREATE TABLE `presupuesto` (" +
+            statement.executeUpdate("CREATE TABLE presupuesto (" +
             "presu_ID int(11) NOT NULL,"+
             "DNI_Vendedor varchar(10) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,"+
             "sexoVendedor varchar(10) NOT NULL,"+
             "Fis_CUIT_L varchar(15) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,"+
             "Jur_CUIT varchar(15) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,"+
             "Cod_Merc int(11) NOT NULL,"+
-            "DNI_admin` varchar(10) DEFAULT NULL,"+
-            "plan_ID` int(11) DEFAULT NULL,"+
-            "status` int(11) NOT NULL"+
+            "DNI_admin varchar(10) DEFAULT NULL,"+
+            "plan_ID int(11) DEFAULT NULL,"+
+            "status int(11) NOT NULL"+
             "PRIMARY KEY(presu_ID))"); //ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;"
+        } catch (SQLException throwables) {
+            throwables.printStackTrace(System.out);
+        }
+        DataBase.getInstance().disconnect();
+    }
+    public static void tablaPlanes_pago(){
+        Connection connection = DataBase.getInstance().getConnection();
+        Statement statement;
+        try {
+            statement = connection.createStatement();
+            statement.executeUpdate("CREATE TABLE planes_pago (" +
+                    "plan_ID int(11) NOT NULL,"+
+                    "Nombre varchar(50) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,"+
+                    "Cuotas int(2) NOT NULL,"+
+                    "Porcentaje` enum('5','10','15','20','25','30','35','40','45','50') CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL"
+                    ); //ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
         } catch (SQLException throwables) {
             throwables.printStackTrace(System.out);
         }
