@@ -46,7 +46,8 @@ public class DBQueries {
             "DNI_admin varchar(10) DEFAULT NULL,"+
             "plan_ID int(11) DEFAULT NULL,"+
             "status int(11) NOT NULL"+
-            "PRIMARY KEY(presu_ID))"); //ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;"
+            "PRIMARY KEY(presu_ID))"+
+            "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;"); //
         } catch (SQLException throwables) {
             throwables.printStackTrace(System.out);
         }
@@ -61,8 +62,31 @@ public class DBQueries {
                     "plan_ID int(11) NOT NULL,"+
                     "Nombre varchar(50) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,"+
                     "Cuotas int(2) NOT NULL,"+
-                    "Porcentaje` enum('5','10','15','20','25','30','35','40','45','50') CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL"
-                    ); //ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+                    "Porcentaje` enum('5','10','15','20','25','30','35','40','45','50') CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL"+
+                    "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4");
+        } catch (SQLException throwables) {
+            throwables.printStackTrace(System.out);
+        }
+        DataBase.getInstance().disconnect();
+    }
+    public static void tablaAdministrador(){
+        Connection connection = DataBase.getInstance().getConnection();
+        Statement statement;
+        try {
+            statement = connection.createStatement();
+            statement.executeUpdate( "CREATE TABLE administrador ("+
+                    "DNI-Admin varchar(10) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,"+
+                    "Nombre-Adm varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,"+
+                    "Apellido_Adm varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,"+
+                    "User_Adm varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,"+
+                    "Pass_Adm varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,"+
+                    "Tel-Adm varchar(40) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,"+
+                    "Sexo_Adm varchar(10) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,"+
+                    "FNac-Adm varchar(10) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,"+
+                    "Email-Adm longtext CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,"+
+                    "Priority int(11) NOT NULL,"+
+                    "Status int(11) NOT NULL"+
+                    ") ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;");
         } catch (SQLException throwables) {
             throwables.printStackTrace(System.out);
         }
