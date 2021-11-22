@@ -30,55 +30,7 @@ public class DBQueries {
         tablaRenglonesVenta();
         tablaConexionVenClientF();
         tablaConexionVenClientJ();
-        tablaPresupuesto();
-        tablaPlanes_pago();
     }
-    public static void tablaPresupuesto(){
-        Connection connection = DataBase.getInstance().getConnection();
-        Statement statement;
-        try {
-            statement = connection.createStatement();
-            statement.executeUpdate("CREATE TABLE presupuesto (" +
-            "presu_ID int(11) NOT NULL,"+
-            "DNI_Vendedor varchar(10) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,"+
-            "sexoVendedor varchar(10) NOT NULL,"+
-            "DNI_FIS varchar(10) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,"+
-            "Sexo_Fis varchar(10) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,"+
-            "Jur_CUIT varchar(15) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,"+
-            "plan_ID int(11) DEFAULT NULL,"+
-            "Rengl-ID int(11) NOT NULL,"+
-            "REngl-CodM int(11) NOT NULL,"+        
-            "status int(11) NOT NULL"+
-            "FOREIGN KEY (DNI_Vendedor,sexoVendedor) REFERENCES Vendedor(DNI,SEXO))"+
-            "FOREIGN KEY (Jur_CUIT) REFERENCES ClienteJuridico(CUIT)," +
-            "FOREIGN KEY (DNI_FIS,Sexo_Fis) REFERENCES ClienteFisico(CUIT)," +                              
-            "FOREIGN KEY(Rengl-ID,REngl-CodM)REFERENCES RenglonesVenta(ID_Venta,COD_Mercancia),"+
-            "PRIMARY KEY(presu_ID))"+       
-            "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4"); //
-        } catch (SQLException throwables) {
-            throwables.printStackTrace(System.out);
-        }
-        DataBase.getInstance().disconnect();
-    }
-    public static void tablaPlanes_pago(){
-        Connection connection = DataBase.getInstance().getConnection();
-        Statement statement;
-        try {
-            statement = connection.createStatement();
-            statement.executeUpdate("CREATE TABLE planes_pago (" +
-                    "plan_ID int(11) NOT NULL,"+
-                    "Nombre varchar(50) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,"+
-                    "Cuotas int(2) NOT NULL,"+
-                    "Porcentaje enum('5','10','15','20','25','30','35','40','45','50') CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,"+
-                    "status int(11) NOT NULL"+
-                    "PRIMARY KEY(plan_ID))"+
-                    "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4");
-        } catch (SQLException throwables) {
-            throwables.printStackTrace(System.out);
-        }
-        DataBase.getInstance().disconnect();
-    }
-    
     public static void tablaVendedores(){
         Connection connection = DataBase.getInstance().getConnection();
         Statement statement;
@@ -325,30 +277,7 @@ public class DBQueries {
         dropMercancias();
         dropRenglonesVenta();
         dropVendedores();
-        dropPresupuestos();
-        dropPlanes_pago();
-    }
-    public static void dropPresupuestos(){
-        Connection connection = DataBase.getInstance().getConnection();
-        Statement statement;
-        try {
-            statement = connection.createStatement();
-            statement.executeUpdate("DROP TABLE Presupuesto");
-        } catch (SQLException throwables) {
-            throwables.printStackTrace(System.out);
-        }
-        DataBase.getInstance().disconnect();
-    }
-    public static void dropPlanes_pago(){
-        Connection connection = DataBase.getInstance().getConnection();
-        Statement statement;
-        try {
-            statement = connection.createStatement();
-            statement.executeUpdate("DROP TABLE Planes_pago");
-        } catch (SQLException throwables) {
-            throwables.printStackTrace(System.out);
-        }
-        DataBase.getInstance().disconnect();
+
     }
     public static void dropVendedores(){
         Connection connection = DataBase.getInstance().getConnection();
@@ -495,23 +424,6 @@ public class DBQueries {
         insertDirecciones();
         insertConectorDirClienteF();
         insertConectorDirClienteJ();
-        insertPlanes_pago();
-    }
-    public static void insertPlanes_pago(){
-        Connection connection = DataBase.getInstance().getConnection();
-        Statement statement;
-        try {
-            statement = connection.createStatement();
-            statement.executeUpdate("INSERT INTO Planes_pago VALUES "
-                    + "('1','Daquino','12','10',1),"
-                    + "('2','Ahora12','12','5',1),"
-                    + "('1','Ahora18','18','10',1),"
-                    + "('1','Ahora24','24','20',1),"
-                    + "('1','Tarjeta X','16','15',1),");
-        } catch (SQLException throwables) {
-            throwables.printStackTrace(System.out);
-        }
-        DataBase.getInstance().disconnect();
     }
     public static void insertVendedores(){
         Connection connection = DataBase.getInstance().getConnection();
