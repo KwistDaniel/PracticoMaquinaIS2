@@ -556,6 +556,7 @@ public class FinAltaVenta extends javax.swing.JFrame {
                     Renglon renglon = new Renglon(BusinessObjectRenglon.nuevoRenglon());
                     renglon.setCOD_Venta(venta.getCOD_VENTA());
                     renglon.setCOD_Mercancia(mercancias.get(j).getCod());
+                    renglon.setPARTIDA_Mercancia(mercancias.get(j).getPartida());
                     renglon.setCantidad(mercancias.get(j).getCantidad());
                     renglon.setPrecio_U(mercancias.get(j).getPrecio_u());
                     renglon.setDescuento(descuentos.get(j));
