@@ -13,6 +13,7 @@ public class Renglon {
     private int COD_Renglon;
     private int COD_Venta;
     private int COD_Mercancia;
+    private int PARTIDA_Mercancia;
     private int Cantidad;
     private double Precio_U;
     private int Descuento;
@@ -21,10 +22,11 @@ public class Renglon {
     public Renglon() {
     }
 
-    public Renglon(int COD_Renglon, int COD_Venta, int COD_Mercancia, int Cantidad, double Precio_U, int Descuento, double Precio_F) {
+    public Renglon(int COD_Renglon, int COD_Venta, int COD_Mercancia, int PARTIDA_Mercancia, int Cantidad, double Precio_U, int Descuento, double Precio_F) {
         this.COD_Renglon = COD_Renglon;
         this.COD_Venta = COD_Venta;
         this.COD_Mercancia = COD_Mercancia;
+        this.PARTIDA_Mercancia = PARTIDA_Mercancia;
         this.Cantidad = Cantidad;
         this.Precio_U = Precio_U;
         this.Descuento = Descuento;
@@ -35,6 +37,7 @@ public class Renglon {
         this.COD_Renglon = aux.COD_Renglon;
         this.COD_Venta = aux.COD_Venta;
         this.COD_Mercancia = aux.COD_Mercancia;
+        this.PARTIDA_Mercancia = aux.PARTIDA_Mercancia;
         this.Cantidad = aux.Cantidad;
         this.Precio_U = aux.Precio_U;
         this.Descuento = aux.Descuento;
@@ -95,6 +98,14 @@ public class Renglon {
 
     public void setPrecio_F(double Precio_F) {
         this.Precio_F = Precio_F;
+    }
+
+    public int getPARTIDA_Mercancia() {
+        return PARTIDA_Mercancia;
+    }
+
+    public void setPARTIDA_Mercancia(int PARTIDA_Mercancia) {
+        this.PARTIDA_Mercancia = PARTIDA_Mercancia;
     }
     
     
