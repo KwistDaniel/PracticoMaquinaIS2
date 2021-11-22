@@ -30,8 +30,8 @@ public class DBQueries {
         tablaRenglonesVenta();
         tablaConexionVenClientF();
         tablaConexionVenClientJ();
-        tablaPresupuesto();
         tablaPlanes_pago();
+        tablaPresupuesto();        
     }
     public static void tablaPresupuesto(){
         Connection connection = DataBase.getInstance().getConnection();
@@ -316,6 +316,7 @@ public class DBQueries {
     
     /**DROPS**/
     public static void dropAllTables(){
+        dropPresupuestos();
         dropClientesFisicos();
         dropClientesJuridicos();
         dropConexionDirClientF();
@@ -327,8 +328,7 @@ public class DBQueries {
         dropConexionVenClienJ();
         dropMercancias();
         dropRenglonesVenta();
-        dropVendedores();
-        dropPresupuestos();
+        dropVendedores();            
         dropPlanes_pago();
     }
     public static void dropPresupuestos(){
@@ -347,7 +347,7 @@ public class DBQueries {
         Statement statement;
         try {
             statement = connection.createStatement();
-            statement.executeUpdate("DROP TABLE Planes_pago");
+            statement.executeUpdate("DROP TABLE Plan_pago");
         } catch (SQLException throwables) {
             throwables.printStackTrace(System.out);
         }
@@ -505,7 +505,7 @@ public class DBQueries {
         Statement statement;
         try {
             statement = connection.createStatement();
-            statement.executeUpdate("INSERT INTO Planes_pago VALUES "
+            statement.executeUpdate("INSERT INTO Plan_pago VALUES "
                     + "('1','Daquino','12','10',1),"
                     + "('2','Ahora12','12','5',1),"
                     + "('1','Ahora18','18','10',1),"
