@@ -12,6 +12,7 @@ import Objects.ClienteF;
 import Objects.ClienteJ;
 import Objects.Mercancia;
 import Objects.Vendedor;
+import Utils.Utils;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
@@ -369,7 +370,7 @@ public class SeleccionarClienteF extends javax.swing.JFrame {
     }//GEN-LAST:event_BSeleccionarActionPerformed
 
     private void BCrearClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BCrearClienteActionPerformed
-        JOptionPane.showMessageDialog(null, "Funcionalidad sin implementar");
+        Utils.popUpMSG(Utils.FUNCNOIMP, Utils.ADVICE);
     }//GEN-LAST:event_BCrearClienteActionPerformed
 
     /**

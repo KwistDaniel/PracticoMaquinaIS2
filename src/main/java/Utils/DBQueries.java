@@ -224,7 +224,6 @@ public class DBQueries {
         Statement statement;
         try {
             statement = connection.createStatement();
-            //Al proximo query, le meto los datos del vendedor tmb? como los manejo? y  como manejo al vendedor?
             statement.executeUpdate("CREATE TABLE Venta (" +
                     "COD INT NOT NULL," +
                     "DNI_VENDEDOR VARCHAR(10) NOT NULL," +
@@ -250,11 +249,12 @@ public class DBQueries {
                     "COD INT NOT NULL," +
                     "ID_Venta INT NOT NULL," +
                     "COD_Mercancia INT NOT NULL," +
+                    "PARTIDA_Mercancia INT NOT NULL," +
                     "Cantidad INT NOT NULL," +
                     "Precio_U REAL NOT NULL," +
                     "Descuento INT NOT NULL," +
                     "Precio_F REAL NOT NULL," +
-                    "PRIMARY KEY(ID_Venta,COD_Mercancia))");
+                    "PRIMARY KEY(ID_Venta,COD_Mercancia,PARTIDA_Mercancia))");
         } catch (SQLException throwables) {
             throwables.printStackTrace(System.out);
         }
@@ -446,6 +446,7 @@ public class DBQueries {
             statement = connection.createStatement();
             statement.executeUpdate("INSERT INTO Mercancia VALUES "
                     + "(1,'Objeto1','Desc Obj1','15.2','20','Negro',10101,'Porcelanatos',1,20,10,200,1),"
+                    + "(1,'Objeto1','Desc Obj1','15.2','20','Negro',10102,'Porcelanatos',1,20,10,200,1),"
                     + "(2,'Objeto2','Desc Obj2','17.2','3','Gris',10111,'Ceramicos',1,15,15,225,1),"
                     + "(3,'Objeto3','Desc Obj3','11.2','27','Gris',10112,'Ceramicos',2,15,15,225,1),"
                     + "(4,'Objeto4','Desc Obj4','45','35','Blanco',10201,'Porcelanatos',1,30,50,15000,1),"

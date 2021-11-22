@@ -32,8 +32,8 @@ public class DAORenglon implements DAO<Renglon>{
 
     @Override
     public int create(Renglon t) {
-        String sqlInsert = " INSERT INTO RenglonVenta (COD, ID_Venta, COD_Mercancia, Cantidad, Precio_U, Descuento, Precio_F)" +
-                " VALUES (?, ?, ?, ?, ?, ?, ?)";
+        String sqlInsert = " INSERT INTO RenglonVenta (COD, ID_Venta, COD_Mercancia, PARTIDA_Mercancia, Cantidad, Precio_U, Descuento, Precio_F)" +
+                " VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
         int exito = 0;
         Connection connection = DataBase.getInstance().getConnection();
         PreparedStatement statement;
@@ -42,10 +42,11 @@ public class DAORenglon implements DAO<Renglon>{
             statement.setInt(1, t.getCOD_Renglon());
             statement.setInt(2, t.getCOD_Venta());
             statement.setInt(3, t.getCOD_Mercancia());
-            statement.setInt(4, t.getCantidad());
-            statement.setDouble(5, t.getPrecio_U());
-            statement.setInt(6, t.getDescuento());
-            statement.setDouble(7, t.getPrecio_F());
+            statement.setInt(4, t.getPARTIDA_Mercancia());
+            statement.setInt(5, t.getCantidad());
+            statement.setDouble(6, t.getPrecio_U());
+            statement.setInt(7, t.getDescuento());
+            statement.setDouble(8, t.getPrecio_F());
             statement.executeUpdate();
             exito = 1;
 
