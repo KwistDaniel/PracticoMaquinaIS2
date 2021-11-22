@@ -38,25 +38,26 @@ public class DBQueries {
         Statement statement;
         try {
             statement = connection.createStatement();
-            statement.executeUpdate("CREATE TABLE presupuesto (" +
-            "presu_ID int(11) NOT NULL,"+
-            "DNI_Vendedor varchar(10) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,"+
+            statement.executeUpdate("CREATE TABLE presupuesto ("+
+            "presuID int(11) NOT NULL,"+
+            "DNIVendedor varchar(10) NOT NULL,"+
             "sexoVendedor varchar(10) NOT NULL,"+
-            "DNI_FIS varchar(10) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,"+
-            "Sexo_Fis varchar(10) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,"+
-            "Jur_CUIT varchar(15) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,"+
-            "plan_ID int(11) DEFAULT NULL,"+
-            "Rengl-ID int(11) NOT NULL,"+
-            "Rengl-CodM int(11) NOT NULL,"+ 
-            "Fch_Presu date NOT NULL"+
-            "Fch_Venci date NOT NULL"+
-            "status int(11) NOT NULL"+
-            "FOREIGN KEY (DNI_Vendedor,sexoVendedor) REFERENCES Vendedor(DNI,SEXO))"+
-            "FOREIGN KEY (Jur_CUIT) REFERENCES ClienteJuridico(CUIT)," +
-            "FOREIGN KEY (DNI_FIS,Sexo_Fis) REFERENCES ClienteFisico(CUIT)," +                              
-            "FOREIGN KEY(Rengl-ID,REngl-CodM)REFERENCES RenglonesVenta(ID_Venta,COD_Mercancia),"+
-            "PRIMARY KEY(presu_ID))"+       
-            "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4"); //
+            "DNIFIS varchar(10) DEFAULT NULL,"+
+            "SexoFis varchar(10) DEFAULT NULL,"+
+            "JurCUIT varchar(15) DEFAULT NULL,"+
+            "planID int(11) DEFAULT NULL,"+
+            "RenglID int(11) NOT NULL,"+
+            "RenglCodM int(11) NOT NULL,"+
+            "FchPresu date NOT NULL,"+
+            "FchVenci date NOT NULL,"+
+            "status int(11) NOT NULL,"+
+            "FOREIGN KEY (DNIVendedor,sexoVendedor) REFERENCES vendedor(DNI,SEXO),"+
+            "FOREIGN KEY (JurCUIT) REFERENCES clientejuridico(CUIT),"+
+            "FOREIGN KEY (DNIFIS,SexoFis) REFERENCES clientefisico(DNI,SEXO),"+
+            "FOREIGN KEY (RenglID,REnglCodM) REFERENCES renglonventa(ID_Venta,COD_Mercancia),"+
+	    "FOREIGN KEY (planID) REFERENCES plan_Pago(plan_ID),"+
+            "PRIMARY KEY(presuID))"    
+            ); //
         } catch (SQLException throwables) {
             throwables.printStackTrace(System.out);
         }
@@ -67,14 +68,14 @@ public class DBQueries {
         Statement statement;
         try {
             statement = connection.createStatement();
-            statement.executeUpdate("CREATE TABLE planes_pago (" +
+            statement.executeUpdate("CREATE TABLE plan_pago (" +
                     "plan_ID int(11) NOT NULL,"+
-                    "Nombre varchar(50) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,"+
+                    "Nombre varchar(50) NOT NULL,"+
                     "Cuotas int(2) NOT NULL,"+
-                    "Porcentaje enum('5','10','15','20','25','30','35','40','45','50') CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,"+
+                    "Porcentaje enum('5','10','15','20','25','30','35','40','45','50') NOT NULL,"+
                     "status int(11) NOT NULL"+
-                    "PRIMARY KEY(plan_ID))"+
-                    "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4");
+                    "PRIMARY KEY(plan_ID))"
+            );
         } catch (SQLException throwables) {
             throwables.printStackTrace(System.out);
         }
