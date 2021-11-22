@@ -28,7 +28,7 @@ public class DAOMercancia implements DAO<Mercancia> {
         Statement statement;
         try{
             statement = connection.createStatement();
-            ResultSet rs = statement.executeQuery("SELECT * FROM Mercancia WHERE ( Status = 1 ) ");
+            ResultSet rs = statement.executeQuery("SELECT * FROM Mercancia WHERE ((Status = 1) && (CANTIDAD > 0)) ORDER BY COD ");
             Mercancia mercancia;
             while (rs.next()){
                 mercancia = new Mercancia();
