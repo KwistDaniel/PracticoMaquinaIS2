@@ -13,6 +13,7 @@ import Objects.ClienteF;
 import Objects.ClienteJ;
 import Objects.Mercancia;
 import Objects.Vendedor;
+import Utils.Utils;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
@@ -263,7 +264,14 @@ public class SeleccionarClienteJ extends javax.swing.JFrame {
             }
         });
 
+        jButton1.setBackground(new java.awt.Color(210, 4, 45));
+        jButton1.setForeground(new java.awt.Color(250, 250, 250));
         jButton1.setText("Agregar Cliente");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -272,9 +280,9 @@ public class SeleccionarClienteJ extends javax.swing.JFrame {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(BSeleccionar)
-                .addGap(81, 81, 81)
-                .addComponent(jButton1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 653, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(BVolver)
                 .addContainerGap())
         );
@@ -356,6 +364,10 @@ public class SeleccionarClienteJ extends javax.swing.JFrame {
         
         
     }//GEN-LAST:event_BSeleccionarActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        Utils.popUpMSG(Utils.FUNCNOIMP, Utils.ADVICE);
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -528,6 +540,5 @@ public class SeleccionarClienteJ extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
-    private javax.swing.JPanel jPanel6;
     // End of variables declaration//GEN-END:variables
 }
