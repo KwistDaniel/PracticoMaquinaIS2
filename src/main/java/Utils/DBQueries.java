@@ -508,9 +508,9 @@ public class DBQueries {
             statement.executeUpdate("INSERT INTO Plan_pago VALUES "
                     + "('1','Daquino','12','10',1),"
                     + "('2','Ahora12','12','5',1),"
-                    + "('1','Ahora18','18','10',1),"
-                    + "('1','Ahora24','24','20',1),"
-                    + "('1','Tarjeta X','16','15',1),");
+                    + "('3','Ahora18','18','10',1),"
+                    + "('4','Ahora24','24','20',1),"
+                    + "('5','Tarjeta X','16','15',1)");
         } catch (SQLException throwables) {
             throwables.printStackTrace(System.out);
         }
