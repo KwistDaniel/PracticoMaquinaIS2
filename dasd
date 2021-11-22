@@ -1,0 +1,118 @@
+[33m9866672[m[33m ([m[1;36mHEAD -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m)[m Merge pull request #18 from KwistDaniel/Darío
+[33mdbb3c7f[m Merge pull request #17 from KwistDaniel/feature/Controles
+[33m433a792[m[33m ([m[1;31morigin/feature/Controles[m[33m, [m[1;32mfeature/Controles[m[33m)[m readme.md
+[33mbd45c85[m Merge pull request #16 from KwistDaniel/feature/Controles
+[33me411e66[m readme.me
+[33mbeac465[m Insert en Planes_pago en BDQueries
+[33me36921e[m Creación de Drop Presupuestos y Planes_pago en BDQueries
+[33m3acc0e3[m Merge pull request #15 from KwistDaniel/feature/Controles
+[33m9b98c60[m cambios de backup
+[33me568686[m Merge pull request #14 from KwistDaniel/feature/Controles
+[33m89836f7[m Finalizar controles, acomodar componentes de GUI y cambios pequenos
+[33mf7d9959[m Arreglo tabla Presupuestos en BDQueries
+[33m8d0d474[m Creación tabla tablaAdministrador, actualización Planes_Pago y Presupuestos en BDQueries
+[33m9b1818d[m Creación tabla Planes_Pago en BDQueries
+[33m0c4231f[m Creación tabla presupuesto en BDQueries
+[33m5fd7760[m Modificación interfaz1
+[33mf095155[m cambios joptionpane
+[33mf7a6f7d[m cambios minimos
+[33mb3d5117[m Merge pull request #13 from KwistDaniel/feature/Controles
+[33m4f3b71f[m implementacion controles mas exhaustivos
+[33m48ded02[m Merge pull request #12 from KwistDaniel/feature/CosasFinales
+[33ma0b7ef4[m[33m ([m[1;31morigin/feature/CosasFinales[m[33m, [m[1;32mfeature/CosasFinales[m[33m)[m solucion de algunos warnings
+[33me270820[m Merge pull request #11 from KwistDaniel/feature/CosasFinales
+[33m015a50d[m cambios
+[33m3f73a66[m cambios menores
+[33m192cc7d[m algunos controles
+[33mee1839c[m Merge pull request #10 from KwistDaniel/feature/ModificarEnvio
+[33mbfb2cf3[m[33m ([m[1;31morigin/feature/ModificarEnvio[m[33m, [m[1;32mfeature/ModificarEnvio[m[33m)[m logica final
+[33m65e87ef[m Merge pull request #9 from KwistDaniel/feature/BuscarEnvio
+[33m3819871[m[33m ([m[1;31morigin/feature/BuscarEnvio[m[33m, [m[1;32mfeature/BuscarEnvio[m[33m)[m pull
+[33m33ed94f[m pruebas
+[33mae6c24a[m pruebas
+[33m8d25e32[m Merge pull request #8 from KwistDaniel/feature/GenerarPresupuesto
+[33m4308681[m Merge branch 'main' into feature/GenerarPresupuesto
+[33m212f1db[m presupuesto V1
+[33m8944637[m Merge pull request #7 from KwistDaniel/feature/BuscarEnvio
+[33me88cd6f[m cambios y arreglos
+[33mf4e46fe[m arreglo de agregar y eliminar mercancias en venta
+[33ma6b4df9[m arreglo de agregar y eliminar mercancias en venta
+[33m590309b[m arreglo de errores
+[33m54bcd19[m arreglos y cambios
+[33m57cb23a[m cambios
+[33m5cadb2c[m qslqdq
+[33m926dfe1[m inicio modificar Envio
+[33m5a02126[m correccion de errores e implementacion de controles
+[33md16cf43[m correccion de errores
+[33me8c7de4[m correcciones menores
+[33m1b12a9e[m Baja Envio
+[33m5f2a4f0[m Continuacion de la implementacion
+[33ma26e4bc[m terminacion de filtros y botones en tabla
+[33m4685989[m creacion textfields filtros
+[33md885123[m creacion textfields filtros
+[33m13f94f1[m Merge pull request #5 from KwistDaniel/feature/BuscarEnvio
+[33m4037015[m correccion errores menores
+[33med0f235[m Merge pull request #4 from KwistDaniel/feature/BuscarEnvio
+[33m5295ec3[m correccion errores menores
+[33m7f64cca[m Merge pull request #3 from KwistDaniel/feature/BuscarEnvio
+[33m2ea16fe[m qslqdq
+[33m1e9c36b[m Correccion SINGLETON
+[33m6d51f1d[m Merge pull request #2 from KwistDaniel/feature/NEWDAO
+[33md431be6[m[33m ([m[1;31morigin/feature/NEWDAO[m[33m, [m[1;32mfeature/NEWDAO[m[33m)[m entrega
+[33me117818[m Cambios finales
+[33mf70865d[m actualizacion querys
+[33mc5938d6[m Cambios graficos menores
+[33m318534f[m Cambios graficos menores
+[33m9876c5b[m Cambios graficos menores
+[33m1c8fcb8[m pequenos controles
+[33m1a141e9[m correccion errores
+[33m8710077[m cambios menores
+[33mc7adf5d[m prueba2
+[33mcdf854b[m cambios
+[33mf7a9c8a[m cambios
+[33m07342c1[m cambios
+[33mcd6c536[m cambios
+[33mf632fcc[m incorporacion nuevo DAO
+[33m5ff00bf[m primeros cambios DAO
+[33m5707b33[m cambios
+[33m3fbe4b5[m cargar venta v1
+[33m0fdc8b5[m Correccion DAO's
+[33m58094f0[m cambios y re-levantamiento DB
+[33mc3f51a5[m cambios
+[33mdf430d7[m cambios vendedor
+[33m9fb772f[m cambios
+[33m63f5692[m cambios
+[33m70967f2[m ajustes
+[33m1642e89[m carga casi finalizada
+[33m5d068a6[m Adelanto GUI y fin parcial DB
+[33m17fbc07[m qslqdq
+[33m698ffd8[m cambios menores
+[33m961385e[m cambios menores
+[33m24ca564[m cambios menores
+[33m25dcb42[m Controles
+[33m1416ee9[m DAO y TABLAS
+[33m61e66a5[m DAO y TABLAS
+[33maef92b5[m cambios menores
+[33m1e067a5[m GUIs
+[33m17fae5d[m levantamiento bd y acomodamiento GUI
+[33m4d410c2[m deploy de tablas y sistema de usuarios
+[33m5ee87ac[m deploy de tablas y sistema de usuarios
+[33maeccda6[m cambios menores
+[33m823723e[m prueba
+[33mb84f425[m tabla 1er func
+[33m24d58a7[m inicio tablas
+[33mca054ca[m cambios menores
+[33m10f46fe[m Singleton
+[33m074b780[m QueLaHistoriaMeJuzgue
+[33m15cce3f[m cambios minimos
+[33m1f7e4ff[m startup
+[33mba8cc61[m Intento Subida
+[33m1cf77a2[m Merge pull request #1 from KwistDaniel/feature/creacionClases
+[33m806d8a0[m[33m ([m[1;31morigin/feature/creacionClases[m[33m, [m[1;32mfeature/creacionClases[m[33m)[m inicio
+[33m26f01eb[m cambios menores
+[33m64ba688[m cambios menores
+[33m3b0d810[m cambios menores
+[33m89bdfdb[m cambios menores
+[33m529c76d[m Dependencias y prueba DB
+[33m7faff6f[m primeros packages
+[33mb0e9664[m deploy
