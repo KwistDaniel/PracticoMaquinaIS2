@@ -47,7 +47,9 @@ public class DBQueries {
             "Jur_CUIT varchar(15) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,"+
             "plan_ID int(11) DEFAULT NULL,"+
             "Rengl-ID int(11) NOT NULL,"+
-            "REngl-CodM int(11) NOT NULL,"+        
+            "Rengl-CodM int(11) NOT NULL,"+ 
+            "Fch_Presu date NOT NULL"+
+            "Fch_Venci date NOT NULL"+
             "status int(11) NOT NULL"+
             "FOREIGN KEY (DNI_Vendedor,sexoVendedor) REFERENCES Vendedor(DNI,SEXO))"+
             "FOREIGN KEY (Jur_CUIT) REFERENCES ClienteJuridico(CUIT)," +
