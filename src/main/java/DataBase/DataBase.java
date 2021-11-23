@@ -16,14 +16,14 @@ import java.sql.SQLException;
 public class DataBase {
     private static DataBase INSTANCE;
     private static Connection connection;
-    /*private static String url = "jdbc:mariadb://dvnikst.duckdns.org:3306/is2-daquino-gk";
+    private static String url = "jdbc:mariadb://dvnikst.duckdns.org:3306/is2-daquino-gk";
     private static String user = "user1";
     private static String password = "951753";
-    */
+    /*
     private static String url = "jdbc:mariadb://localhost:3306/is2-daquino-gk";
     private static String user = "root";
     private static String password = "";
-    
+    */
     
     private DataBase(){//esto va priv
         try{
