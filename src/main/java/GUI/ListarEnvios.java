@@ -476,7 +476,7 @@ public class ListarEnvios extends javax.swing.JFrame {
         try{
             
             int estadoentrega = 0;
-            Object[] aux = tm.getDataVector().elementAt(tabla.getSelectedRow()).toArray();
+            Object[] aux = tm.getDataVector().elementAt(tabla.convertRowIndexToModel(tabla.getSelectedRow())).toArray();
             if(((String)aux[4]).equals("Entregado")){
                 estadoentrega = 1;
             }
@@ -500,7 +500,7 @@ public class ListarEnvios extends javax.swing.JFrame {
 
     private void BConfEnvActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BConfEnvActionPerformed
         try{
-            Object[] aux = tm.getDataVector().elementAt(tabla.getSelectedRow()).toArray();
+            Object[] aux = tm.getDataVector().elementAt(tabla.convertRowIndexToModel(tabla.getSelectedRow())).toArray();
             if(((String) aux[4]).equals("Entregado")){
                 Utils.popUpMSG(Utils.ENVIOYAENT, Utils.ERROR);
             }
@@ -531,7 +531,7 @@ public class ListarEnvios extends javax.swing.JFrame {
     private void BBorrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BBorrarActionPerformed
         try{
             int estadoentrega = 0;
-            Object[] aux = tm.getDataVector().elementAt(tabla.getSelectedRow()).toArray();
+            Object[] aux = tm.getDataVector().elementAt(tabla.convertRowIndexToModel(tabla.getSelectedRow())).toArray();
             if(((String) aux[4]).equals("Entregado")){
                 estadoentrega = 1;
             }

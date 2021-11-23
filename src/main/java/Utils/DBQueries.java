@@ -163,7 +163,7 @@ public class DBQueries {
                     "CALIDAD INT," +
                     "MEDIDA_ANCHO INT," +
                     "MEDIDA_ALTO INT," +
-                    "METROS_CUADRADOS INT," +
+                    "METROS_CUADRADOS REAL," +
                     "Status INT NOT NULL," +
                     "PRIMARY KEY(COD,PARTIDA))");
         } catch (SQLException throwables) {
@@ -424,6 +424,11 @@ public class DBQueries {
         insertDirecciones();
         insertConectorDirClienteF();
         insertConectorDirClienteJ();
+        insertEnvio();
+        insertVenta();
+        insertRenglonVenta();
+        insertConectVenCliF();
+        insertConectVenCliJ();
     }
     public static void insertVendedores(){
         Connection connection = DataBase.getInstance().getConnection();
@@ -445,14 +450,20 @@ public class DBQueries {
         try {
             statement = connection.createStatement();
             statement.executeUpdate("INSERT INTO Mercancia VALUES "
-                    + "(1,'Objeto1','Desc Obj1','15.2','20','Negro',10101,'Porcelanatos',1,20,10,200,1),"
-                    + "(1,'Objeto1','Desc Obj1','15.2','20','Negro',10102,'Porcelanatos',1,20,10,200,1),"
-                    + "(2,'Objeto2','Desc Obj2','17.2','3','Gris',10111,'Ceramicos',1,15,15,225,1),"
-                    + "(3,'Objeto3','Desc Obj3','11.2','27','Gris',10112,'Ceramicos',2,15,15,225,1),"
-                    + "(4,'Objeto4','Desc Obj4','45','35','Blanco',10201,'Porcelanatos',1,30,50,15000,1),"
-                    + "(5,'Objeto5','Desc Obj5','921','25','Azul Cielo',154201,'Griferia',1,17,52,1500,1),"
-                    + "(6,'Objeto6','Desc Obj6','225','26','Rojo',1501,'Ceramica',2,28,28,7500,1),"
-                    + "(7,'Objeto7','Desc Obj7','396','1505','Celeste',14201,'Mosaico',4,17,17,250,1)");
+                    + "(1,'Soho Lounge','Porcelanato Soho Lounge','4500','8','Blanco',10101,'Porcelanatos',1,45,90,1.22,1),"
+                    + "(1,'Soho Lounge','Porcelanato Soho Lounge','4500','21','Blanco',10111,'Porcelanatos',1,45,90,1.22,1),"
+                    + "(2,'Ilva Burlington Ice','Porcelanato Ilva Burlington Ice','4700','7','Blanco',10201,'Porcelanatos',1,60,120,1.48,1),"
+                    + "(2,'Ilva Burlington Ice','Porcelanato Ilva Burlington Ice','4700','17','Blanco',10222,'Porcelanatos',1,60,120,1.48,1),"
+                    + "(3,'Legni Identica Acacia','Porcenalato Legni Identica Acaci','4999','50','Acacia',10354,'Porcelanatos',1,22,90,1.22,1),"
+                    + "(4,'Legno Nogal Cortines','Ceramico Legno Nogal','1910','40','Nogal',10111,'Ceramicos',1,45,30,1.35,1),"
+                    + "(5,'Ciment Arena','Ceramico Ciment Arena','845','7','Arena',10121,'Ceramicos',1,40,40,1,1),"
+                    + "(5,'Ciment Arena','Ceramico Ciment Arena','845','30','Arena',10122,'Ceramicos',1,40,40,1,1),"
+                    + "(6,'Pavimenti Palladio','Ceramico Pavimenti Palladio','990','14','Blanco Satinado',20122,'Ceramicos',2,35,60,1.47,1),"
+                    + "(7,'Bacha Porcelana Piazza','Bacha de porcelana de apoyar','7500','12','Blanco',0,'Bacha',0,0,0,0,1),"
+                    + "(8,'Bacha Piazza','Bacha sobre mesada de empotre','10000','5','Blanco',0,'Bacha',0,0,0,0,1),"
+                    + "(9,'Griferia Enblem Piazza','Griferia Cocina Monocomando','10000','10','Negro',0,'Griferia',0,0,0,0,1),"
+                    + "(10,'Griferia Mesada FV','Griferia para mesada de cocina','6500','15','Gris Cromado',0,'Griferia',0,0,0,0,1),"
+                    + "(11,'Combo Sanitario Ferrum','Inodoro Bidet y Deposito','140000','5','Blanco',0,'Sanitarios',0,0,0,0,1)");
         } catch (SQLException throwables) {
             throwables.printStackTrace(System.out);
         }
@@ -530,14 +541,80 @@ public class DBQueries {
         }
         DataBase.getInstance().disconnect();
     }
+    public static void insertEnvio(){
+        Connection connection = DataBase.getInstance().getConnection();
+        Statement statement;
+        try {
+            statement = connection.createStatement();
+            statement.executeUpdate("INSERT INTO Envio VALUES "
+                    + "(1,1,0,'26/11/2021','10:30',1),"
+                    + "(2,2,1,'16/11/2021','17:00',1),"
+                    + "(3,6,0,'30/11/2021','11:00',1)");
+        } catch (SQLException throwables) {
+            throwables.printStackTrace(System.out);
+        }
+        DataBase.getInstance().disconnect();
+    }
+    public static void insertVenta(){
+        Connection connection = DataBase.getInstance().getConnection();
+        Statement statement;
+        try {
+            statement = connection.createStatement();
+            statement.executeUpdate("INSERT INTO Venta VALUES "
+                    + "(1,'36421350','Femenino','449.0','359.2',1,1),"
+                    + "(2,'36421350','Femenino','540.0','477.0',2,1),"
+                    + "(3,'36421350','Femenino','1980.0','1980.0',3,1)");
+        } catch (SQLException throwables) {
+            throwables.printStackTrace(System.out);
+        }
+        DataBase.getInstance().disconnect();
+    }
+    public static void insertRenglonVenta(){
+        Connection connection = DataBase.getInstance().getConnection();
+        Statement statement;
+        try {
+            statement = connection.createStatement();
+            statement.executeUpdate("INSERT INTO RenglonVenta VALUES "
+                    + "(1,1,3,10112,20,11.2,20,179.2),"
+                    + "(2,1,4,10201,5,45,20,180),"
+                    + "(3,2,4,10201,7,45,20,252),"
+                    + "(4,2,6,1501,1,225,0,225),"
+                    + "(5,3,7,14201,5,396,0,1980)");
+        } catch (SQLException throwables) {
+            throwables.printStackTrace(System.out);
+        }
+        DataBase.getInstance().disconnect();
+    }
+    public static void insertConectVenCliF(){
+        Connection connection = DataBase.getInstance().getConnection();
+        Statement statement;
+        try {
+            statement = connection.createStatement();
+            statement.executeUpdate("INSERT INTO ConectVenCliF VALUES "
+                    + "(1,'39662252','Masculino'),"
+                    + "(2,'39662252','Masculino')");
+        } catch (SQLException throwables) {
+            throwables.printStackTrace(System.out);
+        }
+        DataBase.getInstance().disconnect();
+    }
+    public static void insertConectVenCliJ(){
+        Connection connection = DataBase.getInstance().getConnection();
+        Statement statement;
+        try {
+            statement = connection.createStatement();
+            statement.executeUpdate("INSERT INTO ConectVenCliJ VALUES "
+                    + "(3,'20-12345678-3')");
+        } catch (SQLException throwables) {
+            throwables.printStackTrace(System.out);
+        }
+        DataBase.getInstance().disconnect();
+    }
     
     /*
-    Queries importantes:
+    Queries Join:
     **JOIN PARA CONSEGUIR DIRECCIONES DE UN CLIENTEF POR DNI Y SEXO:**
     SELECT ID,CALLE,NUMERO,PISO,DEPTO,COD_POSTAL,LOCALIDAD FROM Direccion INNER JOIN (SELECT ID_DIR FROM conectdirclif WHERE (DNI_CF='39662252') AND (SEXO_CF='Masculino')) AS DJ ON ID = DJ.ID_DIR WHERE (Status = 1)
-    
-    **JOIN PARA LISTAR VENTAS:
-    SELECT //hacer como arriba, join de interseccion con subconsulta deberia andar
     
 */
 }

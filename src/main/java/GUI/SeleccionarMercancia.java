@@ -20,6 +20,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.DefaultRowSorter;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
@@ -30,6 +31,8 @@ import javax.swing.RowFilter;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
+import javax.swing.event.RowSorterEvent;
+import javax.swing.event.RowSorterListener;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
@@ -71,18 +74,25 @@ public class SeleccionarMercancia extends javax.swing.JFrame {
         tm.setDataVector(objects, headers);
         
         ArrayList<Integer> codaelim = new ArrayList<Integer>();
+        ArrayList<Integer> partaelim = new ArrayList<Integer>();
         for(int i=0; i < mercancias.size();i++){
             codaelim.add((Integer)mercancias.get(i).getCod());
+            partaelim.add((Integer)mercancias.get(i).getPartida());
         }
         
-        int rows = tm.getRowCount(),cantcodigo = codaelim.size();
-        
+        int rows = tm.getRowCount(),cantaverif = mercancias.size();
+        int auxparttabla,auxpartarr;
         for (int i=0; i < rows; i++){
-            for (int j=0; j < cantcodigo; j++){
-                if(tm.getValueAt(i, 0) == codaelim.get(j)){
+            for (int j=0; j < cantaverif; j++){
+                auxparttabla = (int) tm.getValueAt(i, 11);
+                auxpartarr = partaelim.get(j);
+                if(((int)tm.getValueAt(i, 0) == codaelim.get(j)) && (int)tm.getValueAt(i, 11) == partaelim.get(j)){
                     tm.removeRow(i);
                     rows--;
+                    cantaverif--;
                 }
+                auxparttabla = 0;
+                auxpartarr = 0;
             }
         }
 
@@ -346,7 +356,7 @@ public class SeleccionarMercancia extends javax.swing.JFrame {
             try{
                 int cant = Integer.parseInt(control);
                 ArrayList<Mercancia> mercanciasaux = new ArrayList<Mercancia>(mercancias);
-                Object[] aux = tm.getDataVector().elementAt(tabla.getSelectedRow()).toArray();
+                Object[] aux = tm.getDataVector().elementAt(tabla.convertRowIndexToModel(tabla.getSelectedRow())).toArray();
                 if (cant > (int) aux[4] || cant <=0){
                     Utils.popUpMSG(Utils.WRONGVALUE, Utils.ERROR);
                 }
@@ -362,7 +372,7 @@ public class SeleccionarMercancia extends javax.swing.JFrame {
                     aux1.setCalidad((int) aux[7]);
                     aux1.setAncho((int) aux[8]);
                     aux1.setAlto((int) aux[9]);
-                    aux1.setMetcuad((int) aux[10]);
+                    aux1.setMetcuad((double) aux[10]);
                     aux1.setPartida((int) aux[11]);
                     mercanciasaux.add(aux1);
                     int newcant = ((int)aux[4] - cant);

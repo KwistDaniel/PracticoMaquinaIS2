@@ -22,13 +22,13 @@ public class Mercancia {
     private int partida;
     private int ancho;
     private int alto;
-    private int metcuad;
+    private double metcuad;
     private int calidad;
 
     public Mercancia() {
     }
 
-    public Mercancia(int cod, String nombre, String categoria, String descripcion, int cantidad, double precio_u, String color, int partida, int ancho, int alto, int metcuad, int calidad) {
+    public Mercancia(int cod, String nombre, String categoria, String descripcion, int cantidad, double precio_u, String color, int partida, int ancho, int alto, double metcuad, int calidad) {
         this.cod = cod;
         this.nombre = nombre;
         this.categoria = categoria;
@@ -138,11 +138,11 @@ public class Mercancia {
         this.alto = alto;
     }
 
-    public int getMetcuad() {
+    public double getMetcuad() {
         return metcuad;
     }
 
-    public void setMetcuad(int metcuad) {
+    public void setMetcuad(double metcuad) {
         this.metcuad = metcuad;
     }
 
