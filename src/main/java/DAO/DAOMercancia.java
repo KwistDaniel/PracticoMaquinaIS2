@@ -42,7 +42,7 @@ public class DAOMercancia implements DAO<Mercancia> {
                 mercancia.setCalidad(rs.getInt("CALIDAD"));
                 mercancia.setAncho(rs.getInt("MEDIDA_ANCHO"));
                 mercancia.setAlto(rs.getInt("MEDIDA_ALTO"));
-                mercancia.setMetcuad(rs.getInt("METROS_CUADRADOS"));
+                mercancia.setMetcuad(rs.getDouble("METROS_CUADRADOS"));
                 mercancia.setPartida(rs.getInt("PARTIDA"));
                 mercancias.add(mercancia);
             }
@@ -69,7 +69,7 @@ public class DAOMercancia implements DAO<Mercancia> {
     @Override
     public int update(Mercancia mercancia) {
         String sqlUpdate = "UPDATE Mercancia SET NOMBRE = ?, DESCRIPCION = ?, PRECIO_UNITARIO = ?, CANTIDAD = ?, COLOR = ?, CATEGORIA = ?, CALIDAD = ?, MEDIDA_ANCHO = ?, MEDIDA_ALTO = ?, METROS_CUADRADOS = ?" +
-                " WHERE (COD = '" + mercancia.getCod() + "')";
+                " WHERE ((COD = '" + mercancia.getCod() + "') && (PARTIDA = '" + mercancia.getPartida() + "'))";
         int exito =0;
         Connection connection = DataBase.getInstance().getConnection();
         PreparedStatement statement;
@@ -84,7 +84,7 @@ public class DAOMercancia implements DAO<Mercancia> {
             statement.setInt(7,mercancia.getCalidad());
             statement.setInt(8,mercancia.getAncho());
             statement.setInt(9,mercancia.getAlto());
-            statement.setInt(10,mercancia.getMetcuad());
+            statement.setDouble(10,mercancia.getMetcuad());
             statement.executeUpdate();
             exito = 1;
         } catch(SQLException throwables){
