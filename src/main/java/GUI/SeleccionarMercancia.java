@@ -45,7 +45,7 @@ import javax.swing.table.TableRowSorter;
 public class SeleccionarMercancia extends javax.swing.JFrame {
     ArrayList<Mercancia> mercancias,restar;
     Vendedor vendedor;
-    boolean venta_presupuesto,controlfiltro = true;
+    boolean venta_presupuesto,controlfiltro = true,limpiar = false;
     /**
      * Creates new form Menu
      */
@@ -69,9 +69,7 @@ public class SeleccionarMercancia extends javax.swing.JFrame {
         GridBagConstraints gridBagConstraints = new GridBagConstraints();
         
         
-        Object[][] objects = Mercancia.getDataVector(BusinessObjectVenta.listarMercancias());
-        Object[] headers = Mercancia.getHeaders();
-        tm.setDataVector(objects, headers);
+        
         
         ArrayList<Integer> codaelim = new ArrayList<Integer>();
         ArrayList<Integer> partaelim = new ArrayList<Integer>();
@@ -79,22 +77,58 @@ public class SeleccionarMercancia extends javax.swing.JFrame {
             codaelim.add((Integer)mercancias.get(i).getCod());
             partaelim.add((Integer)mercancias.get(i).getPartida());
         }
+        ArrayList<Mercancia> mercaux = new ArrayList<Mercancia>(BusinessObjectVenta.listarMercancias());
+        int mercsize = mercaux.size();
+        int codaelimsize = codaelim.size();
+        for (int i=0;i<mercsize;i++){
+            for(int j = 0; j < codaelimsize ; j++){
+                if((int)mercaux.get(i).getCod() == codaelim.get(j)){
+                    if((int)mercaux.get(i).getPartida() == partaelim.get(j)){
+                        mercaux.remove(i);
+                        codaelim.remove(j);
+                        partaelim.remove(j);
+                        codaelimsize = codaelim.size();
+                        mercsize = mercaux.size();
+                        i=0;
+                        j=0;
+                    }
+                }   
+            }
+        }
+        mercsize = mercaux.size();
+        codaelimsize = codaelim.size();
+        for (int i=0;i<mercsize;i++){
+            for(int j = 0; j < codaelimsize ; j++){
+                if((int)mercaux.get(i).getCod() == codaelim.get(j)){
+                    if((int)mercaux.get(i).getPartida() == partaelim.get(j)){
+                        mercaux.remove(i);
+                        codaelim.remove(j);
+                        partaelim.remove(j);
+                        codaelimsize = codaelim.size();
+                        mercsize = mercaux.size();
+                        i=0;
+                        j=0;
+                    }
+                }   
+            }
+        }
         
-        int rows = tm.getRowCount(),cantaverif = mercancias.size();
-        int auxparttabla,auxpartarr;
+        
+        Object[][] objects = Mercancia.getDataVector(mercaux);
+        Object[] headers = Mercancia.getHeaders();
+        tm.setDataVector(objects, headers);
+        
+        /*int rows = tm.getRowCount(),cantaverif = mercancias.size();
         for (int i=0; i < rows; i++){
             for (int j=0; j < cantaverif; j++){
-                auxparttabla = (int) tm.getValueAt(i, 11);
-                auxpartarr = partaelim.get(j);
-                if(((int)tm.getValueAt(i, 0) == codaelim.get(j)) && (int)tm.getValueAt(i, 11) == partaelim.get(j)){
+                if(((int)tm.getValueAt(i, 0) == codaelim.get(j)) && ((int) tm.getValueAt(i, 11) == partaelim.get(j))){
                     tm.removeRow(i);
                     rows--;
                     cantaverif--;
                 }
-                auxparttabla = 0;
-                auxpartarr = 0;
             }
         }
+        */
 
         
         tabla = new JTable(tm);
