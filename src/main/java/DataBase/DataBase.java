@@ -23,7 +23,7 @@ public class DataBase {
     private static String url = "jdbc:mariadb://localhost:3306/is2-daquino-gk";
     private static String user = "root";
     private static String password = "";
-    */
+    *///Esta es la local x si no tengo internet
     
     private DataBase(){//esto va priv
         try{
