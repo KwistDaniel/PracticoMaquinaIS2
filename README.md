@@ -16,5 +16,3 @@ Este sistema se propone mantener información sobre los clientes, empleados, pro
 
 
 https://docs.google.com/document/d/1tfSOk3O-gk1XHRlXmCAaAivl9NJyQJhnQlp_sJ7MGmk/edit?usp=sharing
-
-[ayuda](http://makeareadme.com)
